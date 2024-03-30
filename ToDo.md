@@ -9,10 +9,11 @@
 
 [Done] layout
 > landing page
-> members
-> resources
-> events
-> gallery
-> news
-> about
-> contact
+[Done] members
+[Done] forms
+[Done] events
+[Done] gallery
+[Done] mission / objective
+
+[Done] about
+[Done] contact

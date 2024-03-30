@@ -40,4 +40,39 @@ class AccountController extends Controller
 	{
 		return view('index');
 	}
+
+	public function getGallery()
+	{
+		return view('gallery');
+	}
+
+	public function getAbout()
+	{
+		return view('about');
+	}
+
+	public function getContact()
+	{
+		return view('contact');
+	}
+
+	public function getTeam()
+	{
+		return view('team');
+	}
+
+	public function getMission()
+	{
+		return view('mission');
+	}
+
+	public function getEvents()
+	{
+		return view('events');
+	}
+
+	public function getForms()
+	{
+		return view('forms');
+	}
 }

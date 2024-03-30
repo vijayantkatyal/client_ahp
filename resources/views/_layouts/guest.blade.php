@@ -126,8 +126,8 @@
 									Parishad
 								</a>
 								<div class="dropdown-menu" aria-labelledby="services-dropdown">
-									<a class="dropdown-item" href="services.php">Objective</a>
-									<a class="dropdown-item" href="services-single.php">Board Memebrs</a>
+									<a class="dropdown-item" href="{{ route('get_mission') }}">Objective</a>
+									<a class="dropdown-item" href="{{ route('get_team') }}">Board Memebrs</a>
 								</div>
 							</li>
 							<!-- menu item -->
@@ -143,9 +143,10 @@
 								</div>
 							</li>
 							<!-- menu item -->
-							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_index') }}">Gallery</a></li>
-							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_index') }}">Events</a></li>
-							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_index') }}">Contact Us</a></li>
+							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_gallery') }}">Gallery</a></li>
+							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_events') }}">Events</a></li>
+							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_about') }}">About</a></li>
+							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_contact') }}">Contact Us</a></li>
 						</ul>
 						<!--/ul -->
 					</div>
