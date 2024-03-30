@@ -25,11 +25,11 @@
 			<div class="ls-l header-wrapper" data-ls="offsetyin:150; durationin:700; delayin:200; easingin:easeOutQuint; rotatexin:20; scalexin:1.4; offsetyout:600; durationout:400;">
 				<div class="header-text">
 					<span>Welcome to</span>
-					<h1> AHP</h1>
+					<h1>Alberta Hindi Parishad</h1>
 					<!--the div below is hidden on small screens  -->
 					<div class="hidden-small">
-						<p class="header-p">We offer high quality Daycare Services, contact us or visit us today for more information</p>
-						<a class="btn btn-secondary" href="contact.php">Contact us</a>
+						<p class="header-p">We provide regular classes to teach Hindi systematically</p>
+						<a class="btn btn-secondary" href="#">Enrol Now</a>
 					</div>
 					<!--/hidden-small -->
 				</div>
@@ -55,9 +55,9 @@
 				<!-- front of card  -->
 				<div class="card bg-secondary text-light ">
 					<div class="p-5">
-						<h5 class="card-title text-light">Licensed Child Care</h5>
+						<h5 class="card-title text-light">Licensed Vidyalaya</h5>
 						<p class="card-text">
-							In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat lorem
+							Hindi Vidyalaya was started in 1987 at the University of Alberta with the help of (late) Professor Emeritus Dr. Ambikeshwar Sharma
 						</p>
 						<!-- button show on mobile only,where flip is disabled -->
 						<a href="contact.php" class="btn d-lg-none">Contact us</a>
@@ -71,7 +71,7 @@
 				<div class="card bg-secondary text-light card-back">
 					<div class="card-body d-flex justify-content-center align-items-center">
 						<div class="p-4">
-							<h5 class="card-title text-light">Since 2004</h5>
+							<h5 class="card-title text-light">Since 1987</h5>
 							<p class="card-text">enas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id.
 								In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat
 							</p>
@@ -109,7 +109,7 @@
 				<div class="card bg-primary text-light card-back">
 					<div class="card-body d-flex justify-content-center align-items-center">
 						<div class="p-4">
-							<h5 class="card-title text-light">Quality daycare</h5>
+							<h5 class="card-title text-light">Quality Education</h5>
 							<p class="card-text">enas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id.
 								In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat
 							</p>
@@ -327,7 +327,7 @@
 								<!-- icon -->
 								<i class="flaticon-baby-boy text-primary"></i>
 							</div>
-							<h5>Infant care</h5>
+							<h5>care</h5>
 							<p>Etiam rhoncus leo a dolor placerat, nec elem entum ipsum convall.</p>
 						</div>
 						<!-- /feature-with-icon-->
@@ -348,169 +348,7 @@
 	<!-- /container -->
 </section>
 <!-- /section ends -->
-<!-- section -->
-<section id="services-home" class="container-fluid">
-	<div class="container pb-5">
-		<!-- section heading -->
-		<div class="section-heading text-center">
-			<h2>Our Services</h2>
-			<p class="subtitle">what we offer</p>
-		</div>
-		<!-- /section heading -->
-		<!-- row -->
-		<div class="row vertical-tabs">
-			<div class="col-lg-12">
-				<!-- navigation -->
-				<div class="tabs-with-icon">
-					<nav>
-						<div class="nav nav-tabs" id="nav-tab" role="tablist">
-							<a class="nav-item nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1"><i class="flaticon-abc-block"></i>Daycare</a>
-							<a class="nav-item nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2"><i class="flaticon-kids-1"></i>Summer Camp</a>
-							<a class="nav-item nav-link" id="tab3-tab" data-bs-toggle="tab" href="#tab3"><i class="flaticon-smiling-baby"></i>Infant care</a>
-							<a class="nav-item nav-link" id="tab4-tab" data-bs-toggle="tab" href="#tab4"><i class="flaticon-blackboard"></i>Classes</a>
-							<a class="nav-item nav-link" id="tab5-tab" data-bs-toggle="tab" href="#tab5"><i class="flaticon-kids"></i>Activities</a>
-						</div>
-					</nav>
-					<!-- tab-content -->
-					<div class="tab-content block-padding bg-light" id="nav-tabContent">
-						<div class="tab-pane active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
-							<!-- row -->
-							<div class="row">
-								<div class="col-lg-6">
-									<!-- image -->
-									<img src="{{ asset('assets/img/services/service1.jpg') }}" alt="" class="rounded img-fluid">
-									<!-- ornament starts-->
-									<div class="ornament-rainbow" data-aos="fade-right"></div>
-								</div>
-								<!-- col-lg -->
-								<div class="col-lg-6">
-									<h3>Daycare</h3>
-									<p>Maecenas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.</p>
-									<ul class="custom ps-0">
-										<li>Over 30 Qualified professionals</li>
-										<li>We offer you our quality services since 2002</li>
-										<li>Educational activities in our daily plan</li>
-									</ul>
-									<!-- Button -->
-									<a href="services-single.php" class="btn btn-secondary mt-4">Read More</a>
-								</div>
-								<!-- /col-lg -->
-							</div>
-							<!-- row -->
-						</div>
-						<!-- ./Tab-pane -->
-						<div class="tab-pane" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-							<div class="row">
-								<div class="col-lg-6">
-									<h3>Summer Camp</h3>
-									<p>Maecenas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.</p>
-									<ul class="custom ps-0">
-										<li>Over 30 Qualified professionals</li>
-										<li>We offer you our quality services since 2002</li>
-										<li>Educational activities in our daily plan</li>
-									</ul>
-									<!-- Button -->
-									<a href="services-single.php" class="btn btn-secondary mt-4">Read More</a>
-								</div>
-								<!-- /col-lg -->
-								<div class="col-lg-6 res-margin">
-									<!-- image -->
-									<img src="{{ asset('assets/img/services/service2.jpg') }}" alt="" class="rounded img-fluid">
-									<!-- ornament starts-->
-									<div class="ornament-stars" data-aos="fade-right"></div>
-								</div>
-								<!-- col-lg -->
-							</div>
-							<!-- row -->
-						</div>
-						<!-- ./Tab-pane -->
-						<div class="tab-pane" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
-							<div class="row">
-								<div class="col-lg-6">
-									<!-- image -->
-									<img src="{{ asset('assets/img/services/service3.jpg') }}" alt="" class="rounded img-fluid">
-									<!-- ornament starts-->
-									<div class="ornament-bubbles" data-aos="fade-right"></div>
-								</div>
-								<!-- col-lg -->
-								<div class="col-lg-6">
-									<h3>Infant Care</h3>
-									<p>Maecenas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.</p>
-									<ul class="custom ps-0">
-										<li>Over 30 Qualified professionals</li>
-										<li>We offer you our quality services since 2002</li>
-										<li>Educational activities in our daily plan</li>
-									</ul>
-									<!-- Button -->
-									<a href="services-single.php" class="btn btn-secondary mt-4">Read More</a>
-								</div>
-								<!-- /col-lg -->
-							</div>
-							<!-- row -->
-						</div>
-						<!-- ./Tab-pane -->
-						<div class="tab-pane" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
-							<div class="row">
-								<div class="col-lg-6">
-									<h3>Classes</h3>
-									<p>Maecenas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.</p>
-									<ul class="custom ps-0">
-										<li>Over 30 Qualified professionals</li>
-										<li>We offer you our quality services since 2002</li>
-										<li>Educational activities in our daily plan</li>
-									</ul>
-									<!-- Button -->
-									<a href="services-single.php" class="btn btn-secondary mt-4">Read More</a>
-								</div>
-								<!-- /col-lg -->
-								<div class="col-lg-6 res-margin">
-									<!-- image -->
-									<img src="{{ asset('assets/img/services/service4.jpg') }}" alt="" class="rounded img-fluid">
-									<!-- ornament starts-->
-									<div class="ornament-stars" data-aos="fade-right"></div>
-								</div>
-								<!-- col-lg -->
-							</div>
-							<!-- row -->
-						</div>
-						<!-- ./Tab-pane -->
-						<div class="tab-pane" id="tab5" role="tabpanel" aria-labelledby="tab5-tab">
-							<div class="row">
-								<div class="col-lg-6">
-									<!-- image -->
-									<img src="{{ asset('assets/img/services/service5.jpg') }}" alt="" class="rounded img-fluid">
-									<!-- ornament starts-->
-									<div class="ornament-rainbow" data-aos="fade-right"></div>
-								</div>
-								<!-- col-lg -->
-								<div class="col-lg-6">
-									<h3>Activities</h3>
-									<p>Maecenas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.</p>
-									<ul class="custom ps-0">
-										<li>Over 30 Qualified professionals</li>
-										<li>We offer you our quality services since 2002</li>
-										<li>Educational activities in our daily plan</li>
-									</ul>
-									<!-- Button -->
-									<a href="services-single.php" class="btn btn-secondary mt-4">Read More</a>
-								</div>
-								<!-- /col-lg -->
-							</div>
-							<!-- row -->
-						</div>
-						<!-- ./Tab-pane -->
-					</div>
-					<!-- ./Tab-content -->
-				</div>
-				<!-- vertical-tabs -->
-			</div>
-			<!-- /col-lg-6 -->
-		</div>
-		<!-- /row -->
-	</div>
-	<!-- /container -->
-</section>
-<!-- /section ends -->
+
 <!-- Section  -->
 <section id="counter-section" class="container-fluid counter-calltoaction bg-fixed overlay" data-100-bottom="background-position: 50% 100px;" data-top-bottom="background-position: 50% -100px;">
 	<div id="counter" class="container">
@@ -585,304 +423,11 @@
 			<div class="ornament-stars" data-aos="fade-down"></div>
 		</div>
 		<!-- /col-lg-->
-		<div class="col-lg-12">
-			<!-- team carousel -->
-			<div class="carousel-4items owl-carousel owl-theme mt-5">
-				<!-- Team member 1 -->
-				<div class="col-md-12 team-style1 notepad">
-					<div class="team_img">
-						<a href="team-single.php">
-							<img src="{{ asset('assets/img/team/team1.jpg') }}" class="img-fluid" alt="">
-						</a>
-						<!-- social icons -->
-						<ul class="social">
-							<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-							<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-						</ul>
-					</div>
-					<!-- /team_img -->
-					<div class="team-content">
-						<a href="team-single.php">
-							<h5 class="title">Laura Smith</h5>
-						</a>
-						<span class="post">Teacher</span>
-						<p>Id fermentum augue, ut pellen tesque leo nas. Maecenas at arcu risus Donec com modo.</p>
-					</div>
-					<!-- /team-content -->
-				</div>
-				<!-- /team-style1 -->
-				<!-- Team member 2 -->
-				<div class="col-md-12 team-style1 notepad">
-					<div class="team_img">
-						<a href="team-single.php">
-							<img src="{{ asset('assets/img/team/team2.jpg') }}" class="img-fluid" alt="">
-						</a>
-						<!-- social icons -->
-						<ul class="social">
-							<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-							<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-						</ul>
-					</div>
-					<!-- /team_img -->
-					<div class="team-content">
-						<a href="team-single.php">
-							<h5 class="title">John Doe</h5>
-						</a>
-						<span class="post">Administrator</span>
-						<p>Id fermentum augue, ut pellen tesque leo nas. Maecenas at arcu risus Donec com modo.</p>
-					</div>
-					<!-- /team-content -->
-				</div>
-				<!-- /team-style1 -->
-				<!-- Team member 3 -->
-				<div class="col-md-12 team-style1 notepad">
-					<div class="team_img">
-						<a href="team-single.php">
-							<img src="{{ asset('assets/img/team/team3.jpg') }}" class="img-fluid" alt="">
-						</a>
-						<!-- social icons -->
-						<ul class="social">
-							<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-							<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-						</ul>
-					</div>
-					<!-- /team_img -->
-					<div class="team-content">
-						<a href="team-single.php">
-							<h5 class="title">Meghan Smith</h5>
-						</a>
-						<span class="post">Assitant Teacher</span>
-						<p>Id fermentum augue, ut pellen tesque leo nas. Maecenas at arcu risus Donec com modo.</p>
-					</div>
-					<!-- /team-content -->
-				</div>
-				<!-- /team-style1 -->
-				<!-- Team member 4 -->
-				<div class="col-md-12 team-style1 notepad">
-					<div class="team_img">
-						<a href="team-single.php">
-							<img src="{{ asset('assets/img/team/team4.jpg') }}" class="img-fluid" alt="">
-						</a>
-						<!-- social icons -->
-						<ul class="social">
-							<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-							<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-						</ul>
-					</div>
-					<!-- /team_img -->
-					<div class="team-content">
-						<a href="team-single.php">
-							<h5 class="title">Mika Doe</h5>
-						</a>
-						<span class="post">Teacher</span>
-						<p>Id fermentum augue, ut pellen tesque leo nas. Maecenas at arcu risus Donec com modo.</p>
-					</div>
-					<!-- /team-content -->
-				</div>
-				<!-- /team-style1 -->
-				<!-- Team member 5 -->
-				<div class="col-md-12 team-style1 notepad">
-					<div class="team_img">
-						<a href="team-single.php">
-							<img src="{{ asset('assets/img/team/team5.jpg') }}" class="img-fluid" alt="">
-						</a>
-						<!-- social icons -->
-						<ul class="social">
-							<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-							<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-						</ul>
-					</div>
-					<!-- /team_img -->
-					<div class="team-content">
-						<a href="team-single.php">
-							<h5 class="title">Jillian Smith</h5>
-						</a>
-						<span class="post">Asssitant Teacher</span>
-						<p>Id fermentum augue, ut pellen tesque leo nas. Maecenas at arcu risus Donec com modo.</p>
-					</div>
-					<!-- /team-content -->
-				</div>
-				<!-- /team-style1 -->
-			</div>
-			<!-- /owl-team-->
-		</div>
-		<!-- /col-lg-->
+		
 	</div>
 	<!-- /row-->
 </section>
 <!-- /section ends-->
-<!-- section -->
-<section id="gallery-home" class="container-fluid bg-tertiary no-bg-sm">
-	<div class="container">
-		<!-- section heading -->
-		<div class="section-heading text-center text-light">
-			<h2>Gallery</h2>
-			<p class="subtitle">Our facilities</p>
-		</div>
-		<!-- /section-heading -->
-		<!-- centered Gallery navigation -->
-		<ul class="nav nav-pills category-isotope center-nav">
-			<li class="nav-item">
-				<a class="nav-link active" href="#" data-toggle="tab" data-filter="*">All</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#" data-toggle="tab" data-filter=".school">Our School</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#" data-toggle="tab" data-filter=".activities">Activities</a>
-			</li>
-		</ul>
-		<!-- /ul -->
-		<!-- Gallery -->
-		<div id="gallery-isotope" class="row mt-5 magnific-popup">
-			<!-- Image 1 -->
-			<div class="col-sm-6 col-md-6 col-lg-4 activities">
-				<div class="portfolio-item">
-					<div class="gallery-thumb">
-						<img class="img-fluid " src="{{ asset('assets/img/gallery/gallery1.jpg') }}" alt="">
-						<span class="overlay-mask"></span>
-						<a href="{{ asset('assets/img/gallery/gallery1.jpg') }}" class="link centered" title="You can add caption to pictures.">
-							<i class="fa fa-expand"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- Image 2 -->
-			<div class="col-sm-6 col-md-6 col-lg-4 school">
-				<div class="portfolio-item">
-					<div class="gallery-thumb">
-						<img class="img-fluid " src="{{ asset('assets/img/gallery/gallery2.jpg') }}" alt="">
-						<span class="overlay-mask"></span>
-						<a href="{{ asset('assets/img/gallery/gallery2.jpg') }}" class="link centered" title="You can add caption to pictures.">
-							<i class="fa fa-expand"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- Image 3 -->
-			<div class="col-sm-6 col-md-6 col-lg-4 school">
-				<div class="portfolio-item">
-					<div class="gallery-thumb">
-						<img class="img-fluid " src="{{ asset('assets/img/gallery/gallery3.jpg') }}" alt="">
-						<span class="overlay-mask"></span>
-						<a href="{{ asset('assets/img/gallery/gallery3.jpg') }}" class="link centered" title="You can add caption to pictures.">
-							<i class="fa fa-expand"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- Image 4 -->
-			<div class="col-sm-6 col-md-6 col-lg-4 activities">
-				<div class="portfolio-item">
-					<div class="gallery-thumb">
-						<img class="img-fluid " src="{{ asset('assets/img/gallery/gallery4.jpg') }}" alt="">
-						<span class="overlay-mask"></span>
-						<a href="{{ asset('assets/img/gallery/gallery4.jpg') }}" class="link centered" title="You can add caption to pictures.">
-							<i class="fa fa-expand"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- Image 5 -->
-			<div class="col-sm-6 col-md-6 col-lg-4 school">
-				<div class="portfolio-item">
-					<div class="gallery-thumb">
-						<img class="img-fluid " src="{{ asset('assets/img/gallery/gallery5.jpg') }}" alt="">
-						<span class="overlay-mask"></span>
-						<a href="{{ asset('assets/img/gallery/gallery5.jpg') }}" class="link centered" title="You can add caption to pictures.">
-							<i class="fa fa-expand"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- Image 6 -->
-			<div class="col-sm-6 col-md-6 col-lg-4 school">
-				<div class="portfolio-item">
-					<div class="gallery-thumb">
-						<img class="img-fluid " src="{{ asset('assets/img/gallery/gallery6.jpg') }}" alt="">
-						<span class="overlay-mask"></span>
-						<a href="{{ asset('assets/img/gallery/gallery6.jpg') }}" class="link centered" title="You can add caption to pictures.">
-							<i class="fa fa-expand"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- Image 7 -->
-			<div class="col-sm-6 col-md-6 col-lg-4 activities">
-				<div class="portfolio-item">
-					<div class="gallery-thumb">
-						<img class="img-fluid " src="{{ asset('assets/img/gallery/gallery7.jpg') }}" alt="">
-						<span class="overlay-mask"></span>
-						<a href="{{ asset('assets/img/gallery/gallery7.jpg') }}" class="link centered" title="You can add caption to pictures.">
-							<i class="fa fa-expand"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- Image 8 -->
-			<div class="col-sm-6 col-md-6 col-lg-4 activities">
-				<div class="portfolio-item">
-					<div class="gallery-thumb">
-						<img class="img-fluid " src="{{ asset('assets/img/gallery/gallery8.jpg') }}" alt="">
-						<span class="overlay-mask"></span>
-						<a href="{{ asset('assets/img/gallery/gallery8.jpg') }}" class="link centered" title="You can add caption to pictures.">
-							<i class="fa fa-expand"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- Image 9 -->
-			<div class="col-sm-6 col-md-6 col-lg-4 school">
-				<div class="portfolio-item">
-					<div class="gallery-thumb">
-						<img class="img-fluid " src="{{ asset('assets/img/gallery/gallery9.jpg') }}" alt="">
-						<span class="overlay-mask"></span>
-						<a href="{{ asset('assets/img/gallery/gallery9.jpg') }}" class="link centered" title="You can add caption to pictures.">
-							<i class="fa fa-expand"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- Image 10 -->
-			<div class="col-sm-6 col-md-6 col-lg-4 school">
-				<div class="portfolio-item">
-					<div class="gallery-thumb">
-						<img class="img-fluid " src="{{ asset('assets/img/gallery/gallery10.jpg') }}" alt="">
-						<span class="overlay-mask"></span>
-						<a href="{{ asset('assets/img/gallery/gallery10.jpg') }}" class="link centered" title="You can add caption to pictures.">
-							<i class="fa fa-expand"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- Image 11 -->
-			<div class="col-sm-6 col-md-6 col-lg-4 school">
-				<div class="portfolio-item">
-					<div class="gallery-thumb">
-						<img class="img-fluid " src="{{ asset('assets/img/gallery/gallery11.jpg') }}" alt="">
-						<span class="overlay-mask"></span>
-						<a href="{{ asset('assets/img/gallery/gallery11.jpg') }}" class="link centered" title="You can add caption to pictures.">
-							<i class="fa fa-expand"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- Image 12 -->
-			<div class="col-sm-6 col-md-6 col-lg-4 school">
-				<div class="portfolio-item">
-					<div class="gallery-thumb">
-						<img class="img-fluid " src="{{ asset('assets/img/gallery/gallery12.jpg') }}" alt="">
-						<span class="overlay-mask"></span>
-						<a href="{{ asset('assets/img/gallery/gallery12.jpg') }}" class="link centered" title="You can add caption to pictures.">
-							<i class="fa fa-expand"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- /gallery-isotope-->
-	</div>
-	<!-- /container-->
-</section>
-<!-- /section ends -->
 <!-- section -->
 <section id="blogprev-home" data-100-bottom="background-position: 0% 120%;" data-top-bottom="background-position: 0% 100%;">
 	<div class="container">
@@ -898,14 +443,14 @@
 			<div class="blog-box">
 				<!-- image -->
 				<a href="blog-single.php">
-					<div class="image"><img src="{{ asset('assets/img/blog/blogstyle2-1.jpg') }}" alt=""></div>
+					<div class="image"><img src="http://ahpschool.ca/Ref/Events/2020/RepublicDay/9M%20.jpeg" alt=""></div>
 				</a>
 				<!-- blog-box-caption -->
 				<div class="blog-box-caption">
 					<!-- date -->
 					<div class="date"><span class="day">12</span><span class="month">May</span></div>
 					<a href="blog-single.php">
-						<h4>Helping Your Child with Socialization</h4>
+						<h4>Republic Day</h4>
 					</a>
 					<!-- /link -->
 					<p>
@@ -914,11 +459,9 @@
 				</div>
 				<!-- blog-box-footer -->
 				<div class="blog-box-footer">
-					<div class="author">Posted by<a href="#"><i class="fas fa-user"></i>Lauren Smith</a></div>
-					<div class="comments"><a href="blog-single.php"><i class="fas fa-comment"></i>23</a></div>
 					<!-- Button -->
 					<div class="text-center col-md-12">
-						<a href="blog-single.php" class="btn btn-primary ">Read more</a>
+						<a href="#" class="btn btn-primary ">Read more</a>
 					</div>
 				</div>
 				<!-- /blog-box-footer -->
@@ -928,14 +471,14 @@
 			<div class="blog-box">
 				<!-- image -->
 				<a href="blog-single.php">
-					<div class="image"><img src="{{ asset('assets/img/blog/blogstyle2-2.jpg') }}" alt=""></div>
+					<div class="image"><img src="http://ahpschool.ca/Ref/Events/2020/Ilha/9M%20.jpeg" alt=""></div>
 				</a>
 				<!-- blog-box-caption -->
 				<div class="blog-box-caption">
 					<!-- date -->
 					<div class="date"><span class="day">28</span><span class="month">June</span></div>
 					<a href="blog-single.php">
-						<h4>Our Healthy meals that toddlers love</h4>
+						<h4>llha</h4>
 					</a>
 					<!-- /link -->
 					<p>
@@ -944,8 +487,6 @@
 				</div>
 				<!-- blog-box-footer -->
 				<div class="blog-box-footer">
-					<div class="author">Posted by<a href="#"><i class="fas fa-user"></i>Jonas Doe</a></div>
-					<div class="comments"><a href="blog-single.php"><i class="fas fa-comment"></i>5</a></div>
 					<!-- Button -->
 					<div class="text-center col-md-12">
 						<a href="blog-single.php" class="btn btn-primary ">Read more</a>
@@ -974,8 +515,6 @@
 				</div>
 				<!-- blog-box-footer -->
 				<div class="blog-box-footer">
-					<div class="author">Posted by<a href="#"><i class="fas fa-user"></i>Lauren Smith</a></div>
-					<div class="comments"><a href="blog-single.php"><i class="fas fa-comment"></i>10</a></div>
 					<!-- Button -->
 					<div class="text-center col-md-12">
 						<a href="blog-single.php" class="btn btn-primary ">Read more</a>
@@ -1065,7 +604,7 @@
 							<!-- contact-icon info-->
 							<div class="contact-icon-info">
 								<h5>Write us</h5>
-								<p><a href="mailto:email@yoursite.com">email@yoursite.com</a></p>
+								<p><a href="mailto:albertahindischool@gmail.com">albertahindischool@gmail.com</a></p>
 							</div>
 						</div>
 						<!-- /contact-icon-->
@@ -1078,7 +617,7 @@
 							<!-- contact-icon info-->
 							<div class="contact-icon-info">
 								<h5>Visit us</h5>
-								<p>Street Name 123 - New York</p>
+								<p>#104, 3907-98 Street, Edmonton, Alberta, T6E 6M3</p>
 							</div>
 						</div>
 						<!-- /contact-icon-->
@@ -1091,7 +630,7 @@
 							<!-- contact-icon info-->
 							<div class="contact-icon-info">
 								<h5>Call us</h5>
-								<p>(123) 456-789</p>
+								<p>(780) 432-3674</p>
 							</div>
 						</div>
 						<!-- /contact-icon-->
