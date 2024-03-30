@@ -7,7 +7,7 @@
 > theme
 > blank page
 
-> layout
+[Done] layout
 > landing page
 > members
 > resources
