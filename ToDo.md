@@ -1,14 +1,7 @@
 [Done]
 
-[Working]
-
-[ToDo]
-
-> theme
-> blank page
-
 [Done] layout
-> landing page
+[Done] landing page
 [Done] members
 [Done] forms
 [Done] events
@@ -17,3 +10,27 @@
 
 [Done] about
 [Done] contact
+
+[Working]
+
+[ToDo]
+
+> signup
+> login
+> reset
+
+> admin
+- settings
+- manage members
+- manage students
+- manage courses
+- manage classes
+- manage forms
+
+> student
+- login
+- attendance
+- class schedule
+- message
+
+> staff
