@@ -11,19 +11,28 @@
 [Done] about
 [Done] contact
 
+...........................
+
 [Working]
 
 [ToDo]
 
-> signup
-> login
-> reset
+[Done] Signup
+[Done] Login
+[Done] Reset
 
 > admin
-- settings
+[Done] settings
+[Done] manage students
+
 - manage members
-- manage students
-- manage courses
+
+> manage courses (name, added_on, active)
+✅ create
+✅ view
+- delete
+- disable
+
 - manage classes
 - manage forms
 

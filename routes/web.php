@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,14 @@ Route::get('/mission', [AccountController::class, 'getMission'])->name('get_miss
 
 Route::get('/team', [AccountController::class, 'getTeam'])->name('get_team');
 Route::get('/gallery', [AccountController::class, 'getGallery'])->name('get_gallery');
+
+Route::group(
+	[
+		'prefix'		=>	config('isotopekit_admin.route_admin'),
+		'middleware'	=>	['admin']
+	],
+    function () {
+        Route::get('/courses', [AdminController::class, 'getCourses'])->name('get_admin_courses_all');
+        Route::post('/course', [AdminController::class, 'postCourse'])->name('post_admin_course');
+    }
+);

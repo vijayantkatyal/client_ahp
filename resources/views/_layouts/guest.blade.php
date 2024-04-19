@@ -147,6 +147,11 @@
 							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_events') }}">Events</a></li>
 							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_about') }}">About</a></li>
 							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_contact') }}">Contact Us</a></li>
+							@if(Auth::check())
+								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_admin_register_route') }}">Dashboard</a></li>
+							@else
+								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_admin_register_route') }}">Enrol Now</a></li>
+							@endif
 						</ul>
 						<!--/ul -->
 					</div>
