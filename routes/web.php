@@ -32,7 +32,20 @@ Route::group(
 		'middleware'	=>	['admin']
 	],
     function () {
+        
+        // courses
+        
         Route::get('/courses', [AdminController::class, 'getCourses'])->name('get_admin_courses_all');
         Route::post('/course', [AdminController::class, 'postCourse'])->name('post_admin_course');
+
+        // classes
+        // add
+        Route::get('/classes', [AdminController::class, 'getClasses'])->name('get_admin_classes_all');
+        Route::post('/class', [AdminController::class, 'postClass'])->name('post_admin_class');
+        // edit
+        Route::get('/class/edit/{id}', [AdminController::class, 'getEditClass'])->name('get_admin_class_edit');
+        Route::post('/class/edit', [AdminController::class, 'postEditClass'])->name('post_admin_class_edit');
+
+
     }
 );

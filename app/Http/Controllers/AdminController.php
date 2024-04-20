@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SaveEmbedding;
 use App\Libraries\CaptionsData;
+use App\Models\Classes;
 use App\Models\Courses;
 use IsotopeKit\AuthAPI\Models\User;
 use IsotopeKit\AuthAPI\Models\User_Role;
@@ -51,5 +52,95 @@ class AdminController extends Controller
         ]);
 
         return redirect($request->header('Referer'))->with('status.success', 'Course Created');
+    }
+
+    // classes
+
+    public function getClasses()
+	{
+        $classes = Classes::get();
+        $courses = Courses::get();
+
+        foreach ($classes as $class)
+        {
+            $course_name = "";
+
+            $get_course = Courses::where('id', $class->course_id)->first();
+            if($get_course)
+            {
+                $course_name = $get_course->name;
+            }
+
+            $class->course_name = $course_name;
+        }
+		
+        return view('admin.classes.all')
+            ->with('classes', $classes)
+            ->with('courses', $courses);
+	}
+
+    public function postClass(Request $request)
+    {
+        Classes::create([
+            'name'          =>  $request->input('name'),
+            'start_date'    =>  $request->input('start_date'),
+            'end_date'      =>  $request->input('end_date'),
+            'course_id'     =>  $request->input('course_id'),
+            'added_on'      =>  time(),
+
+            'assigned_member_id'    =>  $request->input('assigned_member_id')
+        ]);
+
+        return redirect($request->header('Referer'))->with('status.success', 'Class Created');
+    }
+
+    public function getEditClass(Request $request, $id)
+    {
+        $class = Classes::where('id', $id)->first();
+        if($class)
+        {
+            $courses = Courses::get();
+
+            $course_name = "";
+
+            $get_course = Courses::where('id', $class->course_id)->first();
+            if($get_course)
+            {
+                $course_name = $get_course->name;
+            }
+
+            $class->course_name = $course_name;
+            
+            return view('admin.classes.edit')
+                ->with('class', $class)
+                ->with('courses', $courses);
+        }
+        else
+        {
+            return "not found";
+        }
+    }
+
+    public function postEditClass(Request $request)
+    {
+        try
+        {
+            Classes::where('id', $request->input('class_id'))->update([
+                'name'  =>  $request->input('name'),
+                'start_date'    =>  $request->input('start_date'),
+                'end_date'      =>  $request->input('end_date'),
+                'course_id'     =>  $request->input('course_id'),
+
+                'assigned_member_id'    =>  $request->input('assigned_member_id')
+
+            ]);
+
+            return redirect($request->header('Referer'))->with('status.success', 'Class Updated');
+        }
+        catch(\Exception $ex)
+        {
+            return redirect($request->header('Referer'))->with('status.error', 'Something went wrong');
+        }
+
     }
 }

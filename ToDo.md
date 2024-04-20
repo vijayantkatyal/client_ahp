@@ -1,39 +1,41 @@
 [Done]
 
-[Done] layout
-[Done] landing page
-[Done] members
-[Done] forms
-[Done] events
-[Done] gallery
-[Done] mission / objective
+[Done] Signup
+[Done] Login
+[Done] Reset
 
-[Done] about
-[Done] contact
+[Done] admin
+✅ login
+✅ logout
+✅ settings
 
-...........................
+[Done] settings
+[Done] manage students
+
+[Done] manage courses (name, added_on, active)
+✅ create
+✅ view
+
+[Done] manage classes
+✅ create (name, start date, end, course id)
+✅ view
+✅ edit
 
 [Working]
 
 [ToDo]
 
-[Done] Signup
-[Done] Login
-[Done] Reset
-
-> admin
-[Done] settings
-[Done] manage students
+> Class 
+- manage students
+- attendance
+-- view
+-- add
 
 - manage members
 
-> manage courses (name, added_on, active)
-✅ create
-✅ view
-- delete
-- disable
+> student
+- add course and class
 
-- manage classes
 - manage forms
 
 > student

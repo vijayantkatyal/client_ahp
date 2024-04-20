@@ -1,5 +1,5 @@
 @extends('admin_panel::_layouts.admin')
-@section('title','Courses')
+@section('title','Classes')
 @section('header')
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css"/>
@@ -20,9 +20,9 @@
 			<div class="row align-items-center">
 				<div class="col">
 					<h2 class="page-title">
-						Courses
+						Classes
 					</h2>
-					<div class="text-muted mt-1">{{ sizeof($courses) }} course</div>
+					<div class="text-muted mt-1">{{ sizeof($classes) }} classes</div>
 				</div>
 				<!-- Page title actions -->
 				<div class="col-auto ms-auto d-print-none">
@@ -51,7 +51,7 @@
 								<line x1="12" y1="5" x2="12" y2="19"></line>
 								<line x1="5" y1="12" x2="19" y2="12"></line>
 							</svg>
-							New course
+							New class
 						</a>
 					</div>
 				</div>
@@ -105,13 +105,16 @@
 												<polyline points="6 15 12 9 18 15" />
 											</svg>
 										</th>
-										<th>Status</th>
+                                        <th>Course Name</th>
+										<th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Assigned Member</th>
 										<th>Added on</th>
 										<th class="w-1"></th>
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($courses as $user)
+									@foreach($classes as $user)
 										<tr>
 											<td>
 												<input class="form-check-input m-0 align-middle select_user" type="checkbox" aria-label="Select User" data-id="{{ $user->id }}">
@@ -126,18 +129,19 @@
 													</div>
 												</div>
 											</td>
-											<td>
-												@if($user->active)
-												<span class="badge bg-success me-1"></span> Active
-												@else
-												<span class="badge bg-danger me-1"></span> Disabled
-												@endif
-											</td>
+											<td>{{ $user->course_name }}</td>
+                                            <td>{{ $user->start_date }}</td>
+                                            <td>{{ $user->end_date }}</td>
+                                            <td>{{ $user->assigned_member_id }}</td>
 											<td class="moment_time">
 												{{ $user->added_on }}
 											</td>
 											<td>
-												
+												<div class="btn-list flex-nowrap">
+                                                    <a href="{{ route('get_admin_class_edit', ['id' => $user->id]) }}" class="btn btn-white">
+														Edit
+													</a>
+                                                </div>
 											</td>
 										</tr>
 									@endforeach
@@ -189,10 +193,10 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">New Course</h5>
+					<h5 class="modal-title">New Class</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<form action="{{ route('post_admin_course') }}" method="POST">
+				<form action="{{ route('post_admin_class') }}" method="POST">
 					{{ csrf_field() }}
 					<div class="modal-body">
 						@component('admin_panel::_layouts.components.alert')
@@ -200,7 +204,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="mb-3">
-									<label class="form-label">Course name</label>
+									<label class="form-label">Class name</label>
 									<input
 										type="text" name="name" required placeholder="Name"
 										@if($errors->has('name'))
@@ -214,6 +218,48 @@
 										<div class="invalid-feedback">{{ $errors->first('name') }}</div>
 									@endif
 								</div>
+                                <div class="mb-3">
+									<label class="form-label">Select Course</label>
+                                    <select required name="course_id" class="form-select" id="">
+                                        @foreach($courses as $course)
+                                            <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                        @endforeach
+                                    </select>
+								</div>
+                                <div class="mb-3">
+									<label class="form-label">Start Date (optional)</label>
+									<input
+										type="date" name="start_date" placeholder="Start Date"
+										@if($errors->has('start_date'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('start_date') }}"
+									>
+									@if($errors->has('start_date'))
+										<div class="invalid-feedback">{{ $errors->first('start_date') }}</div>
+									@endif
+								</div>
+                                <div class="mb-3">
+									<label class="form-label">End Date (optional)</label>
+									<input
+										type="date" name="end_date" placeholder=""
+										@if($errors->has('end_date'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('end_date') }}"
+									>
+									@if($errors->has('end_date'))
+										<div class="invalid-feedback">{{ $errors->first('end_date') }}</div>
+									@endif
+								</div>
+                                <div class="mb-3">
+									<label class="form-label">Assigned Member (optional)</label>
+									<select name="assigned_member_id" class="form-select" id=""></select>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -222,7 +268,7 @@
 							Cancel
 						</a>
 						<button type="submit" class="btn btn-success ms-auto">
-							Create Course
+							Create Class
 						</button>
 					</div>
 				</form>
