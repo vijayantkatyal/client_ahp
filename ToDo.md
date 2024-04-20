@@ -21,6 +21,8 @@
 ✅ view
 ✅ edit
 
+[Done] add course and class to a student
+
 [Working]
 
 [ToDo]
@@ -32,9 +34,6 @@
 -- add
 
 - manage members
-
-> student
-- add course and class
 
 - manage forms
 

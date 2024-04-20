@@ -42,10 +42,12 @@ Route::group(
         // add
         Route::get('/classes', [AdminController::class, 'getClasses'])->name('get_admin_classes_all');
         Route::post('/class', [AdminController::class, 'postClass'])->name('post_admin_class');
+        Route::get('/classes-by-course-id', [AdminController::class, 'getClassesByCourseId'])->name('get_classes_by_course_id');
         // edit
         Route::get('/class/edit/{id}', [AdminController::class, 'getEditClass'])->name('get_admin_class_edit');
         Route::post('/class/edit', [AdminController::class, 'postEditClass'])->name('post_admin_class_edit');
-
-
+        // manage
+        Route::get('/class/manage/{id}', [AdminController::class, 'getManageClass'])->name('get_admin_class_manage');
+        Route::post('/add-class-to-user', [AdminController::class, 'postAddClassToUser'])->name('post_class_to_course');
     }
 );

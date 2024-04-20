@@ -31,6 +31,7 @@ use App\Models\VideoPage;
 use App\Models\Video;
 use App\Models\VideoReactions;
 use App\Models\Domain;
+use App\Models\User as ModelsUser;
 use App\Models\VidChapterProject;
 use Google\Service\StreetViewPublish\Level;
 use IsotopeKit\AuthAPI\Models\Levels;
@@ -142,5 +143,40 @@ class AdminController extends Controller
             return redirect($request->header('Referer'))->with('status.error', 'Something went wrong');
         }
 
+    }
+
+    public function getManageClass(Request $request, $id)
+    {
+        // get class info
+        $class = Classes::where('id', $id)->first();
+        if($class)
+        {
+            // get all students
+            $students = User::where('class_id', $id)->get();
+
+            return view('admin.classes.manage')->with('class', $class)->with('students', $students);
+        }
+        else
+        {
+            return "not found";
+        }
+
+        // add new student
+        // remove student
+        // view student report
+    }
+
+    public function getClassesByCourseId(Request $request)
+    {
+        return Classes::where('course_id', $request->get('id'))->get();
+    }
+
+    public function postAddClassToUser(Request $request)
+    {
+        ModelsUser::where('id', $request->input('user_id'))->update([
+            'course_id' =>  $request->input('course_id'),
+            'class_id'  =>  $request->input('class_id')
+        ]);
+        return redirect($request->header('Referer'))->with('status.success', 'Class Info Updated');
     }
 }

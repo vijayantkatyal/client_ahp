@@ -1,5 +1,5 @@
 @extends('admin_panel::_layouts.admin')
-@section('title','Classes')
+@section('title','Class Students')
 @section('header')
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css"/>
@@ -20,9 +20,9 @@
 			<div class="row align-items-center">
 				<div class="col">
 					<h2 class="page-title">
-						Classes
+						{{ $class->name }} / Students
 					</h2>
-					<div class="text-muted mt-1">{{ sizeof($classes) }} classes</div>
+					<div class="text-muted mt-1">{{ sizeof($students) }} students</div>
 				</div>
 				<!-- Page title actions -->
 				<div class="col-auto ms-auto d-print-none">
@@ -51,7 +51,7 @@
 								<line x1="12" y1="5" x2="12" y2="19"></line>
 								<line x1="5" y1="12" x2="19" y2="12"></line>
 							</svg>
-							New class
+							New student
 						</a>
 					</div>
 				</div>
@@ -105,16 +105,13 @@
 												<polyline points="6 15 12 9 18 15" />
 											</svg>
 										</th>
-                                        <th>Course Name</th>
-										<th>Start Date</th>
-                                        <th>End Date</th>
-                                        <th>Assigned Member</th>
+										<th>Status</th>
 										<th>Added on</th>
 										<th class="w-1"></th>
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($classes as $user)
+									@foreach($students as $user)
 										<tr>
 											<td>
 												<input class="form-check-input m-0 align-middle select_user" type="checkbox" aria-label="Select User" data-id="{{ $user->id }}">
@@ -122,29 +119,109 @@
 											<td>
 												<div class="d-flex py-1 align-items-center">
 													<span class="avatar me-2">
-														{{ substr($user->name, 0, 1) }}
+														{{ substr($user->first_name, 0, 1) }}{{ substr($user->last_name, 0, 1) }}
 													</span>
 													<div class="flex-fill">
-														<div class="font-weight-medium text-capitalize">{{ $user->name }}</div>
+														<div class="font-weight-medium text-capitalize">{{ $user->first_name }} {{ $user->last_name }}</div>
+														<div class="text-muted">
+															<a href="#" class="text-reset">{{ $user->email }}</a>
+															@if($user->owner_details != null)
+																<br>
+																<span class="badge bg-blue-lt">Agency Sub User</span>
+																<span class="badge bg-blue-lt">{{ $user->owner_details->first_name }} {{ $user->owner_details->last_name }}</span>
+																<a class="badge bg-blue-lt" href="{{ url('/admin/users/edit') }}/{{ $user->owner_details->id }}">by: {{ $user->owner_details->first_name }} {{ $user->owner_details->last_name }}</a>
+
+															@endif
+															@if($user->is_agency)
+																<br>
+																<span class="badge bg-red-lt">Agency</span>
+															@endif
+														</div>
 													</div>
 												</div>
 											</td>
-											<td>{{ $user->course_name }}</td>
-                                            <td>{{ $user->start_date }}</td>
-                                            <td>{{ $user->end_date }}</td>
-                                            <td>{{ $user->assigned_member_id }}</td>
-											<td class="moment_time">
-												{{ $user->added_on }}
+											<td>
+												@if($user->enabled)
+												<span class="badge bg-success me-1"></span> Active
+												@else
+												<span class="badge bg-danger me-1"></span> Disabled
+												@endif
+											</td>
+											<td>
+												{{ $user->created_at }}
 											</td>
 											<td>
 												<div class="btn-list flex-nowrap">
-                                                    <a href="{{ route('get_admin_class_edit', ['id' => $user->id]) }}" class="btn btn-white">
+													<a href="{{ route('get_admin_users_edit', ['id' => $user->id]) }}" class="btn btn-white">
 														Edit
 													</a>
-                                                    <a href="{{ route('get_admin_class_manage', ['id' => $user->id]) }}" class="btn btn-outline-success">
-														Manage
-													</a>
-                                                </div>
+													<div class="dropdown">
+														<button class="btn dropdown-toggle align-text-top"
+															data-bs-boundary="viewport"
+															data-bs-toggle="dropdown">Actions</button>
+														<div class="dropdown-menu dropdown-menu-end">
+															<button class="dropdown-item" onclick="event.preventDefault();document.getElementById('access-user-{{ $user->id }}').submit();">
+																<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-login" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+																	<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+																	<path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+																	<path d="M20 12h-13l3 -3m0 6l-3 -3"></path>
+																</svg>&nbsp;Access
+															</button>
+															<form id="access-user-{{ $user->id }}" action="{{ route('post_admin_users_access', $user->id) }}" method="POST" style="display: none;">
+																{{ csrf_field() }}
+															</form>
+															<button class="dropdown-item" type="button" title="Reset and Send New Login Credentials" onclick="event.preventDefault();document.getElementById('reset-user-{{ $user->id }}').submit();">
+																<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+																	<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+																	<line x1="10" y1="14" x2="21" y2="3"></line>
+																	<path d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"></path>
+																</svg>&nbsp;Reset
+															</button>
+															<form id="reset-user-{{ $user->id }}" action="{{ route('post_admin_users_reset', $user->id) }}" method="POST" style="display: none;">
+																{{ csrf_field() }}
+															</form>
+															<button type="button" class="dropdown-item" onclick="event.preventDefault();document.getElementById('change-user-status-{{ $user->id }}').submit();">
+																@if($user->enabled)
+																<span class="text-danger">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+																		<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+																		<line x1="18" y1="6" x2="6" y2="18"></line>
+																		<line x1="6" y1="6" x2="18" y2="18"></line>
+																	</svg>&nbsp;Disable
+																</span>
+																@else
+																<span class="text-success">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+																		<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+																		<path d="M5 12l5 5l10 -10"></path>
+																	</svg>&nbsp;Enable
+																</span>
+																@endif
+															</button>
+															<form id="change-user-status-{{ $user->id }}" action="{{ route('post_admin_users_edit_status', $user->id) }}" method="POST" style="display: none;">
+																{{ csrf_field() }}
+																@if($user->enabled)
+																	<input type="hidden" name="enabled" value="0">
+																@else
+																	<input type="hidden" name="enabled" value="1">
+																@endif
+															</form>
+															<button class="dropdown-item text-red" onclick="event.preventDefault();document.getElementById('delete-user-{{ $user->id }}').submit();">
+																<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+																	<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+																	<line x1="4" y1="7" x2="20" y2="7"></line>
+																	<line x1="10" y1="11" x2="10" y2="17"></line>
+																	<line x1="14" y1="11" x2="14" y2="17"></line>
+																	<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+																	<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+																</svg>&nbsp;Delete
+															</button>
+															<form id="delete-user-{{ $user->id }}" action="{{ route('post_admin_users_delete', $user->id) }}" method="POST" style="display: none;">
+																{{ csrf_field() }}
+															</form>
+														</div>
+													</div>
+												</div>
 											</td>
 										</tr>
 									@endforeach
@@ -196,74 +273,80 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">New Class</h5>
+					<h5 class="modal-title">New User</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<form action="{{ route('post_admin_class') }}" method="POST">
+				<form action="{{ route('post_admin_users_add') }}" method="POST">
 					{{ csrf_field() }}
 					<div class="modal-body">
 						@component('admin_panel::_layouts.components.alert')
 						@endcomponent
 						<div class="row">
-							<div class="col-lg-12">
+							<div class="col-lg-6">
 								<div class="mb-3">
-									<label class="form-label">Class name</label>
+									<label class="form-label">First name</label>
 									<input
-										type="text" name="name" required placeholder="Name"
-										@if($errors->has('name'))
+										type="text" name="first_name" required placeholder="First Name"
+										@if($errors->has('first_name'))
 											class="form-control is-invalid"
 										@else
 											class="form-control"
 										@endif
-										value="{{ old('name') }}"
+										value="{{ old('first_name') }}"
 									>
-									@if($errors->has('name'))
-										<div class="invalid-feedback">{{ $errors->first('name') }}</div>
+									@if($errors->has('first_name'))
+										<div class="invalid-feedback">{{ $errors->first('first_name') }}</div>
 									@endif
-								</div>
-                                <div class="mb-3">
-									<label class="form-label">Select Course</label>
-                                    <select required name="course_id" class="form-select" id="">
-                                        @foreach($courses as $course)
-                                            <option value="{{ $course->id }}">{{ $course->name }}</option>
-                                        @endforeach
-                                    </select>
-								</div>
-                                <div class="mb-3">
-									<label class="form-label">Start Date (optional)</label>
-									<input
-										type="date" name="start_date" placeholder="Start Date"
-										@if($errors->has('start_date'))
-											class="form-control is-invalid"
-										@else
-											class="form-control"
-										@endif
-										value="{{ old('start_date') }}"
-									>
-									@if($errors->has('start_date'))
-										<div class="invalid-feedback">{{ $errors->first('start_date') }}</div>
-									@endif
-								</div>
-                                <div class="mb-3">
-									<label class="form-label">End Date (optional)</label>
-									<input
-										type="date" name="end_date" placeholder=""
-										@if($errors->has('end_date'))
-											class="form-control is-invalid"
-										@else
-											class="form-control"
-										@endif
-										value="{{ old('end_date') }}"
-									>
-									@if($errors->has('end_date'))
-										<div class="invalid-feedback">{{ $errors->first('end_date') }}</div>
-									@endif
-								</div>
-                                <div class="mb-3">
-									<label class="form-label">Assigned Member (optional)</label>
-									<select name="assigned_member_id" class="form-select" id=""></select>
 								</div>
 							</div>
+							<div class="col-lg-6">
+								<div class="mb-3">
+									<label class="form-label">Last Name</label>
+									<input
+										type="text" name="last_name" required placeholder="Last Name"
+										@if($errors->has('last_name'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('last_name') }}"
+									>
+									@if($errors->has('last_name'))
+										<div class="invalid-feedback">{{ $errors->first('last_name') }}</div>
+									@endif
+								</div>
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Email</label>
+							<input type="text" name="email" required placeholder="User Email"
+								@if($errors->has('email'))
+									class="form-control is-invalid"
+								@else
+									class="form-control"
+								@endif
+								value="{{ old('email') }}"
+							>
+							@if($errors->has('email'))
+								<div class="invalid-feedback">{{ $errors->first('email') }}</div>
+							@endif
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Password</label>
+							<input
+								type="password" name="password" required placeholder="User Password"
+								@if($errors->has('password'))
+									class="form-control is-invalid"
+								@else
+									class="form-control"
+								@endif
+								value=""
+							>
+							@if($errors->has('password'))
+								<div class="invalid-feedback">{{ $errors->first('password') }}</div>
+							@endif
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -271,7 +354,7 @@
 							Cancel
 						</a>
 						<button type="submit" class="btn btn-success ms-auto">
-							Create Class
+							Create User
 						</button>
 					</div>
 				</form>
@@ -285,17 +368,6 @@
 
 	<script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap5.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
-    <script>
-        $(".moment_time").each(function(){
-            var _e_time = $(this).text();
-            var _time = moment.unix(_e_time);
-            var _title = _time.format("DD-MMMM-YYYY h:mm:ss a");
-            $(this).attr("title", _title);
-            $(this).text(_time.fromNow());
-        });
-    </script>
 
 	<script>
 		$('.datatable').DataTable({
