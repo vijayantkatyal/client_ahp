@@ -49,5 +49,12 @@ Route::group(
         // manage
         Route::get('/class/manage/{id}', [AdminController::class, 'getManageClass'])->name('get_admin_class_manage');
         Route::post('/add-class-to-user', [AdminController::class, 'postAddClassToUser'])->name('post_class_to_course');
+        Route::get('/class/attendance/{id}', [AdminController::class, 'getAttendanceClass'])->name('get_admin_class_attendance');
+
+        // attendance
+        // get
+        Route::get('/g-attendance', [AdminController::class, 'getAttendanceSingle'])->name('get_amin_class_attendance_single');
+        // post
+        Route::post('/g-attendance', [AdminController::class, 'postAttendanceSingle'])->name('post_amin_class_attendance_single');
     }
 );

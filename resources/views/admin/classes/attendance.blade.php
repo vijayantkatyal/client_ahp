@@ -1,5 +1,5 @@
 @extends('admin_panel::_layouts.admin')
-@section('title','Class Students')
+@section('title','Class Attendance')
 @section('header')
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css"/>
@@ -20,42 +20,16 @@
 			<div class="row align-items-center">
 				<div class="col">
 					<h2 class="page-title">
-						{{ $class->name }} / Students
+						{{ $class->name }} / Attendance
 					</h2>
 					<div class="text-muted mt-1">{{ sizeof($students) }} students</div>
 				</div>
 				<!-- Page title actions -->
 				<div class="col-auto ms-auto d-print-none">
 					<div class="d-flex">
-					
-						<button style="display: none;" id="del_users_btn" class="btn btn-danger me-1">
-							<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-								<line x1="4" y1="7" x2="20" y2="7"></line>
-								<line x1="10" y1="11" x2="10" y2="17"></line>
-								<line x1="14" y1="11" x2="14" y2="17"></line>
-								<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-								<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-							</svg>&nbsp;Delete Selected
-						</button>
-						<form id="delete-users" action="{{ route('post_admin_users_delete_multiple') }}" method="POST" style="display: none;">
-							<input type="text" name="users_id" />
-							{{ csrf_field() }}
-						</form>
-
-                        <a href="{{ route('get_admin_class_attendance', ['id' => $class->id]) }}" class="btn btn-outline-primary me-1">
-							Attendance
-						</a>
-
-						<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-new-user">
-							<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-								stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-								stroke-linejoin="round">
-								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-								<line x1="12" y1="5" x2="12" y2="19"></line>
-								<line x1="5" y1="12" x2="19" y2="12"></line>
-							</svg>
-							New student
+						<a href="#" class="btn btn-primary">
+							<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
+							Download Attendance (PDF)
 						</a>
 					</div>
 				</div>
@@ -109,9 +83,9 @@
 												<polyline points="6 15 12 9 18 15" />
 											</svg>
 										</th>
-										<th>Status</th>
-										<th>Added on</th>
-										<th class="w-1"></th>
+										@foreach($days as $day)
+											<th class="text-center">{{ $day['day'] }} ({{ $day['date'] }})</th>
+										@endforeach
 									</tr>
 								</thead>
 								<tbody>
@@ -144,26 +118,14 @@
 													</div>
 												</div>
 											</td>
-											<td>
-												@if($user->enabled)
-												<span class="badge bg-success me-1"></span> Active
-												@else
-												<span class="badge bg-danger me-1"></span> Disabled
-												@endif
+											@foreach($days as $day)
+											<td class="text-center">
+												<span class="user_attendance" data-user-id="{{ $user->id }}" data-date="{{ $day['date'] }}"></span>
+                                                <!-- <span class="text-success">
+                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
+                                                </span> -->
 											</td>
-											<td>
-												{{ $user->created_at }}
-											</td>
-											<td>
-												<div class="btn-list flex-nowrap">
-													<a href="{{ route('get_admin_users_edit', ['id' => $user->id]) }}" class="btn btn-white">
-														Edit
-													</a>
-													<a href="{{ route('get_admin_users_edit', ['id' => $user->id]) }}" class="btn btn-white">
-														Attendance Report
-													</a>
-												</div>
-											</td>
+                                            @endforeach
 										</tr>
 									@endforeach
 								</tbody>
@@ -206,99 +168,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal modal-blur fade" id="modal-new-user" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">New User</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<form action="{{ route('post_admin_users_add') }}" method="POST">
-					{{ csrf_field() }}
-					<div class="modal-body">
-						@component('admin_panel::_layouts.components.alert')
-						@endcomponent
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="mb-3">
-									<label class="form-label">First name</label>
-									<input
-										type="text" name="first_name" required placeholder="First Name"
-										@if($errors->has('first_name'))
-											class="form-control is-invalid"
-										@else
-											class="form-control"
-										@endif
-										value="{{ old('first_name') }}"
-									>
-									@if($errors->has('first_name'))
-										<div class="invalid-feedback">{{ $errors->first('first_name') }}</div>
-									@endif
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="mb-3">
-									<label class="form-label">Last Name</label>
-									<input
-										type="text" name="last_name" required placeholder="Last Name"
-										@if($errors->has('last_name'))
-											class="form-control is-invalid"
-										@else
-											class="form-control"
-										@endif
-										value="{{ old('last_name') }}"
-									>
-									@if($errors->has('last_name'))
-										<div class="invalid-feedback">{{ $errors->first('last_name') }}</div>
-									@endif
-								</div>
-							</div>
-						</div>
-
-						<div class="mb-3">
-							<label class="form-label">Email</label>
-							<input type="text" name="email" required placeholder="User Email"
-								@if($errors->has('email'))
-									class="form-control is-invalid"
-								@else
-									class="form-control"
-								@endif
-								value="{{ old('email') }}"
-							>
-							@if($errors->has('email'))
-								<div class="invalid-feedback">{{ $errors->first('email') }}</div>
-							@endif
-						</div>
-
-						<div class="mb-3">
-							<label class="form-label">Password</label>
-							<input
-								type="password" name="password" required placeholder="User Password"
-								@if($errors->has('password'))
-									class="form-control is-invalid"
-								@else
-									class="form-control"
-								@endif
-								value=""
-							>
-							@if($errors->has('password'))
-								<div class="invalid-feedback">{{ $errors->first('password') }}</div>
-							@endif
-						</div>
-					</div>
-					<div class="modal-footer">
-						<a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-							Cancel
-						</a>
-						<button type="submit" class="btn btn-success ms-auto">
-							Create User
-						</button>
-					</div>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -377,6 +246,85 @@
 				event.preventDefault();
 				document.getElementById('delete-users').submit();
 			}
+		});
+	</script>
+
+	<script>
+		$(".user_attendance").each(function(key, item){
+			var _item = $(item)[0];
+			console.log(_item);
+			var _user_id = _item.dataset.userId;
+			var _date_id = _item.dataset.date;
+			var _class_id = "{{ $class->id }}";
+
+			console.log(_class_id);
+			console.log(_user_id + " : " + _date_id);
+
+			$.getJSON("{{ route('get_amin_class_attendance_single') }}?user_id="+_user_id+"&class_id="+_class_id+"&date="+_date_id).done(function(resp){
+				console.log(resp);
+				if(resp == null)
+				{
+					var _body = `<div class="btn-group" role="group" aria-label="">
+						<button data-user-id="`+ _user_id +`" data-date="`+ _date_id +`" data-present="true" type="button" class="mark_attendance btn btn-outline-success"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg></button>
+						<button data-user-id="`+ _user_id +`" data-date="`+ _date_id +`" data-present="false" type="button" class="mark_attendance btn btn-outline-danger"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
+					</div>`;
+					$(_item).append(_body);
+				}
+				else
+				{
+					if(resp.present == true)
+					{
+						$(_item).append(`
+							<span class="text-success"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg></span>
+						`);	
+					}
+					if(resp.present == false)
+					{
+						$(_item).append(`
+							<span class="text-danger"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></span>
+						`);
+					}
+				}
+			});
+		})
+	</script>
+
+	<script>
+		$("body").on("click", ".mark_attendance", function(){
+			var _item = $(this)[0];
+			console.log(_item);
+			var _user_id = _item.dataset.userId;
+			var _date_id = _item.dataset.date;
+			var _class_id = "{{ $class->id }}";
+			var _present = _item.dataset.present;
+
+			$.post("{{ route('post_amin_class_attendance_single') }}", {
+				"_token": "{{ csrf_token() }}",
+				"user_id": _user_id,
+				"date_id": _date_id,
+				"class_id": _class_id,
+				"present": _present
+			}).done(function(resp){
+				console.log(resp);
+
+				var _parent = $(_item).parents(".user_attendance");
+
+				$(_parent).empty();				
+
+				if(_present == "true")
+				{
+					$(_parent).append(`
+						<span class="text-success"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg></span>
+					`);	
+				}
+
+				if(_present == "false")
+				{
+					$(_parent).append(`
+						<span class="text-danger"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></span>
+					`);	
+				}
+			});
 		});
 	</script>
 

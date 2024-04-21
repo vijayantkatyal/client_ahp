@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SaveEmbedding;
 use App\Libraries\CaptionsData;
+use App\Models\Attendance;
 use App\Models\Classes;
 use App\Models\Courses;
 use IsotopeKit\AuthAPI\Models\User;
@@ -160,10 +161,6 @@ class AdminController extends Controller
         {
             return "not found";
         }
-
-        // add new student
-        // remove student
-        // view student report
     }
 
     public function getClassesByCourseId(Request $request)
@@ -178,5 +175,101 @@ class AdminController extends Controller
             'class_id'  =>  $request->input('class_id')
         ]);
         return redirect($request->header('Referer'))->with('status.success', 'Class Info Updated');
+    }
+
+    public function getAttendanceClass(Request $request, $id)
+    {
+        $class = Classes::where('id', $id)->first();
+        if($class)
+        {
+            // all attendance
+
+            $today = time();
+            $wday = date('w', $today);   
+            $datemon = date('m-d-Y', $today - ($wday - 1)*86400);
+            $datetue = date('m-d-Y', $today - ($wday - 2)*86400);
+            $datewed = date('m-d-Y', $today - ($wday - 3)*86400);
+            $datethu = date('m-d-Y', $today - ($wday - 4)*86400);
+            $datefri = date('m-d-Y', $today - ($wday - 5)*86400);
+
+            $days = [];
+
+            // mon
+            $monday = [
+                "day"   =>  "Monday",
+                "date"  =>  $datemon
+            ];
+            array_push($days, $monday);
+
+            // tue
+            $tuesday = [
+                "day"   =>  "Tuesday",
+                "date"  =>  $datetue
+            ];
+            array_push($days, $tuesday);
+
+            // wed
+            $wednesday = [
+                "day"   =>  "Wednesday",
+                "date"  =>  $datewed
+            ];
+            array_push($days, $wednesday);
+
+            // thursday
+            $thursday = [
+                "day"   =>  "Thursday",
+                "date"  =>  $datethu
+            ];
+            array_push($days, $thursday);
+
+            // friday
+            $friday = [
+                "day"   =>  "Friday",
+                "date"  =>  $datefri
+            ];
+            array_push($days, $friday);
+
+            // return $days;
+
+            // get all students
+            $students = User::where('class_id', $id)->get();
+            if(sizeof($students) > 0)
+            {
+                return view('admin.classes.attendance')->with('class', $class)->with('students', $students)->with('days', $days);
+            }
+            else
+            {
+                return redirect($request->header('Referer'))->with('status.error', 'No Students Found');    
+            }
+        }
+        else
+        {
+            return redirect($request->header('Referer'))->with('status.error', 'Class Not Found');
+        }
+    }
+
+    public function getAttendanceSingle(Request $request)
+    {
+        $attendance = Attendance::where('user_id', $request->input('user_id'))->where('class_id', $request->input('class_id'))->where('date', $request->input('date'))->first();
+        if($attendance)
+        {
+            return json_encode($attendance);
+        }
+        else
+        {
+            return json_encode(null);
+        }
+    }
+
+    public function postAttendanceSingle(Request $request)
+    {
+        Attendance::create([
+            'user_id'   =>  $request->input('user_id'),
+            'class_id'  =>  $request->input('class_id'),
+            'date'      =>  $request->input('date_id'),
+            'present'   =>  (boolean) json_decode($request->input('present')),
+        ]);
+
+        return "done";
     }
 }

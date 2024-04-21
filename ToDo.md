@@ -23,15 +23,16 @@
 
 [Done] add course and class to a student
 
+[Done] attendance
+✅ view
+✅ add
+
 [Working]
 
 [ToDo]
 
 > Class 
-- manage students
-- attendance
--- view
--- add
+- manage students (remove from class)
 
 - manage members
 
