@@ -27,21 +27,23 @@
 ✅ view
 ✅ add
 
+[Done] manage students (remove from class)
+
 [Working]
 
 [ToDo]
 
-> Class 
-- manage students (remove from class)
+> student
+✅ login 
+✅ dashboard
+✅ attedance
+✅ class info
+- message
+✅ logout
 
-- manage members
+> member / agency
+- login
+- dashboard
+- manage class
 
 - manage forms
-
-> student
-- login
-- attendance
-- class schedule
-- message
-
-> staff

@@ -47,7 +47,7 @@
 							Attendance
 						</a>
 
-						<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-new-user">
+						<!-- <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-new-user">
 							<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
 								stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
 								stroke-linejoin="round">
@@ -56,7 +56,7 @@
 								<line x1="5" y1="12" x2="19" y2="12"></line>
 							</svg>
 							New student
-						</a>
+						</a> -->
 					</div>
 				</div>
 			</div>

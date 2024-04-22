@@ -148,9 +148,9 @@
 							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_about') }}">About</a></li>
 							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_contact') }}">Contact Us</a></li>
 							@if(Auth::check())
-								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_admin_register_route') }}">Dashboard</a></li>
+								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_user_index_s') }}">Dashboard</a></li>
 							@else
-								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_admin_register_route') }}">Enrol Now</a></li>
+								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_admin_register_route') }}">Enrol Now / Login</a></li>
 							@endif
 						</ul>
 						<!--/ul -->
@@ -438,6 +438,17 @@
 	<script src="{{ asset('assets/vendor/layerslider/js/layerslider.transitions.js') }}"></script>
 	<script src="{{ asset('assets/vendor/layerslider/js/layerslider.kreaturamedia.jquery.js') }}"></script>
 	<script src="{{ asset('assets/vendor/layerslider/js/layerslider.load.js') }}"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script>
+        $(".moment_time").each(function(){
+            var _e_time = $(this).text();
+            var _time = moment.unix(_e_time);
+            var _title = _time.format("DD-MMMM-YYYY h:mm:ss a");
+            $(this).attr("title", _title);
+            $(this).text(_time.fromNow());
+        });
+    </script>
 	
 	@yield('footer')
 </body>

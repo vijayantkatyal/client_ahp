@@ -75,4 +75,9 @@ class AccountController extends Controller
 	{
 		return view('forms');
 	}
+
+	public function getLogin(Request $request)
+	{
+		return redirect(url('/'));
+	}
 }

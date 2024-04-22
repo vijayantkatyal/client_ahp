@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
+use IsotopeKit\AuthAPI\Http\Controllers\AuthController as auth_api_auth_controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,16 @@ Route::get('/mission', [AccountController::class, 'getMission'])->name('get_miss
 
 Route::get('/team', [AccountController::class, 'getTeam'])->name('get_team');
 Route::get('/gallery', [AccountController::class, 'getGallery'])->name('get_gallery');
+
+Route::group(
+	[
+		'prefix'		=>	config('isotopekit_admin.route_prefix'),
+		'middleware'	=>	['guest']
+	],
+	function () {
+		Route::get('/login', [AccountController::class, 'getLogin'])->name('get_login_route');
+    }
+);
 
 Route::group(
 	[
@@ -56,5 +68,21 @@ Route::group(
         Route::get('/g-attendance', [AdminController::class, 'getAttendanceSingle'])->name('get_amin_class_attendance_single');
         // post
         Route::post('/g-attendance', [AdminController::class, 'postAttendanceSingle'])->name('post_amin_class_attendance_single');
+    }
+);
+
+Route::group(
+	[
+		'prefix'		=>	'user',
+		'middleware'	=>	['user']
+	],
+	function () {
+        Route::get('/', [UserController::class, 'getIndex'])->name('get_user_index_s');
+        Route::get('/overview', [UserController::class, 'getIndex'])->name('get_user_index');
+
+        Route::post('/logout', [auth_api_auth_controller::class, 'postLogout'])->name('post_logout_route');
+
+		Route::post('/settings-general', [UserController::class, 'postSettingsGeneral'])->name('post_user_settings_general');
+		Route::post('/settings-password', [UserController::class, 'postSettingsPassword'])->name('post_user_settings_password');
     }
 );
