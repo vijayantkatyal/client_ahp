@@ -47,3 +47,19 @@
 - manage class
 
 - manage forms
+
+
+-----------------------
+
+> student - only one class (but can join other class)
+> teacher (main, assistance), admin, board member, principal
+
+> board member (events / calendar, send event notification - photos)
+> principal (manage classses, manage teachers, manage teachers attendance - total hours) (assign claas-wise hour rate)
+> teacher (multiple classes) - can manage class (students, attendance)
+> student (by default) (user as signup)
+> super admin
+
+> email ? / message
+
+> class manage (add students in bulk)
