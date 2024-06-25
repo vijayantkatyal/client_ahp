@@ -1,4 +1,4 @@
-@extends('admin_panel::_layouts.admin')
+@extends('_layouts.admin')
 @section('title','Class Attendance')
 @section('header')
 
@@ -38,7 +38,7 @@
 
 		<br>
 
-		@component('admin_panel::_layouts.components.alert')
+		@component('_layouts.components.alert')
 		@endcomponent
 	</div>
 

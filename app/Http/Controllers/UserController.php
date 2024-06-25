@@ -20,9 +20,6 @@ use Illuminate\Support\Str;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use DateTime;
 
-// use IsotopeKit\AuthAPI\Models\User;
-use IsotopeKit\AuthAPI\Models\User_Role;
-
 class UserController extends Controller
 {
 	use DispatchesJobs;

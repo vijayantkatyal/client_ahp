@@ -29,17 +29,21 @@
 
 [Done] manage students (remove from class)
 
+[Done] student
+✅ login 
+✅ dashboard
+✅ attedance
+✅ class info
+✅ logout
+
+----------------------
+
 [Working]
 
 [ToDo]
 
 > student
-✅ login 
-✅ dashboard
-✅ attedance
-✅ class info
 - message
-✅ logout
 
 > member / agency
 - login

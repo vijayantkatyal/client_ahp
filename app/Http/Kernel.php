@@ -4,6 +4,12 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
+// custom middlewares
+use App\Http\Middleware\CheckIsUser;
+use App\Http\Middleware\CheckIsAdmin;
+use App\Http\Middleware\CheckIsAgency;
+use App\Http\Middleware\CheckIsTeam;
+
 class Kernel extends HttpKernel
 {
     /**
@@ -43,6 +49,19 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+
+        'admin' =>  [
+            CheckIsAdmin::class
+        ],
+        'agency' => [
+            CheckIsAgency::class
+        ],
+        'team'  =>  [
+            CheckIsTeam::class
+        ],
+        'user'  =>  [
+            CheckIsUser::class
+        ]
     ];
 
     /**

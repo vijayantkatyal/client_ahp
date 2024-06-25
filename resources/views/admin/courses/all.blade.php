@@ -1,4 +1,4 @@
-@extends('admin_panel::_layouts.admin')
+@extends('_layouts.admin')
 @section('title','Courses')
 @section('header')
 
@@ -60,7 +60,7 @@
 
 		<br>
 
-		@component('admin_panel::_layouts.components.alert')
+		@component('_layouts.components.alert')
 		@endcomponent
 	</div>
 
@@ -195,7 +195,7 @@
 				<form action="{{ route('post_admin_course') }}" method="POST">
 					{{ csrf_field() }}
 					<div class="modal-body">
-						@component('admin_panel::_layouts.components.alert')
+						@component('_layouts.components.alert')
 						@endcomponent
 						<div class="row">
 							<div class="col-lg-12">

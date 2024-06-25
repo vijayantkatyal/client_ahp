@@ -8,22 +8,10 @@
     ],
     "license": "MIT",
     "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:isotopekit/admin_panel.git"
-        },
-		{
-            "type": "vcs",
-            "url": "git@github.com:isotopekit/auth_api.git"
-        },
 		{
             "type": "vcs",
             "url": "git@github.com:isotopekit/utility.git"
-        },
-		{
-			"type": "vcs",
-			"url": "git@github.com:isotopekit/integration_third_party_sync.git"
-		}
+        }
     ],
     "require": {
         "php": "^7.3|^8.0",
@@ -32,7 +20,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "isotopekit/admin_panel": "dev-master"
+        "isotopekit/utility": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

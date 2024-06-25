@@ -1,5 +1,5 @@
 @extends('_layouts.admin')
-@section('title','Class Students')
+@section('title','Users')
 @section('header')
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css"/>
@@ -20,13 +20,27 @@
 			<div class="row align-items-center">
 				<div class="col">
 					<h2 class="page-title">
-						{{ $class->name }} / Students
+						Users
 					</h2>
-					<div class="text-muted mt-1">{{ sizeof($students) }} students</div>
+					<div class="text-muted mt-1">{{ sizeof($users) }} people</div>
 				</div>
 				<!-- Page title actions -->
 				<div class="col-auto ms-auto d-print-none">
 					<div class="d-flex">
+
+						<form id="change-plan-users" class="me-1" action="{{ route('post_admin_users_plan_multiple') }}" method="POST" style="display: none;">
+							{{ csrf_field() }}
+							<input type="text" name="users_id" style="display: none;" />
+							<div class="input-group">
+								<span class="input-group-text">Change Plan to</span>
+								<select name="new_plan_id" class="form-select" id="" style="min-width: 150px;">
+									@foreach($plans as $plan)
+										<option value="{{ $plan->id }}">{{ $plan->name }}</option>
+									@endforeach
+								</select>
+								<button class="btn btn-success" type="submit">Submit</button>
+							</div>
+						</form>
 					
 						<button style="display: none;" id="del_users_btn" class="btn btn-danger me-1">
 							<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -43,11 +57,7 @@
 							{{ csrf_field() }}
 						</form>
 
-                        <a href="{{ route('get_admin_class_attendance', ['id' => $class->id]) }}" class="btn btn-outline-primary me-1">
-							Attendance
-						</a>
-
-						<!-- <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-new-user">
+						<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-new-user">
 							<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
 								stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
 								stroke-linejoin="round">
@@ -55,8 +65,8 @@
 								<line x1="12" y1="5" x2="12" y2="19"></line>
 								<line x1="5" y1="12" x2="19" y2="12"></line>
 							</svg>
-							New student
-						</a> -->
+							New user
+						</a>
 					</div>
 				</div>
 			</div>
@@ -109,13 +119,17 @@
 												<polyline points="6 15 12 9 18 15" />
 											</svg>
 										</th>
+										<th>Plan</th>
+										@if($filter == "appsumo")
+											<th>Code Used</th>
+										@endif
 										<th>Status</th>
 										<th>Added on</th>
 										<th class="w-1"></th>
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($students as $user)
+									@foreach($users as $user)
 										<tr>
 											<td>
 												<input class="form-check-input m-0 align-middle select_user" type="checkbox" aria-label="Select User" data-id="{{ $user->id }}">
@@ -145,6 +159,44 @@
 												</div>
 											</td>
 											<td>
+												@if($user->plan_name != null && $user->owner_details == null)
+												<span class="badge bg-green-lt">{{ $user->plan_name }}</span>
+												@endif
+											</td>
+											@if($filter == "appsumo")
+											<td>
+												@if($user->code_used_one)
+													<span class="badge bg-secondary">
+														{{ $user->code_used_one }}
+													</span>
+												@endif
+												@if($user->code_used_two)
+													<br>
+													<span class="badge bg-secondary">
+														{{ $user->code_used_two }}
+													</span>
+												@endif
+												@if($user->code_used_three)
+													<br>
+													<span class="badge bg-secondary">
+														{{ $user->code_used_three }}
+													</span>
+												@endif
+												@if($user->code_used_four)
+													<br>
+													<span class="badge bg-secondary">
+														{{ $user->code_used_four }}
+													</span>
+												@endif
+												@if($user->code_used_five)
+													<br>
+													<span class="badge bg-secondary">
+														{{ $user->code_used_five }}
+													</span>
+												@endif
+											</td>
+											@endif
+											<td>
 												@if($user->enabled)
 												<span class="badge bg-success me-1"></span> Active
 												@else
@@ -159,9 +211,72 @@
 													<a href="{{ route('get_admin_users_edit', ['id' => $user->id]) }}" class="btn btn-white">
 														Edit
 													</a>
-													<a href="{{ route('get_admin_users_edit', ['id' => $user->id]) }}" class="btn btn-white">
-														Attendance Report
-													</a>
+													<div class="dropdown">
+														<button class="btn dropdown-toggle align-text-top"
+															data-bs-boundary="viewport"
+															data-bs-toggle="dropdown">Actions</button>
+														<div class="dropdown-menu dropdown-menu-end">
+															<button class="dropdown-item" onclick="event.preventDefault();document.getElementById('access-user-{{ $user->id }}').submit();">
+																<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-login" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+																	<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+																	<path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+																	<path d="M20 12h-13l3 -3m0 6l-3 -3"></path>
+																</svg>&nbsp;Access
+															</button>
+															<form id="access-user-{{ $user->id }}" action="{{ route('post_admin_users_access', $user->id) }}" method="POST" style="display: none;">
+																{{ csrf_field() }}
+															</form>
+															<button class="dropdown-item" type="button" title="Reset and Send New Login Credentials" onclick="event.preventDefault();document.getElementById('reset-user-{{ $user->id }}').submit();">
+																<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+																	<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+																	<line x1="10" y1="14" x2="21" y2="3"></line>
+																	<path d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"></path>
+																</svg>&nbsp;Reset
+															</button>
+															<form id="reset-user-{{ $user->id }}" action="{{ route('post_admin_users_reset', $user->id) }}" method="POST" style="display: none;">
+																{{ csrf_field() }}
+															</form>
+															<button type="button" class="dropdown-item" onclick="event.preventDefault();document.getElementById('change-user-status-{{ $user->id }}').submit();">
+																@if($user->enabled)
+																<span class="text-danger">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+																		<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+																		<line x1="18" y1="6" x2="6" y2="18"></line>
+																		<line x1="6" y1="6" x2="18" y2="18"></line>
+																	</svg>&nbsp;Disable
+																</span>
+																@else
+																<span class="text-success">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+																		<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+																		<path d="M5 12l5 5l10 -10"></path>
+																	</svg>&nbsp;Enable
+																</span>
+																@endif
+															</button>
+															<form id="change-user-status-{{ $user->id }}" action="{{ route('post_admin_users_edit_status', $user->id) }}" method="POST" style="display: none;">
+																{{ csrf_field() }}
+																@if($user->enabled)
+																	<input type="hidden" name="enabled" value="0">
+																@else
+																	<input type="hidden" name="enabled" value="1">
+																@endif
+															</form>
+															<button class="dropdown-item text-red" onclick="event.preventDefault();document.getElementById('delete-user-{{ $user->id }}').submit();">
+																<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+																	<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+																	<line x1="4" y1="7" x2="20" y2="7"></line>
+																	<line x1="10" y1="11" x2="10" y2="17"></line>
+																	<line x1="14" y1="11" x2="14" y2="17"></line>
+																	<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+																	<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+																</svg>&nbsp;Delete
+															</button>
+															<form id="delete-user-{{ $user->id }}" action="{{ route('post_admin_users_delete', $user->id) }}" method="POST" style="display: none;">
+																{{ csrf_field() }}
+															</form>
+														</div>
+													</div>
 												</div>
 											</td>
 										</tr>
@@ -287,6 +402,24 @@
 							>
 							@if($errors->has('password'))
 								<div class="invalid-feedback">{{ $errors->first('password') }}</div>
+							@endif
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">Plan / Level</label>
+							<select name="plan_id" required id=""
+								@if($errors->has('plan_id'))
+									class="form-control is-invalid"
+								@else
+									class="form-control"
+								@endif
+							>
+								@foreach($plans as $plan)
+									<option value="{{ $plan->id }}">{{ $plan->name }} - ${{ $plan->price }}</option>
+								@endforeach
+							</select>
+							@if($errors->has('plan_id'))
+								<div class="invalid-feedback">{{ $errors->first('plan_id') }}</div>
 							@endif
 						</div>
 					</div>

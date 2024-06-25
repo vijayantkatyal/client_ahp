@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bcbd9866f220a81c5e0496e31e9cfb60",
+    "content-hash": "2db7c32bf08f0756793eeec63542b588",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1081,169 +1081,6 @@
                 }
             ],
             "time": "2023-12-03T20:05:35+00:00"
-        },
-        {
-            "name": "isotopekit/admin_panel",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:isotopekit/admin_panel.git",
-                "reference": "b774879c20a4a4d8ed129663e0fed3ca148e17ee"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/isotopekit/admin_panel/zipball/b774879c20a4a4d8ed129663e0fed3ca148e17ee",
-                "reference": "b774879c20a4a4d8ed129663e0fed3ca148e17ee",
-                "shasum": ""
-            },
-            "require": {
-                "isotopekit/auth_api": "@dev"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "IsotopeKit\\AdminPanel\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "IsotopeKit\\AdminPanel\\": "src/"
-                }
-            },
-            "scripts": {
-                "post-install-cmd": [
-                    "php artisan vendor:publish --provider='IsotopeKit\\AdminPanel\\ServiceProvider' --tag='views' --force",
-                    "php artisan vendor:publish --provider='IsotopeKit\\AdminPanel\\ServiceProvider' --tag='assets' --force",
-                    "php artisan vendor:publish --provider='IsotopeKit\\AdminPanel\\ServiceProvider' --tag='config' --force"
-                ],
-                "post-update-cmd": [
-                    "php artisan vendor:publish --provider='IsotopeKit\\AdminPanel\\ServiceProvider' --tag='views' --force",
-                    "php artisan vendor:publish --provider='IsotopeKit\\AdminPanel\\ServiceProvider' --tag='assets' --force",
-                    "php artisan vendor:publish --provider='IsotopeKit\\AdminPanel\\ServiceProvider' --tag='config' --force"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Vijayant Katyal",
-                    "email": "hello@vijayantkatyal.com"
-                }
-            ],
-            "description": "Admin Panel",
-            "support": {
-                "source": "https://github.com/isotopekit/admin_panel/tree/master",
-                "issues": "https://github.com/isotopekit/admin_panel/issues"
-            },
-            "time": "2023-06-23T12:23:01+00:00"
-        },
-        {
-            "name": "isotopekit/auth_api",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:isotopekit/auth_api.git",
-                "reference": "00e589381bba1ce83afec7cafafd9755dd8eaa44"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/isotopekit/auth_api/zipball/00e589381bba1ce83afec7cafafd9755dd8eaa44",
-                "reference": "00e589381bba1ce83afec7cafafd9755dd8eaa44",
-                "shasum": ""
-            },
-            "require": {
-                "isotopekit/utility": "@dev"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "IsotopeKit\\AuthAPI\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "IsotopeKit\\AuthAPI\\": "src/",
-                    "IsotopeKit\\AuthAPI\\Database\\Seeders\\": "database/seeders/"
-                }
-            },
-            "scripts": {
-                "post-install-cmd": [
-                    "php artisan vendor:publish --provider='IsotopeKit\\AuthAPI\\ServiceProvider' --tag='config' --force",
-                    "php artisan vendor:publish --provider='IsotopeKit\\AuthAPI\\ServiceProvider' --tag='migrations' --force",
-                    "php artisan db:seed --class='IsotopeKit\\AuthAPI\\Database\\Seeders\\DatabaseSeeder' --force"
-                ],
-                "post-update-cmd": [
-                    "php artisan vendor:publish --provider='IsotopeKit\\AuthAPI\\ServiceProvider' --tag='config' --force",
-                    "php artisan vendor:publish --provider='IsotopeKit\\AuthAPI\\ServiceProvider' --tag='migrations' --force",
-                    "php artisan db:seed --class='IsotopeKit\\AuthAPI\\Database\\Seeders\\DatabaseSeeder' --force"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Vijayant Katyal",
-                    "email": "hello@vijayantkatyal.com"
-                }
-            ],
-            "description": "Auth API Package",
-            "support": {
-                "source": "https://github.com/isotopekit/auth_api/tree/master",
-                "issues": "https://github.com/isotopekit/auth_api/issues"
-            },
-            "time": "2022-07-29T16:05:21+00:00"
-        },
-        {
-            "name": "isotopekit/utility",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:isotopekit/utility.git",
-                "reference": "80528305cb0927ef9c065abf77e559e39bef3fe1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/isotopekit/utility/zipball/80528305cb0927ef9c065abf77e559e39bef3fe1",
-                "reference": "80528305cb0927ef9c065abf77e559e39bef3fe1",
-                "shasum": ""
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "IsotopeKit\\Utility\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "IsotopeKit\\Utility\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Vijayant Katyal",
-                    "email": "hello@vijayantkatyal.com"
-                }
-            ],
-            "description": "Utility Package",
-            "support": {
-                "source": "https://github.com/isotopekit/utility/tree/master",
-                "issues": "https://github.com/isotopekit/utility/issues"
-            },
-            "time": "2022-08-03T21:46:30+00:00"
         },
         {
             "name": "laravel/framework",
@@ -7818,9 +7655,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "isotopekit/admin_panel": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -1,4 +1,4 @@
-@extends('admin_panel::_layouts.admin')
+@extends('_layouts.admin')
 @section('title','Class Edit')
 @section('header')
 
@@ -27,7 +27,7 @@
 		<div class="row">
 			<div class="col-12">
 				
-				@component('admin_panel::_layouts.components.alert')
+				@component('_layouts.components.alert')
         		@endcomponent
 
 				<div class="card mb-4" id="general">
