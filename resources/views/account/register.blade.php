@@ -1,4 +1,4 @@
-@extends('_layouts.guest')
+@extends('_layouts.account')
 
 @section('title','Register')
 

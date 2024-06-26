@@ -35,11 +35,13 @@ Route::group(
 		'middleware'	=>	['guest']
 	],
 	function () {
-		Route::get('/login', [AccountController::class, 'getLogin'])->name('get_login_route');
+		Route::get('/login', [AccountController::class, 'getLogin'])->name('get_admin_login_route');
         Route::post('/login', [AccountController::class, 'postLogin'])->name('post_login_route');
         
-        Route::get('/register', [AccountController::class, 'getRegister'])->name('get_register_route');
-		Route::get('/reset', [AccountController::class, 'getReset'])->name('get_reset_route');
+        Route::get('/register', [AccountController::class, 'getRegister'])->name('get_admin_register_route');
+		Route::post('/register', [AccountController::class, 'postRegister'])->name('post_register_route');
+
+		Route::get('/reset', [AccountController::class, 'getReset'])->name('get_admin_reset_route');
     }
 );
 
