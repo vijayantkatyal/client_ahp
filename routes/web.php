@@ -49,6 +49,17 @@ Route::group(
     }
 );
 
+Route::group(
+	[
+		'prefix'		=>	'/',
+		'middleware'	=>	['user']
+	],
+	function () {
+		Route::post('/settings-general', [StudentController::class, 'postSettingsGeneral'])->name('post_user_settings_general');
+		Route::post('/settings-password', [StudentController::class, 'postSettingsPassword'])->name('post_user_settings_password');
+    }
+);
+
 // super admin
 // 0
 Route::group(
@@ -234,14 +245,11 @@ Route::group(
 	],
 	function () {
         Route::get('/', [StudentController::class, 'getIndex'])->name('get_user_index');
-
-		Route::post('/settings-general', [StudentController::class, 'postSettingsGeneral'])->name('post_user_settings_general');
-		Route::post('/settings-password', [StudentController::class, 'postSettingsPassword'])->name('post_user_settings_password');
     }
 );
 
-// student
-// 5
+// general member
+// 6
 Route::group(
 	[
 		'prefix'		=>	'member',
@@ -249,8 +257,5 @@ Route::group(
 	],
 	function () {
         Route::get('/', [MemberController::class, 'getIndex'])->name('get_member_index_s');
-
-		Route::post('/settings-general', [StudentController::class, 'postSettingsGeneral'])->name('post_member_settings_general');
-		Route::post('/settings-password', [StudentController::class, 'postSettingsPassword'])->name('post_member_settings_password');
     }
 );

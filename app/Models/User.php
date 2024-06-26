@@ -37,6 +37,23 @@ class User extends Authenticatable
 		return false;
 	}
 
+	public function isUser()
+	{
+		$data = User_Role::where('user_id', $this->id)->first();
+
+		if ($data) {
+			// TODO get from levels table
+			$level = '1';
+
+			if (in_array($level, json_decode($data->levels))) {
+				// get level details
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public function isTeamOnly()
     {
         $data = User_Role::where('user_id', $this->id)->first();
