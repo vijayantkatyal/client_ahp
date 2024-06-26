@@ -1,3 +1,32 @@
+> student
+- message
+
+> member / agency
+- login
+- dashboard
+- manage class
+
+- manage forms
+
+
+-----------------------
+
+> student - only one class (but can join other class)
+> teacher (main, assistance), admin, board member, principal
+
+> board member (events / calendar, send event notification - photos)
+> principal (manage classses, manage teachers, manage teachers attendance - total hours) (assign claas-wise hour rate)
+> teacher (multiple classes) - can manage class (students, attendance)
+> student (by default) (user as signup)
+> super admin
+
+> email ? / message
+
+> class manage (add students in bulk)
+
+---------------------------
+
+
 Hindi School Website - Should have Hindi and English input/ keyboard 
 
 Registration forms (same inputs as here http://ahpschool.ca/Ref/Resources/Registration%20form.pdf)

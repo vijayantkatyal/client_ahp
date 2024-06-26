@@ -5,7 +5,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgencyController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +45,8 @@ Route::group(
     }
 );
 
+// super admin
+// 0
 Route::group(
 	[
 		'prefix'		=>	'admin',
@@ -219,19 +221,20 @@ Route::group(
 	}
 );
 
-
+// student
+// 1
 Route::group(
 	[
-		'prefix'		=>	'user',
-		'middleware'	=>	['user']
+		'prefix'		=>	'student',
+		'middleware'	=>	['student']
 	],
 	function () {
-        Route::get('/', [UserController::class, 'getIndex'])->name('get_user_index_s');
-        Route::get('/overview', [UserController::class, 'getIndex'])->name('get_user_index');
+        Route::get('/', [StudentController::class, 'getIndex'])->name('get_user_index_s');
+        Route::get('/overview', [StudentController::class, 'getIndex'])->name('get_user_index');
 
         Route::post('/logout', [AdminController::class, 'postLogout'])->name('post_logout_route');
 
-		Route::post('/settings-general', [UserController::class, 'postSettingsGeneral'])->name('post_user_settings_general');
-		Route::post('/settings-password', [UserController::class, 'postSettingsPassword'])->name('post_user_settings_password');
+		Route::post('/settings-general', [StudentController::class, 'postSettingsGeneral'])->name('post_user_settings_general');
+		Route::post('/settings-password', [StudentController::class, 'postSettingsPassword'])->name('post_user_settings_password');
     }
 );

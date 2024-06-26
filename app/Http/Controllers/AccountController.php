@@ -60,6 +60,10 @@ class AccountController extends Controller
                     {
                         return redirect()->intended('/agency');
                     }
+                    if(Auth::user()->isStudent() == true)
+                    {
+                        return redirect()->intended('/student');
+                    }
                     else {
                         return redirect()->intended('/user');
                     }

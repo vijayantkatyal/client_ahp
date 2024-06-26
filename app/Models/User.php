@@ -53,63 +53,7 @@ class User extends Authenticatable
         return false;
     }
 
-	public function isUser()
-	{
-		$data = User_Role::where('user_id', $this->id)->first();
-
-		if ($data) {
-
-
-			$t_level = '101';
-
-			if (in_array($t_level, json_decode($data->levels))) {
-				return false;
-			}
-
-			// TODO get from levels table
-			$level = '1';
-
-			if (in_array($level, json_decode($data->levels))) {
-				// check if agency
-				$user_level_id = json_decode($data->levels)[1];
-				// get level details
-				$level_details = Levels::where('id', $user_level_id)->first();
-				if ($level_details) {
-					if ($level_details->agency_members == 0) {
-						return true;
-					} else {
-						// if($level_details->id == $this->created_by)
-						if ($this->created_by != "direct") {
-							return true;
-						}
-					}
-				} else {
-					return true;
-				}
-			}
-			if (array_key_exists(1, json_decode($data->levels))) {
-				// get user level
-				$user_level_id = json_decode($data->levels)[1];
-
-				// get level details
-				$level_details = Levels::where('id', $user_level_id)->first();
-
-				if ($level_details->agency_members > 0) {
-					// echo $level_details->id ."--". $this->created_by;
-					// if($level_details->id === $this->created_by)
-					if ($this->created_by != "direct") {
-						return false;
-					}
-
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	public function isDirectUser()
+	public function isStudent()
 	{
 		$data = User_Role::where('user_id', $this->id)->first();
 

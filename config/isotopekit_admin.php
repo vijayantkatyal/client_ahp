@@ -18,7 +18,7 @@ return [
 	'domains'	=>	[
 		'show'	=>	false
 	],
-	'mail_subject' => 'Welcome to App',
+	'mail_subject' => 'Welcome to AHP',
 	'account_list'	=>	[1],
 	'agency_training_link'	=>	'https://training.isotopekit.com',
 	'agency_guide_link'	=>	'https://guide.isotopekit.com',

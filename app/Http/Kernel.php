@@ -5,7 +5,7 @@ namespace App\Http;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 // custom middlewares
-use App\Http\Middleware\CheckIsUser;
+use App\Http\Middleware\CheckIsStudent;
 use App\Http\Middleware\CheckIsAdmin;
 use App\Http\Middleware\CheckIsAgency;
 use App\Http\Middleware\CheckIsTeam;
@@ -59,8 +59,8 @@ class Kernel extends HttpKernel
         'team'  =>  [
             CheckIsTeam::class
         ],
-        'user'  =>  [
-            CheckIsUser::class
+        'student'  =>  [
+            CheckIsStudent::class
         ]
     ];
 
