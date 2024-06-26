@@ -3,8 +3,7 @@
 [Working]
 
 [ToDo]
-
-> Different Roles and their login / dashboard (with role mentioned somewhere)
+> Roles login (different roles and their login / dashboard)
 - ✅ super admin (all things) [0]
 - board member [2]
 - principal [3]

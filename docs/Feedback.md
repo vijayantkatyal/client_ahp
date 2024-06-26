@@ -1,44 +1,65 @@
-> student
-- message
-
-> member / agency
-- login
-- dashboard
-- manage class
-
-- manage forms
-
-
------------------------
-
-> student - only one class (but can join other class)
-> teacher (main, assistance), admin, board member, principal
-
-> board member (events / calendar, send event notification - photos)
-> principal (manage classses, manage teachers, manage teachers attendance - total hours) (assign claas-wise hour rate)
-> teacher (multiple classes) - can manage class (students, attendance)
-> student (by default) (user as signup)
 > super admin
+- login
+- settings
+- all students / teachers / board members / principal / members / users
+- courses
+- classes
+- forms
+- calendar & events
+- cms
+- blog
+- contact us messages
+- schedule notification email (general, event) (all or specific group)
 
-> email ? / message
+> board member
+- events / calendar
+- send event notification - photos
 
-> class manage (add students in bulk)
+> principal
+- manage classses
+- manage teachers
+- manage teachers attendance - total hours
+- assign claas-wise hour rate
+
+> teacher
+- (multiple classes)
+- can manage class (students, attendance)
+-- class manage (add students in bulk)
+- assigment management (class wise) (student can reply) (teacher can accept / reject)
+- Teacher - parents Class wise 
+- Teacher post homework (communicate with text / file instructions)
+- Teacher’s Diary  (class resources)
+- Exam papers (class resources)
+- Class wise - students marks , app should count percentage  
+-- teacher can assign marks to assignment, and can see total percentage
+
+> student
+- (by default) (user as signup)
+- only one class (but can join other class)
+- student can see total marks obtained for specific assignment.
 
 ---------------------------
 
+> manage forms
+- Registration forms (same inputs as here http://ahpschool.ca/Ref/Resources/Registration%20form.pdf)
+- Student registration 
+- Membership registration (based on confirmation by admin based on payment id) (http://ahpschool.ca/Ref/Resources/GeneralMembershipform.pdf)
+- field trip form (http://ahpschool.ca/Ref/Resources/Field%20Trip%20waiver2018.pdf)
 
-Hindi School Website - Should have Hindi and English input/ keyboard 
+> misc
+- Hindi School Website - Should have Hindi and English input/ keyboard
+- Review forms (google review for Hindi School)
+- AHP other programas
+- Newsletter monthly/by monthly 
+- Volunteer opportunities
+- Contact us
 
-Registration forms (same inputs as here http://ahpschool.ca/Ref/Resources/Registration%20form.pdf)
-Student registration 
-Membership registration (based on confirmation by admin based on payment id) (http://ahpschool.ca/Ref/Resources/GeneralMembershipform.pdf)
-
-2. Events (year wise)
-1. School Calendar
-2. AHP Calendar
-3. Director’s duty Calendar 
-
-[visitor-area] top bar alert for new upcoming event
+> Calendar
+- Events (year wise)
+- School Calendar
+- AHP Calendar
+- Director’s duty Calendar 
+- [visitor-area] top bar alert for new upcoming event
   
 Resources
 > files uploaded
@@ -47,44 +68,26 @@ Resources
 > Teaching material. Level wise - can be pictures / video/ templates 
 
 > Picture / Video Gallery 
-Communication
+> Communication
 
-> assigment management (class wise) (student can reply) (teacher can accept / reject)
-
-Teacher -parents Class wise 
-Teacher post homework (communicate with text / file instructions)
-
-Information 
-Parent’s query etc.
-Teacher Principal communication
-Parent -Principal/ board communication 
-Curriculum
-Class wise Curriculum
-Lesson plan - Class wise
-Teacher’s Diary  (class resources)
-Exam papers (class resources)
-
-Class wise - students marks , app should count percentage  
-- teacher can assign marks to assignment, and can see total percentage
-- student can see total marks obtained for specific assignment.
-
-Administration 
-1. .Attendance
-
-Students Class wise 
-Assistant Teachers 
-Teachers - Shift wise
+> Attendance
+- Students Class wise 
+- Assistant Teachers 
+- Teachers - Shift wise
 Note: attendance app should be able to count percentage.
 
-Review forms (google review for Hindi School)
-For Teachers/principal/members 
-AHP other programas
-Newsletter monthly/by monthly 
-Volunteer opportunities 
-Contact us
+> CMS
+- index page
+- mission
+- members
+- about
 
+---------------------
 
-....
-
-student area
-- field trip form (http://ahpschool.ca/Ref/Resources/Field%20Trip%20waiver2018.pdf)
+[?] Information 
+[?] Parent’s query etc.
+[?] Teacher Principal communication
+[?] Parent -Principal/ board communication 
+[?]  Curriculum
+[?] Class wise Curriculum
+[?] Lesson plan - Class wise

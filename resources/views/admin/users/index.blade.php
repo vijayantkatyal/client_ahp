@@ -32,7 +32,7 @@
 							{{ csrf_field() }}
 							<input type="text" name="users_id" style="display: none;" />
 							<div class="input-group">
-								<span class="input-group-text">Change Plan to</span>
+								<span class="input-group-text">Change Type to</span>
 								<select name="new_plan_id" class="form-select" id="" style="min-width: 150px;">
 									@foreach($plans as $plan)
 										<option value="{{ $plan->id }}">{{ $plan->name }}</option>
@@ -119,7 +119,7 @@
 												<polyline points="6 15 12 9 18 15" />
 											</svg>
 										</th>
-										<th>Plan</th>
+										<th>Type</th>
 										@if($filter == "appsumo")
 											<th>Code Used</th>
 										@endif
@@ -406,7 +406,7 @@
 						</div>
 
 						<div class="mb-3">
-							<label class="form-label">Plan / Level</label>
+							<label class="form-label">Type</label>
 							<select name="plan_id" required id=""
 								@if($errors->has('plan_id'))
 									class="form-control is-invalid"
@@ -415,7 +415,7 @@
 								@endif
 							>
 								@foreach($plans as $plan)
-									<option value="{{ $plan->id }}">{{ $plan->name }} - ${{ $plan->price }}</option>
+									<option value="{{ $plan->id }}">{{ $plan->name }}</option>
 								@endforeach
 							</select>
 							@if($errors->has('plan_id'))
