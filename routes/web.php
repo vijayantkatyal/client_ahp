@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,17 +47,6 @@ Route::group(
 		Route::post('/register', [AccountController::class, 'postRegister'])->name('post_register_route');
 
 		Route::get('/reset', [AccountController::class, 'getReset'])->name('get_admin_reset_route');
-    }
-);
-
-Route::group(
-	[
-		'prefix'		=>	'/',
-		'middleware'	=>	['user']
-	],
-	function () {
-		Route::post('/settings-general', [StudentController::class, 'postSettingsGeneral'])->name('post_user_settings_general');
-		Route::post('/settings-password', [StudentController::class, 'postSettingsPassword'])->name('post_user_settings_password');
     }
 );
 
@@ -182,58 +172,117 @@ Route::group(
 
 Route::group(
 	[
-		'prefix'		=>	'agency',
-		'middleware'	=>	['agency']
+		'prefix'		=>	'teacher',
+		'middleware'	=>	['teacher']
 	],
 	function () {
-		Route::get('/', [AgencyController::class, 'index'])->name('get_agency_index');
-        Route::post('/logout', [AdminController::class, 'postLogout'])->name('post_agency_logout_route');
+		Route::get('/', [TeacherController::class, 'index'])->name('get_teacher_index');
 
 		// users
-		Route::get('/users', [AgencyController::class, 'getUsers'])->name('get_agency_users_index');
+		// Route::get('/users', [AgencyController::class, 'getUsers'])->name('get_agency_users_index');
 
-		// users/create (post)
-		Route::post('/users/add', [AgencyController::class, 'postAddUser'])->name('post_agency_users_add');
+		// // users/create (post)
+		// Route::post('/users/add', [AgencyController::class, 'postAddUser'])->name('post_agency_users_add');
 
-		// edit user
-		Route::get('/users/edit/{id}', [AgencyController::class, 'getEditUser'])->name('get_agency_users_edit');
+		// // edit user
+		// Route::get('/users/edit/{id}', [AgencyController::class, 'getEditUser'])->name('get_agency_users_edit');
 
-		// edit user (post)
-		Route::post('/users/edit/{id}', [AgencyController::class, 'postEditUser'])->name('post_agency_users_edit');
+		// // edit user (post)
+		// Route::post('/users/edit/{id}', [AgencyController::class, 'postEditUser'])->name('post_agency_users_edit');
 
-		// change user password (post)
-		Route::post('/users/change-password/{id}', [AgencyController::class, 'postChangeUserPassword'])->name('post_agency_users_password');
+		// // change user password (post)
+		// Route::post('/users/change-password/{id}', [AgencyController::class, 'postChangeUserPassword'])->name('post_agency_users_password');
 
-		// change bonus (post)
-		Route::post('/users/change-bonus/{id}', [AgencyController::class, 'postChangeUserBonus'])->name('post_agency_users_bonus');
+		// // change bonus (post)
+		// Route::post('/users/change-bonus/{id}', [AgencyController::class, 'postChangeUserBonus'])->name('post_agency_users_bonus');
 
-		// access user
-		Route::post('/users/access/{id}', [AgencyController::class, 'postAccessUser'])->name('post_agency_users_access');
+		// // access user
+		// Route::post('/users/access/{id}', [AgencyController::class, 'postAccessUser'])->name('post_agency_users_access');
 
-		// user status (post)
-		Route::post('/users/change_status/{id}', [AgencyController::class, 'postChangeUserStatus'])->name('post_agency_users_edit_status');
-		// user delete
-		Route::post('/users/delete/{id}', [AgencyController::class, 'postDeleteUser'])->name('post_agency_users_delete');
+		// // user status (post)
+		// Route::post('/users/change_status/{id}', [AgencyController::class, 'postChangeUserStatus'])->name('post_agency_users_edit_status');
+		// // user delete
+		// Route::post('/users/delete/{id}', [AgencyController::class, 'postDeleteUser'])->name('post_agency_users_delete');
 
 
 		// agency settings
-		Route::get('/settings', [AgencyController::class, 'getSettings'])->name('get_agency_settings');
+		Route::get('/settings', [TeacherController::class, 'getSettings'])->name('get_teacher_settings');
 
 		// agency settings general (post)
-		Route::post('/settings-general', [AgencyController::class, 'postSettingsGeneral'])->name('post_agency_settings_general');
-
-		// agency settings email (post)
-		Route::post('/settings-email', [AgencyController::class, 'postSettingsEmail'])->name('post_agency_settings_email');
-
-		// agency settings domain (post)
-		Route::post('/settings-domain', [AgencyController::class, 'postSettingsDomain'])->name('post_agency_settings_domain');
+		Route::post('/settings-general', [TeacherController::class, 'postSettingsGeneral'])->name('post_teacher_settings_general');
 
 		// agency settings password (post)
-		Route::post('/settings-password', [AgencyController::class, 'postSettingsPassword'])->name('post_agency_settings_password');
-
-		// agency settings customization (post)
-		Route::post('/settings-customization', [AgencyController::class, 'postSettingsCustomization'])->name('post_agency_settings_customization');
+		Route::post('/settings-password', [TeacherController::class, 'postSettingsPassword'])->name('post_teacher_settings_password');
 	}
+);
+
+// Route::group(
+// 	[
+// 		'prefix'		=>	'agency',
+// 		'middleware'	=>	['agency']
+// 	],
+// 	function () {
+// 		Route::get('/', [AgencyController::class, 'index'])->name('get_agency_index');
+//         Route::post('/logout', [AdminController::class, 'postLogout'])->name('post_agency_logout_route');
+
+// 		// users
+// 		Route::get('/users', [AgencyController::class, 'getUsers'])->name('get_agency_users_index');
+
+// 		// users/create (post)
+// 		Route::post('/users/add', [AgencyController::class, 'postAddUser'])->name('post_agency_users_add');
+
+// 		// edit user
+// 		Route::get('/users/edit/{id}', [AgencyController::class, 'getEditUser'])->name('get_agency_users_edit');
+
+// 		// edit user (post)
+// 		Route::post('/users/edit/{id}', [AgencyController::class, 'postEditUser'])->name('post_agency_users_edit');
+
+// 		// change user password (post)
+// 		Route::post('/users/change-password/{id}', [AgencyController::class, 'postChangeUserPassword'])->name('post_agency_users_password');
+
+// 		// change bonus (post)
+// 		Route::post('/users/change-bonus/{id}', [AgencyController::class, 'postChangeUserBonus'])->name('post_agency_users_bonus');
+
+// 		// access user
+// 		Route::post('/users/access/{id}', [AgencyController::class, 'postAccessUser'])->name('post_agency_users_access');
+
+// 		// user status (post)
+// 		Route::post('/users/change_status/{id}', [AgencyController::class, 'postChangeUserStatus'])->name('post_agency_users_edit_status');
+// 		// user delete
+// 		Route::post('/users/delete/{id}', [AgencyController::class, 'postDeleteUser'])->name('post_agency_users_delete');
+
+
+// 		// agency settings
+// 		Route::get('/settings', [AgencyController::class, 'getSettings'])->name('get_agency_settings');
+
+// 		// agency settings general (post)
+// 		Route::post('/settings-general', [AgencyController::class, 'postSettingsGeneral'])->name('post_agency_settings_general');
+
+// 		// agency settings email (post)
+// 		Route::post('/settings-email', [AgencyController::class, 'postSettingsEmail'])->name('post_agency_settings_email');
+
+// 		// agency settings domain (post)
+// 		Route::post('/settings-domain', [AgencyController::class, 'postSettingsDomain'])->name('post_agency_settings_domain');
+
+// 		// agency settings password (post)
+// 		Route::post('/settings-password', [AgencyController::class, 'postSettingsPassword'])->name('post_agency_settings_password');
+
+// 		// agency settings customization (post)
+// 		Route::post('/settings-customization', [AgencyController::class, 'postSettingsCustomization'])->name('post_agency_settings_customization');
+// 	}
+// );
+
+// user
+// 1
+Route::group(
+	[
+		'prefix'		=>	'/',
+		'middleware'	=>	['user']
+	],
+	function () {
+		Route::post('/settings-general', [StudentController::class, 'postSettingsGeneral'])->name('post_user_settings_general');
+		Route::post('/settings-password', [StudentController::class, 'postSettingsPassword'])->name('post_user_settings_password');
+    }
 );
 
 // student

@@ -112,6 +112,22 @@ class User extends Authenticatable
 		return false;
 	}
 
+	public function isTeacher()
+	{
+		$data = User_Role::where('user_id', $this->id)->first();
+
+		if ($data) {
+			// TODO get from levels table
+			$level = '4';
+
+			if (in_array($level, json_decode($data->levels))) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public function isAgency()
 	{
 		$user_levels = User_Role::where('user_id', $this->id)->first();

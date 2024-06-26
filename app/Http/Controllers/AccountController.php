@@ -64,6 +64,10 @@ class AccountController extends Controller
                     {
                         return redirect()->intended('/student');
                     }
+                    if(Auth::user()->isTeacher() == true)
+                    {
+                        return redirect()->intended('/teacher');
+                    }
                     if(Auth::user()->isMember() == true)
                     {
                         return redirect()->intended('/member');
@@ -107,6 +111,10 @@ class AccountController extends Controller
             if(Auth::user()->isStudent() == true)
             {
                 return redirect()->intended('/student');
+            }
+            if(Auth::user()->isTeacher() == true)
+            {
+                return redirect()->intended('/teacher');
             }
             if(Auth::user()->isMember() == true)
             {

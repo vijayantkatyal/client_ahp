@@ -11,6 +11,7 @@ use App\Http\Middleware\CheckIsMember;
 use App\Http\Middleware\CheckIsAdmin;
 use App\Http\Middleware\CheckIsAgency;
 use App\Http\Middleware\CheckIsTeam;
+use App\Http\Middleware\CheckIsTeacher;
 
 class Kernel extends HttpKernel
 {
@@ -54,6 +55,9 @@ class Kernel extends HttpKernel
 
         'admin' =>  [
             CheckIsAdmin::class
+        ],
+        'teacher'  =>  [
+            CheckIsTeacher::class
         ],
         'agency' => [
             CheckIsAgency::class
