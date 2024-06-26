@@ -59,7 +59,28 @@ class User extends Authenticatable
 
 		if ($data) {
 			// TODO get from levels table
-			$level = '1';
+			$level = '5';
+
+			if (in_array($level, json_decode($data->levels))) {
+				// check if agency
+				// $user_level_id = json_decode($data->levels)[1];
+				// get level details
+				if ($this->created_by == "direct") {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public function isMember()
+	{
+		$data = User_Role::where('user_id', $this->id)->first();
+
+		if ($data) {
+			// TODO get from levels table
+			$level = '6';
 
 			if (in_array($level, json_decode($data->levels))) {
 				// check if agency

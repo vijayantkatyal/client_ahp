@@ -6,8 +6,8 @@
 
 > Different Roles and their login / dashboard (with role mentioned somewhere)
 - super admin (all things) [0]
-- student (class info, attendance, message) [1]
-- board member
-- principal
-- teacher
-- general member
+- board member [2]
+- principal [3]
+- teacher [4]
+- student (class info, attendance, message) [5]
+- general member [6]

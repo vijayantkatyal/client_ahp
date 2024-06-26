@@ -148,7 +148,7 @@
 							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_about') }}">About</a></li>
 							<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_contact') }}">Contact Us</a></li>
 							@if(Auth::check())
-								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_user_index_s') }}">Dashboard</a></li>
+								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_dashboard_index') }}">Dashboard ({{ Auth::user()->levelInfo() != null ? Auth::user()->levelInfo()->name : "Admin"  }})</a></li>
 							@else
 								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_admin_register_route') }}">Enrol Now / Login</a></li>
 							@endif

@@ -64,6 +64,10 @@ class AccountController extends Controller
                     {
                         return redirect()->intended('/student');
                     }
+                    if(Auth::user()->isMember() == true)
+                    {
+                        return redirect()->intended('/member');
+                    }
                     else {
                         return redirect()->intended('/user');
                     }
@@ -81,6 +85,40 @@ class AccountController extends Controller
         {
             return $ex;
             return redirect($login_url)->with('status.error', 'Something went wrong, try again later');
+        }
+    }
+
+    public function getIndex(Request $request)
+    {
+        if(Auth::check())
+        {
+            if(Auth::user()->isAdmin() === true)
+            {
+                return redirect()->intended('/admin');
+            }
+            if(Auth::user()->isTeamOnly() === true)
+            {
+                return redirect()->intended('/team');
+            }
+            if(Auth::user()->isAgency() == true)
+            {
+                return redirect()->intended('/agency');
+            }
+            if(Auth::user()->isStudent() == true)
+            {
+                return redirect()->intended('/student');
+            }
+            if(Auth::user()->isMember() == true)
+            {
+                return redirect()->intended('/member');
+            }
+            else {
+                return redirect()->intended('/user');
+            }
+        }
+        else
+        {
+            return redirect()->intended('/');
         }
     }
 

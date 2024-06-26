@@ -37,7 +37,7 @@ class StudentController extends Controller
 
 		$attendance = Attendance::where('user_id', Auth::user()->id)->get();
 
-		return view('user.index')
+		return view('student.index')
 			->with('course_info', $course_info)
 			->with('class_info', $class_info)
 			->with('attendance', $attendance);

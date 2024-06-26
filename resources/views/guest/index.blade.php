@@ -1,4 +1,4 @@
-@extends('_layouts/guest')
+@extends('_layouts.guest')
 @section('title', 'Home')
 
 @section('header')

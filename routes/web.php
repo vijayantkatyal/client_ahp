@@ -6,6 +6,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,9 @@ Route::get('/mission', [GuestController::class, 'getMission'])->name('get_missio
 
 Route::get('/team', [GuestController::class, 'getTeam'])->name('get_team');
 Route::get('/gallery', [GuestController::class, 'getGallery'])->name('get_gallery');
+
+Route::post('/logout', [AdminController::class, 'postLogout'])->name('post_logout_route');
+Route::get('/dashboard', [AccountController::class, 'getIndex'])->name('get_dashboard_index');
 
 Route::group(
 	[
@@ -103,26 +107,26 @@ Route::group(
 		Route::get('/agency-domains/check/{id}', [AdminController::class, 'getAgencyDomainsCheck'])->name('get_admin_agency_domains_check_index');
 		// Route::get('/agency-domains/refresh-all', [AdminController::class, 'getAgencyDomainsRefresh'])->name('get_admin_agency_domains_refresh');
 		
-		// plans
-		Route::get('/plans', [AdminController::class, 'getPlans'])->name('get_admin_plans_index');
+		// // plans
+		// Route::get('/plans', [AdminController::class, 'getPlans'])->name('get_admin_plans_index');
 
-		// plan schema
-		Route::get('/plans/schema', [AdminController::class, 'getPlanSchema'])->name('get_admin_plans_schema');
-		Route::post('/plans/schema', [AdminController::class, 'postPlanSchema'])->name('post_admin_plans_schema');
-		Route::get('/plans/schema/{id}/delete', [AdminController::class, 'getDeletePlanSchema'])->name('get_admin_plans_schema_delete');
+		// // plan schema
+		// Route::get('/plans/schema', [AdminController::class, 'getPlanSchema'])->name('get_admin_plans_schema');
+		// Route::post('/plans/schema', [AdminController::class, 'postPlanSchema'])->name('post_admin_plans_schema');
+		// Route::get('/plans/schema/{id}/delete', [AdminController::class, 'getDeletePlanSchema'])->name('get_admin_plans_schema_delete');
 
-		// add a plan
-		Route::get('/plans/add', [AdminController::class, 'getAddPlan'])->name('get_admin_plans_add');
-		Route::post('/plans/add', [AdminController::class, 'postAddPlan'])->name('post_admin_plans_add');
+		// // add a plan
+		// Route::get('/plans/add', [AdminController::class, 'getAddPlan'])->name('get_admin_plans_add');
+		// Route::post('/plans/add', [AdminController::class, 'postAddPlan'])->name('post_admin_plans_add');
 
-		// edit plan
-		Route::get('/plans/edit/{id}', [AdminController::class, 'getEditPlan'])->name('get_admin_plans_edit');
-		Route::post('/plans/edit/{id}', [AdminController::class, 'postEditPlan'])->name('post_admin_plans_edit');
+		// // edit plan
+		// Route::get('/plans/edit/{id}', [AdminController::class, 'getEditPlan'])->name('get_admin_plans_edit');
+		// Route::post('/plans/edit/{id}', [AdminController::class, 'postEditPlan'])->name('post_admin_plans_edit');
 
-		// plan status (post)
-		Route::post('/plans/change_status/{id}', [AdminController::class, 'postChangePlanStatus'])->name('post_admin_plans_edit_status');
-		// plan delete (post)
-		Route::post('/plans/delete/{id}', [AdminController::class, 'postDeletePlan'])->name('post_admin_plans_delete');
+		// // plan status (post)
+		// Route::post('/plans/change_status/{id}', [AdminController::class, 'postChangePlanStatus'])->name('post_admin_plans_edit_status');
+		// // plan delete (post)
+		// Route::post('/plans/delete/{id}', [AdminController::class, 'postDeletePlan'])->name('post_admin_plans_delete');
 
 		// admin settings
 		Route::get('/settings', [AdminController::class, 'getSettings'])->name('get_admin_settings');
@@ -222,19 +226,31 @@ Route::group(
 );
 
 // student
-// 1
+// 5
 Route::group(
 	[
 		'prefix'		=>	'student',
 		'middleware'	=>	['student']
 	],
 	function () {
-        Route::get('/', [StudentController::class, 'getIndex'])->name('get_user_index_s');
-        Route::get('/overview', [StudentController::class, 'getIndex'])->name('get_user_index');
-
-        Route::post('/logout', [AdminController::class, 'postLogout'])->name('post_logout_route');
+        Route::get('/', [StudentController::class, 'getIndex'])->name('get_user_index');
 
 		Route::post('/settings-general', [StudentController::class, 'postSettingsGeneral'])->name('post_user_settings_general');
 		Route::post('/settings-password', [StudentController::class, 'postSettingsPassword'])->name('post_user_settings_password');
+    }
+);
+
+// student
+// 5
+Route::group(
+	[
+		'prefix'		=>	'member',
+		'middleware'	=>	['member']
+	],
+	function () {
+        Route::get('/', [MemberController::class, 'getIndex'])->name('get_member_index_s');
+
+		Route::post('/settings-general', [StudentController::class, 'postSettingsGeneral'])->name('post_member_settings_general');
+		Route::post('/settings-password', [StudentController::class, 'postSettingsPassword'])->name('post_member_settings_password');
     }
 );

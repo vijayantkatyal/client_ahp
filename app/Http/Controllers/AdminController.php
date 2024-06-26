@@ -7,8 +7,7 @@ use App\Libraries\CaptionsData;
 use App\Models\Attendance;
 use App\Models\Classes;
 use App\Models\Courses;
-
-
+use App\Models\CustomProperties;
 use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
