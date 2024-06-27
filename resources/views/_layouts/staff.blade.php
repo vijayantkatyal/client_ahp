@@ -44,7 +44,7 @@
 							</div>
 						</a>
 						<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-							<a href="{{ route('get_teacher_settings') }}" class="dropdown-item">Settings</a>
+							<a href="{{ route('get_staff_settings') }}" class="dropdown-item">Settings</a>
 							<button type="button" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</button>
 						</div>
 					</div>
@@ -52,7 +52,7 @@
 				<div class="collapse navbar-collapse" id="navbar-menu">
 					<ul class="navbar-nav pt-lg-3">
 						<li class="nav-item">
-							<a class="nav-link" href="{{ route('get_teacher_index') }}">
+							<a class="nav-link" href="{{ route('get_staff_index') }}">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
 									<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
 										viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -103,7 +103,7 @@
 						</li>
 
 						<li class="nav-item">
-							<a class="nav-link" href="{{ route('get_teacher_settings') }}">
+							<a class="nav-link" href="{{ route('get_staff_settings') }}">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
 									<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 										<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -142,7 +142,7 @@
 							</div>
 						</a>
 						<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-							<a href="{{ route('get_teacher_settings') }}" class="dropdown-item">Settings</a>
+							<a href="{{ route('get_staff_settings') }}" class="dropdown-item">Settings</a>
 							<button type="button" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</button>
 							<form id="logout-form" action="{{ route('post_logout_route') }}" method="POST" style="display: none;">
 								{{ csrf_field() }}

@@ -64,10 +64,12 @@ class AccountController extends Controller
                     {
                         return redirect()->intended('/student');
                     }
-                    if(Auth::user()->isTeacher() == true)
+
+                    if(Auth::user()->isTeacher() == true || Auth::user()->isPrincipal() == true || Auth::user()->isBoardMember() == true)
                     {
-                        return redirect()->intended('/teacher');
+                        return redirect()->intended('/staff');
                     }
+
                     if(Auth::user()->isMember() == true)
                     {
                         return redirect()->intended('/member');
@@ -112,10 +114,12 @@ class AccountController extends Controller
             {
                 return redirect()->intended('/student');
             }
-            if(Auth::user()->isTeacher() == true)
+            
+            if(Auth::user()->isTeacher() == true || Auth::user()->isPrincipal() == true || Auth::user()->isBoardMember() == true)
             {
-                return redirect()->intended('/teacher');
+                return redirect()->intended('/staff');
             }
+            
             if(Auth::user()->isMember() == true)
             {
                 return redirect()->intended('/member');

@@ -1,4 +1,4 @@
-@extends('_layouts.teacher')
+@extends('_layouts.staff')
 @section('title','Settings')
 @section('content')
 
@@ -43,7 +43,7 @@
 					<div class="card-header">
 						<h3 class="card-title">Security</h3>
 					</div>
-					<form action="{{ route('post_teacher_settings_password') }}" method="post">
+					<form action="{{ route('post_staff_settings_password') }}" method="post">
 						{{ csrf_field() }}
 
 						<div class="card-body">
@@ -105,7 +105,7 @@
 						</div>
 						<div class="card-footer">
 							<div class="d-flex">
-								<a href="{{ route('get_teacher_index') }}" class="btn btn-link">Cancel</a>
+								<a href="{{ route('get_staff_index') }}" class="btn btn-link">Cancel</a>
 								<button type="submit" class="btn btn-success ms-auto">Change Password</button>
 							</div>
 						</div>

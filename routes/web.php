@@ -7,7 +7,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\TeacherController;
+
+use App\Http\Controllers\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -170,49 +171,31 @@ Route::group(
     }
 );
 
+// board member
+// 2
+
+// principal
+// 3
+
+// teacher
+// 4
+
 Route::group(
 	[
-		'prefix'		=>	'teacher',
-		'middleware'	=>	['teacher']
+		'prefix'		=>	'staff',
+		'middleware'	=>	['staff']
 	],
 	function () {
-		Route::get('/', [TeacherController::class, 'index'])->name('get_teacher_index');
-
-		// users
-		// Route::get('/users', [AgencyController::class, 'getUsers'])->name('get_agency_users_index');
-
-		// // users/create (post)
-		// Route::post('/users/add', [AgencyController::class, 'postAddUser'])->name('post_agency_users_add');
-
-		// // edit user
-		// Route::get('/users/edit/{id}', [AgencyController::class, 'getEditUser'])->name('get_agency_users_edit');
-
-		// // edit user (post)
-		// Route::post('/users/edit/{id}', [AgencyController::class, 'postEditUser'])->name('post_agency_users_edit');
-
-		// // change user password (post)
-		// Route::post('/users/change-password/{id}', [AgencyController::class, 'postChangeUserPassword'])->name('post_agency_users_password');
-
-		// // change bonus (post)
-		// Route::post('/users/change-bonus/{id}', [AgencyController::class, 'postChangeUserBonus'])->name('post_agency_users_bonus');
-
-		// // access user
-		// Route::post('/users/access/{id}', [AgencyController::class, 'postAccessUser'])->name('post_agency_users_access');
-
-		// // user status (post)
-		// Route::post('/users/change_status/{id}', [AgencyController::class, 'postChangeUserStatus'])->name('post_agency_users_edit_status');
-		// // user delete
-		// Route::post('/users/delete/{id}', [AgencyController::class, 'postDeleteUser'])->name('post_agency_users_delete');
-
+		Route::get('/', [StaffController::class, 'index'])->name('get_staff_index');
 
 		// agency settings
-		Route::get('/settings', [TeacherController::class, 'getSettings'])->name('get_teacher_settings');
+		Route::get('/settings', [StaffController::class, 'getSettings'])->name('get_staff_settings');
 
 		// agency settings general (post)
-		Route::post('/settings-general', [TeacherController::class, 'postSettingsGeneral'])->name('post_teacher_settings_general');
+		Route::post('/settings-general', [StaffController::class, 'postSettingsGeneral'])->name('post_staff_settings_general');
 
 		// agency settings password (post)
-		Route::post('/settings-password', [TeacherController::class, 'postSettingsPassword'])->name('post_teacher_settings_password');
+		Route::post('/settings-password', [StaffController::class, 'postSettingsPassword'])->name('post_staff_settings_password');
 	}
 );
 

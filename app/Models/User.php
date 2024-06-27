@@ -112,6 +112,40 @@ class User extends Authenticatable
 		return false;
 	}
 
+	// staff
+
+	public function isBoardMember()
+	{
+		$data = User_Role::where('user_id', $this->id)->first();
+
+		if ($data) {
+			// TODO get from levels table
+			$level = '2';
+
+			if (in_array($level, json_decode($data->levels))) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public function isPrincipal()
+	{
+		$data = User_Role::where('user_id', $this->id)->first();
+
+		if ($data) {
+			// TODO get from levels table
+			$level = '3';
+
+			if (in_array($level, json_decode($data->levels))) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public function isTeacher()
 	{
 		$data = User_Role::where('user_id', $this->id)->first();
