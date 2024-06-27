@@ -1,16 +1,3 @@
-> super admin
-- login
-- settings
-- all students / teachers / board members / principal / members / users
-- courses
-- classes
-- forms
-- calendar & events
-- cms
-- blog
-- contact us messages
-- schedule notification email (general, event) (all or specific group)
-
 > board member
 - events / calendar
 - send event notification - photos

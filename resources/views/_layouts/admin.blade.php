@@ -51,73 +51,45 @@
 				</div>
 				<div class="collapse navbar-collapse" id="navbar-menu">
 					<ul class="navbar-nav pt-lg-3">
-						<li class="nav-item" style="display: none;">
-							<a class="nav-link" href="{{ route('get_admin_index') }}">
-								<span class="nav-link-icon d-md-none d-lg-inline-block">
-									<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-										viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-										stroke-linecap="round" stroke-linejoin="round">
-										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-										<polyline points="5 12 3 12 12 3 21 12 19 12" />
-										<path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-										<path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-									</svg>
-								</span>
-								<span class="nav-link-title">
-									Home
-								</span>
-							</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="{{ route('get_admin_users_index') }}" title="Including Team and Agency Clients">
-								<span class="nav-link-icon d-md-none d-lg-inline-block">
-									<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-										<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-										<circle cx="9" cy="7" r="4"></circle>
-										<path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-										<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-										<path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
-									</svg>
-								</span>
-								<span class="nav-link-title">
-									All
-								</span>
-							</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="{{ route('get_admin_users_index') }}?filter=direct" title="Direct Users and Agency">
-								<span class="nav-link-icon d-md-none d-lg-inline-block">
-									<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-										<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-										<circle cx="9" cy="7" r="4"></circle>
-										<path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-										<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-										<path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
-									</svg>
-								</span>
-								<span class="nav-link-title">
-									Teachers
-								</span>
-							</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="{{ route('get_admin_users_index') }}?filter=direct" title="Direct Users and Agency">
-								<span class="nav-link-icon d-md-none d-lg-inline-block">
-									<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-										<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-										<circle cx="9" cy="7" r="4"></circle>
-										<path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-										<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-										<path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
-									</svg>
-								</span>
-								<span class="nav-link-title">
-									Students
-								</span>
-							</a>
+						
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true" >
+							<span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
+								<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+									<circle cx="9" cy="7" r="4"></circle>
+									<path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+									<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+									<path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
+								</svg>
+							</span>
+							<span class="nav-link-title">
+								Users
+							</span>
+						</a>
+						<div class="dropdown-menu">
+							<div class="dropdown-menu-columns">
+								<div class="dropdown-menu-column">
+									<a class="dropdown-item" href="{{ route('get_admin_users_index') }}">
+										All
+									</a>
+									<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=board_members">
+										Board Members
+									</a>
+									<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=principals">
+										Principal
+									</a>
+									<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=teachers">
+										Teachers
+									</a>
+									<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=students">
+										Students
+									</a>
+									<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=members">
+										Members
+									</a>
+								</div>
+							</div>
 						</li>
 
 						<li class="nav-item">

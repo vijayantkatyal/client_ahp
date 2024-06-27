@@ -20,7 +20,7 @@
 			<div class="row align-items-center">
 				<div class="col">
 					<h2 class="page-title">
-						Users
+						{{ $filter }}
 					</h2>
 					<div class="text-muted mt-1">{{ sizeof($users) }} people</div>
 				</div>
@@ -120,9 +120,6 @@
 											</svg>
 										</th>
 										<th>Type</th>
-										@if($filter == "appsumo")
-											<th>Code Used</th>
-										@endif
 										<th>Status</th>
 										<th>Added on</th>
 										<th class="w-1"></th>
@@ -143,17 +140,6 @@
 														<div class="font-weight-medium text-capitalize">{{ $user->first_name }} {{ $user->last_name }}</div>
 														<div class="text-muted">
 															<a href="#" class="text-reset">{{ $user->email }}</a>
-															@if($user->owner_details != null)
-																<br>
-																<span class="badge bg-blue-lt">Agency Sub User</span>
-																<span class="badge bg-blue-lt">{{ $user->owner_details->first_name }} {{ $user->owner_details->last_name }}</span>
-																<a class="badge bg-blue-lt" href="{{ url('/admin/users/edit') }}/{{ $user->owner_details->id }}">by: {{ $user->owner_details->first_name }} {{ $user->owner_details->last_name }}</a>
-
-															@endif
-															@if($user->is_agency)
-																<br>
-																<span class="badge bg-red-lt">Agency</span>
-															@endif
 														</div>
 													</div>
 												</div>
@@ -163,39 +149,6 @@
 												<span class="badge bg-green-lt">{{ $user->plan_name }}</span>
 												@endif
 											</td>
-											@if($filter == "appsumo")
-											<td>
-												@if($user->code_used_one)
-													<span class="badge bg-secondary">
-														{{ $user->code_used_one }}
-													</span>
-												@endif
-												@if($user->code_used_two)
-													<br>
-													<span class="badge bg-secondary">
-														{{ $user->code_used_two }}
-													</span>
-												@endif
-												@if($user->code_used_three)
-													<br>
-													<span class="badge bg-secondary">
-														{{ $user->code_used_three }}
-													</span>
-												@endif
-												@if($user->code_used_four)
-													<br>
-													<span class="badge bg-secondary">
-														{{ $user->code_used_four }}
-													</span>
-												@endif
-												@if($user->code_used_five)
-													<br>
-													<span class="badge bg-secondary">
-														{{ $user->code_used_five }}
-													</span>
-												@endif
-											</td>
-											@endif
 											<td>
 												@if($user->enabled)
 												<span class="badge bg-success me-1"></span> Active

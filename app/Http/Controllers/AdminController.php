@@ -73,22 +73,47 @@ class AdminController extends Controller
 		$plans = Levels::where('id', '!=', '1')->get();
 		$users = \App\Models\User::whereNotIn('id', $admin_accounts)->select('id','first_name', 'last_name', 'email', 'enabled', 'created_at', 'created_by')->orderByDesc('id')->get();
 
-		$filter = null;
+		$filter = "All";
 
 		if($request->filter)
 		{
-			if($request->filter == "appsumo")
+			// board_members
+			if($request->filter == "board_members")
 			{
-				$filter = "appsumo";
-				$users = \App\Models\User::whereNotIn('id', $admin_accounts)->where('code_used_one', '!=', null)->select('id','first_name', 'last_name', 'email', 'enabled', 'created_at', 'created_by', 'code_used_one', 'code_used_two', 'code_used_three', 'code_used_four', 'code_used_five')->orderByDesc('id')->get();
+				$filter = "Board Member(s)";
+				$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '2')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at')->orderByDesc('id')->get();
 			}
 
-			if($request->filter == "direct")
+			// principals
+			if($request->filter == "principals")
 			{
-				$filter = "direct";
-				$users = \App\Models\User::whereNotIn('id', $admin_accounts)->where('created_by', 'direct')->select('id','first_name', 'last_name', 'email', 'enabled', 'created_by', 'created_at')->orderByDesc('id')->get();
+				$filter = "Principal(s)";
+				$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '3')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at')->orderByDesc('id')->get();
+			}
+			
+			// teachers
+			if($request->filter == "teachers")
+			{
+				$filter = "Teacher(s)";
+				$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '4')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at')->orderByDesc('id')->get();
+			}
+
+			// students
+			if($request->filter == "students")
+			{
+				$filter = "Student(s)";
+				$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '5')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at')->orderByDesc('id')->get();
+			}
+
+			// members
+			if($request->filter == "members")
+			{
+				$filter = "Member(s)";
+				$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '6')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at')->orderByDesc('id')->get();
 			}
 		}
+
+		// return $users;
 
 		foreach($users as $user)
 		{
@@ -113,30 +138,6 @@ class AdminController extends Controller
 					}
 				}
 			}
-
-			// agency details
-			if($user->created_by != "direct")
-			{
-				$owner_details = \App\Models\User::where('id', $user->created_by)->first();
-				if($owner_details)
-				{
-					$user->owner_details = $owner_details;
-					$agency_details = \App\Models\Site::where('agency_id', $owner_details->id)->first();
-					if($agency_details)
-					{
-						$user->agency_details = $agency_details;
-					}
-				}
-			}
-
-			// check if is agency
-			$user->is_agency = false;
-			$get_sub_users = \App\Models\User::where('created_by', $user->id)->count();
-			if($get_sub_users > 0)
-			{
-				$user->is_agency = true;
-			}
-
 		}
 
 		return view('admin.users.index')
