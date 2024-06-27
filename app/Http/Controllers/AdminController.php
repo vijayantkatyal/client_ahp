@@ -1379,12 +1379,82 @@ class AdminController extends Controller
     public function postCourse(Request $request)
     {
         Courses::create([
-            'name'  =>  $request->input('name'),
-            'added_on'  =>  time()
+            'name'  		=>  $request->input('name'),
+			'description' 	=>	$request->input('description'),
+            'added_on'  	=>  time()
         ]);
 
         return redirect($request->header('Referer'))->with('status.success', 'Course Created');
     }
+
+	// delete multiple user (post)
+	public function postDeleteMultipleCourses(Request $request)
+	{
+		try
+		{
+			$user_ids = $request->input("users_id");
+			$user_ids = explode(",", $user_ids);
+
+			foreach($user_ids as $id)
+			{
+				Courses::where('id', $id)->delete();
+			}
+			
+			return redirect()->route('get_admin_courses_all')->with('status.success', 'Courses Deleted.');
+		}
+		catch(\Exception $ex)
+		{
+			return redirect()->route('get_admin_courses_all')->with('status.error', 'Something Went Wrong');
+		}
+	}
+
+	// edit user
+	public function getEditCourse(Request $request, $id)
+	{
+		$course = Courses::find($id);
+		if($course)
+		{
+			return view('admin.courses.edit')->with('course', $course);
+		}
+		else
+		{
+			return view('errors.404');
+		}
+	}
+
+	// update user (post)
+	public function postEditCourse(Request $request, $id)
+	{
+		try
+		{
+			$isValid =  Validator::make($request->all(), [
+				'name'    =>  'required|string|min:3'
+			]);
+
+			if($isValid->fails()){
+				$messages = $isValid->messages();
+				return redirect()->route('get_admin_course_edit', ['id'	=>	$id])->withErrors($isValid)->withInput();
+			}
+
+			$course = Courses::find($id);
+			if($course)
+			{
+				$course->name = $request->input('name');
+				$course->description = $request->input('description');
+				$course->save();
+
+				return redirect()->route('get_admin_course_edit', ['id'	=>	$id])->with('status.success', 'Course Updated.');
+			}
+			else
+			{
+				return redirect()->route('get_admin_course_edit', ['id'	=>	$id])->with('status.error', 'Something went wrong');
+			}
+		}
+		catch(\Exception $ex)
+		{
+			return redirect()->route('get_admin_course_edit', ['id'	=>	$id])->with('status.error', 'Something went wrong');
+		}
+	}
 
     // classes
 
@@ -1392,6 +1462,9 @@ class AdminController extends Controller
 	{
         $classes = Classes::get();
         $courses = Courses::get();
+
+		// get all teachers
+		$teachers = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '4')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at')->orderByDesc('id')->get();
 
         foreach ($classes as $class)
         {
@@ -1404,11 +1477,33 @@ class AdminController extends Controller
             }
 
             $class->course_name = $course_name;
+
+			if($class->assigned_member_id != null)
+			{
+				$teachers_info = [];
+
+				foreach (json_decode($class->assigned_member_id) as $teacher_id)
+				{
+
+					$teacher_info = $teachers->where('id', $teacher_id)->first();
+
+					if($teacher_info)
+					{
+						array_push($teachers_info, $teacher_info);
+					}
+				}
+
+				$class->assigned_member_id = $teachers_info;
+			}
         }
+
+		
+		// return $classes;
 		
         return view('admin.classes.all')
             ->with('classes', $classes)
-            ->with('courses', $courses);
+            ->with('courses', $courses)
+			->with('teachers', $teachers);
 	}
 
     public function postClass(Request $request)
@@ -1420,7 +1515,7 @@ class AdminController extends Controller
             'course_id'     =>  $request->input('course_id'),
             'added_on'      =>  time(),
 
-            'assigned_member_id'    =>  $request->input('assigned_member_id')
+            'assigned_member_id'    =>  json_encode($request->input('assigned_member_id'))
         ]);
 
         return redirect($request->header('Referer'))->with('status.success', 'Class Created');
@@ -1433,6 +1528,9 @@ class AdminController extends Controller
         {
             $courses = Courses::get();
 
+			// get all teachers
+			$teachers = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '4')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at')->orderByDesc('id')->get();
+
             $course_name = "";
 
             $get_course = Courses::where('id', $class->course_id)->first();
@@ -1442,10 +1540,28 @@ class AdminController extends Controller
             }
 
             $class->course_name = $course_name;
+
+			if($class->assigned_member_id != null)
+			{
+				$teachers_info = [];
+
+				foreach (json_decode($class->assigned_member_id) as $teacher_id)
+				{
+					$teacher_info = $teachers->where('id', $teacher_id)->first();
+
+					if($teacher_info)
+					{
+						array_push($teachers_info, $teacher_info);
+					}
+				}
+
+				$class->assigned_member_id = $teachers_info;				
+			}
             
             return view('admin.classes.edit')
                 ->with('class', $class)
-                ->with('courses', $courses);
+                ->with('courses', $courses)
+				->with('teachers', $teachers);
         }
         else
         {
@@ -1475,6 +1591,27 @@ class AdminController extends Controller
         }
 
     }
+
+	// delete multiple user (post)
+	public function postDeleteMultipleClass(Request $request)
+	{
+		try
+		{
+			$user_ids = $request->input("users_id");
+			$user_ids = explode(",", $user_ids);
+
+			foreach($user_ids as $id)
+			{
+				Classes::where('id', $id)->delete();
+			}
+			
+			return redirect()->route('get_admin_classes_all')->with('status.success', 'Class Deleted.');
+		}
+		catch(\Exception $ex)
+		{
+			return redirect()->route('get_admin_classes_all')->with('status.error', 'Something Went Wrong');
+		}
+	}
 
     public function getManageClass(Request $request, $id)
     {

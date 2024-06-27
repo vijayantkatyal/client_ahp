@@ -18,8 +18,9 @@
 ✅ login
 ✅ settings
 ✅ all students / teachers / board members / principal / members / users
-- courses
-- classes
+✅ courses (add description, edit / info)
+- classes (assign member, delete)
+-- add students in bulk
 - forms
 - calendar & events
 - cms

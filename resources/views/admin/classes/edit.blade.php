@@ -93,13 +93,22 @@
                                 @endif
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Assigned Member (optional)</label>
-                                <select name="assigned_member_id" class="form-select" id=""></select>
+                                <label class="form-label">Assigned Teacher (optional)</label>
+                                <select name="assigned_member_id[]" class="form-select" multiple id="">
+                                    @foreach($teachers as $teacher)
+                                        <option
+                                            @if($class->assigned_member_id != null)
+                                                @if(array_search($teacher->id, array_column(json_decode(json_encode($class->assigned_member_id),TRUE), 'id')) !== false) selected @endif
+                                            @endif
+                                            value="{{ $teacher->id }}"
+                                        >{{ $teacher->first_name }} {{ $teacher->last_name }} ({{ $teacher->email }})</option>
+                                    @endforeach
+                                </select>
                             </div>
 						</div>
 						<div class="card-footer">
 							<div class="d-flex">
-								<a href="{{ route('get_admin_users_index') }}" class="btn btn-link">Cancel</a>
+								<a href="{{ route('get_admin_classes_all') }}" class="btn btn-link">Cancel</a>
 								<button type="submit" class="btn btn-success ms-auto">Update</button>
 							</div>
 						</div>

@@ -38,7 +38,7 @@
 								<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
 							</svg>&nbsp;Delete Selected
 						</button>
-						<form id="delete-users" action="{{ route('post_admin_users_delete_multiple') }}" method="POST" style="display: none;">
+						<form id="delete-users" action="{{ route('post_admin_classes_delete_multiple') }}" method="POST" style="display: none;">
 							<input type="text" name="users_id" />
 							{{ csrf_field() }}
 						</form>
@@ -51,7 +51,7 @@
 								<line x1="12" y1="5" x2="12" y2="19"></line>
 								<line x1="5" y1="12" x2="19" y2="12"></line>
 							</svg>
-							New class
+							New Class
 						</a>
 					</div>
 				</div>
@@ -108,7 +108,7 @@
                                         <th>Course Name</th>
 										<th>Start Date</th>
                                         <th>End Date</th>
-                                        <th>Assigned Member</th>
+                                        <th>Assigned Teacher(s)</th>
 										<th>Added on</th>
 										<th class="w-1"></th>
 									</tr>
@@ -132,7 +132,13 @@
 											<td>{{ $user->course_name }}</td>
                                             <td>{{ $user->start_date }}</td>
                                             <td>{{ $user->end_date }}</td>
-                                            <td>{{ $user->assigned_member_id }}</td>
+                                            <td>
+												@if($user->assigned_member_id != null)
+													@foreach($user->assigned_member_id as $teacher_info)
+														<a href="{{ route('get_admin_users_edit', ['id' => $teacher_info->id]) }}" class="btn btn-outline-secondary">{{ $teacher_info->first_name }} {{ $teacher_info->last_name }}</a>
+													@endforeach
+												@endif
+											</td>
 											<td class="moment_time">
 												{{ $user->added_on }}
 											</td>
@@ -260,8 +266,13 @@
 									@endif
 								</div>
                                 <div class="mb-3">
-									<label class="form-label">Assigned Member (optional)</label>
-									<select name="assigned_member_id" class="form-select" id=""></select>
+									<label class="form-label">Assign Teacher(s) (optional)</label>
+									<select name="assigned_member_id[]" class="form-select" multiple id="">
+										<option selected></option>
+										@foreach($teachers as $teacher)
+											<option value="{{ $teacher->id }}">{{ $teacher->first_name }} {{ $teacher->last_name }} ({{ $teacher->email }})</option>
+										@endforeach
+									</select>
 								</div>
 							</div>
 						</div>

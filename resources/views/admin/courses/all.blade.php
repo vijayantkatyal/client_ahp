@@ -38,7 +38,7 @@
 								<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
 							</svg>&nbsp;Delete Selected
 						</button>
-						<form id="delete-users" action="{{ route('post_admin_users_delete_multiple') }}" method="POST" style="display: none;">
+						<form id="delete-users" action="{{ route('post_admin_courses_delete_multiple') }}" method="POST" style="display: none;">
 							<input type="text" name="users_id" />
 							{{ csrf_field() }}
 						</form>
@@ -137,7 +137,11 @@
 												{{ $user->added_on }}
 											</td>
 											<td>
-												
+												<div class="btn-list flex-nowrap">
+													<a href="{{ route('get_admin_course_edit', ['id' => $user->id]) }}" class="btn btn-white">
+														Edit
+													</a>
+												</div>
 											</td>
 										</tr>
 									@endforeach
@@ -200,7 +204,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="mb-3">
-									<label class="form-label">Course name</label>
+									<label class="form-label">Name</label>
 									<input
 										type="text" name="name" required placeholder="Name"
 										@if($errors->has('name'))
@@ -212,6 +216,15 @@
 									>
 									@if($errors->has('name'))
 										<div class="invalid-feedback">{{ $errors->first('name') }}</div>
+									@endif
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="mb-3">
+									<label class="form-label">Description</label>
+									<textarea name="description" class="form-control">{{ old('description') }}</textarea>
+									@if($errors->has('description'))
+										<div class="invalid-feedback">{{ $errors->first('description') }}</div>
 									@endif
 								</div>
 							</div>
