@@ -8,6 +8,7 @@ use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MemberController;
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\StaffController;
 
 /*
@@ -263,6 +264,7 @@ Route::group(
 		'middleware'	=>	['user']
 	],
 	function () {
+		Route::get('/user', [UserController::class, 'getIndex'])->name('get_student_index');
 		Route::post('/settings-general', [StudentController::class, 'postSettingsGeneral'])->name('post_user_settings_general');
 		Route::post('/settings-password', [StudentController::class, 'postSettingsPassword'])->name('post_user_settings_password');
     }

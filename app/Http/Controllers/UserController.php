@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use DateTime;
 
-class MemberController extends Controller
+class UserController extends Controller
 {
 	use DispatchesJobs;
 
