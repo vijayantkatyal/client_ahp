@@ -103,17 +103,6 @@
 														<div class="font-weight-medium text-capitalize">{{ $user->first_name }} {{ $user->last_name }}</div>
 														<div class="text-muted">
 															<a href="#" class="text-reset">{{ $user->email }}</a>
-															@if($user->owner_details != null)
-																<br>
-																<span class="badge bg-blue-lt">Agency Sub User</span>
-																<span class="badge bg-blue-lt">{{ $user->owner_details->first_name }} {{ $user->owner_details->last_name }}</span>
-																<a class="badge bg-blue-lt" href="{{ url('/admin/users/edit') }}/{{ $user->owner_details->id }}">by: {{ $user->owner_details->first_name }} {{ $user->owner_details->last_name }}</a>
-
-															@endif
-															@if($user->is_agency)
-																<br>
-																<span class="badge bg-red-lt">Agency</span>
-															@endif
 														</div>
 													</div>
 												</div>

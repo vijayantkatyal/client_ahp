@@ -29,6 +29,7 @@ use App\Models\VideoReactions;
 use App\Models\Domain;
 use App\Models\Levels;
 use App\Models\Site;
+use App\Models\StudentClass;
 use App\Models\User as ModelsUser;
 use App\Models\VidChapterProject;
 use Google\Service\StreetViewPublish\Level;
@@ -254,12 +255,36 @@ class AdminController extends Controller
 						if($level_info)
 						{
 							$user->plan_name = $level_info->name;
+
+							if($user->plan_name == "Student")
+							{
+								$classes = [];
+								$get_classes_info = StudentClass::where('student_id', $id)->get();
+
+								foreach ($get_classes_info as $class_info)
+								{
+									// course name
+									// class name
+									// $get_class_info = Classes::join('courses', 'classes.course_id', '=', 'courses.id')->select('classes.id', 'classes.name', 'classes.start_date', 'classes.end_date', 'courses.name as course_name')->first();
+
+									$get_class_info = StudentClass::join('courses', 'student_classes.course_id', '=', 'courses.id')
+														->where('student_classes.id', $class_info->id)
+														->join('classes', 'student_classes.class_id', '=', 'classes.id')
+														->select('student_classes.id', 'courses.name as course_name', 'classes.name as class_name', 'classes.start_date', 'classes.end_date')
+														->first();
+
+									array_push($classes, $get_class_info);
+									
+								}
+
+								$user->classes_info = $classes;
+							}
 						}
 					}
 				}
 			}
-			
-			$custom_properties = CustomProperties::get();
+
+			// return $user->classes_info;
 
 			$courses = Courses::get();
 			$classes = Classes::where('course_id', $user->course_id)->get();
@@ -267,7 +292,6 @@ class AdminController extends Controller
 			return view('admin.users.edit')
 				->with('user', $user)->with('plans', $plans)
 				->with('plan_id', $plan_id)
-				->with('custom_properties', $custom_properties)
 				->with('courses', $courses)
 				->with('classes', $classes);
 		}
@@ -1620,7 +1644,10 @@ class AdminController extends Controller
         if($class)
         {
             // get all students
-            $students = \App\Models\User::where('class_id', $id)->get();
+            $students = \App\Models\User
+						::join('student_classes', 'users.id', '=', 'student_classes.student_id')
+						->where('student_classes.class_id', $id)
+						->get();
 
             return view('admin.classes.manage')->with('class', $class)->with('students', $students);
         }
@@ -1637,11 +1664,20 @@ class AdminController extends Controller
 
     public function postAddClassToUser(Request $request)
     {
-        ModelsUser::where('id', $request->input('user_id'))->update([
-            'course_id' =>  $request->input('course_id'),
-            'class_id'  =>  $request->input('class_id')
-        ]);
-        return redirect($request->header('Referer'))->with('status.success', 'Class Info Updated');
+		StudentClass::create([
+			'student_id'	=>	$request->input('user_id'),
+			'course_id' 	=>  $request->input('course_id'),
+            'class_id'  	=>  $request->input('class_id')
+		]);
+
+        return redirect($request->header('Referer'))->with('status.success', 'Class Attached to Student');
+    }
+
+	public function getRemoveClassFromUser(Request $request, $id)
+    {
+		StudentClass::where('id', $id)->delete();
+
+        return redirect($request->header('Referer'))->with('status.success', 'Class Removed from Student');
     }
 
     public function getAttendanceClass(Request $request, $id)
@@ -1699,7 +1735,15 @@ class AdminController extends Controller
             // return $days;
 
             // get all students
-            $students = \App\Models\User::where('class_id', $id)->get();
+            // $students = \App\Models\User::where('class_id', $id)->get();
+			$students = \App\Models\User
+						::join('student_classes', 'users.id', '=', 'student_classes.student_id')
+						->where('student_classes.class_id', $id)
+						->select('users.id', 'users.first_name', 'users.last_name')
+						->get();
+
+			// return $students;
+
             if(sizeof($students) > 0)
             {
                 return view('admin.classes.attendance')->with('class', $class)->with('students', $students)->with('days', $days);

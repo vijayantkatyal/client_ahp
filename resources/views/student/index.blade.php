@@ -178,17 +178,20 @@
                         </div>
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
 
-                            @if($course_info != null)
+                            @if(sizeof($classes) > 0)
                             Your Classes:
                             <br /><br />
-                            Course:
-                            <br />
-                            <b>{{ $course_info->name }}</b> joined on <span class="moment_time">{{ $course_info->added_on }}</span>
-                            <br />
-                            <br />
-                            Class:
-                            <br />
-                            <b>{{ $class_info->name }}</b> duration: {{ $class_info->start_date }} to {{ $class_info->end_date }}
+                            <ul class="list-group list-group-flush">
+                                @foreach($classes as $class_info)
+                                    <div class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <b>Course: </b>{{ $class_info->course_name }} / <b>Class: </b> {{ $class_info->class_name }} ({{ $class_info->start_date }} - {{ $class_info->end_date }})
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </ul>
                             @else
                             No Classes joined yet.
                             @endif
@@ -197,7 +200,23 @@
                         <div class="tab-pane fade" id="pills-attendance" role="tabpanel" aria-labelledby="pills-attendance-tab" tabindex="0">
                             <b>Attendance</b>
                             <br />
+                            @if(sizeof($classes) > 0)
+                                @foreach($classes as $class_info)
+                                    <a
+                                        href="{{ route('get_user_index') }}?class_id={{ $class_info->id }}"
+                                        @if($class_id == $class_info->id)
+                                            class="badge rounded-pill text-bg-primary"
+                                        @else
+                                            class="badge rounded-pill text-bg-secondary"
+                                        @endif
+                                        style="font-size: 16px; margin-right: 6px;"
+                                    >
+                                        {{ $class_info->course_name }} / {{ $class_info->class_name }}
+                                    </a>
+                                @endforeach
+                            @endif
                             <br />
+                            <br/>
                             <div class="table-responsive">
                                 <table class="table card-table table-vcenter table-mobile-md datatable">
                                     <thead>

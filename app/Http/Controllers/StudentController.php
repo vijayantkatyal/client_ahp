@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\Classes;
 use App\Models\Courses;
+use App\Models\StudentClass;
 use App\Models\User;
 
 use Session;
@@ -26,21 +27,34 @@ class StudentController extends Controller
 
 	public function getIndex(Request $request)
 	{
-		$course_info = null;
-		$class_info = null;		
+		$classes = [];
+		$get_classes_info = StudentClass::where('student_id', Auth::user()->id)->get();
 
-		if(Auth::user()->course_id != null && Auth::user()->class_id != null)
+		foreach ($get_classes_info as $class_info)
 		{
-			$course_info = Courses::where('id', Auth::user()->course_id)->first();
-			$class_info = Classes::where('id', Auth::user()->class_id)->first();
+			$get_class_info = StudentClass::join('courses', 'student_classes.course_id', '=', 'courses.id')
+								->where('student_classes.id', $class_info->id)
+								->join('classes', 'student_classes.class_id', '=', 'classes.id')
+								->select('classes.id', 'courses.name as course_name', 'classes.name as class_name', 'classes.start_date', 'classes.end_date')
+								->first();
+
+			array_push($classes, $get_class_info);
 		}
 
-		$attendance = Attendance::where('user_id', Auth::user()->id)->get();
+		$attendance = [];
+
+		$class_id = null;
+
+		if($request->filled('class_id'))
+		{
+			$class_id = $request->input('class_id');
+			$attendance = Attendance::where('user_id', Auth::user()->id)->where('class_id', $request->input('class_id'))->get();
+		}
 
 		return view('student.index')
-			->with('course_info', $course_info)
-			->with('class_info', $class_info)
-			->with('attendance', $attendance);
+			->with('classes', $classes)
+			->with('attendance', $attendance)
+			->with('class_id', $class_id);
 	}
 
 	public function postSettingsGeneral(Request $request)
