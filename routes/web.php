@@ -161,6 +161,7 @@ Route::group(
         Route::get('/classes', [AdminController::class, 'getClasses'])->name('get_admin_classes_all');
         Route::post('/class', [AdminController::class, 'postClass'])->name('post_admin_class');
 		Route::post('/classes/delete-multiple', [AdminController::class, 'postDeleteMultipleClass'])->name('post_admin_classes_delete_multiple');
+		Route::post('/users/class-multiple', [AdminController::class, 'postClassMultipleUser'])->name('post_admin_users_class_multiple');
         Route::get('/classes-by-course-id', [AdminController::class, 'getClassesByCourseId'])->name('get_classes_by_course_id');
         // edit
         Route::get('/class/edit/{id}', [AdminController::class, 'getEditClass'])->name('get_admin_class_edit');

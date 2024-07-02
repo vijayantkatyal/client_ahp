@@ -69,6 +69,10 @@ Note: attendance app should be able to count percentage.
 - members
 - about
 
+- cms
+- blog
+- contact us messages
+
 ---------------------
 
 [?] Information 

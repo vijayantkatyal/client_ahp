@@ -22,11 +22,8 @@
 ✅ classes (assign member, delete)
 
 ✅ multiple class for students
--- add students in bulk
+✅ add students in bulk
 
 - forms
-- calendar & events
-- cms
-- blog
-- contact us messages
+- calendar & events  
 - schedule notification email (general, event) (all or specific group)

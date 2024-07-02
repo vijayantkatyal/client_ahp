@@ -28,6 +28,22 @@
 				<div class="col-auto ms-auto d-print-none">
 					<div class="d-flex">
 
+					@if($filter == "Student(s)")
+						<form id="change-class-users" class="me-1" action="{{ route('post_admin_users_class_multiple') }}" method="POST" style="display: none;">
+							{{ csrf_field() }}
+							<input type="text" name="users_id" style="display: none;" />
+							<div class="input-group">
+								<span class="input-group-text">Add to Class</span>
+								<select name="new_plan_id" class="form-select" id="" style="min-width: 150px;">
+									@foreach($classes as $class)
+										<option value="{{ $class->course_id }}--{{ $class->id }}">{{ $class->course_name }} / {{ $class->name }} ({{ $class->start_date }} - {{ $class->end_date }})</option>
+									@endforeach
+								</select>
+								<button class="btn btn-success" type="submit">Submit</button>
+							</div>
+						</form>
+						@else
+
 						<form id="change-plan-users" class="me-1" action="{{ route('post_admin_users_plan_multiple') }}" method="POST" style="display: none;">
 							{{ csrf_field() }}
 							<input type="text" name="users_id" style="display: none;" />
@@ -41,6 +57,7 @@
 								<button class="btn btn-success" type="submit">Submit</button>
 							</div>
 						</form>
+						@endif
 					
 						<button style="display: none;" id="del_users_btn" class="btn btn-danger me-1">
 							<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -443,14 +460,17 @@
 			{
 				$("#delete-users input[name=users_id]").val(_selected_users);
 				$("#change-plan-users input[name=users_id]").val(_selected_users);
+				$("#change-class-users input[name=users_id]").val(_selected_users);
 
 				$("#del_users_btn").show();
 				$("#change-plan-users").show();
+				$("#change-class-users").show();
 			}
 			else
 			{
 				$("#del_users_btn").hide();
 				$("#change-plan-users").hide();
+				$("#change-class-users").hide();
 			}
 		});
 	</script>

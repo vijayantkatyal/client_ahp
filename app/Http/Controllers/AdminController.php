@@ -141,10 +141,17 @@ class AdminController extends Controller
 			}
 		}
 
+		$classes = Classes::join('courses', 'classes.course_id', '=', 'courses.id')
+					->select('classes.id', 'courses.name as course_name', 'classes.name', 'classes.start_date', 'classes.end_date', 'courses.id as course_id')
+					->get();
+
+		// return $classes;
+
 		return view('admin.users.index')
 				->with('filter', $filter)	
 				->with('plans', $plans)
-				->with('users', $users);
+				->with('users', $users)
+				->with('classes', $classes);
 	}
 
 	// add user (post)
@@ -1615,6 +1622,43 @@ class AdminController extends Controller
         }
 
     }
+
+	public function postClassMultipleUser(Request $request)
+	{
+		try
+		{
+			$user_ids = $request->input("users_id");
+			$user_ids = explode(",", $user_ids);
+
+			$get_ids = explode("--", $request->input('new_plan_id'));
+
+			$course_id = $get_ids[0];
+			$class_id = $get_ids[1];
+
+			// return json_encode($request->all());
+
+			foreach($user_ids as $id)
+			{
+
+				// if exists
+				$get_existsing_class = StudentClass::where('student_id', $id)->where('course_id', $course_id)->where('class_id', $class_id)->first();
+				if(!$get_existsing_class)
+				{
+					StudentClass::create([
+						'student_id'	=>	$id,
+						'course_id'		=>	$course_id,
+						'class_id'		=>	$class_id
+					]);
+				}
+			}
+			
+			return redirect()->route('get_admin_users_index', ['filter' => 'students'])->with('status.success', 'Class Updated.');
+		}
+		catch(\Exception $ex)
+		{
+			return redirect()->route('get_admin_users_index', ['filter' => 'students'])->with('status.error', 'Something Went Wrong');
+		}
+	}
 
 	// delete multiple user (post)
 	public function postDeleteMultipleClass(Request $request)
