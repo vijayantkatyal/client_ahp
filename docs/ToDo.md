@@ -10,11 +10,7 @@
 ✅ student [5]
 ✅ general member [6]
 
-[Working]
-
-[ToDo]
-
-> admin
+[Done] admin
 ✅ login
 ✅ settings
 ✅ all students / teachers / board members / principal / members / users
@@ -24,6 +20,16 @@
 ✅ multiple class for students
 ✅ add students in bulk
 
-- forms
+[Working]
+
+[ToDo]
+
+> manage forms
+✅ Registration forms (same inputs as here http://ahpschool.ca/Ref/Resources/Registration%20form.pdf)
+✅ Student registration 
+✅ Membership registration (based on confirmation by admin based on payment id) (http://ahpschool.ca/Ref/Resources/GeneralMembershipform.pdf)
+[x] field trip form (http://ahpschool.ca/Ref/Resources/Field%20Trip%20waiver2018.pdf)
+- admin can manage / view forms
+
 - calendar & events  
 - schedule notification email (general, event) (all or specific group)

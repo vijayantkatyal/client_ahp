@@ -27,12 +27,6 @@
 
 ---------------------------
 
-> manage forms
-- Registration forms (same inputs as here http://ahpschool.ca/Ref/Resources/Registration%20form.pdf)
-- Student registration 
-- Membership registration (based on confirmation by admin based on payment id) (http://ahpschool.ca/Ref/Resources/GeneralMembershipform.pdf)
-- field trip form (http://ahpschool.ca/Ref/Resources/Field%20Trip%20waiver2018.pdf)
-
 > misc
 - Hindi School Website - Should have Hindi and English input/ keyboard
 - Review forms (google review for Hindi School)

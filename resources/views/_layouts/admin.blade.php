@@ -52,42 +52,43 @@
 				<div class="collapse navbar-collapse" id="navbar-menu">
 					<ul class="navbar-nav pt-lg-3">
 						
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true" >
-							<span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
-								<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-									<circle cx="9" cy="7" r="4"></circle>
-									<path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-									<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-									<path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
-								</svg>
-							</span>
-							<span class="nav-link-title">
-								Users
-							</span>
-						</a>
-						<div class="dropdown-menu">
-							<div class="dropdown-menu-columns">
-								<div class="dropdown-menu-column">
-									<a class="dropdown-item" href="{{ route('get_admin_users_index') }}">
-										All
-									</a>
-									<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=board_members">
-										Board Members
-									</a>
-									<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=principals">
-										Principal
-									</a>
-									<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=teachers">
-										Teachers
-									</a>
-									<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=students">
-										Students
-									</a>
-									<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=members">
-										Members
-									</a>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true" >
+								<span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
+									<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+										<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+										<circle cx="9" cy="7" r="4"></circle>
+										<path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+										<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+										<path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
+									</svg>
+								</span>
+								<span class="nav-link-title">
+									Users
+								</span>
+							</a>
+							<div class="dropdown-menu">
+								<div class="dropdown-menu-columns">
+									<div class="dropdown-menu-column">
+										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}">
+											All
+										</a>
+										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=board_members">
+											Board Members
+										</a>
+										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=principals">
+											Principal
+										</a>
+										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=teachers">
+											Teachers
+										</a>
+										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=students">
+											Students
+										</a>
+										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=members">
+											Members
+										</a>
+									</div>
 								</div>
 							</div>
 						</li>
@@ -114,8 +115,8 @@
 							</a>
 						</li>
 
-						<li class="nav-item">
-							<a class="nav-link" href="{{ route('get_admin_users_index') }}?filter=direct" title="Direct Users and Agency">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true" >
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
 									<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-certificate"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M5 8v-3a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5" /><path d="M6 14m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M4.5 17l-1.5 5l3 -1.5l3 1.5l-1.5 -5" /></svg>
 								</span>
@@ -123,6 +124,21 @@
 									Forms
 								</span>
 							</a>
+							<div class="dropdown-menu">
+								<div class="dropdown-menu-columns">
+									<div class="dropdown-menu-column">
+										<a class="dropdown-item" href="{{ route('get_admin_forms_registration') }}">
+											Registration
+										</a>
+										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=board_members">
+											Membership
+										</a>
+										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=principals">
+											Field Trip
+										</a>
+									</div>
+								</div>
+							</div>
 						</li>
 
 						@if(array_key_exists('domains', config('isotopekit_admin')))

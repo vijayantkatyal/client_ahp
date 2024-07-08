@@ -28,6 +28,12 @@ Route::get('/contact', [GuestController::class, 'getContact'])->name('get_contac
 Route::get('/events', [GuestController::class, 'getEvents'])->name('get_events');
 Route::get('/forms', [GuestController::class, 'getForms'])->name('get_forms');
 
+Route::get('/form/registration', [GuestController::class, 'getFormRegistration'])->name('get_form_registration');
+Route::post('/form/registration', [GuestController::class, 'postFormRegistration'])->name('post_form_registration');
+
+Route::get('/form/membership', [GuestController::class, 'getFormMembership'])->name('get_form_membership');
+Route::post('/form/membership', [GuestController::class, 'postFormMembership'])->name('post_form_membership');
+
 Route::get('/mission', [GuestController::class, 'getMission'])->name('get_mission');
 
 Route::get('/team', [GuestController::class, 'getTeam'])->name('get_team');
@@ -99,15 +105,15 @@ Route::group(
 		Route::post('/users/plan-multiple', [AdminController::class, 'postPlanMultipleUser'])->name('post_admin_users_plan_multiple');
 		
 		
-		Route::get('/domains', [AdminController::class, 'getDomains'])->name('get_admin_domains_index');
-		Route::get('/domains/check-all', [AdminController::class, 'getDomainsCheckAll'])->name('get_admin_domains_check');
-		Route::get('/domains/check/{id}', [AdminController::class, 'getDomainsCheck'])->name('get_admin_domains_check_index');
+		// Route::get('/domains', [AdminController::class, 'getDomains'])->name('get_admin_domains_index');
+		// Route::get('/domains/check-all', [AdminController::class, 'getDomainsCheckAll'])->name('get_admin_domains_check');
+		// Route::get('/domains/check/{id}', [AdminController::class, 'getDomainsCheck'])->name('get_admin_domains_check_index');
 		
-		Route::get('/domains_refresh_all', [AdminController::class, 'getDomainsRefresh'])->name('get_admin_domains_refresh');
+		// Route::get('/domains_refresh_all', [AdminController::class, 'getDomainsRefresh'])->name('get_admin_domains_refresh');
 
-		Route::get('/agency-domains', [AdminController::class, 'getAgencyDomains'])->name('get_admin_agency_domains_index');
-		Route::get('/agency-domains/check-all', [AdminController::class, 'getAgencyDomainsCheckAll'])->name('get_admin_agency_domains_check');
-		Route::get('/agency-domains/check/{id}', [AdminController::class, 'getAgencyDomainsCheck'])->name('get_admin_agency_domains_check_index');
+		// Route::get('/agency-domains', [AdminController::class, 'getAgencyDomains'])->name('get_admin_agency_domains_index');
+		// Route::get('/agency-domains/check-all', [AdminController::class, 'getAgencyDomainsCheckAll'])->name('get_admin_agency_domains_check');
+		// Route::get('/agency-domains/check/{id}', [AdminController::class, 'getAgencyDomainsCheck'])->name('get_admin_agency_domains_check_index');
 		// Route::get('/agency-domains/refresh-all', [AdminController::class, 'getAgencyDomainsRefresh'])->name('get_admin_agency_domains_refresh');
 		
 		// // plans
@@ -177,6 +183,9 @@ Route::group(
         Route::get('/g-attendance', [AdminController::class, 'getAttendanceSingle'])->name('get_amin_class_attendance_single');
         // post
         Route::post('/g-attendance', [AdminController::class, 'postAttendanceSingle'])->name('post_amin_class_attendance_single');
+
+		// forms
+		Route::get('/forms/registration', [AdminController::class, 'getFormsRegistration'])->name('get_admin_forms_registration');
     }
 );
 

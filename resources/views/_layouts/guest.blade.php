@@ -138,7 +138,7 @@
 								<div class="dropdown-menu" aria-labelledby="about-dropdown">
 									<a class="dropdown-item" href="about.php">Documents</a>
 									<a class="dropdown-item" href="about2.php">Calendar</a>
-									<a class="dropdown-item" href="team.php">Forms</a>
+									<a class="dropdown-item" href="{{ route('get_forms') }}">Forms</a>
 									<a class="dropdown-item" href="team-single.php">Newsletter</a>
 								</div>
 							</li>
