@@ -34,13 +34,6 @@
 - Newsletter monthly/by monthly 
 - Volunteer opportunities
 - Contact us
-
-> Calendar
-- Events (year wise)
-- School Calendar
-- AHP Calendar
-- Director’s duty Calendar 
-- [visitor-area] top bar alert for new upcoming event
   
 Resources
 > files uploaded

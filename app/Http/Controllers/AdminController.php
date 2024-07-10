@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Jobs\SaveEmbedding;
 use App\Libraries\CaptionsData;
 use App\Models\Attendance;
+use App\Models\CalendarDirector;
+use App\Models\CalendarSchool;
 use App\Models\Classes;
 use App\Models\Courses;
 use App\Models\CustomProperties;
@@ -1958,5 +1960,99 @@ class AdminController extends Controller
 		]);
 
 		return redirect($request->header('Referer'))->with('status.success', 'Changes Saved');
+	}
+
+	// school calendar
+
+	public function getSchoolCalendar(Request $request)
+	{
+		$events = CalendarSchool::get();
+		return view('admin.calendar.school')->with('events', $events);
+	}
+
+	public function postSchoolCalendarEvent(Request $request)
+	{
+		CalendarSchool::insert([
+			'date'				=>	$request->input('date'),
+			'school_activity'	=>	$request->input('school_activity'),
+			'no_of_classes'		=>	$request->input('no_of_classes'),
+			'activity'			=>	$request->input('activity')
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Calendar Entry Created');
+	}
+
+	public function getEditSchoolCalendarEvent(Request $request, $id)
+	{
+		$event = CalendarSchool::where('id', $id)->first();
+		return view('admin.calendar.school_edit')->with('event', $event);
+	}
+
+	public function postEditSchoolCalendarEvent(Request $request)
+	{
+		CalendarSchool::where('id', $request->input('event_id'))->update([
+			'date'	=>	$request->input('date'),
+			'school_activity'	=>	$request->input('school_activity'),
+			'no_of_classes'		=>	$request->input('no_of_classes'),
+			'activity'			=>	$request->input('activity')
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Calendar Entry Updated');
+	}
+
+	public function postDeleteSchoolCalendarEvent(Request $request, $id)
+	{
+		CalendarSchool::where('id', $id)->delete();
+		return redirect($request->header('Referer'))->with('status.success', 'Calendar Entry Deleted');
+	}
+
+	// director calendar
+
+	public function getDirectorCalendar(Request $request)
+	{
+		$events = CalendarDirector::get();
+
+		$directors = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '2')->select('users.id','users.first_name', 'users.last_name', 'users.email')->orderByDesc('id')->get();
+
+		return view('admin.calendar.director')->with('events', $events)->with('directors', $directors);
+	}
+
+	public function postDirectorCalendarEvent(Request $request)
+	{
+		CalendarDirector::insert([
+			'date'				=>	$request->input('date'),
+			'school_activity'	=>	$request->input('school_activity'),
+			'no_of_classes'		=>	$request->input('no_of_classes'),
+			'director_on_duty'	=>	$request->input('director_on_duty'),
+			'activity'			=>	$request->input('activity')
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Calendar Entry Created');
+	}
+
+	public function getEditDirectorCalendarEvent(Request $request, $id)
+	{
+		$event = CalendarDirector::where('id', $id)->first();
+		$directors = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '2')->select('users.id','users.first_name', 'users.last_name', 'users.email')->orderByDesc('id')->get();
+		return view('admin.calendar.director_edit')->with('event', $event)->with('directors', $directors);
+	}
+
+	public function postEditDirectorCalendarEvent(Request $request)
+	{
+		CalendarDirector::where('id', $request->input('event_id'))->update([
+			'date'	=>	$request->input('date'),
+			'school_activity'	=>	$request->input('school_activity'),
+			'no_of_classes'		=>	$request->input('no_of_classes'),
+			'director_on_duty'	=>	$request->input('director_on_duty'),
+			'activity'			=>	$request->input('activity')
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Calendar Entry Updated');
+	}
+
+	public function postDeleteDirectorCalendarEvent(Request $request, $id)
+	{
+		CalendarDirector::where('id', $id)->delete();
+		return redirect($request->header('Referer'))->with('status.success', 'Calendar Entry Deleted');
 	}
 }

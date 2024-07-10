@@ -193,6 +193,21 @@ Route::group(
 		Route::get('/forms/membership', [AdminController::class, 'getFormsMembership'])->name('get_admin_forms_membership');
 		Route::get('/forms/mem/{id}/detail', [AdminController::class, 'getFormsMembershipDetail'])->name('get_admin_forms_membership_detail');
 		// Route::post('/forms/mem', [AdminController::class, 'postFormsMembershipDetail'])->name('post_admin_forms_membership_detail');
+
+		// calendar
+		Route::get('/calendar/school', [AdminController::class, 'getSchoolCalendar'])->name('get_admin_school_calendar');
+		Route::post('/calendar/school-event', [AdminController::class, 'postSchoolCalendarEvent'])->name('post_admin_school_calendar_event');
+		Route::get('/calendar/edit/school-event/{id}', [AdminController::class, 'getEditSchoolCalendarEvent'])->name('get_admin_school_calendar_event_edit');
+		Route::post('/calendar/edit-school-event', [AdminController::class, 'postEditSchoolCalendarEvent'])->name('post_admin_school_calendar_event_edit');
+		Route::post('/calendar/delete-school-event/{id}', [AdminController::class, 'postDeleteSchoolCalendarEvent'])->name('post_admin_school_calendar_event_delete');
+		
+		Route::get('/calendar/director', [AdminController::class, 'getDirectorCalendar'])->name('get_admin_director_calendar');
+		Route::post('/calendar/director-event', [AdminController::class, 'postDirectorCalendarEvent'])->name('post_admin_director_calendar_event');
+		Route::get('/calendar/edit/director-event/{id}', [AdminController::class, 'getEditDirectorCalendarEvent'])->name('get_admin_director_calendar_event_edit');
+		Route::post('/calendar/edit-director-event', [AdminController::class, 'postEditDirectorCalendarEvent'])->name('post_admin_director_calendar_event_edit');
+		Route::post('/calendar/delete-director-event/{id}', [AdminController::class, 'postDeleteDirectorCalendarEvent'])->name('post_admin_director_calendar_event_delete');
+		
+		Route::get('/events', [AdminController::class, 'getEvents'])->name('get_admin_school_events');
     }
 );
 
