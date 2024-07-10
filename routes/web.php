@@ -184,8 +184,15 @@ Route::group(
         // post
         Route::post('/g-attendance', [AdminController::class, 'postAttendanceSingle'])->name('post_amin_class_attendance_single');
 
-		// forms
+		// reg forms
 		Route::get('/forms/registration', [AdminController::class, 'getFormsRegistration'])->name('get_admin_forms_registration');
+		Route::get('/forms/reg/{id}/detail', [AdminController::class, 'getFormsRegistrationDetail'])->name('get_admin_forms_registration_detail');
+		Route::post('/forms/reg', [AdminController::class, 'postFormsRegistrationDetail'])->name('post_admin_forms_registration_detail');
+
+		// mem forms
+		Route::get('/forms/membership', [AdminController::class, 'getFormsMembership'])->name('get_admin_forms_membership');
+		Route::get('/forms/mem/{id}/detail', [AdminController::class, 'getFormsMembershipDetail'])->name('get_admin_forms_membership_detail');
+		// Route::post('/forms/mem', [AdminController::class, 'postFormsMembershipDetail'])->name('post_admin_forms_membership_detail');
     }
 );
 

@@ -130,11 +130,8 @@
 										<a class="dropdown-item" href="{{ route('get_admin_forms_registration') }}">
 											Registration
 										</a>
-										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=board_members">
+										<a class="dropdown-item" href="{{ route('get_admin_forms_membership') }}">
 											Membership
-										</a>
-										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=principals">
-											Field Trip
 										</a>
 									</div>
 								</div>

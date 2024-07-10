@@ -151,6 +151,7 @@
 								<label class="form-label col-12 col-sm-3 col-form-label">Plan / Level</label>
 								<div class="col">
 									<select name="plan_id" class="form-control">
+										<option selected></option>
 										@foreach($plans as $plan)
 											<option {{ old('plan_id', $plan_id) == $plan->id ? "selected": "" }} value="{{ $plan->id }}">{{ $plan->name }}</option>
 										@endforeach

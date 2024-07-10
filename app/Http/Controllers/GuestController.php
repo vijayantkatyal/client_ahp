@@ -186,7 +186,7 @@ class GuestController extends Controller
 
 					'name'			=>	$request->input('first_name')." ".$request->input('last_name'),
 					'spouse_name'	=>	$request->input('spouse_name'),
-					'mailing_address'	=>	$request->input('mailing_address'),
+					'mailing_address'	=>	$request->input('address'),
 
 					'tel_no'	=>	$request->input('tel_no'),
 					'email'	=>	$request->input('email'),
@@ -210,7 +210,7 @@ class GuestController extends Controller
 		}
 		catch(\Exception $ex)
 		{
-			return $ex;
+			// return $ex;
 			return redirect($request->header('Referer'))->with('status.error', 'Something Went Wrong');
 		}
 	}

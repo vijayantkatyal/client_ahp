@@ -27,6 +27,8 @@ use App\Models\VideoPage;
 use App\Models\Video;
 use App\Models\VideoReactions;
 use App\Models\Domain;
+use App\Models\FormMembership;
+use App\Models\FormRegistration;
 use App\Models\Levels;
 use App\Models\Site;
 use App\Models\StudentClass;
@@ -1827,4 +1829,134 @@ class AdminController extends Controller
 
         return "done";
     }
+
+	// reg forms
+
+	public function getFormsRegistration(Request $request)
+	{
+		$users = FormRegistration::join('users', 'forms_regs.user_id', '=', 'users.id')
+					->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at', 'forms_regs.id as form_id')
+					->orderByDesc('id')
+					->get();
+
+		foreach($users as $user)
+		{
+			$user->plan_name = null;
+
+			// get user level
+			$fetch_roles = \App\Models\User_Role::where('user_id', '=', $user->id)->first();
+			if($fetch_roles)
+			{
+				if(json_decode($fetch_roles->levels) != null && json_decode($fetch_roles->levels) != "")
+				{
+					if(array_key_exists(1, json_decode($fetch_roles->levels)))
+					{
+						$get_level_id = json_decode($fetch_roles->levels)[1];
+						$level_info = Levels::where('id', $get_level_id)->first();
+						if($level_info)
+						{
+							$user->plan_name = $level_info->name;
+						}
+					}
+				}
+			}
+		}
+
+		$plans = Levels::where('id', '!=', '1')->get();
+
+		// return $users;
+		
+		return view('admin.forms.registration')
+			->with('users', $users)
+			->with('plans', $plans);
+	}
+
+	public function getFormsRegistrationDetail(Request $request, $id)
+	{
+		$form = FormRegistration::where('id', $id)->first();
+
+		if($form)
+		{
+			return view('admin.forms.registration_detail')->with('form', $form);
+		}
+		else
+		{
+			return redirect($request->header('Referer'))->with('status.error', 'Not Found');
+		}
+	}
+
+	public function postFormsRegistrationDetail(Request $request)
+	{
+		FormRegistration::where('id', $request->input('form_id'))->update([
+			'receipt_fee'	=>	$request->input('receipt_fee'),
+			'receipt_membership'	=>	$request->input('receipt_membership'),
+			'supplies_provided'		=>	$request->input('supplies_provided')
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Changes Saved');
+	}
+
+	// mem forms
+
+	public function getFormsMembership(Request $request)
+	{
+		$users = FormMembership::join('users', 'forms_mems.user_id', '=', 'users.id')
+					->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at', 'forms_mems.id as form_id')
+					->orderByDesc('id')
+					->get();
+
+		foreach($users as $user)
+		{
+			$user->plan_name = null;
+
+			// get user level
+			$fetch_roles = \App\Models\User_Role::where('user_id', '=', $user->id)->first();
+			if($fetch_roles)
+			{
+				if(json_decode($fetch_roles->levels) != null && json_decode($fetch_roles->levels) != "")
+				{
+					if(array_key_exists(1, json_decode($fetch_roles->levels)))
+					{
+						$get_level_id = json_decode($fetch_roles->levels)[1];
+						$level_info = Levels::where('id', $get_level_id)->first();
+						if($level_info)
+						{
+							$user->plan_name = $level_info->name;
+						}
+					}
+				}
+			}
+		}
+
+		$plans = Levels::where('id', '!=', '1')->get();
+
+		// return $users;
+		
+		return view('admin.forms.membership')
+			->with('users', $users)
+			->with('plans', $plans);
+	}
+
+	public function getFormsMembershipDetail(Request $request, $id)
+	{
+		$form = FormMembership::where('id', $id)->first();
+
+		if($form)
+		{
+			return view('admin.forms.membership_detail')->with('form', $form);
+		}
+		else
+		{
+			return redirect($request->header('Referer'))->with('status.error', 'Not Found');
+		}
+	}
+
+	public function postFormsMembershipDetail(Request $request)
+	{
+		FormMembership::where('id', $request->input('form_id'))->update([
+			
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Changes Saved');
+	}
 }
