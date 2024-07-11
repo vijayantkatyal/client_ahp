@@ -8,6 +8,7 @@ use App\Models\Attendance;
 use App\Models\CalendarDirector;
 use App\Models\CalendarSchool;
 use App\Models\Classes;
+use App\Models\ClassResource;
 use App\Models\Courses;
 use App\Models\CustomProperties;
 use Session;
@@ -1730,6 +1731,8 @@ class AdminController extends Controller
         return redirect($request->header('Referer'))->with('status.success', 'Class Removed from Student');
     }
 
+	// attendance
+
     public function getAttendanceClass(Request $request, $id)
     {
         $class = Classes::where('id', $id)->first();
@@ -1851,6 +1854,170 @@ class AdminController extends Controller
 
         return "done";
     }
+
+	// resources
+
+	public function getResourcesClass(Request $request, $id)
+    {
+        $class = Classes::where('id', $id)->first();
+        if($class)
+        {
+			$resources_photos = ClassResource::where('class_id', $id)->where('type', 'photo')->get();
+			$resources_videos = ClassResource::where('class_id', $id)->where('type', 'video')->get();
+			$resources_docs = ClassResource::where('class_id', $id)->where('type', 'docs')->get();
+			$resources_notes = ClassResource::where('class_id', $id)->where('type', 'note')->get();
+
+            return view('admin.classes.resources')
+					->with('class', $class)
+					->with('photos', $resources_photos)
+					->with('videos', $resources_videos)
+					->with('docs', $resources_docs)
+					->with('notes', $resources_notes);
+        }
+        else
+        {
+            return redirect($request->header('Referer'))->with('status.error', 'Class Not Found');
+        }
+    }
+
+	// add photos
+	public function postAddClassResourcePhotos(Request $request)
+	{
+		$total = count($_FILES['photos']['name']);
+
+		// $result = [];
+
+		// Loop through each file
+		for( $i=0 ; $i < $total ; $i++ )
+		{
+			//Get the temp file path
+			$tmpFilePath = $_FILES['photos']['tmp_name'][$i];
+		
+			//Make sure we have a file path
+			if($tmpFilePath != "")
+			{
+				// array_push($result, $tmpFilePath);
+				$extension = pathinfo($_FILES['photos']['name'][$i], PATHINFO_EXTENSION);
+				if($extension == "png" || $extension == "jpg" || $extension == "jpeg")
+				{
+					$random_name = rand();
+					Storage::disk('uploads')->putFileAs('resources', $tmpFilePath, $random_name.".".$extension);
+					$path = "/uploads/resources/".$random_name.".".$extension;
+
+					ClassResource::insert([
+						'class_id'	=>	$request->input('class_id'),
+						'file_path'	=>	$path,
+						'type'		=>	'photo'
+					]);
+				}
+			}
+		}
+
+		return redirect($request->header('Referer'))->with('status.success', 'Photos Uploaded');
+	}
+
+	// add videos
+	public function postAddClassResourceVideos(Request $request)
+	{
+		$total = count($_FILES['photos']['name']);
+
+		// $result = [];
+
+		// Loop through each file
+		for( $i=0 ; $i < $total ; $i++ )
+		{
+			//Get the temp file path
+			$tmpFilePath = $_FILES['photos']['tmp_name'][$i];
+		
+			//Make sure we have a file path
+			if($tmpFilePath != "")
+			{
+				// array_push($result, $tmpFilePath);
+				$extension = pathinfo($_FILES['photos']['name'][$i], PATHINFO_EXTENSION);
+				if($extension == "mp4" || $extension == "avi" || $extension == "mpeg")
+				{
+					$random_name = rand();
+					Storage::disk('uploads')->putFileAs('resources', $tmpFilePath, $random_name.".".$extension);
+					$path = "/uploads/resources/".$random_name.".".$extension;
+
+					ClassResource::insert([
+						'class_id'	=>	$request->input('class_id'),
+						'file_path'	=>	$path,
+						'type'		=>	'video'
+					]);
+				}
+			}
+		}
+
+		return redirect($request->header('Referer'))->with('status.success', 'Videos Uploaded');
+	}
+
+	public function postAddClassResourceDocs(Request $request)
+	{
+		$total = count($_FILES['photos']['name']);
+
+		// $result = [];
+
+		// Loop through each file
+		for( $i=0 ; $i < $total ; $i++ )
+		{
+			//Get the temp file path
+			$tmpFilePath = $_FILES['photos']['tmp_name'][$i];
+		
+			//Make sure we have a file path
+			if($tmpFilePath != "")
+			{
+				// array_push($result, $tmpFilePath);
+				$extension = pathinfo($_FILES['photos']['name'][$i], PATHINFO_EXTENSION);
+				if($extension == "doc" || $extension == "docx" || $extension == "pdf" || $extension == "xsl")
+				{
+					$random_name = rand();
+					Storage::disk('uploads')->putFileAs('resources', $tmpFilePath, $random_name.".".$extension);
+					$path = "/uploads/resources/".$random_name.".".$extension;
+
+					ClassResource::insert([
+						'class_id'	=>	$request->input('class_id'),
+						'file_path'	=>	$path,
+						'type'		=>	'docs'
+					]);
+				}
+			}
+		}
+
+		return redirect($request->header('Referer'))->with('status.success', 'Videos Uploaded');
+	}
+
+	public function postAddClassResourceNote(Request $request)
+	{
+		ClassResource::insert([
+			'class_id'	=>	$request->input('class_id'),
+			'type'		=>	'note',
+			'name'		=>	$request->input('name'),
+			'description'		=>	$request->input('description'),
+			'date'		=>	$request->input('date')
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Note Added');
+	}
+
+	public function getResourcesClassNote(Request $request, $id)
+	{
+		$note = ClassResource::where('id', $id)->first();
+		if($note)
+		{
+			return view('admin.classes.note')->with('note', $note);
+		}
+		else
+		{
+			return redirect($request->header('Referer'))->with('status.error', 'Note Not Found');
+		}
+	}
+
+	public function getResourcesDelete(Request $request, $id)
+	{
+		ClassResource::where('id', $id)->delete();
+		return redirect($request->header('Referer'))->with('status.error', 'Note Deleted');
+	}
 
 	// reg forms
 

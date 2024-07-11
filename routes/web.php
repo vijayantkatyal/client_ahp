@@ -183,6 +183,15 @@ Route::group(
 		Route::get('/remove-class-from-user/{id}', [AdminController::class, 'getRemoveClassFromUser'])->name('get_remove_class_from_user');
         Route::get('/class/attendance/{id}', [AdminController::class, 'getAttendanceClass'])->name('get_admin_class_attendance');
 
+		// resources
+		Route::get('/class/resources/{id}', [AdminController::class, 'getResourcesClass'])->name('get_admin_class_resources');
+		Route::post('/add-class-resource-photos', [AdminController::class, 'postAddClassResourcePhotos'])->name('post_add_class_resource_photos');
+		Route::post('/add-class-resource-videos', [AdminController::class, 'postAddClassResourceVideos'])->name('post_add_class_resource_videos');
+		Route::post('/add-class-resource-docs', [AdminController::class, 'postAddClassResourceDocs'])->name('post_add_class_resource_docs');
+		Route::post('/add-class-resource-note', [AdminController::class, 'postAddClassResourceNote'])->name('post_add_class_resource_note');
+		Route::get('/class-resource/note/{id}', [AdminController::class, 'getResourcesClassNote'])->name('get_admin_class_note');
+		Route::get('/class-resource-delete/{id}', [AdminController::class, 'getResourcesDelete'])->name('get_admin_class_resource_delete');
+
         // attendance
         // get
         Route::get('/g-attendance', [AdminController::class, 'getAttendanceSingle'])->name('get_amin_class_attendance_single');

@@ -144,6 +144,12 @@
 											</td>
 											<td>
 												<div class="btn-list flex-nowrap">
+													<a href="{{ route('get_admin_class_resources', ['id' => $user->id]) }}" class="btn btn-outline-warning">
+														Resources
+													</a>
+													<a href="{{ route('get_admin_class_attendance', ['id' => $user->id]) }}" class="btn btn-outline-primary">
+														Attendance
+													</a>
                                                     <a href="{{ route('get_admin_class_edit', ['id' => $user->id]) }}" class="btn btn-white">
 														Edit
 													</a>

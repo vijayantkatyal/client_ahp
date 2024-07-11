@@ -42,16 +42,19 @@
 
 [Done] class attendane (edit marked attendance)
 
+[Done] Teaching material (class wise)
+✅ can be pictures / video/ templates 
+✅ Teacher’s Diary  (class resources)
+✅ Exam papers (class resources)
+
 [Working]
 
 [ToDo]
 
 > assigment management (class wise) (student can reply) (teacher can accept / reject)
 
-> Teaching material. class wise - can be pictures / video/ templates 
-
 > Attendance
-- Students Class wise 
+✅ Students Class wise 
 - Assistant Teachers 
 - Teachers - Shift wise
 Note: attendance app should be able to count percentage.
