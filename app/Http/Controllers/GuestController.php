@@ -9,6 +9,8 @@ use App\Models\Classes;
 use App\Models\Courses;
 use App\Models\FormMembership;
 use App\Models\FormRegistration;
+use App\Models\SchoolEventPhotos;
+use App\Models\SchoolEvents;
 use App\Models\User;
 use App\Models\User_Role;
 use Session;
@@ -58,7 +60,33 @@ class GuestController extends Controller
 
 	public function getEvents()
 	{
-		return view('guest.events');
+		$events = SchoolEvents::get();
+		foreach ($events as $event)
+		{
+			$first_image = SchoolEventPhotos::where('event_id', $event->id)->first();
+			if($first_image)
+			{
+				$event->first_image = $first_image->photo;
+			}
+			else
+			{
+				$event->first_image = null;
+			}
+		}
+
+		// return $events;
+
+		return view('guest.events')->with('events', $events);
+	}
+
+	public function getEventDetails(Request $request, $id)
+	{
+		$event = SchoolEvents::where('id', $id)->first();
+		if($event)
+		{
+			$photos = SchoolEventPhotos::where('event_id', $id)->get();
+			return view('guest.event')->with('event', $event)->with('photos', $photos);
+		}
 	}
 
 	public function getForms()

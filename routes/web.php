@@ -26,6 +26,8 @@ Route::get('/', [GuestController::class, 'getIndex'])->name('get_index');
 Route::get('/about', [GuestController::class, 'getAbout'])->name('get_about');
 Route::get('/contact', [GuestController::class, 'getContact'])->name('get_contact');
 Route::get('/events', [GuestController::class, 'getEvents'])->name('get_events');
+Route::get('/event/{id}', [GuestController::class, 'getEventDetails'])->name('get_event_details');
+
 Route::get('/forms', [GuestController::class, 'getForms'])->name('get_forms');
 Route::get('/calendar', [GuestController::class, 'getCalendar'])->name('get_calendar');
 Route::get('/calendar/school', [GuestController::class, 'getCalendarSchool'])->name('get_calendar_school');
