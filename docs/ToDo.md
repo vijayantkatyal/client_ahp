@@ -38,11 +38,47 @@
 -✅ manage
 -✅ view
 
+[Done] Hindi School Website - Should have Hindi and English input/ keyboard
+
 [Working]
 
 [ToDo]
 
+> class attendane
+- edit marked attendance
 
-[Later]
+> assigment management (class wise) (student can reply) (teacher can accept / reject)
+
+> Teaching material. class wise - can be pictures / video/ templates 
+
+> Attendance
+- Students Class wise 
+- Assistant Teachers 
+- Teachers - Shift wise
+Note: attendance app should be able to count percentage.
+
 - [visitor-area] top bar alert for new upcoming event
 - schedule notification email (general, event) (all or specific group)
+
+[Later]
+
+> misc
+- Review forms (google review for Hindi School)
+- AHP other programas
+- Newsletter monthly/by monthly 
+- Volunteer opportunities
+- Contact us
+
+> CMS
+- index page
+- mission
+- members
+- about
+- blog
+- contact us messages
+
+Resources
+> files uploaded
+> Event drama scripts - Category wise (file or text input)
+> Picture / Video Gallery 
+> Communication

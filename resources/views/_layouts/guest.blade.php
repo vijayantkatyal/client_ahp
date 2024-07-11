@@ -46,6 +46,8 @@
 	<link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/styles/playtime.css') }}" title="playtime" media="all">
 	<link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/styles/preschool.css') }}" title="preschool" media="all">
 
+	<link rel="stylesheet" href="{{ asset('/assets/keyboard/jqkeyboard.css') }}" />
+
 	@yield('header')
 </head>
 <!-- ==== body starts ==== -->
@@ -449,6 +451,19 @@
             $(this).text(_time.fromNow());
         });
     </script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js" integrity="sha512-Ww1y9OuQ2kehgVWSD/3nhgfrb424O3802QYP/A5gPXoM4+rRjiKrjHdGxQKrMGQykmsJ/86oGdHszfcVgUr4hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="{{ asset('/assets/keyboard/jqkeyboard-min.js') }}"></script>
+	<script src="{{ asset('/assets/keyboard/jqk.layout.en.js') }}"></script>
+	<script src="{{ asset('/assets/keyboard/jqk.layout.bg.js') }}"></script>
+
+	<script>
+		$(function () {
+			"use strict";
+
+			jqKeyboard.init();
+		});
+	</script>
 	
 	@yield('footer')
 </body>

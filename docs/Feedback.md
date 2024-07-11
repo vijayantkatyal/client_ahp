@@ -25,47 +25,12 @@
 - only one class (but can join other class)
 - student can see total marks obtained for specific assignment.
 
----------------------------
-
-> misc
-- Hindi School Website - Should have Hindi and English input/ keyboard
-- Review forms (google review for Hindi School)
-- AHP other programas
-- Newsletter monthly/by monthly 
-- Volunteer opportunities
-- Contact us
-  
-Resources
-> files uploaded
-> Event drama scripts - Category wise (file or text input)
-
-> Teaching material. Level wise - can be pictures / video/ templates 
-
-> Picture / Video Gallery 
-> Communication
-
-> Attendance
-- Students Class wise 
-- Assistant Teachers 
-- Teachers - Shift wise
-Note: attendance app should be able to count percentage.
-
-> CMS
-- index page
-- mission
-- members
-- about
-
-- cms
-- blog
-- contact us messages
-
 ---------------------
 
 [?] Information 
 [?] Parent’s query etc.
 [?] Teacher Principal communication
 [?] Parent -Principal/ board communication 
-[?]  Curriculum
+[?] Curriculum
 [?] Class wise Curriculum
 [?] Lesson plan - Class wise
