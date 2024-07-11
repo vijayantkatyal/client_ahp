@@ -27,13 +27,8 @@
 [x] field trip form (http://ahpschool.ca/Ref/Resources/Field%20Trip%20waiver2018.pdf)
 ✅ admin can manage / view forms
 
-[Working]
-
-[ToDo]
-
-> Calendar
-
-- Events (year wise)
+[Done] Calendar
+✅ Events (year wise)
 -✅ manage
 -✅ view
 ✅ School Calendar (http://ahpschool.ca/Ref/Resources/SchoolCalendar.pdf)
@@ -43,6 +38,11 @@
 -✅ manage
 -✅ view
 
-- [visitor-area] top bar alert for new upcoming event
+[Working]
 
+[ToDo]
+
+
+[Later]
+- [visitor-area] top bar alert for new upcoming event
 - schedule notification email (general, event) (all or specific group)

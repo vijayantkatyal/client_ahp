@@ -8,7 +8,20 @@
 
 <div id="blog-home" class="page">
     <div class="container">
-        <h2>Events</h2>
+        <div class="row">
+            <div class="col-8">
+                <h2>Events</h2>
+            </div>
+            <div class="col-4 text-end">
+                Show by Year:&nbsp;&nbsp;
+                <select name="filter_year" id="" class="form-select" style="display: inline; width: 100px;">
+                    <option @if($filter == "") selected @endif value="">All</option>
+                    @foreach($years as $year)
+                        <option @if($filter == $year) selected @endif value="{{ $year }}">{{ $year }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <br/>
         <div class="row">
             <div class="col-12">
@@ -70,4 +83,10 @@
 @endsection
 
 @section('footer')
+<script>
+    $("select[name=filter_year]").change(function(e){
+        var _year = $(this).val();
+        window.location = "{{ route('get_events') }}?year="+_year;
+    })
+</script>
 @endsection

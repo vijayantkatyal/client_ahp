@@ -58,9 +58,27 @@ class GuestController extends Controller
 		return view('guest.mission');
 	}
 
-	public function getEvents()
+	public function getEvents(Request $request)
 	{
+		$filter = "";
+
+		$all_events = SchoolEvents::get();
+		$years = [];
+
+		foreach ($all_events as $event)
+		{
+			array_push($years, date('Y', strtotime($event->date)));
+		}
+
 		$events = SchoolEvents::get();
+
+		if($request->filled('year'))
+		{
+			$filter = $request->input('year');
+
+			$events = SchoolEvents::where(DB::raw('YEAR(date)'), '=', $filter)->get();
+		}
+
 		foreach ($events as $event)
 		{
 			$first_image = SchoolEventPhotos::where('event_id', $event->id)->first();
@@ -74,9 +92,9 @@ class GuestController extends Controller
 			}
 		}
 
-		// return $events;
+		$years = array_unique($years);
 
-		return view('guest.events')->with('events', $events);
+		return view('guest.events')->with('events', $events)->with('years', $years)->with('filter', $filter);
 	}
 
 	public function getEventDetails(Request $request, $id)
