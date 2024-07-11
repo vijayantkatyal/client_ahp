@@ -210,7 +210,15 @@ Route::group(
 		Route::post('/calendar/edit-director-event', [AdminController::class, 'postEditDirectorCalendarEvent'])->name('post_admin_director_calendar_event_edit');
 		Route::post('/calendar/delete-director-event/{id}', [AdminController::class, 'postDeleteDirectorCalendarEvent'])->name('post_admin_director_calendar_event_delete');
 		
-		Route::get('/events', [AdminController::class, 'getEvents'])->name('get_admin_school_events');
+		Route::get('/events', [AdminController::class, 'getSchoolEvents'])->name('get_admin_school_events');
+		Route::post('/school-event', [AdminController::class, 'postSchoolEvent'])->name('post_admin_school_event');
+		Route::get('/edit-school-event/{id}', [AdminController::class, 'getEditSchoolEvent'])->name('get_admin_school_event_edit');
+		Route::post('/edit-school-event', [AdminController::class, 'postEditSchoolEvent'])->name('post_admin_school_event_edit');
+		Route::post('/delete-school-event/{id}', [AdminController::class, 'postDeleteSchoolEvent'])->name('post_admin_school_event_delete');
+
+		Route::post('/add-school-event-photos', [AdminController::class, 'postEditSchoolEventPhotos'])->name('post_admin_school_event_photos');
+		Route::get('/delete-school-event-photo/{id}', [AdminController::class, 'getDeleteSchoolEventPhoto'])->name('get_admin_school_event_photo_delete');
+
     }
 );
 

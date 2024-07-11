@@ -32,7 +32,10 @@
 [ToDo]
 
 > Calendar
+
 - Events (year wise)
+-✅ manage
+-- view
 ✅ School Calendar (http://ahpschool.ca/Ref/Resources/SchoolCalendar.pdf)
 -✅ manage
 -✅ view

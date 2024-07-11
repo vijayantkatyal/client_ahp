@@ -14,3 +14,4 @@ yarn-error.log
 /mysql_database
 resources/views/vendor/isotopekit/admin_panel
 public/admin_panel
+public/uploads/

@@ -32,6 +32,8 @@ use App\Models\Domain;
 use App\Models\FormMembership;
 use App\Models\FormRegistration;
 use App\Models\Levels;
+use App\Models\SchoolEventPhotos;
+use App\Models\SchoolEvents;
 use App\Models\Site;
 use App\Models\StudentClass;
 use App\Models\User as ModelsUser;
@@ -2054,5 +2056,88 @@ class AdminController extends Controller
 	{
 		CalendarDirector::where('id', $id)->delete();
 		return redirect($request->header('Referer'))->with('status.success', 'Calendar Entry Deleted');
+	}
+
+	// school events
+
+	public function getSchoolEvents(Request $request)
+	{
+		$events = SchoolEvents::get();
+		return view('admin.events.index')->with('events', $events);
+	}
+
+	public function postSchoolEvent(Request $request)
+	{
+		SchoolEvents::insert([
+			'name'	=>	$request->input('name'),
+			'date'	=>	$request->input('date'),
+			'description'	=>	$request->input('description')
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Even Entry Created');
+	}
+
+	public function getEditSchoolEvent(Request $request, $id)
+	{
+		$event = SchoolEvents::where('id', $id)->first();
+		$photos = SchoolEventPhotos::where('event_id', $id)->get();
+		return view('admin.events.edit')->with('event', $event)->with('photos', $photos);
+	}
+
+	public function postEditSchoolEvent(Request $request)
+	{
+		SchoolEvents::where('id', $request->input('event_id'))->update([
+			'date'			=>	$request->input('date'),
+			'name'			=>	$request->input('name'),
+			'description'	=>	$request->input('description')
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'School Event Updated');
+	}
+
+	public function postDeleteSchoolEvent(Request $request, $id)
+	{
+		SchoolEvents::where('id', $id)->delete();
+		return redirect($request->header('Referer'))->with('status.success', 'School Event Deleted');
+	}
+
+	public function postEditSchoolEventPhotos(Request $request)
+	{
+		$total = count($_FILES['photos']['name']);
+
+		// $result = [];
+
+		// Loop through each file
+		for( $i=0 ; $i < $total ; $i++ )
+		{
+			//Get the temp file path
+			$tmpFilePath = $_FILES['photos']['tmp_name'][$i];
+		
+			//Make sure we have a file path
+			if($tmpFilePath != "")
+			{
+				// array_push($result, $tmpFilePath);
+				$extension = pathinfo($_FILES['photos']['name'][$i], PATHINFO_EXTENSION);
+				if($extension == "png" || $extension == "jpg" || $extension == "jpeg")
+				{
+					$random_name = rand();
+					Storage::disk('uploads')->putFileAs('events', $tmpFilePath, $random_name);
+					$path = "/uploads/events/".$random_name;
+
+					SchoolEventPhotos::insert([
+						'event_id'	=>	$request->input('event_id'),
+						'photo'		=>	$path
+					]);
+				}
+			}
+		}
+
+		return redirect($request->header('Referer'))->with('status.success', 'Photos Uploaded');
+	}
+
+	public function getDeleteSchoolEventPhoto(Request $request, $id)
+	{
+		SchoolEventPhotos::where('id', $id)->delete();
+		return redirect($request->header('Referer'))->with('status.success', 'School Event Photo Deleted');
 	}
 }
