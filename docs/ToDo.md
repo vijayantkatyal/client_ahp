@@ -33,16 +33,13 @@
 
 > Calendar
 - Events (year wise)
-
-- School Calendar (http://ahpschool.ca/Ref/Resources/SchoolCalendar.pdf)
+✅ School Calendar (http://ahpschool.ca/Ref/Resources/SchoolCalendar.pdf)
 -✅ manage
--- view
-
-- AHP Calendar
+-✅ view
+✅ Director’s duty Calendar (http://ahpschool.ca/Ref/Resources/DirectorDuties.pdf)
 -✅ manage
--- view
+-✅ view
 
-- Director’s duty Calendar (http://ahpschool.ca/Ref/Resources/DirectorDuties.pdf)
 - [visitor-area] top bar alert for new upcoming event
 
 - schedule notification email (general, event) (all or specific group)

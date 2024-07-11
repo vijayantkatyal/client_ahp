@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\CalendarDirector;
+use App\Models\CalendarSchool;
 use App\Models\Classes;
 use App\Models\Courses;
 use App\Models\FormMembership;
@@ -213,5 +215,22 @@ class GuestController extends Controller
 			// return $ex;
 			return redirect($request->header('Referer'))->with('status.error', 'Something Went Wrong');
 		}
+	}
+
+	public function getCalendar(Request $request)
+	{
+		return view('guest.calendar.index');
+	}
+
+	public function getCalendarSchool(Request $request)
+	{
+		$events = CalendarSchool::orderBy('date', 'asc')->get();
+		return view('guest.calendar.school')->with('events', $events);
+	}
+
+	public function getCalendarDirectorDuty()
+	{
+		$events = CalendarDirector::orderBy('date', 'asc')->get();
+		return view('guest.calendar.director')->with('events', $events);
 	}
 }
