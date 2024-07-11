@@ -1824,12 +1824,30 @@ class AdminController extends Controller
 
     public function postAttendanceSingle(Request $request)
     {
-        Attendance::create([
-            'user_id'   =>  $request->input('user_id'),
-            'class_id'  =>  $request->input('class_id'),
-            'date'      =>  $request->input('date_id'),
-            'present'   =>  (boolean) json_decode($request->input('present')),
-        ]);
+		// check if already exists
+
+		$attendance_exists = Attendance::where('user_id', $request->input('user_id'))->where('class_id', $request->input('class_id'))->where('date', $request->input('date_id'))->first();
+		if($attendance_exists)
+		{
+			Attendance::where('user_id', $request->input('user_id'))
+				->where('class_id', $request->input('class_id'))
+				->where('date', $request->input('date_id'))
+				->update([
+					'user_id'   =>  $request->input('user_id'),
+					'class_id'  =>  $request->input('class_id'),
+					'date'      =>  $request->input('date_id'),
+					'present'   =>  (boolean) json_decode($request->input('present')),
+				]);
+		}
+		else
+		{
+			Attendance::create([
+				'user_id'   =>  $request->input('user_id'),
+				'class_id'  =>  $request->input('class_id'),
+				'date'      =>  $request->input('date_id'),
+				'present'   =>  (boolean) json_decode($request->input('present')),
+			]);
+		}
 
         return "done";
     }

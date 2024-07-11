@@ -40,12 +40,11 @@
 
 [Done] Hindi School Website - Should have Hindi and English input/ keyboard
 
+[Done] class attendane (edit marked attendance)
+
 [Working]
 
 [ToDo]
-
-> class attendane
-- edit marked attendance
 
 > assigment management (class wise) (student can reply) (teacher can accept / reject)
 
