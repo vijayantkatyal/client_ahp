@@ -2225,6 +2225,7 @@ class AdminController extends Controller
 				{
 					StudentAssignment::insert([
 						'user_id'	=>	$student->id,
+						'class_id'	=>	$class->id,
 						'assignment_id'	=>	$assignment->id,
 					]);
 				}

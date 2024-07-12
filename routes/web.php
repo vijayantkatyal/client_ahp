@@ -350,6 +350,12 @@ Route::group(
 	],
 	function () {
         Route::get('/', [StudentController::class, 'getIndex'])->name('get_user_index');
+		Route::get('/assignment/{id}', [StudentController::class, 'getAssignment'])->name('get_user_assignment');
+
+		Route::post('/assignment-file', [StudentController::class, 'postAssignmentFile'])->name('post_assignment_file');
+		Route::post('/assignment-note', [StudentController::class, 'postAssignmentNote'])->name('post_assignment_note');
+
+		Route::post('/assignment-message', [StudentController::class, 'postAssignmentMessage'])->name('post_assignment_message');
     }
 );
 

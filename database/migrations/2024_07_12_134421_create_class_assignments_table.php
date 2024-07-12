@@ -34,6 +34,7 @@ class CreateClassAssignmentsTable extends Migration
         Schema::create('student_assignments', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
+            $table->string('class_id');
             $table->string('assignment_id');
 
             $table->string('file')->nullable();
@@ -48,6 +49,7 @@ class CreateClassAssignmentsTable extends Migration
             $table->string('student_assignment_id');
 
             $table->string('user_id');
+            $table->string('class_id');
             $table->longText('message');
 
             $table->string('time');

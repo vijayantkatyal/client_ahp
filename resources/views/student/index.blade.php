@@ -32,7 +32,7 @@
     <div class="col-12">
         <div class="container">
             <div class="row">
-                <div class="col-8">
+                <div class="col-10">
                     <ul class="nav nav-pills">
                         <li class="nav-item">
                             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Info</button>
@@ -44,11 +44,14 @@
                             <button class="nav-link" id="pills-attendance-tab" data-bs-toggle="pill" data-bs-target="#pills-attendance" type="button" role="tab" aria-controls="pills-attendance" aria-selected="false">Attendance</button>
                         </li>
                         <li class="nav-item">
+                            <button class="nav-link" id="pills-assignments-tab" data-bs-toggle="pill" data-bs-target="#pills-assignments" type="button" role="tab" aria-controls="pills-assignments" aria-selected="false">Assignments</button>
+                        </li>
+                        <li class="nav-item">
                             <button class="nav-link" id="pills-message-tab" data-bs-toggle="pill" data-bs-target="#pills-message" type="button" role="tab" aria-controls="pills-message" aria-selected="false">Message</button>
                         </li>
                     </ul>
                 </div>
-                <div class="col-4 text-end">
+                <div class="col-2 text-end">
                     <button type="button" class="btn btn-secondary" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</button>
                     <form id="logout-form" action="{{ route('post_logout_route') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
@@ -245,6 +248,64 @@
                                 </table>
                             </div>
                         </div>
+
+                        <div class="tab-pane fade" id="pills-assignments" role="tabpanel" aria-labelledby="pills-assignments-tab" tabindex="0">
+                            <b>Assignments</b>
+                            <br />
+                            @if(sizeof($classes) > 0)
+                                @foreach($classes as $class_info)
+                                    <a
+                                        href="{{ route('get_user_index') }}?class_id={{ $class_info->id }}"
+                                        @if($class_id == $class_info->id)
+                                            class="badge rounded-pill text-bg-primary"
+                                        @else
+                                            class="badge rounded-pill text-bg-secondary"
+                                        @endif
+                                        style="font-size: 16px; margin-right: 6px;"
+                                    >
+                                        {{ $class_info->course_name }} / {{ $class_info->class_name }}
+                                    </a>
+                                @endforeach
+                            @endif
+                            <br />
+                            <br/>
+                            <div class="table-responsive">
+                                <table class="table card-table table-vcenter table-mobile-md datatable">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                Name
+                                            </th>
+                                            <th>Marks Obtained</th>
+                                            <th class="text-center">Accepted</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($assignments as $assignment)
+                                        <tr>
+                                            <td class="text-center">{{ $assignment->assignment_name }}</td>
+                                            <td class="text-center">
+                                                {{ $assignment->marks_obtained }}
+                                            </td>
+                                            <td class="text-center">
+                                                @if($assignment->accepted == true)
+                                                <span class="badge bg-success">Yes</span>
+                                                @endif
+                                                @if($assignment->accepted == false)
+                                                <span class="badge bg-danger">No</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('get_user_assignment', ['id' => $assignment->id]) }}">View</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                         <div class="tab-pane fade" id="pills-message" role="tabpanel" aria-labelledby="pills-message-tab" tabindex="0">
                             <b>Send Message</b>
                             <br />
