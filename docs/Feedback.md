@@ -19,6 +19,7 @@
 - Exam papers (class resources)
 - Class wise - students marks , app should count percentage  
 -- teacher can assign marks to assignment, and can see total percentage
+- see own attendance for multiple classes
 
 > student
 - (by default) (user as signup)

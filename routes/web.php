@@ -193,6 +193,15 @@ Route::group(
 		Route::get('/class-resource/note/{id}', [AdminController::class, 'getResourcesClassNote'])->name('get_admin_class_note');
 		Route::get('/class-resource-delete/{id}', [AdminController::class, 'getResourcesDelete'])->name('get_admin_class_resource_delete');
 
+		// assignments
+		Route::get('/class/assignments/{id}', [AdminController::class, 'getAssignmentsClass'])->name('get_admin_class_assignments');
+		Route::post('/add-class-assignment-file', [AdminController::class, 'postAddClassAssignmentFile'])->name('post_add_class_assignment_file');
+		Route::post('/add-class-assignment-note', [AdminController::class, 'postAddClassAssignmentNote'])->name('post_add_class_assignment_note');
+		Route::get('/class-assignment/note/{id}', [AdminController::class, 'getAssignmentClassNote'])->name('get_admin_class_assignment_note');
+		Route::get('/class-assignment-delete/{id}', [AdminController::class, 'getAssignmentDelete'])->name('get_admin_class_assignment_delete');
+
+		Route::post('/assign-class-assignment', [AdminController::class, 'postAssignClassAssignment'])->name('post_assign_class_assignment');
+
         // attendance
         // get
         Route::get('/g-attendance', [AdminController::class, 'getAttendanceSingle'])->name('get_amin_class_attendance_single');

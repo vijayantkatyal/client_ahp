@@ -55,14 +55,21 @@ Note: attendance app should be able to count percentage.
 
 [Working]
 
-[ToDo]
+> assigment management (class wise)
+- (student can reply) (teacher can accept / reject)
+- teacher can assign marks to assignment, and can see total percentage
+- student can see total marks obtained for specific assignment.
+- Teacher post homework (communicate with text / file instructions)
+- Class wise - students marks , app should count percentage
 
-> assigment management (class wise) (student can reply) (teacher can accept / reject)
+[ToDo]
 
 - [visitor-area] top bar alert for new upcoming event
 - schedule notification email (general, event) (all or specific group)
 
 [Later]
+
+> attendance, show old data (using date range)
 
 > misc
 - Review forms (google review for Hindi School)

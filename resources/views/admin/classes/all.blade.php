@@ -149,6 +149,7 @@
 													</button>
 													<ul class="dropdown-menu">
 														<li><a class="dropdown-item" href="{{ route('get_admin_class_resources', ['id' => $user->id]) }}">Resources</a></li>
+														<li><a class="dropdown-item" href="{{ route('get_admin_class_assignments', ['id' => $user->id]) }}">Assignments</a></li>
 														<li><a class="dropdown-item" href="{{ route('get_admin_class_attendance', ['id' => $user->id]) }}">Students Attendance</a></li>
 														<li><a class="dropdown-item" href="{{ route('get_admin_staff_class_attendance', ['id' => $user->id]) }}">Teachers Attendance</a></li>
 														<li><a class="dropdown-item" href="{{ route('get_admin_class_manage', ['id' => $user->id]) }}">Manage</a></li>

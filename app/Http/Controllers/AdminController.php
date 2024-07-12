@@ -7,6 +7,7 @@ use App\Libraries\CaptionsData;
 use App\Models\Attendance;
 use App\Models\CalendarDirector;
 use App\Models\CalendarSchool;
+use App\Models\ClassAssignment;
 use App\Models\Classes;
 use App\Models\ClassResource;
 use App\Models\Courses;
@@ -36,6 +37,7 @@ use App\Models\Levels;
 use App\Models\SchoolEventPhotos;
 use App\Models\SchoolEvents;
 use App\Models\Site;
+use App\Models\StudentAssignment;
 use App\Models\StudentClass;
 use App\Models\User as ModelsUser;
 use App\Models\VidChapterProject;
@@ -2104,6 +2106,139 @@ class AdminController extends Controller
 	{
 		ClassResource::where('id', $id)->delete();
 		return redirect($request->header('Referer'))->with('status.error', 'Note Deleted');
+	}
+
+	// assignments
+
+	public function getAssignmentsClass(Request $request, $id)
+    {
+        $class = Classes::where('id', $id)->first();
+        if($class)
+        {
+			$assignments = ClassAssignment::where('class_id', $id)->orderBy('id', 'desc')->get();
+
+            return view('admin.classes.assignments.all')
+					->with('class', $class)
+					->with('assignments', $assignments);
+        }
+        else
+        {
+            return redirect($request->header('Referer'))->with('status.error', 'Class Not Found');
+        }
+    }
+
+	public function postAddClassAssignmentFile(Request $request)
+	{
+		$file_to_upload = $request->file('file');
+		$file_path = null;
+
+		if($file_to_upload)
+		{
+			// check size
+			// $size = $request->file('file')->getSize();
+			// if($size > 2000000)
+			// {
+			// 	return json_encode("file should not exceed 2mb");
+			// }
+
+			$extension = $file_to_upload->getClientOriginalExtension();
+			if($extension == "doc" || $extension == "docx" || $extension == "pdf")
+			{
+				$uniq_id = rand();
+				$random_name = $uniq_id.".".$request->file('file')->clientExtension();
+
+				Storage::disk('uploads')->putFileAs('assignments', $request->file('file'), $random_name);
+				$file_path = "/uploads/assignments/".$random_name;
+
+				ClassAssignment::insert([
+					'class_id'	=>	$request->input('class_id'),
+					'type'		=>	$request->input('type'),
+					'file_type'	=>	"file",
+					'name'		=>	$request->input('name'),
+					'file'		=>	$file_path,
+					'max_marks'	=>	$request->input('max_marks'),
+					'created_by_id'	=>	Auth::id()
+				]);
+
+				return redirect($request->header('Referer'))->with('status.success', 'Assignment Created');
+			}
+			else
+			{
+				return redirect($request->header('Referer'))->with('status.error', 'UnSupported file');
+			}
+		}
+	}
+
+	public function postAddClassAssignmentNote(Request $request)
+	{
+		ClassAssignment::insert([
+			'class_id'	=>	$request->input('class_id'),
+			'type'		=>	$request->input('type'),
+			'file_type'	=>	"note",
+			'name'		=>	$request->input('name'),
+			'note'		=>	$request->input('note'),
+			'max_marks'	=>	$request->input('max_marks'),
+			'created_by_id'	=>	Auth::id()
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Assignment Created');
+	}
+
+	public function getAssignmentClassNote(Request $request, $id)
+	{
+		$note = ClassAssignment::where('id', $id)->first();
+		if($note)
+		{
+			return view('admin.classes.assignments.note')->with('note', $note);
+		}
+		else
+		{
+			return redirect($request->header('Referer'))->with('status.error', 'Note Not Found');
+		}
+	}
+
+	public function getAssignmentDelete(Request $request, $id)
+	{
+		ClassAssignment::where('id', $id)->delete();
+		return redirect($request->header('Referer'))->with('status.success', 'Assignment Deleted');
+	}
+
+	public function postAssignClassAssignment(Request $request)
+	{
+		// get assignment
+		$assignment = ClassAssignment::where('id', $request->input('assignment_id'))->first();
+		if($assignment)
+		{
+			// get class
+			$class = Classes::where('id', $assignment->class_id)->first();
+			
+			if($class)
+			{
+				// get students
+				 $students = \App\Models\User::join('student_classes', 'users.id', '=', 'student_classes.student_id')
+				 	->where('student_classes.class_id', $class->id)
+					->select('users.id')
+				 	->get();
+				
+				// assign assignment
+				foreach ($students as $student)
+				{
+					StudentAssignment::insert([
+						'user_id'	=>	$student->id,
+						'assignment_id'	=>	$assignment->id,
+					]);
+				}
+
+				// mark assignment as published
+				ClassAssignment::where('id', $assignment->id)->update([
+					'published'	=>	true
+				]);
+
+				return redirect($request->header('Referer'))->with('status.success', 'Assignment Assigned to Students');
+			}
+		}
+
+		return redirect($request->header('Referer'))->with('status.error', 'Unable to Assign');
 	}
 
 	// reg forms
