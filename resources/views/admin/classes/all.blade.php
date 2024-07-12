@@ -143,20 +143,18 @@
 												{{ $user->added_on }}
 											</td>
 											<td>
-												<div class="btn-list flex-nowrap">
-													<a href="{{ route('get_admin_class_resources', ['id' => $user->id]) }}" class="btn btn-outline-warning">
-														Resources
-													</a>
-													<a href="{{ route('get_admin_class_attendance', ['id' => $user->id]) }}" class="btn btn-outline-primary">
-														Attendance
-													</a>
-                                                    <a href="{{ route('get_admin_class_edit', ['id' => $user->id]) }}" class="btn btn-white">
-														Edit
-													</a>
-                                                    <a href="{{ route('get_admin_class_manage', ['id' => $user->id]) }}" class="btn btn-outline-success">
-														Manage
-													</a>
-                                                </div>
+												<div class="dropdown">
+													<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+														<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-dots-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
+													</button>
+													<ul class="dropdown-menu">
+														<li><a class="dropdown-item" href="{{ route('get_admin_class_resources', ['id' => $user->id]) }}">Resources</a></li>
+														<li><a class="dropdown-item" href="{{ route('get_admin_class_attendance', ['id' => $user->id]) }}">Students Attendance</a></li>
+														<li><a class="dropdown-item" href="{{ route('get_admin_staff_class_attendance', ['id' => $user->id]) }}">Teachers Attendance</a></li>
+														<li><a class="dropdown-item" href="{{ route('get_admin_class_manage', ['id' => $user->id]) }}">Manage</a></li>
+														<li><a class="dropdown-item" href="{{ route('get_admin_class_edit', ['id' => $user->id]) }}">Edit</a></li>
+													</ul>
+												</div>
 											</td>
 										</tr>
 									@endforeach

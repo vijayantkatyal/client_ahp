@@ -47,17 +47,17 @@
 ✅ Teacher’s Diary  (class resources)
 ✅ Exam papers (class resources)
 
+[Done] Attendance
+✅ Students Class wise 
+✅ Teachers - Shift wise
+- Assistant Teachers 
+Note: attendance app should be able to count percentage.
+
 [Working]
 
 [ToDo]
 
 > assigment management (class wise) (student can reply) (teacher can accept / reject)
-
-> Attendance
-✅ Students Class wise 
-- Assistant Teachers 
-- Teachers - Shift wise
-Note: attendance app should be able to count percentage.
 
 - [visitor-area] top bar alert for new upcoming event
 - schedule notification email (general, event) (all or specific group)

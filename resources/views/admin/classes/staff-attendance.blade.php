@@ -1,5 +1,5 @@
 @extends('_layouts.admin')
-@section('title','Class Students Attendance')
+@section('title','Class Teachers Attendance')
 @section('header')
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css"/>
@@ -20,9 +20,9 @@
 			<div class="row align-items-center">
 				<div class="col">
 					<h2 class="page-title">
-						{{ $class->name }} / Students Attendance
+						{{ $class->name }} / Teachers Attendance
 					</h2>
-					<div class="text-muted mt-1">{{ sizeof($students) }} students</div>
+					<div class="text-muted mt-1">{{ sizeof($students) }} teachers</div>
 				</div>
 				<!-- Page title actions -->
 				<div class="col-auto ms-auto d-print-none">

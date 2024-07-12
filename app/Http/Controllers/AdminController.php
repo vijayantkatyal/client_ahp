@@ -1812,6 +1812,93 @@ class AdminController extends Controller
         }
     }
 
+	public function getStaffAttendanceClass(Request $request, $id)
+    {
+        $class = Classes::where('id', $id)->first();
+        if($class)
+        {
+            // all attendance
+
+            $today = time();
+            $wday = date('w', $today);   
+            $datemon = date('m-d-Y', $today - ($wday - 1)*86400);
+            $datetue = date('m-d-Y', $today - ($wday - 2)*86400);
+            $datewed = date('m-d-Y', $today - ($wday - 3)*86400);
+            $datethu = date('m-d-Y', $today - ($wday - 4)*86400);
+            $datefri = date('m-d-Y', $today - ($wday - 5)*86400);
+
+            $days = [];
+
+            // mon
+            $monday = [
+                "day"   =>  "Monday",
+                "date"  =>  $datemon
+            ];
+            array_push($days, $monday);
+
+            // tue
+            $tuesday = [
+                "day"   =>  "Tuesday",
+                "date"  =>  $datetue
+            ];
+            array_push($days, $tuesday);
+
+            // wed
+            $wednesday = [
+                "day"   =>  "Wednesday",
+                "date"  =>  $datewed
+            ];
+            array_push($days, $wednesday);
+
+            // thursday
+            $thursday = [
+                "day"   =>  "Thursday",
+                "date"  =>  $datethu
+            ];
+            array_push($days, $thursday);
+
+            // friday
+            $friday = [
+                "day"   =>  "Friday",
+                "date"  =>  $datefri
+            ];
+            array_push($days, $friday);
+
+            // return $days;
+
+            // get all students
+            // $students = \App\Models\User::where('class_id', $id)->get();
+
+			$teachers = [];
+
+			if($class->assigned_member_id != null)
+			{
+				foreach (json_decode($class->assigned_member_id) as $member_id)
+				{
+					$teacher = \App\Models\User
+						::where('id', $member_id)
+						->select('users.id', 'users.first_name', 'users.last_name')
+						->first();
+
+						array_push($teachers, $teacher);
+				}
+			}
+
+            if(sizeof($teachers) > 0)
+            {
+                return view('admin.classes.staff-attendance')->with('class', $class)->with('students', $teachers)->with('days', $days);
+            }
+            else
+            {
+                return redirect($request->header('Referer'))->with('status.error', 'No Teachers Found');    
+            }
+        }
+        else
+        {
+            return redirect($request->header('Referer'))->with('status.error', 'Class Not Found');
+        }
+    }
+
     public function getAttendanceSingle(Request $request)
     {
         $attendance = Attendance::where('user_id', $request->input('user_id'))->where('class_id', $request->input('class_id'))->where('date', $request->input('date'))->first();

@@ -182,6 +182,7 @@ Route::group(
         Route::post('/add-class-to-user', [AdminController::class, 'postAddClassToUser'])->name('post_class_to_course');
 		Route::get('/remove-class-from-user/{id}', [AdminController::class, 'getRemoveClassFromUser'])->name('get_remove_class_from_user');
         Route::get('/class/attendance/{id}', [AdminController::class, 'getAttendanceClass'])->name('get_admin_class_attendance');
+		Route::get('/class/staff-attendance/{id}', [AdminController::class, 'getStaffAttendanceClass'])->name('get_admin_staff_class_attendance');
 
 		// resources
 		Route::get('/class/resources/{id}', [AdminController::class, 'getResourcesClass'])->name('get_admin_class_resources');
