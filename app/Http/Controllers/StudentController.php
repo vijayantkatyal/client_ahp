@@ -148,7 +148,7 @@ class StudentController extends Controller
 			}
 
 			// thread
-			$get_assignment_thread = StudentAssignmentThread::where('student_assignment_id', $assignment->id)->where('user_id', Auth::id())->where('class_id', $assignment->class_id)->get();
+			$get_assignment_thread = StudentAssignmentThread::where('student_assignment_id', $assignment->id)->where('class_id', $assignment->class_id)->get();
 			$assignment->thread = $get_assignment_thread;
 
 			// return $assignment;

@@ -56,10 +56,10 @@ Note: attendance app should be able to count percentage.
 [Working]
 
 > assigment management (class wise)
-- (student can reply) (teacher can accept / reject)
+✅ (student can reply) (teacher can accept / reject)
 - teacher can assign marks to assignment, and can see total percentage
-- student can see total marks obtained for specific assignment.
-- Teacher post homework (communicate with text / file instructions)
+✅ student can see total marks obtained for specific assignment.
+✅ Teacher post homework (communicate with text / file instructions)
 - Class wise - students marks , app should count percentage
 
 [ToDo]
