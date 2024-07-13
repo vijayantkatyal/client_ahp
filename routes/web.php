@@ -202,6 +202,13 @@ Route::group(
 
 		Route::post('/assign-class-assignment', [AdminController::class, 'postAssignClassAssignment'])->name('post_assign_class_assignment');
 
+		// submissions
+		Route::get('/class/assignment-submissions/{id}', [AdminController::class, 'getAssignmentSubmissions'])->name('get_admin_assignments_submissions');
+		Route::get('/class/assignment-submission-detail/{id}', [AdminController::class, 'getAssignmentSubmissionDetail'])->name('get_admin_assignment_submission_detail');
+		Route::post('/class/assignment-message', [AdminController::class, 'postAssignmentMessage'])->name('post_admin_assignment_message');
+		
+		Route::post('/class/assignment-accept', [AdminController::class, 'postAssignmentAccept'])->name('post_admin_assignment_accept');
+
         // attendance
         // get
         Route::get('/g-attendance', [AdminController::class, 'getAttendanceSingle'])->name('get_amin_class_attendance_single');

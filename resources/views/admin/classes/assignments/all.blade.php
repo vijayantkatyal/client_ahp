@@ -113,6 +113,8 @@
                                                 <li><a class="dropdown-item text-danger delete_a_thing" href="{{ route('get_admin_class_assignment_delete', ['id' => $assignment->id]) }}">Delete</a></li>
                                             </ul>
                                         </div>
+                                        @else
+                                        <a href="{{ route('get_admin_assignments_submissions', ['id' => $assignment->id]) }}" class="btn btn-outline-success">View Submissions</a>
                                         @endif
                                     </td>
                                 </tr>

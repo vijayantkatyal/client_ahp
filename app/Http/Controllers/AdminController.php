@@ -38,6 +38,7 @@ use App\Models\SchoolEventPhotos;
 use App\Models\SchoolEvents;
 use App\Models\Site;
 use App\Models\StudentAssignment;
+use App\Models\StudentAssignmentThread;
 use App\Models\StudentClass;
 use App\Models\User as ModelsUser;
 use App\Models\VidChapterProject;
@@ -2240,6 +2241,82 @@ class AdminController extends Controller
 		}
 
 		return redirect($request->header('Referer'))->with('status.error', 'Unable to Assign');
+	}
+
+	public function getAssignmentSubmissions(Request $request, $id)
+	{
+		$assignment = ClassAssignment::where('id', $id)->first();
+		if($assignment->file_type == "file")
+		{
+			$assignments = StudentAssignment::where('assignment_id', $id)->where('file', '!=', null)->get();
+		}
+		if($assignment->file_type == "note")
+		{
+			$assignments = StudentAssignment::where('assignment_id', $id)->where('note', '!=', null)->get();
+		}
+
+		foreach ($assignments as $assignment_item)
+		{
+			$assignment_item->user = \App\Models\User::where('id', $assignment_item->user_id)->select('id', 'first_name', 'last_name', 'email')->first();
+		}
+
+		// return $assignments;
+
+		return view('admin.classes.assignments.submissions')->with('assignment', $assignment)->with('assignments', $assignments);
+	}
+
+	public function getAssignmentSubmissionDetail(Request $request, $id)
+	{
+		// get assignment info
+		$assignment = StudentAssignment::where('id', $id)->first();
+		if($assignment)
+		{
+			// class info
+			$get_class_info = Classes::where('id', $assignment->class_id)->first();
+			if($get_class_info)
+			{
+				$assignment->class_info = $get_class_info;
+				// get assignment thread
+			}
+
+			// assignment info
+			$get_assignment_info = ClassAssignment::where('id', $assignment->assignment_id)->first();
+			if($get_assignment_info)
+			{
+				$assignment->assignment_info = $get_assignment_info;
+			}
+
+			// thread
+			$get_assignment_thread = StudentAssignmentThread::where('student_assignment_id', $assignment->id)->where('class_id', $assignment->class_id)->get();
+			$assignment->thread = $get_assignment_thread;
+
+			// return $assignment;
+
+			return view('admin.classes.assignments.submission-detail')->with('assignment', $assignment);
+		}
+	}
+
+	public function postAssignmentMessage(Request $request)
+	{
+		StudentAssignmentThread::insert([
+			'student_assignment_id'	=>	$request->input('assignment_id'),
+			'class_id'				=>	$request->input('class_id'),
+			'user_id'				=>	Auth::id(),
+			'message'				=>	$request->input('message'),
+			'time'					=>	time()
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Message Sent');
+	}
+
+	public function postAssignmentAccept(Request $request)
+	{
+		StudentAssignment::where('id', $request->input('assignment_id'))->update([
+			'marks_obtained'	=>	$request->input('marks_obtained'),
+			'accepted'			=>	true
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Assignment Accepted');
 	}
 
 	// reg forms
