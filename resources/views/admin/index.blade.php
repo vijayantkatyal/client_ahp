@@ -25,35 +25,7 @@
 	<div class="page-body">
 		<div class="container-xl">
 
-			<div class="row row-deck row-cards">
-
-				<div class="col-sm-6 col-lg-6">
-					<div class="card">
-						<div class="card-body">
-							<div class="d-flex align-items-center">
-								<div class="subheader">Users</div>
-							</div>
-							<div class="d-flex align-items-baseline">
-								<div class="h1 mb-0 me-2">30</div>							
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-lg-6">
-					<div class="card">
-						<div class="card-body">
-							<div class="d-flex align-items-center">
-								<div class="subheader">Plans</div>
-							</div>
-							<div class="d-flex align-items-baseline">
-								<div class="h1 mb-3 me-2">82</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
+			features
 
 		</div>
 	</div>

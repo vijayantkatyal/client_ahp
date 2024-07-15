@@ -226,24 +226,24 @@ Route::group(
 // teacher
 // 4
 
-Route::group(
-	[
-		'prefix'		=>	'staff',
-		'middleware'	=>	['staff']
-	],
-	function () {
-		Route::get('/', [StaffController::class, 'index'])->name('get_staff_index');
+// Route::group(
+// 	[
+// 		'prefix'		=>	'staff',
+// 		'middleware'	=>	['staff']
+// 	],
+// 	function () {
+// 		Route::get('/', [StaffController::class, 'index'])->name('get_staff_index');
 
-		// agency settings
-		Route::get('/settings', [StaffController::class, 'getSettings'])->name('get_staff_settings');
+// 		// agency settings
+// 		Route::get('/settings', [StaffController::class, 'getSettings'])->name('get_staff_settings');
 
-		// agency settings general (post)
-		Route::post('/settings-general', [StaffController::class, 'postSettingsGeneral'])->name('post_staff_settings_general');
+// 		// agency settings general (post)
+// 		Route::post('/settings-general', [StaffController::class, 'postSettingsGeneral'])->name('post_staff_settings_general');
 
-		// agency settings password (post)
-		Route::post('/settings-password', [StaffController::class, 'postSettingsPassword'])->name('post_staff_settings_password');
-	}
-);
+// 		// agency settings password (post)
+// 		Route::post('/settings-password', [StaffController::class, 'postSettingsPassword'])->name('post_staff_settings_password');
+// 	}
+// );
 
 // user
 // 1

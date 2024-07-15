@@ -156,7 +156,9 @@
 												{{ $user->created_at }}
 											</td>
 											<td>
+												@if($user->marks_obtained != null && $user->total_marks != null)
 												{{ $user->marks_obtained }} / {{ $user->total_marks }} ({{ ($user->marks_obtained / $user->total_marks) * 100 }} %)
+												@endif
 											</td>
 											<td>
 												<div class="btn-list flex-nowrap">

@@ -28,6 +28,7 @@
 				<div class="col-auto ms-auto d-print-none">
 					<div class="d-flex">
 					
+						@if(Auth::user()->isAdmin() === true || Auth::user()->isPrincipal() == true)
 						<button style="display: none;" id="del_users_btn" class="btn btn-danger me-1">
 							<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -53,6 +54,7 @@
 							</svg>
 							New Class
 						</a>
+						@endif
 					</div>
 				</div>
 			</div>
@@ -150,10 +152,14 @@
 													<ul class="dropdown-menu">
 														<li><a class="dropdown-item" href="{{ route('get_admin_class_resources', ['id' => $user->id]) }}">Resources</a></li>
 														<li><a class="dropdown-item" href="{{ route('get_admin_class_assignments', ['id' => $user->id]) }}">Assignments</a></li>
+														@if(Auth::user()->isAdmin() === true || Auth::user()->isPrincipal() == true)
 														<li><a class="dropdown-item" href="{{ route('get_admin_class_attendance', ['id' => $user->id]) }}">Students Attendance</a></li>
 														<li><a class="dropdown-item" href="{{ route('get_admin_staff_class_attendance', ['id' => $user->id]) }}">Teachers Attendance</a></li>
+														@endif
 														<li><a class="dropdown-item" href="{{ route('get_admin_class_manage', ['id' => $user->id]) }}">Manage</a></li>
+														@if(Auth::user()->isAdmin() === true || Auth::user()->isPrincipal() == true)
 														<li><a class="dropdown-item" href="{{ route('get_admin_class_edit', ['id' => $user->id]) }}">Edit</a></li>
+														@endif
 													</ul>
 												</div>
 											</td>

@@ -10,7 +10,7 @@
 				<h2 class="page-title">
 					Settings
 				</h2>
-				<div class="text-muted mt-1">Super Admin Settings</div>
+				<div class="text-muted mt-1">{{ Auth::user()->levelInfo() != null ? Auth::user()->levelInfo()->name : "Admin"  }} Settings</div>
 			</div>
 		</div>
 	</div>
@@ -21,6 +21,7 @@
 		<div class="row">
 			<div class="d-none d-lg-block col-lg-3">
 				<div class="list-group bg-white" id="settings-list">
+					@if(Auth::user()->isAdmin())
 					<a href="#general" class="list-group-item list-group-item-action active" aria-current="true">
 						<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle"
 							width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -42,16 +43,7 @@
 						</svg>
 						Email Setup
 					</a>
-					<a href="#domain" class="list-group-item list-group-item-action">
-						<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24"
-							height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-							stroke-linecap="round" stroke-linejoin="round">
-							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-							<path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path>
-							<path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path>
-						</svg>
-						Domain Setup
-					</a>
+					@endif
 					<a href="#security" class="list-group-item list-group-item-action">
 						<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="24"
 							height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -70,6 +62,7 @@
 				@component('_layouts.components.alert')
         		@endcomponent
 
+				@if(Auth::user()->isAdmin())
 				<div class="card mb-4" id="general">
 					<div class="card-header">
 						<h3 class="card-title">General</h3>
@@ -344,85 +337,7 @@
 						</div>
 					</form>
 				</div>
-
-				<div class="card mb-4" id="domain">
-					<div class="card-header">
-						<h3 class="card-title">Domain Setup</h3>
-					</div>
-					<form action="{{ route('post_admin_settings_domain') }}" method="post">
-						{{ csrf_field() }}
-						<div class="card-body">
-							<div class="form-group mb-3 row">
-								<label for="" class="form-label col-12 col-sm-3 col-form-label">Custom Domain</label>
-								<div class="col">
-									<div class="input-group">
-										<span class="input-group-text">
-											https://
-										</span>
-										<input
-											type="text" required name="unique_name" placeholder="subdomain" autocomplete="off"
-											@if($errors->has('unique_name'))
-												class="form-control is-invalid"
-											@else
-												class="form-control"
-											@endif
-											value="{{ old('unique_name', $settings->unique_name) }}"
-										>
-										<span class="input-group-text">
-											.{{ config('isotopekit_admin.domain') }}
-										</span>
-									</div>
-									@if($errors->has('name'))
-										<div class="invalid-feedback">{{ $errors->first('name') }}</div>
-									@endif
-								</div>
-							</div>
-							<div class="alert alert-important alert-info bg-blue-lt">
-								<div class="d-flex">
-									<div>
-										
-									</div>
-									<div>
-										to connect domain, Point your domain (example.com)
-										<br>
-										<b>A</b> <b>domain.com</b> points to <b>X.XX.X.XX</b>
-										<br>
-										<b>A</b> <b>*.domain.com</b> points to <b>X.XX.X.XX</b>
-										<br>
-										in your domain DNS settings
-									</div>
-								</div>
-							</div>
-							<div class="form-group mb-3 row">
-								<label for="" class="form-label col-12 col-sm-3 col-form-label">External URL</label>
-								<div class="col">
-									<input
-										type="text" name="external_url"
-										@if($errors->has('external_url'))
-											class="form-control is-invalid"
-										@else
-											class="form-control"
-										@endif
-										value="{{ old('external_url', $settings->external_url) }}"
-									/>
-									@if($errors->has('external_url'))
-										<div class="invalid-feedback">{{ $errors->first('external_url') }}</div>
-									@endif
-								</div>
-							</div>
-						</div>
-						<div class="card-footer">
-							<div class="d-flex">
-								<a href="{{ route('get_admin_index') }}" class="btn btn-link">Cancel</a>
-								<div class="ms-auto">
-									<a href="#" class="btn btn-outline-warning">Test Configuration</a>
-									<button type="submit" class="btn btn-success">Save Changes</button>
-								</div>
-
-							</div>
-						</div>
-					</form>
-				</div>
+				@endif
 
 				<div class="card mb-4" id="security">
 					<div class="card-header">

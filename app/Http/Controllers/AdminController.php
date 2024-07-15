@@ -50,7 +50,7 @@ class AdminController extends Controller
     // dashboard
 	public function index(Request $request)
 	{
-		return redirect()->route('get_admin_users_index');
+		// return redirect()->route('get_admin_users_index');
 		return view('admin.index');
 	}
 
@@ -1538,6 +1538,18 @@ class AdminController extends Controller
 			}
         }
 
+		if(Auth::user()->isTeacher() == true)
+		{
+			$classes = $classes->filter(function($class){
+				if($class->assigned_member_id != null)
+				{
+					if(array_search(Auth::id(), array_column($class->assigned_member_id, 'id')) !== FALSE)
+					{
+						return $class;
+					}
+				}
+			})->values();
+		}
 		
 		// return $classes;
 		

@@ -51,7 +51,19 @@
 				</div>
 				<div class="collapse navbar-collapse" id="navbar-menu">
 					<ul class="navbar-nav pt-lg-3">
-						
+
+						<li class="nav-item">
+							<a class="nav-link" href="{{ route('get_admin_index') }}" title="Courses">
+								<span class="nav-link-icon d-md-none d-lg-inline-block">
+									<svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-home"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+								</span>
+								<span class="nav-link-title">
+									Home
+								</span>
+							</a>
+						</li>
+
+						@if(Auth::user()->isAdmin() === true || Auth::user()->isPrincipal() == true || Auth::user()->isTeacher() == true)
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true" >
 								<span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
@@ -70,6 +82,7 @@
 							<div class="dropdown-menu">
 								<div class="dropdown-menu-columns">
 									<div class="dropdown-menu-column">
+										@if(Auth::user()->isAdmin() === true)
 										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}">
 											All
 										</a>
@@ -79,20 +92,29 @@
 										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=principals">
 											Principal
 										</a>
+										@endif
+										@if(Auth::user()->isAdmin() === true || Auth::user()->isPrincipal() == true)
 										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=teachers">
 											Teachers
 										</a>
+										@endif
+										@if(Auth::user()->isAdmin() === true || Auth::user()->isTeacher() == true)
 										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=students">
 											Students
 										</a>
+										@endif
+										@if(Auth::user()->isAdmin() === true)
 										<a class="dropdown-item" href="{{ route('get_admin_users_index') }}?filter=members">
 											Members
 										</a>
+										@endif
 									</div>
 								</div>
 							</div>
 						</li>
+						@endif
 
+						@if(Auth::user()->isAdmin() === true || Auth::user()->isPrincipal() == true)
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('get_admin_courses_all') }}" title="Courses">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -103,7 +125,8 @@
 								</span>
 							</a>
 						</li>
-
+						@endif
+						@if(Auth::user()->isAdmin() === true || Auth::user()->isPrincipal() == true || Auth::user()->isTeacher() == true)
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('get_admin_classes_all') }}" title="Classes">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -114,7 +137,9 @@
 								</span>
 							</a>
 						</li>
+						@endif
 
+						@if(Auth::user()->isAdmin() === true)
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true" >
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -137,7 +162,9 @@
 								</div>
 							</div>
 						</li>
+						@endif
 
+						@if(Auth::user()->isAdmin() === true || Auth::user()->isBoardMember() == true)
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true" >
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -163,61 +190,19 @@
 								</div>
 							</div>
 						</li>
-
-						@if(array_key_exists('domains', config('isotopekit_admin')))
-							@if(config('isotopekit_admin.domains')['show'] == true)
-								<li class="nav-item">
-									<a class="nav-link" href="{{ route('get_admin_domains_index') }}">
-										<span class="nav-link-icon d-md-none d-lg-inline-block">
-											<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-												<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-												<path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path>
-												<path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path>
-											</svg>
-										</span>
-										<span class="nav-link-title">
-											Custom Domains
-										</span>
-									</a>
-								</li>
-
-								<li class="nav-item">
-									<a class="nav-link" href="{{ route('get_admin_agency_domains_index') }}">
-										<span class="nav-link-icon d-md-none d-lg-inline-block">
-											<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-												<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-												<path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path>
-												<path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path>
-											</svg>
-										</span>
-										<span class="nav-link-title">
-											Agency Domains
-										</span>
-									</a>
-								</li>
-							@endif
 						@endif
 
-						@if(array_key_exists('appsumo', config('isotopekit_admin')))
-							@if(config('isotopekit_admin.appsumo')['show'] == true)
-								<li class="nav-item">
-									<a class="nav-link" href="{{ route('get_admin_users_index') }}?filter=appsumo">
-										<span class="nav-link-icon d-md-none d-lg-inline-block">
-											<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-store" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-												<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-												<line x1="3" y1="21" x2="21" y2="21" />
-												<path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4" />
-												<line x1="5" y1="21" x2="5" y2="10.85" />
-												<line x1="19" y1="21" x2="19" y2="10.85" />
-												<path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
-											</svg>
-										</span>
-										<span class="nav-link-title">
-											AppSumo
-										</span>
-									</a>
-								</li>
-							@endif
+						@if(Auth::user()->isTeacher() == true)
+						<li class="nav-item">
+							<a class="nav-link" href="#">
+								<span class="nav-link-icon d-md-none d-lg-inline-block">
+									<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4" /><path d="M15 19l2 2l4 -4" /></svg>
+								</span>
+								<span class="nav-link-title">
+									Attendance
+								</span>
+							</a>
+						</li>
 						@endif
 
 						<li class="nav-item">
@@ -246,6 +231,11 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="navbar-nav flex-row order-md-last">
+					<div class="nav-item pe-3">
+                        <span class="text-muted">
+                            Logged in as&nbsp;<b>{{ Auth::user()->levelInfo() != null ? Auth::user()->levelInfo()->name : "Admin"  }}</b>
+                        </span>
+					</div>
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
 							aria-label="Open user menu">

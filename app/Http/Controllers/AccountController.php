@@ -48,7 +48,7 @@ class AccountController extends Controller
                 if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password'), 'enabled' => true], true)) {
                 // if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], true)) {
 				
-                    if(Auth::user()->isAdmin() === true)
+                    if(Auth::user()->isAdmin() === true || Auth::user()->isTeacher() == true || Auth::user()->isPrincipal() == true || Auth::user()->isBoardMember() == true)
                     {
                         return redirect()->intended('/admin');
                     }
@@ -65,10 +65,10 @@ class AccountController extends Controller
                         return redirect()->intended('/student');
                     }
 
-                    if(Auth::user()->isTeacher() == true || Auth::user()->isPrincipal() == true || Auth::user()->isBoardMember() == true)
-                    {
-                        return redirect()->intended('/staff');
-                    }
+                    // if(Auth::user()->isTeacher() == true || Auth::user()->isPrincipal() == true || Auth::user()->isBoardMember() == true)
+                    // {
+                    //     return redirect()->intended('/staff');
+                    // }
 
                     if(Auth::user()->isMember() == true)
                     {
@@ -98,7 +98,7 @@ class AccountController extends Controller
     {
         if(Auth::check())
         {
-            if(Auth::user()->isAdmin() === true)
+            if(Auth::user()->isAdmin() === true || Auth::user()->isTeacher() == true || Auth::user()->isPrincipal() == true || Auth::user()->isBoardMember() == true)
             {
                 return redirect()->intended('/admin');
             }
@@ -115,10 +115,10 @@ class AccountController extends Controller
                 return redirect()->intended('/student');
             }
             
-            if(Auth::user()->isTeacher() == true || Auth::user()->isPrincipal() == true || Auth::user()->isBoardMember() == true)
-            {
-                return redirect()->intended('/staff');
-            }
+            // if(Auth::user()->isTeacher() == true || Auth::user()->isPrincipal() == true || Auth::user()->isBoardMember() == true)
+            // {
+            //     return redirect()->intended('/staff');
+            // }
             
             if(Auth::user()->isMember() == true)
             {

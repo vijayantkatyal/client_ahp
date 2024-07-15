@@ -15,7 +15,7 @@ class CheckIsAdmin
 		$user = Auth::user();
 
 		if ($user) {
-			if ($user->isAdmin()) {
+			if ($user->isAdmin() || $user->isTeacher() == true || $user->isPrincipal() == true || $user->isBoardMember() == true) {
 				return $next($request);
 			}
 		}
