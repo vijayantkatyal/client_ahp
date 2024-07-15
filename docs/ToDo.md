@@ -60,9 +60,19 @@ Note: attendance app should be able to count percentage.
 ✅ Teacher post homework (communicate with text / file instructions)
 ✅ Class wise - students marks , app should count percentage
 
+[Done] student dashboard
+✅ (by default) (user as signup)
+✅ only one class (but can join other class)
+✅ student can see total marks obtained for specific assignment.
+
 [Working]
 
 [ToDo]
+
+> board member dashboard
+> principal dashboard
+> teacher dashboard
+
 
 - [visitor-area] top bar alert for new upcoming event
 - schedule notification email (general, event) (all or specific group)

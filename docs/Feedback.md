@@ -21,11 +21,6 @@
 -- teacher can assign marks to assignment, and can see total percentage
 - see own attendance for multiple classes
 
-> student
-- (by default) (user as signup)
-- only one class (but can join other class)
-- student can see total marks obtained for specific assignment.
-
 ---------------------
 
 [?] Information 
