@@ -111,6 +111,7 @@
 										</th>
 										<th>Status</th>
 										<th>Added on</th>
+										<th>Marks</th>
 										<th class="w-1"></th>
 									</tr>
 								</thead>
@@ -153,6 +154,9 @@
 											</td>
 											<td>
 												{{ $user->created_at }}
+											</td>
+											<td>
+												{{ $user->marks_obtained }} / {{ $user->total_marks }} ({{ ($user->marks_obtained / $user->total_marks) * 100 }} %)
 											</td>
 											<td>
 												<div class="btn-list flex-nowrap">

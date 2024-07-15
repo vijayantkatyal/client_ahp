@@ -1701,7 +1701,32 @@ class AdminController extends Controller
             $students = \App\Models\User
 						::join('student_classes', 'users.id', '=', 'student_classes.student_id')
 						->where('student_classes.class_id', $id)
+						->select('users.id', 'users.first_name', 'users.last_name', 'users.email', 'student_classes.student_id', 'student_classes.course_id', 'student_classes.class_id')
 						->get();
+
+			// get marks
+			foreach ($students as $student)
+			{
+				$assignments = StudentAssignment::where('user_id', $student->id)->where('class_id', $id)->get();
+
+				$total_marks = 0;
+				$obtained_marks = 0;
+
+				foreach ($assignments as $assignment)
+				{
+					// if assignment has marks
+					// get assignment info
+					$get_assignment_info = ClassAssignment::where('id', $assignment->assignment_id)->first();
+					if($get_assignment_info->max_marks != null)
+					{
+						$total_marks += $get_assignment_info->max_marks;
+						$obtained_marks += $assignment->marks_obtained;
+					}
+				}
+
+				$student->total_marks = $total_marks;
+				$student->marks_obtained = $obtained_marks;
+			}
 
             return view('admin.classes.manage')->with('class', $class)->with('students', $students);
         }
