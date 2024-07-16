@@ -119,3 +119,18 @@ Resources
 > Event drama scripts - Category wise (file or text input)
 > Picture / Video Gallery 
 > Communication
+
+[feedback]
+
+> email verification by code
+> adin area collpase menu fix
+> board member pic
+> pre-fiiled password (when admin create)
+> attendance - show last 7 days (based on school calendar)
+> assignment multiple
+> publish -> assigned 
+> show submission (if meesage only)
+> preview message
+
+> teach attendance (0.5 -> 10 hours)
+> excel report (attendance) teacher specific (date range)
