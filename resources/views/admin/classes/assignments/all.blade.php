@@ -71,7 +71,7 @@
                                     <th>Assignment Type</th>
                                     <th>File / Note</th>
                                     <th>Max Marks</th>
-                                    <th>Published</th>
+                                    <th>Assigned</th>
                                     <th class="w-1"></th>
                                 </tr>
                             </thead>

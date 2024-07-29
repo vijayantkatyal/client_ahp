@@ -87,6 +87,9 @@ Route::group(
 		// edit user (post)
 		Route::post('/users/edit/{id}', [AdminController::class, 'postEditUser'])->name('post_admin_users_edit');
 
+		// profile pic
+		Route::post('/users/edit-pic', [AdminController::class, 'postEditUserPic'])->name('post_admin_users_edit_pic');
+
 		// change user password (post)
 		Route::post('/users/change-password/{id}', [AdminController::class, 'postChangeUserPassword'])->name('post_admin_users_password');
 

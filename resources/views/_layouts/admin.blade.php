@@ -315,6 +315,9 @@
 		var _c_url = window.location.href;
 		$("#navbar-menu a[href='"+_c_url+"']").addClass("active");
 
+		$("#navbar-menu a[href='"+_c_url+"']").parents(".dropdown-menu").addClass("show");
+		$("#navbar-menu a[href='"+_c_url+"']").parents(".nav-item").addClass("active");
+
 		// confirm delete
 		// $(".delete_a_thing").click(function(e){
 		// 	var answer = confirm("Do you want to delete ?");

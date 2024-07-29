@@ -362,13 +362,13 @@
 						<div class="mb-3">
 							<label class="form-label">Password</label>
 							<input
-								type="password" name="password" required placeholder="User Password"
+								type="text" name="password" required placeholder="User Password"
 								@if($errors->has('password'))
 									class="form-control is-invalid"
 								@else
 									class="form-control"
 								@endif
-								value=""
+								value="{{ base64_encode(openssl_random_pseudo_bytes(3 * (14 >> 2))) }}"
 							>
 							@if($errors->has('password'))
 								<div class="invalid-feedback">{{ $errors->first('password') }}</div>

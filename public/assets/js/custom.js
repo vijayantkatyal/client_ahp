@@ -181,7 +181,7 @@ $(document).ready(function() {
             navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
             dots: true,
             margin: 30,
-            loop: true,
+            loop: false,
             autoplay: false,
             responsiveClass: true,
             responsive: {

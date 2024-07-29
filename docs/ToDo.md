@@ -123,14 +123,14 @@ Resources
 [feedback]
 
 > email verification by code
-> adin area collpase menu fix
-> board member pic
-> pre-fiiled password (when admin create)
+[Done] admin area collpase menu fix
+[Done] board member pic
+[Done] pre-fiiled password (when admin create)
 > attendance - show last 7 days (based on school calendar)
 > assignment multiple
-> publish -> assigned 
-> show submission (if meesage only)
-> preview message
+[Done] publish -> assigned 
+[Done] show submission (if meesage only)
+[Done] preview message
 
-> teach attendance (0.5 -> 10 hours)
+> teacher attendance (0.5 -> 10 hours)
 > excel report (attendance) teacher specific (date range)

@@ -369,6 +369,50 @@ class AdminController extends Controller
 		}
 	}
 
+	// post edit user pic
+	public function postEditUserPic(Request $request)
+	{
+
+		\App\Models\User::where('id', $request->input('user_id'))->update([
+			'title'	=>	$request->input('title')
+		]);
+
+		$file_to_upload = $request->file('file');
+		$file_path = null;
+
+		if($file_to_upload)
+		{
+			// check size
+			// $size = $request->file('file')->getSize();
+			// if($size > 2000000)
+			// {
+			// 	return json_encode("file should not exceed 2mb");
+			// }
+
+			$extension = $file_to_upload->getClientOriginalExtension();
+			if($extension == "png" || $extension == "jpeg" || $extension == "jpg")
+			{
+				$uniq_id = rand();
+				$random_name = $uniq_id.".".$request->file('file')->clientExtension();
+
+				Storage::disk('uploads')->putFileAs('profile', $request->file('file'), $random_name);
+				$file_path = "/uploads/profile/".$random_name;
+
+				\App\Models\User::where('id', $request->input('user_id'))->update([
+					'profile_pic'	=>	$file_path
+				]);
+
+				return redirect($request->header('Referer'))->with('status.success', 'Changes Saved');
+			}
+			else
+			{
+				return redirect($request->header('Referer'))->with('status.error', 'UnSupported file');
+			}
+		}
+
+		return redirect($request->header('Referer'))->with('status.success', 'Changes Saved');
+	}
+
 	public function postChangeUserBonus(Request $request, $id)
 	{
 		try
@@ -2283,18 +2327,25 @@ class AdminController extends Controller
 	public function getAssignmentSubmissions(Request $request, $id)
 	{
 		$assignment = ClassAssignment::where('id', $id)->first();
-		if($assignment->file_type == "file")
-		{
-			$assignments = StudentAssignment::where('assignment_id', $id)->where('file', '!=', null)->get();
-		}
-		if($assignment->file_type == "note")
-		{
-			$assignments = StudentAssignment::where('assignment_id', $id)->where('note', '!=', null)->get();
-		}
+		$assignments = StudentAssignment::where('assignment_id', $id)->get();
+
+		// if($assignment->file_type == "file")
+		// {
+		// 	$assignments = StudentAssignment::where('assignment_id', $id)->where('file', '!=', null)->get();
+		// }
+		// if($assignment->file_type == "note")
+		// {
+		// 	$assignments = StudentAssignment::where('assignment_id', $id)->where('note', '!=', null)->get();
+		// }
 
 		foreach ($assignments as $assignment_item)
 		{
 			$assignment_item->user = \App\Models\User::where('id', $assignment_item->user_id)->select('id', 'first_name', 'last_name', 'email')->first();
+
+			$last_message = StudentAssignmentThread::where('user_id', $assignment_item->user_id)->where('student_assignment_id', $assignment_item->id)->orderBy('id', 'desc')->first();
+			
+			// last message
+			$assignment_item->message = $last_message;
 		}
 
 		// return $assignments;

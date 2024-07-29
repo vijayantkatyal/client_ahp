@@ -168,6 +168,43 @@
 					</form>
 				</div>
 
+				@if($user->plan_name == "Board Member")
+
+				<div class="card mb-4" id="course_info">
+					<div class="card-header">
+						<div class="col">
+							<h3 class="card-title">Profile Pic</h3>
+						</div>
+					</div>
+					<form action="{{ route('post_admin_users_edit_pic') }}" method="post" enctype="multipart/form-data">
+						{{ csrf_field() }}
+						<input type="hidden" name="user_id" value="{{ $user->id }}"/>
+						<div class="card-body">
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Title</label>
+								<div class="col">
+									<input type="text" name="title" id="" class="form-control" value="{{ $user->title }}"/>
+								</div>
+							</div>
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Profile Pic</label>
+								<div class="col">
+									<img src="{{ asset($user->profile_pic) }}" alt=""/>
+									<br/>
+									<input type="file" name="file" id="" class="form-control" required/>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer">
+							<div class="d-flex">
+								<a href="{{ route('get_admin_users_index') }}" class="btn btn-link">Cancel</a>
+								<button type="submit" class="btn btn-success ms-auto">Update</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				@endif
+
 				@if($user->plan_name == "Student")
 
 				<div class="card mb-4" id="course_info">
