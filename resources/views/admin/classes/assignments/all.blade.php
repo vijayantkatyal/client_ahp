@@ -83,7 +83,9 @@
                                     <td class="text-capitalize">{{ $assignment->file_type }}</td>
                                     <td>
                                         @if($assignment->file_type == "file")
-                                            <a target="_blank" title="click to view" class="btn btn-outline-primary" href="{{ asset($assignment->file) }}">{{ $assignment->file }}</a>
+                                            @foreach(json_decode($assignment->file) as $file)
+                                                <a target="_blank" title="click to view" class="btn btn-outline-primary" href="{{ asset($file) }}">{{ $file }}</a>
+                                            @endforeach
                                         @else
                                             <a target="_blank" title="click to view" class="btn btn-outline-primary" href="{{ route('get_admin_class_assignment_note', ['id' => $assignment->id]) }}">View Note</a>
                                         @endif
@@ -193,8 +195,8 @@
 
                     <div class="mb-3">
                         <label class="form-label">File</label>
-                        <input type="file" name="file" class="form-control" required id="">
-                        <div class="form-text">supported formats: doc, pdf, docx</div>
+                        <input type="file" name="file[]" class="form-control" multiple required id="">
+                        <div class="form-text">can upload multiple files. supported formats: doc, pdf, docx</div>
                     </div>
 
                     <div class="mb-3">

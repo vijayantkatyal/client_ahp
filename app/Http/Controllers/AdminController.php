@@ -2211,44 +2211,45 @@ class AdminController extends Controller
 
 	public function postAddClassAssignmentFile(Request $request)
 	{
-		$file_to_upload = $request->file('file');
-		$file_path = null;
+		$total = count($_FILES['file']['name']);
 
-		if($file_to_upload)
+		$files = [];
+
+		// $result = [];
+
+		// Loop through each file
+		for( $i=0 ; $i < $total ; $i++ )
 		{
-			// check size
-			// $size = $request->file('file')->getSize();
-			// if($size > 2000000)
-			// {
-			// 	return json_encode("file should not exceed 2mb");
-			// }
-
-			$extension = $file_to_upload->getClientOriginalExtension();
-			if($extension == "doc" || $extension == "docx" || $extension == "pdf")
+			//Get the temp file path
+			$tmpFilePath = $_FILES['file']['tmp_name'][$i];
+		
+			//Make sure we have a file path
+			if($tmpFilePath != "")
 			{
-				$uniq_id = rand();
-				$random_name = $uniq_id.".".$request->file('file')->clientExtension();
+				// array_push($result, $tmpFilePath);
+				$extension = pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION);
+				if($extension == "doc" || $extension == "docx" || $extension == "pdf" || $extension == "xsl")
+				{
+					$random_name = rand();
+					Storage::disk('uploads')->putFileAs('assignments', $tmpFilePath, $random_name.".".$extension);
+					$path = "/uploads/assignments/".$random_name.".".$extension;
 
-				Storage::disk('uploads')->putFileAs('assignments', $request->file('file'), $random_name);
-				$file_path = "/uploads/assignments/".$random_name;
-
-				ClassAssignment::insert([
-					'class_id'	=>	$request->input('class_id'),
-					'type'		=>	$request->input('type'),
-					'file_type'	=>	"file",
-					'name'		=>	$request->input('name'),
-					'file'		=>	$file_path,
-					'max_marks'	=>	$request->input('max_marks'),
-					'created_by_id'	=>	Auth::id()
-				]);
-
-				return redirect($request->header('Referer'))->with('status.success', 'Assignment Created');
-			}
-			else
-			{
-				return redirect($request->header('Referer'))->with('status.error', 'UnSupported file');
+					array_push($files, $path);
+				}
 			}
 		}
+
+		ClassAssignment::insert([
+			'class_id'	=>	$request->input('class_id'),
+			'type'		=>	$request->input('type'),
+			'file_type'	=>	"file",
+			'name'		=>	$request->input('name'),
+			'file'		=>	json_encode($files),
+			'max_marks'	=>	$request->input('max_marks'),
+			'created_by_id'	=>	Auth::id()
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Assignment Created');
 	}
 
 	public function postAddClassAssignmentNote(Request $request)

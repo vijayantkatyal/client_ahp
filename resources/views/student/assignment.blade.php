@@ -24,7 +24,11 @@
                 <br/>
                 <h3>{{ $assignment->class_info->name }} / Assignment / {{ $assignment->assignment_info->name }}</h3>
                 @if($assignment->assignment_info->file_type == "file")
-                    File: <a target="_blank" href="{{ asset($assignment->assignment_info->file) }}">View Attachment</a>
+                    File(s): 
+                    
+                    @foreach(json_decode($assignment->assignment_info->file) as $key => $file)
+                        <a target="_blank" class="me-2" href="{{ asset($file) }}">View Attachment ({{ $key + 1 }})</a>
+                    @endforeach
                 @endif
                 @if($assignment->assignment_info->file_type == "note")
                     <p class="mt-4 res-margin">
