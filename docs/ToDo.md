@@ -133,5 +133,8 @@ Resources
 [Done] show submission (if meesage only)
 [Done] preview message
 
-> teacher attendance (0.5 -> 10 hours)
+[Done] teacher attendance (0.5 -> 10 hours)
+✅ hourly rate
+✅ attendance hours
+
 > excel report (attendance) teacher specific (date range)

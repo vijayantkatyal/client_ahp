@@ -168,6 +168,35 @@
 					</form>
 				</div>
 
+				@if($user->plan_name == "Teacher")
+
+				<div class="card mb-4" id="hours_info">
+					<div class="card-header">
+						<div class="col">
+							<h3 class="card-title">Hourly Rate</h3>
+						</div>
+					</div>
+					<form action="{{ route('post_admin_users_edit_hourly_rate') }}" method="post">
+						{{ csrf_field() }}
+						<input type="hidden" name="user_id" value="{{ $user->id }}"/>
+						<div class="card-body">
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Hourly Rate (CAD)</label>
+								<div class="col">
+									<input required type="number" min="0" step="0.5" name="hourly_rate" id="" class="form-control" value="{{ $user->hourly_rate }}"/>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer">
+							<div class="d-flex">
+								<a href="{{ route('get_admin_users_index') }}" class="btn btn-link">Cancel</a>
+								<button type="submit" class="btn btn-success ms-auto">Update</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				@endif
+
 				@if($user->plan_name == "Board Member")
 
 				<div class="card mb-4" id="course_info">

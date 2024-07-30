@@ -245,10 +245,44 @@
 
 			$.getJSON("{{ route('get_amin_class_attendance_single') }}?user_id="+_user_id+"&class_id="+_class_id+"&date="+_date_id).done(function(resp){
 				console.log(resp);
+
+				var _hours = '<option value="">Hours</option>';
+
+				if(resp)
+				{
+					if(resp.hours)
+					{
+						var _hours = '<option value="'+resp.hours+'">'+ resp.hours +'</option>';
+					}
+				}
+
 				if(resp == null)
 				{
 					var _body = `<div class="btn-group" role="group" aria-label="">
 						<button data-user-id="`+ _user_id +`" data-date="`+ _date_id +`" data-present="true" type="button" class="mark_attendance btn btn-outline-success"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg></button>
+						<select class="form-control mark_attendance_hours" data-user-id="`+ _user_id +`" data-date="`+ _date_id +`">
+							`+ _hours +`
+							<option value="0.5">0.5</option>
+							<option value="1">1</option>
+							<option value="1.5">1.5</option>
+							<option value="2">2</option>
+							<option value="2.5">2.5</option>
+							<option value="3">3</option>
+							<option value="3.5">3.5</option>
+							<option value="4">4</option>
+							<option value="4.5">4.5</option>
+							<option value="5">5</option>
+							<option value="5.5">5.5</option>
+							<option value="6">6</option>
+							<option value="6.5">6.5</option>
+							<option value="7">7</option>
+							<option value="7.5">7.5</option>
+							<option value="8">8</option>
+							<option value="8.5">8.5</option>
+							<option value="9">9</option>
+							<option value="9.5">9.5</option>
+							<option value="10">10</option>
+						</select>
 						<button data-user-id="`+ _user_id +`" data-date="`+ _date_id +`" data-present="false" type="button" class="mark_attendance btn btn-outline-danger"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
 					</div>`;
 					$(_item).append(_body);
@@ -260,6 +294,29 @@
 						$(_item).append(`
 							<div class="btn-group" role="group" aria-label="">
 								<button data-user-id="`+ _user_id +`" data-date="`+ _date_id +`" data-present="true" type="button" class="mark_attendance btn btn-success"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg></button>
+								<select class="form-control mark_attendance_hours" data-user-id="`+ _user_id +`" data-date="`+ _date_id +`">
+									`+ _hours +`
+									<option value="0.5">0.5</option>
+									<option value="1">1</option>
+									<option value="1.5">1.5</option>
+									<option value="2">2</option>
+									<option value="2.5">2.5</option>
+									<option value="3">3</option>
+									<option value="3.5">3.5</option>
+									<option value="4">4</option>
+									<option value="4.5">4.5</option>
+									<option value="5">5</option>
+									<option value="5.5">5.5</option>
+									<option value="6">6</option>
+									<option value="6.5">6.5</option>
+									<option value="7">7</option>
+									<option value="7.5">7.5</option>
+									<option value="8">8</option>
+									<option value="8.5">8.5</option>
+									<option value="9">9</option>
+									<option value="9.5">9.5</option>
+									<option value="10">10</option>
+								</select>
 								<button data-user-id="`+ _user_id +`" data-date="`+ _date_id +`" data-present="false" type="button" class="mark_attendance btn btn-outline-danger"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
 							</div>
 						`);	
@@ -269,6 +326,29 @@
 						$(_item).append(`
 							<div class="btn-group" role="group" aria-label="">
 								<button data-user-id="`+ _user_id +`" data-date="`+ _date_id +`" data-present="true" type="button" class="mark_attendance btn btn-outline-success"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg></button>
+								<select class="form-control mark_attendance_hours" data-user-id="`+ _user_id +`" data-date="`+ _date_id +`">
+									`+ _hours +`
+									<option value="0.5">0.5</option>
+									<option value="1">1</option>
+									<option value="1.5">1.5</option>
+									<option value="2">2</option>
+									<option value="2.5">2.5</option>
+									<option value="3">3</option>
+									<option value="3.5">3.5</option>
+									<option value="4">4</option>
+									<option value="4.5">4.5</option>
+									<option value="5">5</option>
+									<option value="5.5">5.5</option>
+									<option value="6">6</option>
+									<option value="6.5">6.5</option>
+									<option value="7">7</option>
+									<option value="7.5">7.5</option>
+									<option value="8">8</option>
+									<option value="8.5">8.5</option>
+									<option value="9">9</option>
+									<option value="9.5">9.5</option>
+									<option value="10">10</option>
+								</select>
 								<button data-user-id="`+ _user_id +`" data-date="`+ _date_id +`" data-present="false" type="button" class="mark_attendance btn btn-danger"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
 							</div>
 						`);
@@ -296,6 +376,16 @@
 			}).done(function(resp){
 				console.log(resp);
 
+				var _hours = '<option value="">Hours</option>';
+
+				if(resp)
+				{
+					if(resp.hours)
+					{
+						var _hours = '<option value="'+resp.hours+'">'+ resp.hours +'</option>';
+					}
+				}
+
 				var _parent = $(_item).parents(".user_attendance");
 
 				$(_parent).empty();				
@@ -305,6 +395,29 @@
 					$(_parent).append(`
 						<div class="btn-group" role="group" aria-label="">
 							<button data-user-id="`+ _user_id +`" data-date="`+ _date_id +`" data-present="true" type="button" class="mark_attendance btn btn-success"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg></button>
+							<select class="form-control mark_attendance_hours" data-user-id="`+ _user_id +`" data-date="`+ _date_id +`">
+								`+ _hours +`
+								<option value="0.5">0.5</option>
+								<option value="1">1</option>
+								<option value="1.5">1.5</option>
+								<option value="2">2</option>
+								<option value="2.5">2.5</option>
+								<option value="3">3</option>
+								<option value="3.5">3.5</option>
+								<option value="4">4</option>
+								<option value="4.5">4.5</option>
+								<option value="5">5</option>
+								<option value="5.5">5.5</option>
+								<option value="6">6</option>
+								<option value="6.5">6.5</option>
+								<option value="7">7</option>
+								<option value="7.5">7.5</option>
+								<option value="8">8</option>
+								<option value="8.5">8.5</option>
+								<option value="9">9</option>
+								<option value="9.5">9.5</option>
+								<option value="10">10</option>
+							</select>
 							<button data-user-id="`+ _user_id +`" data-date="`+ _date_id +`" data-present="false" type="button" class="mark_attendance btn btn-outline-danger"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
 						</div>
 					`);	
@@ -315,10 +428,56 @@
 					$(_parent).append(`
 						<div class="btn-group" role="group" aria-label="">
 							<button data-user-id="`+ _user_id +`" data-date="`+ _date_id +`" data-present="true" type="button" class="mark_attendance btn btn-outline-success"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg></button>
+							<select class="form-control mark_attendance_hours" data-user-id="`+ _user_id +`" data-date="`+ _date_id +`">
+								`+ _hours +`
+								<option value="0.5">0.5</option>
+								<option value="1">1</option>
+								<option value="1.5">1.5</option>
+								<option value="2">2</option>
+								<option value="2.5">2.5</option>
+								<option value="3">3</option>
+								<option value="3.5">3.5</option>
+								<option value="4">4</option>
+								<option value="4.5">4.5</option>
+								<option value="5">5</option>
+								<option value="5.5">5.5</option>
+								<option value="6">6</option>
+								<option value="6.5">6.5</option>
+								<option value="7">7</option>
+								<option value="7.5">7.5</option>
+								<option value="8">8</option>
+								<option value="8.5">8.5</option>
+								<option value="9">9</option>
+								<option value="9.5">9.5</option>
+								<option value="10">10</option>
+							</select>
 							<button data-user-id="`+ _user_id +`" data-date="`+ _date_id +`" data-present="false" type="button" class="mark_attendance btn btn-danger"><svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
 						</div>
 					`);	
 				}
+			});
+		});
+	</script>
+
+<script>
+		$("body").on("change", ".mark_attendance_hours", function(){
+			var _item = $(this)[0];
+			console.log(_item);
+			var _user_id = _item.dataset.userId;
+			var _date_id = _item.dataset.date;
+			var _class_id = "{{ $class->id }}";
+			var _hours = $(this).val();
+
+			$.post("{{ route('post_amin_class_attendance_single_hours') }}", {
+				"_token": "{{ csrf_token() }}",
+				"user_id": _user_id,
+				"date_id": _date_id,
+				"class_id": _class_id,
+				"hours": _hours
+			}).done(function(resp){
+				console.log(resp);
+
+				
 			});
 		});
 	</script>

@@ -90,6 +90,9 @@ Route::group(
 		// profile pic
 		Route::post('/users/edit-pic', [AdminController::class, 'postEditUserPic'])->name('post_admin_users_edit_pic');
 
+		// profile pic
+		Route::post('/users/edit-hourly-rate', [AdminController::class, 'postEditUserHourlyRate'])->name('post_admin_users_edit_hourly_rate');
+
 		// change user password (post)
 		Route::post('/users/change-password/{id}', [AdminController::class, 'postChangeUserPassword'])->name('post_admin_users_password');
 
@@ -184,6 +187,8 @@ Route::group(
         Route::get('/g-attendance', [AdminController::class, 'getAttendanceSingle'])->name('get_amin_class_attendance_single');
         // post
         Route::post('/g-attendance', [AdminController::class, 'postAttendanceSingle'])->name('post_amin_class_attendance_single');
+
+		Route::post('/g-attendance-hours', [AdminController::class, 'postAttendanceSingleHours'])->name('post_amin_class_attendance_single_hours');
 
 		// reg forms
 		Route::get('/forms/registration', [AdminController::class, 'getFormsRegistration'])->name('get_admin_forms_registration');

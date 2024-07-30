@@ -413,6 +413,17 @@ class AdminController extends Controller
 		return redirect($request->header('Referer'))->with('status.success', 'Changes Saved');
 	}
 
+	// post edit user pic
+	public function postEditUserHourlyRate(Request $request)
+	{
+
+		\App\Models\User::where('id', $request->input('user_id'))->update([
+			'hourly_rate'	=>	$request->input('hourly_rate')
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Changes Saved');
+	}
+
 	public function postChangeUserBonus(Request $request, $id)
 	{
 		try
@@ -2055,14 +2066,45 @@ class AdminController extends Controller
 					'date'      =>  $request->input('date_id'),
 					'present'   =>  (boolean) json_decode($request->input('present')),
 				]);
+
+			$attendance = Attendance::where('user_id', $request->input('user_id'))->first();
+			return $attendance;
 		}
 		else
 		{
-			Attendance::create([
+			$attendance = Attendance::create([
 				'user_id'   =>  $request->input('user_id'),
 				'class_id'  =>  $request->input('class_id'),
 				'date'      =>  $request->input('date_id'),
 				'present'   =>  (boolean) json_decode($request->input('present')),
+			]);
+
+			return $attendance;
+		}
+    }
+
+	public function postAttendanceSingleHours(Request $request)
+    {
+		// check if already exists
+
+		$attendance_exists = Attendance::where('user_id', $request->input('user_id'))->where('class_id', $request->input('class_id'))->where('date', $request->input('date_id'))->first();
+		if($attendance_exists)
+		{
+			Attendance::where('user_id', $request->input('user_id'))
+				->where('class_id', $request->input('class_id'))
+				->where('date', $request->input('date_id'))
+				->update([
+					'hours'      =>  $request->input('hours')
+				]);
+		}
+		else
+		{
+			Attendance::insert([
+				'user_id'   =>  $request->input('user_id'),
+				'class_id'  =>  $request->input('class_id'),
+				'date'      =>  $request->input('date_id'),
+				'hours'     =>  $request->input('hours'),
+				'present'	=>	true
 			]);
 		}
 
