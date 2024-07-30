@@ -122,12 +122,12 @@ Resources
 
 [feedback]
 
-> email verification by code
+[Done] email verification by code
 - added functions, will enable when recieve email credentials to test.
 [Done] admin area collpase menu fix
 [Done] board member pic
 [Done] pre-fiiled password (when admin create)
-> attendance - show last 7 days (based on school calendar)
+[Done] attendance - show last 7 days (based on school calendar)
 [Done] assignment multiple
 [Done] publish -> assigned 
 [Done] show submission (if meesage only)

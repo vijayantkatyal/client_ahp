@@ -1824,50 +1824,72 @@ class AdminController extends Controller
         {
             // all attendance
 
-            $today = time();
-            $wday = date('w', $today);   
-            $datemon = date('m-d-Y', $today - ($wday - 1)*86400);
-            $datetue = date('m-d-Y', $today - ($wday - 2)*86400);
-            $datewed = date('m-d-Y', $today - ($wday - 3)*86400);
-            $datethu = date('m-d-Y', $today - ($wday - 4)*86400);
-            $datefri = date('m-d-Y', $today - ($wday - 5)*86400);
+            // $today = time();
+            // $wday = date('w', $today);   
+            // $datemon = date('m-d-Y', $today - ($wday - 1)*86400);
+            // $datetue = date('m-d-Y', $today - ($wday - 2)*86400);
+            // $datewed = date('m-d-Y', $today - ($wday - 3)*86400);
+            // $datethu = date('m-d-Y', $today - ($wday - 4)*86400);
+            // $datefri = date('m-d-Y', $today - ($wday - 5)*86400);
 
-            $days = [];
+            // $days = [];
 
-            // mon
-            $monday = [
-                "day"   =>  "Monday",
-                "date"  =>  $datemon
-            ];
-            array_push($days, $monday);
+            // // mon
+            // $monday = [
+            //     "day"   =>  "Monday",
+            //     "date"  =>  $datemon
+            // ];
+            // array_push($days, $monday);
 
-            // tue
-            $tuesday = [
-                "day"   =>  "Tuesday",
-                "date"  =>  $datetue
-            ];
-            array_push($days, $tuesday);
+            // // tue
+            // $tuesday = [
+            //     "day"   =>  "Tuesday",
+            //     "date"  =>  $datetue
+            // ];
+            // array_push($days, $tuesday);
 
-            // wed
-            $wednesday = [
-                "day"   =>  "Wednesday",
-                "date"  =>  $datewed
-            ];
-            array_push($days, $wednesday);
+            // // wed
+            // $wednesday = [
+            //     "day"   =>  "Wednesday",
+            //     "date"  =>  $datewed
+            // ];
+            // array_push($days, $wednesday);
 
-            // thursday
-            $thursday = [
-                "day"   =>  "Thursday",
-                "date"  =>  $datethu
-            ];
-            array_push($days, $thursday);
+            // // thursday
+            // $thursday = [
+            //     "day"   =>  "Thursday",
+            //     "date"  =>  $datethu
+            // ];
+            // array_push($days, $thursday);
 
-            // friday
-            $friday = [
-                "day"   =>  "Friday",
-                "date"  =>  $datefri
-            ];
-            array_push($days, $friday);
+            // // friday
+            // $friday = [
+            //     "day"   =>  "Friday",
+            //     "date"  =>  $datefri
+            // ];
+            // array_push($days, $friday);
+
+			$days = [];
+
+			// get calendar dates
+			$calendar_days = CalendarSchool::select('date')->get();
+
+            $today_date = date('Y-m-d',(strtotime ('-2 day', strtotime (date('Y-m-d')))));
+
+			// array_push($days, $today_date);
+
+			foreach ($calendar_days as $day)
+			{
+				// omit old dates
+
+				$item_date = date('Y-m-d', strtotime($day->date));
+
+				if($item_date > $today_date)
+				{
+					array_push($days, $day);
+				}
+			}
+			 
 
             // return $days;
 
@@ -1903,50 +1925,71 @@ class AdminController extends Controller
         {
             // all attendance
 
-            $today = time();
-            $wday = date('w', $today);   
-            $datemon = date('m-d-Y', $today - ($wday - 1)*86400);
-            $datetue = date('m-d-Y', $today - ($wday - 2)*86400);
-            $datewed = date('m-d-Y', $today - ($wday - 3)*86400);
-            $datethu = date('m-d-Y', $today - ($wday - 4)*86400);
-            $datefri = date('m-d-Y', $today - ($wday - 5)*86400);
+            // $today = time();
+            // $wday = date('w', $today);   
+            // $datemon = date('m-d-Y', $today - ($wday - 1)*86400);
+            // $datetue = date('m-d-Y', $today - ($wday - 2)*86400);
+            // $datewed = date('m-d-Y', $today - ($wday - 3)*86400);
+            // $datethu = date('m-d-Y', $today - ($wday - 4)*86400);
+            // $datefri = date('m-d-Y', $today - ($wday - 5)*86400);
 
-            $days = [];
+            // $days = [];
 
-            // mon
-            $monday = [
-                "day"   =>  "Monday",
-                "date"  =>  $datemon
-            ];
-            array_push($days, $monday);
+            // // mon
+            // $monday = [
+            //     "day"   =>  "Monday",
+            //     "date"  =>  $datemon
+            // ];
+            // array_push($days, $monday);
 
-            // tue
-            $tuesday = [
-                "day"   =>  "Tuesday",
-                "date"  =>  $datetue
-            ];
-            array_push($days, $tuesday);
+            // // tue
+            // $tuesday = [
+            //     "day"   =>  "Tuesday",
+            //     "date"  =>  $datetue
+            // ];
+            // array_push($days, $tuesday);
 
-            // wed
-            $wednesday = [
-                "day"   =>  "Wednesday",
-                "date"  =>  $datewed
-            ];
-            array_push($days, $wednesday);
+            // // wed
+            // $wednesday = [
+            //     "day"   =>  "Wednesday",
+            //     "date"  =>  $datewed
+            // ];
+            // array_push($days, $wednesday);
 
-            // thursday
-            $thursday = [
-                "day"   =>  "Thursday",
-                "date"  =>  $datethu
-            ];
-            array_push($days, $thursday);
+            // // thursday
+            // $thursday = [
+            //     "day"   =>  "Thursday",
+            //     "date"  =>  $datethu
+            // ];
+            // array_push($days, $thursday);
 
-            // friday
-            $friday = [
-                "day"   =>  "Friday",
-                "date"  =>  $datefri
-            ];
-            array_push($days, $friday);
+            // // friday
+            // $friday = [
+            //     "day"   =>  "Friday",
+            //     "date"  =>  $datefri
+            // ];
+            // array_push($days, $friday);
+
+			$days = [];
+
+			// get calendar dates
+			$calendar_days = CalendarSchool::select('date')->get();
+
+            $today_date = date('Y-m-d',(strtotime ('-2 day', strtotime (date('Y-m-d')))));
+
+			// array_push($days, $today_date);
+
+			foreach ($calendar_days as $day)
+			{
+				// omit old dates
+
+				$item_date = date('Y-m-d', strtotime($day->date));
+
+				if($item_date > $today_date)
+				{
+					array_push($days, $day);
+				}
+			}
 
             // return $days;
 
