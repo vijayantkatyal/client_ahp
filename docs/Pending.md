@@ -1,15 +1,16 @@
 [Done]
 
+[Done] mandatory astrick as red
+[Done] new user type drop down visible
+[Done] one single user registration form
+[Done] phone number in every user
+
 [Working]
 
 [ToDo]
 
 [Quick]
 
-> mandatory astrick as red
-> new user type drop down visible
-> one single user registration form
-> phone number in every user
 > board members description to be added
 
 > email id confirmation

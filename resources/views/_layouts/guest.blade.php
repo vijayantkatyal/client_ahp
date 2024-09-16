@@ -48,6 +48,12 @@
 
 	<link rel="stylesheet" href="{{ asset('/assets/keyboard/jqkeyboard.css') }}" />
 
+	<style>
+		span.required {
+			color: red;
+		}
+	</style>
+
 	@yield('header')
 </head>
 <!-- ==== body starts ==== -->

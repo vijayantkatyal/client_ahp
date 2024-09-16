@@ -16,13 +16,12 @@
 
 			<form class="card card-md" action="{{ route('post_register_route') }}" method="post">
 				{{ csrf_field() }}
-                <input type="hidden" name="plan_id" value="2">
 				<div class="card-body">
                     <h2 class="card-title text-center mb-4">Register as Student</h2>
 					<div class="mb-3">
 						<label class="form-label">First Name</label>
 						<input
-							type="text" name="first_name" placeholder=""
+							type="text" name="first_name" required placeholder=""
 							value="{{ old('first_name') }}"
 							@if($errors->has('first_name'))
 								class="form-control is-invalid"
@@ -37,7 +36,7 @@
                     <div class="mb-3">
 						<label class="form-label">Last Name</label>
 						<input
-							type="text" name="last_name" placeholder=""
+							type="text" name="last_name" placeholder="" required
 							value="{{ old('last_name') }}"
 							@if($errors->has('last_name'))
 								class="form-control is-invalid"
@@ -52,7 +51,7 @@
 					<div class="mb-3">
 						<label class="form-label">Email address</label>
 						<input
-							type="email" name="email" placeholder="Enter email"
+							type="email" required name="email" placeholder="Enter email"
 							value="{{ old('email') }}"
 							@if($errors->has('email'))
 								class="form-control is-invalid"
@@ -64,12 +63,27 @@
 							<div class="invalid-feedback">{{ $errors->first('email') }}</div>
 						@endif
 					</div>
-					<div class="mb-2">
+					<div class="mb-3">
+						<label class="form-label">Phone</label>
+						<input
+							type="text" pattern="\d*" maxlength="10" name="phone" placeholder="Enter phone"
+							value="{{ old('phone') }}"
+							@if($errors->has('phone'))
+								class="form-control is-invalid"
+							@else
+								class="form-control"
+							@endif
+						/>
+						@if($errors->has('phone'))
+							<div class="invalid-feedback">{{ $errors->first('phone') }}</div>
+						@endif
+					</div>
+					<div class="mb-3">
 						<label class="form-label">
 							Password
 						</label>
 						<input
-							type="password" name="password" placeholder="Password"
+							type="password" required name="password" placeholder="Password"
 							@if($errors->has('password'))
 								class="form-control is-invalid"
 							@else
@@ -79,6 +93,16 @@
 						@if ($errors->has('password'))
 							<div class="invalid-feedback">{{ $errors->first('password') }}</div>
 						@endif
+					</div>
+					<div class="mb-2">
+						<label class="form-label">Type</label>
+						<select required name="plan_id" class="form-control" id="">
+							<option value="2">Board Member</option>
+							<option value="3">Principal</option>
+							<option value="4">Teacher</option>
+							<option value="5" selected>Student</option>
+							<option value="6">Member</option>
+						</select>
 					</div>
 					<div class="form-footer">
 						<button type="submit" class="btn btn-primary w-100">Sign Up</button>

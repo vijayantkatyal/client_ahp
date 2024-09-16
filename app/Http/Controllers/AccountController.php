@@ -168,7 +168,8 @@ class AccountController extends Controller
                     'email'         =>  $request->input('email'),
                     'password'      =>  bcrypt($request->input('password')),
                     'email_token'   =>  $random_token,
-                    'enabled'       =>  true
+                    'enabled'       =>  true,
+                    'phone'         =>  $request->input('phone')
                 ]);
 
                 $plan_id = json_encode($request->input('plan_id'));
