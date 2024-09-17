@@ -1893,18 +1893,36 @@ class AdminController extends Controller
 
 			// array_push($days, $today_date);
 
+			$range = null;
+
+			if($request->filled('range'))
+			{
+				$range = $request->input("range");
+			}
+
 			foreach ($calendar_days as $day)
 			{
 				// omit old dates
 
 				$item_date = date('Y-m-d', strtotime($day->date));
 
-				if($item_date > $today_date)
+				if($request->filled('range'))
 				{
-					array_push($days, $day);
+					$dates = explode(" - ", $request->input('range'));
+
+					if($item_date >= $dates[0] && $dates[1] >= $item_date )
+					{
+						array_push($days, $day);
+					}
+				}
+				else
+				{
+					if($item_date > $today_date)
+					{
+						array_push($days, $day);
+					}
 				}
 			}
-			 
 
             // return $days;
 
@@ -1920,7 +1938,7 @@ class AdminController extends Controller
 
             if(sizeof($students) > 0)
             {
-                return view('admin.classes.attendance')->with('class', $class)->with('students', $students)->with('days', $days);
+                return view('admin.classes.attendance')->with('class', $class)->with('students', $students)->with('days', $days)->with('range', $range);
             }
             else
             {
@@ -1994,15 +2012,34 @@ class AdminController extends Controller
 
 			// array_push($days, $today_date);
 
+			$range = null;
+
+			if($request->filled('range'))
+			{
+				$range = $request->input("range");
+			}
+
 			foreach ($calendar_days as $day)
 			{
 				// omit old dates
 
 				$item_date = date('Y-m-d', strtotime($day->date));
 
-				if($item_date > $today_date)
+				if($request->filled('range'))
 				{
-					array_push($days, $day);
+					$dates = explode(" - ", $request->input('range'));
+
+					if($item_date >= $dates[0] && $dates[1] >= $item_date )
+					{
+						array_push($days, $day);
+					}
+				}
+				else
+				{
+					if($item_date > $today_date)
+					{
+						array_push($days, $day);
+					}
 				}
 			}
 
@@ -2028,7 +2065,7 @@ class AdminController extends Controller
 
             if(sizeof($teachers) > 0)
             {
-                return view('admin.classes.staff-attendance')->with('class', $class)->with('students', $teachers)->with('days', $days);
+                return view('admin.classes.staff-attendance')->with('class', $class)->with('students', $teachers)->with('days', $days)->with('range', $range);
             }
             else
             {

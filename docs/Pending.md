@@ -24,9 +24,11 @@
 
 [Done] taking attendance with third option of info icon along with present and absent
 
+[Done] student attendance with date range filter
+[Done] teacher attendance with date range filter
+
 [Working]
 
-> student attendance with date range filter
 > student attendance with single student and entire class student attendance in one report.
 
 [ToDo]
