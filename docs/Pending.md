@@ -40,8 +40,6 @@
 > student attendance with single student and entire class student attendance in one report.
 > teachers addentance export as pdf and xls  with date range
 
-> Picture / Video Gallery 
-
 ..
 
 > Communication
@@ -69,3 +67,5 @@
 [?] Resources
 > files uploaded
 > Event drama scripts - Category wise (file or text input)
+
+[?] Picture / Video Gallery 
