@@ -158,7 +158,7 @@
 							@if(Auth::check())
 								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_dashboard_index') }}">Dashboard ({{ Auth::user()->levelInfo() != null ? Auth::user()->levelInfo()->name : (Auth::user()->isUser() ? "User" : "Admin" )  }})</a></li>
 							@else
-								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_admin_register_route') }}">Enrol Now / Login</a></li>
+								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_admin_register_route') }}">School Registration / Login</a></li>
 							@endif
 						</ul>
 						<!--/ul -->

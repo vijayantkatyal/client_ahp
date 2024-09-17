@@ -1785,10 +1785,13 @@ class AdminController extends Controller
 					// if assignment has marks
 					// get assignment info
 					$get_assignment_info = ClassAssignment::where('id', $assignment->assignment_id)->first();
-					if($get_assignment_info->max_marks != null)
+					if($get_assignment_info)
 					{
-						$total_marks += $get_assignment_info->max_marks;
-						$obtained_marks += $assignment->marks_obtained;
+						if($get_assignment_info->max_marks != null)
+						{
+							$total_marks += $get_assignment_info->max_marks;
+							$obtained_marks += $assignment->marks_obtained;
+						}
 					}
 				}
 

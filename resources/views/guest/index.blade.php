@@ -29,7 +29,7 @@
 					<!--the div below is hidden on small screens  -->
 					<div class="hidden-small">
 						<p class="header-p">We provide regular classes to teach Hindi systematically</p>
-						<a class="btn btn-secondary" href="{{ route('get_admin_register_route') }}">Enrol Now</a>
+						<a class="btn btn-secondary" href="{{ route('get_admin_register_route') }}">School Registration</a>
 					</div>
 					<!--/hidden-small -->
 				</div>

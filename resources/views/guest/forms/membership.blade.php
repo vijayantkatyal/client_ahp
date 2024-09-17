@@ -73,9 +73,8 @@
                         <div class="col-md-4">
                             <label>Membership For</label>
                             <select name="membership_for" class="form-control" id="">
-                                <option value="life">Life</option>    
-                                <option value="individual">Individual</option>
-                                <option value="family">Family</option>
+                                <option value="Annual">Annual</option>
+                                <option value="Life">Life</option>
                             </select>
                         </div>
                         <div class="col-md-4">

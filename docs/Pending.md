@@ -8,25 +8,30 @@
 [Done] board members description to be added
 [Done] board member pics in the list
 
+[Done] label change - school registration
+[Done] membership type = annual , life 
+
+[Done] Tree on left menu shud not collapse.
+
+[Done] prefilled password in new create user via admin page
+[Done] student and teachers attendance via current date and one week all dates to be picked up from school calendar
+
+[Done] multiple assignment files instead of one
+
+[Done] students assignments total number of marks
+
 [Working]
 
 [ToDo]
 
 [Quick]
 
-> email id confirmation
-> label change - school registration
-> membership type = annual , life 
-> Tree on left menu shud not collapse.
 > event slide show or lazy load for all pics
-> prefilled password in new create user via admin page
-> student and teachers attendance via current date and one week all dates to be picked up from school calendar
-> multiple assignment files instead of one
 > assigned column name change
-> students assignments total number of marks
 
 [Medium]
 
+> email id confirmation
 > taking attendance with third option of info icon along with present and absent
 > add bulk students from class link / edit class
 > student attendance with date range filter

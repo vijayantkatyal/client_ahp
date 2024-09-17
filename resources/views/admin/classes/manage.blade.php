@@ -157,7 +157,7 @@
 											</td>
 											<td>
 												@if($user->marks_obtained != null && $user->total_marks != null)
-												{{ $user->marks_obtained }} / {{ $user->total_marks }} ({{ ($user->marks_obtained / $user->total_marks) * 100 }} %)
+												{{ $user->marks_obtained }} / {{ $user->total_marks }} ({{ round(($user->marks_obtained / $user->total_marks) * 100, 2) }} %)
 												@endif
 											</td>
 											<td>
