@@ -22,23 +22,23 @@
 
 [Done] event slide show or lazy load for all pics
 
+[Done] taking attendance with third option of info icon along with present and absent
+
 [Working]
+
+> student attendance with date range filter
+> student attendance with single student and entire class student attendance in one report.
 
 [ToDo]
 
 [?] assigned column name change
 
-[Medium]
-
 > email id confirmation
-> taking attendance with third option of info icon along with present and absent
+
 > add bulk students from class link / edit class
-> student attendance with date range filter
 > assignment adding every type of files not just pdf add pic files
 
 [Long]
 
 > teachers addentance per hour wise
-
-> student attendance with single student and entire class student attendance in one report.
 > teachers addentance export as pdf and xls  with date range
