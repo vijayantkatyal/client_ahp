@@ -27,20 +27,19 @@
 [Done] student attendance with date range filter
 [Done] teacher attendance with date range filter
 
+[Done] teachers addentance per hour wise
+[Done] add bulk students from class link / edit class
+[Done] assignment adding every type of files not just pdf add pic files
+
 [Working]
 
-> student attendance with single student and entire class student attendance in one report.
-
 [ToDo]
+
+> student attendance with single student and entire class student attendance in one report.
+> teachers addentance export as pdf and xls  with date range
 
 [?] assigned column name change
 
 > email id confirmation
 
-> add bulk students from class link / edit class
-> assignment adding every type of files not just pdf add pic files
-
 [Long]
-
-> teachers addentance per hour wise
-> teachers addentance export as pdf and xls  with date range

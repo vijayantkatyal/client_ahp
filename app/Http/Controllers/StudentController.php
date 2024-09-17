@@ -172,7 +172,7 @@ class StudentController extends Controller
 			// }
 
 			$extension = $file_to_upload->getClientOriginalExtension();
-			if($extension == "doc" || $extension == "docx" || $extension == "pdf")
+			if($extension == "doc" || $extension == "docx" || $extension == "pdf" || $extension == "xsl" || $extension == "jpeg" || $extension == "jpg" || $extension == "png")
 			{
 				$uniq_id = rand();
 				$random_name = $uniq_id.".".$request->file('file')->clientExtension();

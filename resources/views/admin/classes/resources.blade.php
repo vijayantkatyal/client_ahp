@@ -226,7 +226,7 @@
 
                     <input type="file" name="photos[]" class="form-control" multiple required id="">
                     <div class="form-text">can upload multiple file at once (use ctrl)</div>
-                    <div class="form-text">supported formats: doc, docx, pdf, .xsl</div>
+                    <div class="form-text">supported formats: doc, docx, pdf, .xsl, jpeg, png</div>
 
                 </div>
                 <div class="modal-footer">

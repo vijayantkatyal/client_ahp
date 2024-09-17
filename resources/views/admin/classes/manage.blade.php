@@ -43,6 +43,10 @@
 							{{ csrf_field() }}
 						</form>
 
+						<a href="{{ route('get_admin_users_index') }}?filter=students" class="btn btn-outline-primary me-1">
+							Add in Bulk
+						</a>
+
                         <a href="{{ route('get_admin_class_attendance', ['id' => $class->id]) }}" class="btn btn-outline-primary me-1">
 							Attendance
 						</a>

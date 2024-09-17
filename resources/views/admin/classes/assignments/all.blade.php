@@ -196,7 +196,7 @@
                     <div class="mb-3">
                         <label class="form-label">File</label>
                         <input type="file" name="file[]" class="form-control" multiple required id="">
-                        <div class="form-text">can upload multiple files. supported formats: doc, pdf, docx</div>
+                        <div class="form-text">can upload multiple files. supported formats: doc, pdf, docx, jpeg, png</div>
                     </div>
 
                     <div class="mb-3">

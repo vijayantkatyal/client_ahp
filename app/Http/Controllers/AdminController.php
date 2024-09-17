@@ -2266,7 +2266,7 @@ class AdminController extends Controller
 			{
 				// array_push($result, $tmpFilePath);
 				$extension = pathinfo($_FILES['photos']['name'][$i], PATHINFO_EXTENSION);
-				if($extension == "doc" || $extension == "docx" || $extension == "pdf" || $extension == "xsl")
+				if($extension == "doc" || $extension == "docx" || $extension == "pdf" || $extension == "xsl" || $extension == "jpeg" || $extension == "jpg" || $extension == "png")
 				{
 					$random_name = rand();
 					Storage::disk('uploads')->putFileAs('resources', $tmpFilePath, $random_name.".".$extension);
@@ -2354,7 +2354,7 @@ class AdminController extends Controller
 			{
 				// array_push($result, $tmpFilePath);
 				$extension = pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION);
-				if($extension == "doc" || $extension == "docx" || $extension == "pdf" || $extension == "xsl")
+				if($extension == "doc" || $extension == "docx" || $extension == "pdf" || $extension == "xsl" || $extension == "jpeg" || $extension == "jpg" || $extension == "png")
 				{
 					$random_name = rand();
 					Storage::disk('uploads')->putFileAs('assignments', $tmpFilePath, $random_name.".".$extension);
