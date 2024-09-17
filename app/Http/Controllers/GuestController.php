@@ -52,7 +52,7 @@ class GuestController extends Controller
 	{
 		$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')
 					->whereJsonContains('user_role.levels', '2')
-					->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at', 'users.title', 'users.profile_pic')
+					->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at', 'users.title', 'users.profile_pic', 'users.description')
 					->orderByDesc('id')
 					->get();
 		

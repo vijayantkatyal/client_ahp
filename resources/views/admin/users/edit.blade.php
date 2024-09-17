@@ -216,6 +216,12 @@
 								</div>
 							</div>
 							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Description</label>
+								<div class="col">
+									<textarea type="text" name="description" id="" class="form-control">{{ $user->description }}</textarea>
+								</div>
+							</div>
+							<div class="form-group mb-3 row">
 								<label class="form-label col-12 col-sm-3 col-form-label">Profile Pic</label>
 								<div class="col">
 									<img src="{{ asset($user->profile_pic) }}" alt=""/>

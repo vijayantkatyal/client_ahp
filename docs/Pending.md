@@ -5,20 +5,20 @@
 [Done] one single user registration form
 [Done] phone number in every user
 
+[Done] board members description to be added
+[Done] board member pics in the list
+
 [Working]
 
 [ToDo]
 
 [Quick]
 
-> board members description to be added
-
 > email id confirmation
 > label change - school registration
 > membership type = annual , life 
 > Tree on left menu shud not collapse.
 > event slide show or lazy load for all pics
-> board member pics in the list
 > prefilled password in new create user via admin page
 > student and teachers attendance via current date and one week all dates to be picked up from school calendar
 > multiple assignment files instead of one

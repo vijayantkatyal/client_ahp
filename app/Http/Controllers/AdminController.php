@@ -92,7 +92,7 @@ class AdminController extends Controller
 			if($request->filter == "board_members")
 			{
 				$filter = "Board Member(s)";
-				$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '2')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at')->orderByDesc('id')->get();
+				$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '2')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at', 'users.profile_pic')->orderByDesc('id')->get();
 			}
 
 			// principals
@@ -374,7 +374,8 @@ class AdminController extends Controller
 	{
 
 		\App\Models\User::where('id', $request->input('user_id'))->update([
-			'title'	=>	$request->input('title')
+			'title'			=>	$request->input('title'),
+			'description'	=>	$request->input('description')
 		]);
 
 		$file_to_upload = $request->file('file');

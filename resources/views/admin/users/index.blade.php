@@ -151,7 +151,11 @@
 											<td>
 												<div class="d-flex py-1 align-items-center">
 													<span class="avatar me-2">
+														@if($user->profile_pic)
+														<img src="{{ asset($user->profile_pic) }}" class="img-fluid rounded" alt="">
+														@else
 														{{ substr($user->first_name, 0, 1) }}{{ substr($user->last_name, 0, 1) }}
+														@endif
 													</span>
 													<div class="flex-fill">
 														<div class="font-weight-medium text-capitalize">{{ $user->first_name }} {{ $user->last_name }}</div>

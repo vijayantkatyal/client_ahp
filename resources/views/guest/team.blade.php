@@ -28,9 +28,9 @@
 					<h4>{{ $user->first_name }} {{ $user->last_name }}</h4>
 				</a>
 				<h6>{{ $user->title }}</h6>
-				<!-- <p>
-					Incidunt accusamus necessitatibus modi adipisci officia libero accusantium esse hic, obcaecati, ullam, laboriosa
-				</p> -->
+				<p>
+					{{ $user->description }}
+				</p>
 			</div>
 		</div>
 		@endforeach
