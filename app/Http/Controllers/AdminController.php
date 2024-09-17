@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use Mail;
 
@@ -43,6 +44,7 @@ use App\Models\StudentClass;
 use App\Models\User as ModelsUser;
 use App\Models\VidChapterProject;
 use Google\Service\StreetViewPublish\Level;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -1931,7 +1933,7 @@ class AdminController extends Controller
 			$students = \App\Models\User
 						::join('student_classes', 'users.id', '=', 'student_classes.student_id')
 						->where('student_classes.class_id', $id)
-						->select('users.id', 'users.first_name', 'users.last_name')
+						->select('users.id', 'users.first_name', 'users.last_name', 'users.email')
 						->get();
 
 			// return $students;
@@ -2151,6 +2153,110 @@ class AdminController extends Controller
 
         return "done";
     }
+
+	// report
+	public function getReportPDFDownload($uid, $cid, Request $request)
+	{
+		//return json_encode($request->all());
+
+		// get student
+		$user = User::where('id', $uid)->select('id', 'first_name', 'last_name')->first();
+		
+		// get class info
+		$class = Classes::where('id', $cid)->first();
+
+		if($user && $class)
+		{
+			// get class start time and end time
+			$start_date = date('Y-m-d', strtotime($class->start_date));
+			
+			$end_date = date('Y-m-d', strtotime($class->end_date));
+
+			// get all dates till now
+
+			$days = [];
+
+			// get calendar dates
+			$calendar_days = CalendarSchool::select('date')->get();
+
+            $today_date = date('Y-m-d');
+
+			if($today_date > $end_date)
+			{
+				$today_date = $end_date;
+			}
+
+			$range = null;
+
+			if($request->filled('range'))
+			{
+				$range = $request->input("range");
+			}
+
+			foreach ($calendar_days as $day)
+			{
+				// omit old dates
+
+				$item_date = date('Y-m-d', strtotime($day->date));
+
+				if($request->filled('range'))
+				{
+					$dates = explode(" - ", $request->input('range'));
+
+					if($item_date >= $dates[0] && $dates[1] >= $item_date )
+					{
+						array_push($days, $day);
+					}
+				}
+				else
+				{
+					if($item_date >= $start_date && $item_date <= $today_date)
+					{
+						array_push($days, $day);
+					}
+				}
+			}
+
+			// return $days;
+
+			// get attendance of each day
+
+			foreach ($days as $adate)
+			{
+				$current_status = "-";
+
+				$get_status = Attendance::where('user_id', $uid)->where('class_id', $cid)->where('date', $adate["date"])->first();
+				if($get_status)
+				{
+					if($get_status->present)
+					{
+						$current_status = "Present";
+					}
+					else
+					{
+						$current_status = "Absent";
+					}
+				}
+
+				$adate["status"] = $current_status;
+			}
+
+			$data = [
+				"title"	=>	"Attendance",
+				"user"	=>	$user,
+				"class"	=>	$class,
+				"days"	=>	$days,
+
+				"start_date"	=>	$start_date,
+				"end_date"		=>	$today_date
+			];
+	
+			$pdf = Pdf::loadView('pdf.student_single_attendance', $data);  
+			return $pdf->download($user->first_name.'.pdf');
+
+			// return view('pdf.student_single_attendance');
+		}
+	}
 
 	// resources
 

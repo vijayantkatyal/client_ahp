@@ -38,6 +38,8 @@
 [ToDo]
 
 > student attendance with single student and entire class student attendance in one report.
+- download single student pdf attendance report
+
 > teachers addentance export as pdf and xls  with date range
 
 ..
