@@ -31,6 +31,8 @@
 [Done] add bulk students from class link / edit class
 [Done] assignment adding every type of files not just pdf add pic files
 
+[Done] email id confirmation
+
 [Working]
 
 [ToDo]
@@ -38,8 +40,6 @@
 > student attendance with single student and entire class student attendance in one report.
 > teachers addentance export as pdf and xls  with date range
 
-[?] assigned column name change
-
-> email id confirmation
-
 [Long]
+
+[?] assigned column name change

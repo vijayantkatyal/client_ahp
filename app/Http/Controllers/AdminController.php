@@ -234,10 +234,10 @@ class AdminController extends Controller
 				Config::set('mail.password', $site_settings->password);
 				Config::set('mail.from',  ['address' => $site_settings->from_address , 'name' => $site_settings->from_name]);
 				
-				Mail::send('emails.welcome', $data, function($message) use ($emails_to)
-				{
-					$message->to($emails_to['email'], $emails_to['name'])->subject($emails_to['subject']);
-				});
+				// Mail::send('emails.welcome', $data, function($message) use ($emails_to)
+				// {
+				// 	$message->to($emails_to['email'], $emails_to['name'])->subject($emails_to['subject']);
+				// });
 			}
 
 			return redirect()->route('get_admin_users_index')->with('status.success', 'User Created.');

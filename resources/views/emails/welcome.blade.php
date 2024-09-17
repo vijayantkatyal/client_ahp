@@ -1,14 +1,13 @@
 Hi, {{ $name }}.
 <br><br>
-<b>Welcome to {{ $app_name }}.</b>
+<b>Welcome to AHP.</b>
 <br><br>
-Here is your login access to the dashboard.
+Here is your login access.
 <br><br>
-Login URL: <a href="{{ $app_domain }}/login">{{ $app_domain }}/login</a>
+Login URL: <a href="https://ahp.alphait.ca/login">https://ahp.alphait.ca/login</a>
 <br><br>
-Username: {{ $email }}
+Email: {{ $email }}
 <br><br>
-Password: {{ $password}}
+Verification Code: {{ $code }}
 <br><br>
-
-- {{ $app_name }} Team
+<a href="https://ahp.alphait.ca/verify?email={{ $email }}&code={{ $code }}">Verify Account</a>

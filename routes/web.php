@@ -60,6 +60,9 @@ Route::group(
 		Route::post('/register', [AccountController::class, 'postRegister'])->name('post_register_route');
 
 		Route::get('/reset', [AccountController::class, 'getReset'])->name('get_admin_reset_route');
+
+		Route::get('/verify', [AccountController::class, 'getVerify'])->name('get_admin_verify_route');
+		Route::post('/verify', [AccountController::class, 'postVerify'])->name('post_admin_verify_route');
     }
 );
 

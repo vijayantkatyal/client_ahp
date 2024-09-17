@@ -195,7 +195,7 @@ class AccountController extends Controller
                     
                 //     Mail::send('emails.welcome', $data, function($message) use ($emails_to)
                 //     {
-                //         $message->to($emails_to['email'], $emails_to['name'])->subject('Welcome To MyBrand Bot');
+                //         $message->to($emails_to['email'], $emails_to['name'])->subject('Welcome To AHP');
                 //     });
                 // }
 
@@ -220,4 +220,69 @@ class AccountController extends Controller
 	{
 		return view('account.reset');
 	}
+
+    public function getVerify(Request $request)
+    {
+        $email = "";
+        $code = "";
+
+        if($request->filled('email'))
+        {
+            $email = $request->input('email');    
+        }
+
+        if($request->filled('code'))
+        {
+            $code = $request->input('code');
+        }
+
+        return view('account.verify')->with('email', $email)->with('code', $code);
+    }
+
+    public function postVerify(Request $request)
+    {
+        try{
+            // validate
+            $isValid =  Validator::make($request->all(), [
+                'email' =>  'required|string|email|min:5|max:50',
+                'code'  =>  'required'
+            ]);
+            
+            if($isValid->fails()){
+                $messages = $isValid->messages();
+                return redirect()->route('get_admin_verify_route')->withErrors($isValid)->withInput();
+            }
+            else
+            {
+                $user = User::where('email', $request->input('email'))->first();
+                if($user)
+                {
+                    if($user->email_token == $request->input('code'))
+                    {
+                        // verify
+                        User::where('email', $request->input('email'))->update([
+                            'enabled'   =>  true
+                        ]);
+
+                        return redirect($request->header('Referer'))
+                            ->with('status.success', 'Email Verified & Account Enabled');
+                    }
+                    else
+                    {
+                        return redirect($request->header('Referer'))
+                            ->with('email', $request->input('email'))
+                            ->with('code', $request->input('code'))
+                            ->with('status.error', 'Not Valid');
+                    }
+                }
+            }
+        }
+        catch(\Exception $ex)
+        {
+            return redirect($request->header('Referer'))
+                            ->with('email', $request->input('email'))
+                            ->with('code', $request->input('code'))
+                            ->with('status.error', 'Not Valid');
+        }
+    }
 }
