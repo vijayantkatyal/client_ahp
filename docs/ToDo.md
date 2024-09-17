@@ -65,6 +65,8 @@ Note: attendance app should be able to count percentage.
 ✅ only one class (but can join other class)
 ✅ student can see total marks obtained for specific assignment.
 
+[Done] attendance, show old data (using date range)
+
 [Working]
 
 [ToDo]
@@ -91,39 +93,11 @@ Note: attendance app should be able to count percentage.
 ✅ Class wise - students marks , app should count percentage  (teacher can assign marks to assignment, and can see total percentage)
 - see own attendance for multiple classes
 
-
-- [visitor-area] top bar alert for new upcoming event
-- schedule notification email (general, event) (all or specific group)
-
 [Later]
-
-> attendance, show old data (using date range)
-
-> misc
-- Review forms (google review for Hindi School)
-- AHP other programas
-- Newsletter monthly/by monthly 
-- Volunteer opportunities
-- Contact us
-
-> CMS
-- index page
-- mission
-- members
-- about
-- blog
-- contact us messages
-
-Resources
-> files uploaded
-> Event drama scripts - Category wise (file or text input)
-> Picture / Video Gallery 
-> Communication
 
 [feedback]
 
 [Done] email verification by code
-- added functions, will enable when recieve email credentials to test.
 [Done] admin area collpase menu fix
 [Done] board member pic
 [Done] pre-fiiled password (when admin create)
@@ -136,5 +110,3 @@ Resources
 [Done] teacher attendance (0.5 -> 10 hours)
 ✅ hourly rate
 ✅ attendance hours
-
-> excel report (attendance) teacher specific (date range)

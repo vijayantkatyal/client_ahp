@@ -40,6 +40,32 @@
 > student attendance with single student and entire class student attendance in one report.
 > teachers addentance export as pdf and xls  with date range
 
-[Long]
+> Picture / Video Gallery 
+
+..
+
+> Communication
+> schedule notification email (general, event) (all or specific group) (message, event)
+
+- Contact us form submit
+
+> CMS
+- index page
+- mission
+- members
+- about
+- blog
+- contact us messages
+- [visitor-area] top bar alert for new upcoming event
+
+[?]
 
 [?] assigned column name change
+[?] Review forms (google review for Hindi School)
+[?] AHP other programas
+[?] Newsletter monthly/by monthly 
+[?] Volunteer opportunities
+
+[?] Resources
+> files uploaded
+> Event drama scripts - Category wise (file or text input)
