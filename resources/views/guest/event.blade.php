@@ -32,6 +32,15 @@
         </div>
         @endforeach
     </div>
+
+    @if($total > 9)
+    <div class="text-center">
+        @for($i = 0; $i < ($total / 9); $i++)
+            <a href="{{ route('get_event_details', $event->id) }}?page={{ $i+1 }}" @if($i+1 == $current_page) class="btn btn-primary" @else class="btn btn-danger" @endif>Page {{ $i + 1 }}</a>
+        @endfor
+    </div>
+    @endif
+    
     <!-- /gallery-isotope-->
 </div>
 <!-- /page --></div>

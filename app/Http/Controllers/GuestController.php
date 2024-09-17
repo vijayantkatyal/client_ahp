@@ -108,8 +108,29 @@ class GuestController extends Controller
 		$event = SchoolEvents::where('id', $id)->first();
 		if($event)
 		{
-			$photos = SchoolEventPhotos::where('event_id', $id)->get();
-			return view('guest.event')->with('event', $event)->with('photos', $photos);
+			$current_page = 1;
+
+			if($request->filled('page'))
+			{
+				$current_page = $request->input('page');
+				$skip = ($request->input('page') - 1) * 9;
+			}
+			else
+			{
+				$skip = 0;
+			}
+
+			// return $current_page ." -- ". $skip;
+
+			$total = SchoolEventPhotos::where('event_id', $id)->count();
+
+			$photos = SchoolEventPhotos::where('event_id', $id)->skip($skip)->take(9)->get();
+			
+			return view('guest.event')
+				->with('event', $event)
+				->with('photos', $photos)
+				->with('total', $total)
+				->with('current_page', $current_page);
 		}
 	}
 

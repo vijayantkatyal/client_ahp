@@ -20,14 +20,13 @@
 
 [Done] students assignments total number of marks
 
+[Done] event slide show or lazy load for all pics
+
 [Working]
 
 [ToDo]
 
-[Quick]
-
-> event slide show or lazy load for all pics
-> assigned column name change
+[?] assigned column name change
 
 [Medium]
 
