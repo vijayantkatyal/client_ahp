@@ -173,7 +173,7 @@
 
 <body>
     <div>
-        <h4>Student: {{ $user->first_name }} {{ $user->last_name }}</h4>
+        <h4>{{ $user->first_name }} {{ $user->last_name }}</h4>
         <h4>Class: {{ $class->name }} ({{ $class->start_date }} - {{ $class->end_date }})</h4>
         <h4>Attendance from: {{ $start_date }} to {{ $end_date }}</h4>
     </div>
