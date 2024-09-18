@@ -91,6 +91,7 @@
 										@foreach($days as $day)
 											<th class="text-center">{{ $day['day'] }} ({{ $day['date'] }})</th>
 										@endforeach
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -117,6 +118,9 @@
                                                 </span> -->
 											</td>
                                             @endforeach
+											<td class="text-end">
+												<a href="{{ route('get_admin_download_report_pdf_student', ['uid' => $user->id, 'cid' => $class->id]) }}?range={{ $range }}" class="btn btn-outline-primary" title="download attendance of selected student">Download PDF</a>
+											</td>
 										</tr>
 									@endforeach
 								</tbody>

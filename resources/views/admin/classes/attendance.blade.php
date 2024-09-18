@@ -40,7 +40,7 @@
 								<a class="btn btn-info me-1" href="{{ route('get_admin_class_attendance', $class->id) }}" title="Reset Filter and show all data">Reset</a>
 							@endif
 						</form>
-						<a href="#" class="btn btn-primary">
+						<a href="#" class="btn btn-primary" title="download attendance of all students">
 							<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
 							Download Attendance (PDF)
 						</a>
@@ -96,6 +96,7 @@
 										@foreach($days as $day)
 											<th class="text-center">{{ $day['day'] }} ({{ $day['date'] }})</th>
 										@endforeach
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -107,7 +108,9 @@
 														{{ substr($user->first_name, 0, 1) }}{{ substr($user->last_name, 0, 1) }}
 													</span>
 													<div class="flex-fill">
-														<div class="font-weight-medium text-capitalize">{{ $user->first_name }} {{ $user->last_name }}</div>
+														<div class="font-weight-medium text-capitalize">
+															{{ $user->first_name }} {{ $user->last_name }}
+														</div>
 														<div class="text-muted">
 															<a href="#" class="text-reset">{{ $user->email }}</a>
 														</div>
@@ -122,6 +125,9 @@
                                                 </span> -->
 											</td>
                                             @endforeach
+											<td class="text-end">
+												<a href="{{ route('get_admin_download_report_pdf_student', ['uid' => $user->id, 'cid' => $class->id]) }}?range={{ $range }}" class="btn btn-outline-primary" title="download attendance of selected student">Download PDF</a>
+											</td>
 										</tr>
 									@endforeach
 								</tbody>

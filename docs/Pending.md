@@ -33,14 +33,17 @@
 
 [Done] email id confirmation
 
+[Done] student attendance with single student and entire class student attendance in one report.
+✅ download single student pdf attendance report
+- for all - zip queue
+
+[Done] teachers addentance export as pdf and xls  with date range
+✅ download single student pdf attendance report
+- for all - zip queue
+
 [Working]
 
 [ToDo]
-
-> student attendance with single student and entire class student attendance in one report.
-> teachers addentance export as pdf and xls  with date range
-
-..
 
 > Communication
 > schedule notification email (general, event) (all or specific group) (message, event)

@@ -169,9 +169,6 @@
 													<a href="{{ route('get_admin_users_edit', ['id' => $user->id]) }}" class="btn btn-white">
 														Edit
 													</a>
-													<a href="{{ route('get_admin_users_edit', ['id' => $user->id]) }}" class="btn btn-white">
-														Attendance Report
-													</a>
 												</div>
 											</td>
 										</tr>
