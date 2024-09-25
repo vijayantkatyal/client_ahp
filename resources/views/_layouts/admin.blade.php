@@ -330,7 +330,7 @@
 
 	<script>
 		 $(".delete_a_thing").click(function(e){
-			var answer = confirm("Do you want to delete ?");
+			var answer = confirm("Do you want to do this?");
 			
 			if(!answer) {
 				e.preventDefault();

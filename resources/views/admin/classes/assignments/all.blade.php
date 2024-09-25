@@ -105,7 +105,7 @@
                                                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-dots-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
                                             </button>
                                             <ul class="dropdown-menu">        
-                                                <button class="dropdown-item" onclick="event.preventDefault();document.getElementById('assign-assignment-{{ $assignment->id }}').submit();">
+                                                <button class="dropdown-item assign_assignment" data-id="{{ $assignment->id }}">
                                                     Assign
                                                 </button>
                                                 <form id="assign-assignment-{{ $assignment->id }}" action="{{ route('post_assign_class_assignment') }}" method="POST" style="display: none;">
@@ -275,6 +275,20 @@
 
 <script>
     $("select[name=course_id]").val("{{ $class->course_id }}");
+
+    $(".assign_assignment").click(function(){
+    
+        var answer = confirm("Do you want to do this?");
+			
+        if(!answer) {
+            e.preventDefault();
+        }
+
+        var _id = $(this).attr("data-id");
+        // alert(_id);
+
+        document.getElementById('assign-assignment-'+_id).submit();
+    })
 </script>
 
 @endsection
