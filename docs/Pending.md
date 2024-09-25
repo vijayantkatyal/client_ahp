@@ -74,19 +74,3 @@
 [?] Picture / Video Gallery 
 
 ...
-
-phone in users list
-class name in index (start date - end date)
-export table (xsl, pdf)
-membership / student - mass deactivate
-
-school signup / enrolment email (message)
-field trip acknowledgement (dynamic text)
-
-single pdf (bulk)
-
-confirm box for assigning assignment / delete anything
-
-pdf download - attendance percentage
-
-tag on resources

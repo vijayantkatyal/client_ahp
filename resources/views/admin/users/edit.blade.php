@@ -146,6 +146,24 @@
 									@endif
 								</div>
 							</div>
+
+							<div class="form-group mb-3 row">
+								<label for="" class="form-label col-12 col-sm-3 col-form-label">Phone</label>
+								<div class="col">
+									<input
+										type="text" name="phone" required
+										@if($errors->has('phone'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('phone', $user->phone) }}"
+									/>
+									@if($errors->has('phone'))
+										<div class="invalid-feedback">{{ $errors->first('phone') }}</div>
+									@endif
+								</div>
+							</div>
 							
 							<div class="form-group mb-3 row">
 								<label class="form-label col-12 col-sm-3 col-form-label">Plan / Level</label>

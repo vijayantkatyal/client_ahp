@@ -3,6 +3,7 @@
 @section('header')
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css"/>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.12.0/css/buttons.bootstrap5.min.css">
 
 <style>
 	.table-responsive {
@@ -136,6 +137,7 @@
 												<polyline points="6 15 12 9 18 15" />
 											</svg>
 										</th>
+										<th>Phone</th>
 										<th>Type</th>
 										<th>Status</th>
 										<th>Added on</th>
@@ -162,8 +164,14 @@
 														<div class="text-muted">
 															<a href="#" class="text-reset">{{ $user->email }}</a>
 														</div>
+														@foreach($user->classes as $class_info)
+															<span class="badge bg-green-lt">{{ $class_info }}</span>
+														@endforeach
 													</div>
 												</div>
+											</td>
+											<td>
+												{{ $user->phone }}
 											</td>
 											<td>
 												@if($user->plan_name != null && $user->owner_details == null)
@@ -416,6 +424,15 @@
 
 	<script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap5.min.js"></script>
+	
+	<script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.bootstrap4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
+
 
 	<script>
 		$('.datatable').DataTable({
@@ -428,7 +445,10 @@
 			'order': [4, 'desc'],
 			"lengthMenu": [ [5, 10, 25, 50, 100, 500, 1000, 2000 -1], [5, 10, 25, 50, 100, 500, 1000, 2000, "All"] ],
 			"pageLength": {{ config('isotopekit_admin.defaultLength') }},
-			dom: '<"card-body"<"d-flex"<l><"ms-auto"f>>>rt<"card-body"<"d-flex"<i><"ms-auto"p>>><"clear">'
+			dom: 'B<"card-body"<"d-flex"<l><"ms-auto"f>>>rt<"card-body"<"d-flex"<i><"ms-auto"p>>><"clear">',
+			buttons: [
+				'copy', 'csv', 'excel', 'pdf', 'print'
+			]
 		});
 	</script>
 

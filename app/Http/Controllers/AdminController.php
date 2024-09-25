@@ -84,7 +84,7 @@ class AdminController extends Controller
 	{
 		$admin_accounts = config('isotopekit_admin.account_list');
 		$plans = Levels::where('id', '!=', '1')->get();
-		$users = \App\Models\User::whereNotIn('id', $admin_accounts)->select('id','first_name', 'last_name', 'email', 'enabled', 'created_at', 'created_by')->orderByDesc('id')->get();
+		$users = \App\Models\User::whereNotIn('id', $admin_accounts)->select('id','first_name', 'last_name', 'email', 'enabled', 'created_at', 'created_by', 'phone')->orderByDesc('id')->get();
 
 		$filter = "All";
 
@@ -151,7 +151,27 @@ class AdminController extends Controller
 					}
 				}
 			}
+
+			$user->classes = [];
+
+			// add class info
+			if($request->filter == "students")
+			{
+				$user_classes = [];
+
+				$classes_info = StudentClass::where('student_id', $user->id)->get();
+				foreach ($classes_info as $class_info)
+				{
+					$get_class_info = Classes::where('id', $class_info->class_id)->first();
+					$class_item_info = $get_class_info->name." (".$get_class_info->start_date." - ".$get_class_info->end_date.")";
+					array_push($user_classes, $class_item_info);
+				}
+
+				$user->classes = $user_classes;
+			}
 		}
+
+		// return $users;
 
 		$classes = Classes::join('courses', 'classes.course_id', '=', 'courses.id')
 					->select('classes.id', 'courses.name as course_name', 'classes.name', 'classes.start_date', 'classes.end_date', 'courses.id as course_id')
@@ -343,6 +363,7 @@ class AdminController extends Controller
 				$user->first_name = $request->input('first_name');
 				$user->last_name = $request->input('last_name');
 				$user->email = $request->input('email');
+				$user->phone = $request->input('phone');
 				$user->save();
 
 				$user_role = \App\Models\User_Role::where('user_id', $id)->first();
