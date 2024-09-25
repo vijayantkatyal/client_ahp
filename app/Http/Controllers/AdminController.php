@@ -2331,7 +2331,8 @@ class AdminController extends Controller
 					ClassResource::insert([
 						'class_id'	=>	$request->input('class_id'),
 						'file_path'	=>	$path,
-						'type'		=>	'photo'
+						'type'		=>	'photo',
+						'tag'		=>	$request->input('tag')
 					]);
 				}
 			}
@@ -2367,7 +2368,8 @@ class AdminController extends Controller
 					ClassResource::insert([
 						'class_id'	=>	$request->input('class_id'),
 						'file_path'	=>	$path,
-						'type'		=>	'video'
+						'type'		=>	'video',
+						'tag'		=>	$request->input('tag')
 					]);
 				}
 			}
@@ -2402,7 +2404,8 @@ class AdminController extends Controller
 					ClassResource::insert([
 						'class_id'	=>	$request->input('class_id'),
 						'file_path'	=>	$path,
-						'type'		=>	'docs'
+						'type'		=>	'docs',
+						'tag'		=>	$request->input('tag')
 					]);
 				}
 			}
@@ -2418,7 +2421,8 @@ class AdminController extends Controller
 			'type'		=>	'note',
 			'name'		=>	$request->input('name'),
 			'description'		=>	$request->input('description'),
-			'date'		=>	$request->input('date')
+			'date'		=>	$request->input('date'),
+			'tag'		=>	$request->input('tag')
 		]);
 
 		return redirect($request->header('Referer'))->with('status.success', 'Note Added');

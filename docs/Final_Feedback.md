@@ -3,11 +3,11 @@
 [Done] class name in index (start date - end date)
 [Done] phone in users list
 [Done] export table (xsl, pdf)
+[Done] tag on resources
 
 [Working]
 
 > confirm box for assigning assignment / delete anything
-> tag on resources
 
 [ToDo]
 
