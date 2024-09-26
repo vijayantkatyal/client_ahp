@@ -11,6 +11,7 @@ use App\Models\FormMembership;
 use App\Models\FormRegistration;
 use App\Models\SchoolEventPhotos;
 use App\Models\SchoolEvents;
+use App\Models\Terms;
 use App\Models\User;
 use App\Models\User_Role;
 use Session;
@@ -36,6 +37,16 @@ class GuestController extends Controller
 	public function getGallery()
 	{
 		return view('guest.gallery');
+	}
+
+	public function getTerms(Request $request, $type)
+	{
+		if($type == "signup" || $type == "field")
+		{
+			$term = Terms::where('type', $type)->first();
+			return view('guest.terms')->with('term', $term);
+		}
+		return redirect()->route('get_index');
 	}
 
 	public function getAbout()

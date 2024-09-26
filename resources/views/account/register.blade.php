@@ -17,7 +17,7 @@
 			<form class="card card-md" action="{{ route('post_register_route') }}" method="post">
 				{{ csrf_field() }}
 				<div class="card-body">
-                    <h2 class="card-title text-center mb-4">Register as Student</h2>
+                    <h2 class="card-title text-center mb-4">Register</h2>
 					<div class="mb-3">
 						<label class="form-label">First Name</label>
 						<input
@@ -104,6 +104,14 @@
 							<option value="6">Member</option>
 						</select>
 					</div>
+
+					<br/>
+
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck1" required/>
+						<label class="form-check-label" style="margin-top: 0px;" for="exampleCheck1">I Accept <a target="_blank" href="{{ route('get_terms',['type' => 'signup']) }}">Terms & Conditions</a>.</label>
+					</div>
+
 					<div class="form-footer">
 						<button type="submit" class="btn btn-primary w-100">Sign Up</button>
 					</div>

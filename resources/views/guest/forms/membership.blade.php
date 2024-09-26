@@ -142,6 +142,13 @@
                 </div>
                 
                 <br/>
+
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" required/>
+                    <label class="form-check-label" style="margin-top: 0px;" for="exampleCheck1">I Accept <a target="_blank" href="{{ route('get_terms',['type' => 'signup']) }}">Terms & Conditions</a>.</label>
+                </div>
+                
+                <br/>
                 <div class="text-center">
                     <button type="submit" class="btn btn-success btn-lg">Submit</button>
                 </div>

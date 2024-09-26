@@ -28,6 +28,8 @@ Route::get('/contact', [GuestController::class, 'getContact'])->name('get_contac
 Route::get('/events', [GuestController::class, 'getEvents'])->name('get_events');
 Route::get('/event/{id}', [GuestController::class, 'getEventDetails'])->name('get_event_details');
 
+Route::get('/terms/{type}', [GuestController::class, 'getTerms'])->name('get_terms');
+
 Route::get('/forms', [GuestController::class, 'getForms'])->name('get_forms');
 Route::get('/calendar', [GuestController::class, 'getCalendar'])->name('get_calendar');
 Route::get('/calendar/school', [GuestController::class, 'getCalendarSchool'])->name('get_calendar_school');

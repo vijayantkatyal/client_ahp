@@ -12,13 +12,12 @@
 
 [Done] admin can manage field and signup terms
 
+[Done] field trip acknowledgement (dynamic text)
+[Done] school signup / enrolment email (message)
+
 [Working]
 
 [ToDo]
-
-> field trip acknowledgement (dynamic text)
-
-> school signup / enrolment email (message)
 
 --------
 
