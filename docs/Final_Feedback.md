@@ -8,6 +8,7 @@
 [Done] membership / student - mass deactivate
 [Done] pdf download - attendance percentage
 [Done] single pdf (bulk)
+[Done] single excel (bulk)
 
 [Working]
 

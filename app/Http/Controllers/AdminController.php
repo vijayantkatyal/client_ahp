@@ -2337,7 +2337,6 @@ class AdminController extends Controller
 		//return json_encode($request->all());
 
 		// get students
-		// $users = User::
 		$users = \App\Models\User
 						::join('student_classes', 'users.id', '=', 'student_classes.student_id')
 						->where('student_classes.class_id', $cid)
@@ -2647,6 +2646,188 @@ class AdminController extends Controller
 
 			return response()->download($filename);
 		}
+	}
+
+	// report excel
+	public function getReportExcelMDownload($cid, Request $request)
+	{
+		// get students
+		$users = \App\Models\User
+						::join('student_classes', 'users.id', '=', 'student_classes.student_id')
+						->where('student_classes.class_id', $cid)
+						->select('users.id', 'users.first_name', 'users.last_name', 'users.email')
+						->get();
+
+		// get class info
+		$class = Classes::where('id', $cid)->first();
+
+		$filename = public_path("/tmp/".$class->name.'_attendance.xlsx');
+		
+		$spreadsheet = new Spreadsheet();
+
+		foreach ($users as $user_index => $user)
+		{
+			// get student
+			$user = User::where('id', $user->id)->select('id', 'first_name', 'last_name')->first();
+
+			$attendance_percentage = "0%";
+
+			if($user && $class)
+			{
+				// get class start time and end time
+				$start_date = date('Y-m-d', strtotime($class->start_date));
+				
+				$end_date = date('Y-m-d', strtotime($class->end_date));
+
+				// get all dates till now
+
+				$days = [];
+
+				// get calendar dates
+				$calendar_days = CalendarSchool::select('date')->get();
+
+				$today_date = date('Y-m-d');
+
+				if($today_date > $end_date)
+				{
+					$today_date = $end_date;
+				}
+
+				$range = null;
+
+				if($request->filled('range'))
+				{
+					$range = $request->input("range");
+				}
+
+				foreach ($calendar_days as $day)
+				{
+					// omit old dates
+
+					$item_date = date('Y-m-d', strtotime($day->date));
+
+					if($request->filled('range'))
+					{
+						$dates = explode(" - ", $request->input('range'));
+
+						$start_date = date('Y-m-d', strtotime($dates[0]));
+						$end_date = date('Y-m-d', strtotime($dates[1]));
+
+						$today_date = date('Y-m-d');
+						if($today_date > $end_date)
+						{
+							$today_date = $end_date;
+						}
+
+						if($item_date >= $dates[0] && $dates[1] >= $item_date )
+						{
+							array_push($days, $day);
+						}
+					}
+					else
+					{
+						if($item_date >= $start_date && $item_date <= $today_date)
+						{
+							array_push($days, $day);
+						}
+					}
+				}
+
+				// return $days;
+
+				// get attendance of each day
+
+				$present_days = 0;
+
+				foreach ($days as $adate)
+				{
+					$current_status = "-";
+
+					$get_status = Attendance::where('user_id', $user->id)->where('class_id', $cid)->where('date', $adate["date"])->first();
+					if($get_status)
+					{
+						if($get_status->present)
+						{
+							$present_days++;
+							$current_status = "Present";
+						}
+						else
+						{
+							$current_status = "Absent";
+						}
+					}
+
+					$adate["status"] = $current_status;
+				}
+
+
+				if(count($days) == 0)
+				{
+					$attendance_percentage = "-";
+				}
+
+				if($present_days > 0 && count($days) > 0)
+				{
+					$attendance_percentage = number_format(floatval($present_days / count($days)) * 100, 2, '.', '')."%";
+				}
+
+				// return $data;
+
+				$response = [
+					[$user->first_name. " " .$user->last_name],
+					
+					[""],
+					
+					["Class: ".$class->name."(". $class->start_date." - ". $class->end_date],
+					["Attendance from: ".$start_date." to ". $end_date],
+					["Attendance Percentage: ". $attendance_percentage],
+					
+					[""],
+
+					["Date", "Status"],
+					[""],
+				];
+
+				foreach ($days as $day)
+				{
+					$item = [
+						$day["date"],
+						$day["status"]
+					];
+
+					array_push($response, $item);
+				}
+
+				// return $response;
+
+				if($user_index == 0)
+				{
+					$spreadsheet->getActiveSheet()->fromArray(
+						$response,
+						NULL,
+						'A1'
+					);
+
+					$spreadsheet->getActiveSheet()->setTitle($user->first_name." ".$user->last_name);
+				}
+				else
+				{
+					$spreadsheet->createSheet();
+					$spreadsheet->setActiveSheetIndex(1);
+					$spreadsheet->getActiveSheet()->fromArray(
+						$response,
+						NULL,
+						'A1'
+					);
+					$spreadsheet->getActiveSheet()->setTitle($user->first_name." ".$user->last_name);
+				}
+			}
+		}
+
+		$writer = new Xlsx($spreadsheet);
+		$writer->save($filename);
+
+		return response()->download($filename);
 	}
 
 	// resources

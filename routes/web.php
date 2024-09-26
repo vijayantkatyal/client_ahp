@@ -202,6 +202,7 @@ Route::group(
 
 		// report multiple
 		Route::get('/report/mpdf{cid}', [AdminController::class, 'getReportPDFMDownload'])->name('get_admin_download_report_pdf_m_student');
+		Route::get('/report/mexcel/{cid}', [AdminController::class, 'getReportExcelMDownload'])->name('get_admin_download_report_excel_m_student');
 
 		// reg forms
 		Route::get('/forms/registration', [AdminController::class, 'getFormsRegistration'])->name('get_admin_forms_registration');
