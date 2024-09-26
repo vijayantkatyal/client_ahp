@@ -198,6 +198,7 @@ Route::group(
 
 		// report
 		Route::get('/report/pdf/{uid}/{cid}', [AdminController::class, 'getReportPDFDownload'])->name('get_admin_download_report_pdf_student');
+		Route::get('/report/excel/{uid}/{cid}', [AdminController::class, 'getReportExcelDownload'])->name('get_admin_download_report_excel_student');
 
 		// reg forms
 		Route::get('/forms/registration', [AdminController::class, 'getFormsRegistration'])->name('get_admin_forms_registration');

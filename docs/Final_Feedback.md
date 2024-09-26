@@ -29,7 +29,7 @@ student creation terms and condition editable and sent to
 field trip enrollment accepted via event 
 field disclaimer to be signed online only remove download button
 
-export in pdf and exl both formats
+[Done] export in pdf and exl both formats
 [Done] assignemnt confirmation box 
 
 [Done] student attendance pdf download total attendance in percentage
