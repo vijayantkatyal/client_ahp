@@ -111,7 +111,7 @@
 															data-bs-boundary="viewport"
 															data-bs-toggle="dropdown">Actions</button>
 														<div class="dropdown-menu dropdown-menu-end">
-															<button class="dropdown-item text-red" onclick="event.preventDefault();document.getElementById('delete-user-{{ $event->id }}').submit();">
+															<button class="dropdown-item text-red delete_event" data-id="{{ $event->id }}">
 																<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 																	<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 																	<line x1="4" y1="7" x2="20" y2="7"></line>
@@ -304,6 +304,21 @@
 				document.getElementById('delete-users').submit();
 			}
 		});
+	</script>
+
+	<script>
+		$(".delete_event").click(function(){
+    
+			var answer = confirm("Do you want to do this?");
+				
+			if(!answer) {
+				e.preventDefault();
+			}
+
+			var _id = $(this).attr("data-id");
+
+			document.getElementById('delete-user-'+_id).submit();
+		})
 	</script>
 
 @endsection
