@@ -7,6 +7,7 @@
 [Done] confirm box for assigning assignment / delete anything
 [Done] membership / student - mass deactivate
 [Done] pdf download - attendance percentage
+[Done] single pdf (bulk)
 
 [Working]
 
@@ -15,7 +16,6 @@
 > field trip acknowledgement (dynamic text)
 
 > school signup / enrolment email (message)
-> single pdf (bulk)
 
 --------
 

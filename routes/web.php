@@ -196,9 +196,12 @@ Route::group(
 
 		Route::post('/g-attendance-hours', [AdminController::class, 'postAttendanceSingleHours'])->name('post_amin_class_attendance_single_hours');
 
-		// report
+		// report single
 		Route::get('/report/pdf/{uid}/{cid}', [AdminController::class, 'getReportPDFDownload'])->name('get_admin_download_report_pdf_student');
 		Route::get('/report/excel/{uid}/{cid}', [AdminController::class, 'getReportExcelDownload'])->name('get_admin_download_report_excel_student');
+
+		// report multiple
+		Route::get('/report/mpdf{cid}', [AdminController::class, 'getReportPDFMDownload'])->name('get_admin_download_report_pdf_m_student');
 
 		// reg forms
 		Route::get('/forms/registration', [AdminController::class, 'getFormsRegistration'])->name('get_admin_forms_registration');

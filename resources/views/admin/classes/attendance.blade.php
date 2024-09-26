@@ -40,7 +40,7 @@
 								<a class="btn btn-info me-1" href="{{ route('get_admin_class_attendance', $class->id) }}" title="Reset Filter and show all data">Reset</a>
 							@endif
 						</form>
-						<a href="#" class="btn btn-primary" title="download attendance of all students">
+						<a href="{{ route('get_admin_download_report_pdf_m_student', ['cid' => $class->id]) }}" class="btn btn-primary" title="download attendance of all students">
 							<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
 							Download Attendance (PDF)
 						</a>
