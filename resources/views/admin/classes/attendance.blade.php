@@ -187,10 +187,10 @@
 			// dom: '<"top"i>rt<"bottom"flp><"clear">'
 			'columnDefs': [{
          		'targets': 0,
-         		'searchable':false,
+         		'searchable':true,
          		'orderable':false
 			}],
-			'order': [4, 'desc'],
+			'order': [0, 'desc'],
 			"lengthMenu": [ [5, 10, 25, 50, 100, 500, 1000, 2000 -1], [5, 10, 25, 50, 100, 500, 1000, 2000, "All"] ],
 			"pageLength": {{ config('isotopekit_admin.defaultLength') }},
 			dom: '<"card-body"<"d-flex"<l><"ms-auto"f>>>rt<"card-body"<"d-flex"<i><"ms-auto"p>>><"clear">'

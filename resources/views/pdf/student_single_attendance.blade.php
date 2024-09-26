@@ -173,9 +173,10 @@
 
 <body>
     <div>
-        <h4>{{ $user->first_name }} {{ $user->last_name }}</h4>
+        <h2>{{ $user->first_name }} {{ $user->last_name }}</h2>
         <h4>Class: {{ $class->name }} ({{ $class->start_date }} - {{ $class->end_date }})</h4>
         <h4>Attendance from: {{ $start_date }} to {{ $end_date }}</h4>
+        <h4>Attendance Percentage: {{ $attendance_percentags }}</h4>
     </div>
     <table class="table">
         <thead>

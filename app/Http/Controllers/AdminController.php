@@ -2209,6 +2209,8 @@ class AdminController extends Controller
 		// get class info
 		$class = Classes::where('id', $cid)->first();
 
+		$attendance_percentage = "0%";
+
 		if($user && $class)
 		{
 			// get class start time and end time
@@ -2247,6 +2249,15 @@ class AdminController extends Controller
 				{
 					$dates = explode(" - ", $request->input('range'));
 
+					$start_date = date('Y-m-d', strtotime($dates[0]));
+					$end_date = date('Y-m-d', strtotime($dates[1]));
+
+					$today_date = date('Y-m-d');
+					if($today_date > $end_date)
+					{
+						$today_date = $end_date;
+					}
+
 					if($item_date >= $dates[0] && $dates[1] >= $item_date )
 					{
 						array_push($days, $day);
@@ -2265,6 +2276,8 @@ class AdminController extends Controller
 
 			// get attendance of each day
 
+			$present_days = 0;
+
 			foreach ($days as $adate)
 			{
 				$current_status = "-";
@@ -2274,6 +2287,7 @@ class AdminController extends Controller
 				{
 					if($get_status->present)
 					{
+						$present_days++;
 						$current_status = "Present";
 					}
 					else
@@ -2285,6 +2299,17 @@ class AdminController extends Controller
 				$adate["status"] = $current_status;
 			}
 
+
+			if(count($days) == 0)
+			{
+				$attendance_percentage = "-";
+			}
+
+			if($present_days > 0 && count($days) > 0)
+			{
+				$attendance_percentage = number_format(floatval($present_days / count($days)) * 100, 2, '.', '')."%";
+			}
+
 			$data = [
 				"title"	=>	"Attendance",
 				"user"	=>	$user,
@@ -2292,8 +2317,11 @@ class AdminController extends Controller
 				"days"	=>	$days,
 
 				"start_date"	=>	$start_date,
-				"end_date"		=>	$today_date
+				"end_date"		=>	$today_date,
+				"attendance_percentags" => $attendance_percentage
 			];
+
+			// return $data;
 	
 			$pdf = Pdf::loadView('pdf.student_single_attendance', $data);  
 			return $pdf->download($user->first_name.'.pdf');

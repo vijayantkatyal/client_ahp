@@ -6,6 +6,7 @@
 [Done] tag on resources
 [Done] confirm box for assigning assignment / delete anything
 [Done] membership / student - mass deactivate
+[Done] pdf download - attendance percentage
 
 [Working]
 
@@ -15,7 +16,6 @@
 
 > school signup / enrolment email (message)
 > single pdf (bulk)
-> pdf download - attendance percentage
 
 --------
 
@@ -32,7 +32,7 @@ field disclaimer to be signed online only remove download button
 export in pdf and exl both formats
 [Done] assignemnt confirmation box 
 
-student attendance pdf download total attendance in percentage
+[Done] student attendance pdf download total attendance in percentage
 student attendance grid show total attendance percentage in the grid 
 
 [Done] event delete confirmation box.
