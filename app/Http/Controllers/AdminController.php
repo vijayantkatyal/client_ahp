@@ -43,6 +43,7 @@ use App\Models\Site;
 use App\Models\StudentAssignment;
 use App\Models\StudentAssignmentThread;
 use App\Models\StudentClass;
+use App\Models\Terms;
 use App\Models\User as ModelsUser;
 use App\Models\VidChapterProject;
 use Google\Service\StreetViewPublish\Level;
@@ -3521,5 +3522,28 @@ class AdminController extends Controller
 	{
 		SchoolEventPhotos::where('id', $id)->delete();
 		return redirect($request->header('Referer'))->with('status.success', 'School Event Photo Deleted');
+	}
+
+	public function getFieldTerms(Request $request)
+	{
+		$term = Terms::where('type', 'field')->first();
+		return view('admin.terms.field')->with('term', $term);
+	}
+
+	public function getSignUpTerms(Request $request)
+	{
+		$term = Terms::where('type', 'signup')->first();
+		return view('admin.terms.signup')->with('term', $term);
+	}
+	
+	public function postTerm(Request $request, $type)
+	{
+		Terms::where('type', $type)->update([
+			'title'	=>	$request->input('title'),
+			'terms'	=>	$request->input('description')
+		]);
+		
+		return redirect($request->header('Referer'))->with('status.success', 'Updated');
+
 	}
 }

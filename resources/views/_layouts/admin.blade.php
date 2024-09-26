@@ -162,6 +162,29 @@
 								</div>
 							</div>
 						</li>
+
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true" >
+								<span class="nav-link-icon d-md-none d-lg-inline-block">
+									<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-checklist"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9.615 20h-2.615a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8" /><path d="M14 19l2 2l4 -4" /><path d="M9 8h4" /><path d="M9 12h2" /></svg>
+								</span>
+								<span class="nav-link-title">
+									Terms
+								</span>
+							</a>
+							<div class="dropdown-menu">
+								<div class="dropdown-menu-columns">
+									<div class="dropdown-menu-column">
+										<a class="dropdown-item" href="{{ route('get_admin_field_terms') }}">
+											Field Trip
+										</a>
+										<a class="dropdown-item" href="{{ route('get_admin_signup_terms') }}">
+											SignUp
+										</a>
+									</div>
+								</div>
+							</div>
+						</li>
 						@endif
 
 						@if(Auth::user()->isAdmin() === true || Auth::user()->isBoardMember() == true)

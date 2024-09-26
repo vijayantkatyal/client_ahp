@@ -10,6 +10,8 @@
 [Done] single pdf (bulk)
 [Done] single excel (bulk)
 
+[Done] admin can manage field and signup terms
+
 [Working]
 
 [ToDo]
@@ -34,7 +36,7 @@ field disclaimer to be signed online only remove download button
 [Done] assignemnt confirmation box 
 
 [Done] student attendance pdf download total attendance in percentage
-student attendance grid show total attendance percentage in the grid 
+[❌] student attendance grid show total attendance percentage in the grid 
 
 [Done] event delete confirmation box.
 

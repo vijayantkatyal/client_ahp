@@ -214,6 +214,12 @@ Route::group(
 		Route::get('/forms/mem/{id}/detail', [AdminController::class, 'getFormsMembershipDetail'])->name('get_admin_forms_membership_detail');
 		// Route::post('/forms/mem', [AdminController::class, 'postFormsMembershipDetail'])->name('post_admin_forms_membership_detail');
 
+		// terms
+		Route::get('/terms/field', [AdminController::class, 'getFieldTerms'])->name('get_admin_field_terms');
+		Route::get('/terms/signup', [AdminController::class, 'getSignUpTerms'])->name('get_admin_signup_terms');
+
+		Route::post('/terms/{type}', [AdminController::class, 'postTerm'])->name('post_admin_terms');
+
 		// calendar
 		Route::get('/calendar/school', [AdminController::class, 'getSchoolCalendar'])->name('get_admin_school_calendar');
 		Route::post('/calendar/school-event', [AdminController::class, 'postSchoolCalendarEvent'])->name('post_admin_school_calendar_event');
