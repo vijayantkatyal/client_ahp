@@ -262,11 +262,11 @@ class AdminController extends Controller
 				// });
 			}
 
-			return redirect()->route('get_admin_users_index')->with('status.success', 'User Created.');
+			return redirect($request->header('Referer'))->with('status.success', 'User Created.');
 		}
 		catch(\Exception $ex)
 		{
-			return redirect()->route('get_admin_users_index')->with('status.error', 'Something went wrong, try again later');
+			return redirect($request->header('Referer'))->with('status.error', 'Something went wrong, try again later');
 
 		}
 	}
@@ -538,7 +538,7 @@ class AdminController extends Controller
 
 			if($isValid->fails()){
 				$messages = $isValid->messages();
-				return redirect()->route('get_admin_users_index')->with('status.error', 'Something Went Wrong');
+				return redirect($request->header('Referer'))->with('status.error', 'Something Went Wrong');
 			}
 
 			\App\Models\User::where('id', $id)->update([
@@ -547,17 +547,17 @@ class AdminController extends Controller
 
 			if($request->input('enabled') == true)
 			{
-				return redirect()->route('get_admin_users_index')->with('status.success', 'User now Active.');
+				return redirect($request->header('Referer'))->with('status.success', 'User now Active.');
 			}
 			else
 			{
-				return redirect()->route('get_admin_users_index')->with('status.error', 'User now Inactive.');
+				return redirect($request->header('Referer'))->with('status.error', 'User now Inactive.');
 			}
 
 		}
 		catch(\Exception $ex)
 		{
-			return redirect()->route('get_admin_users_index')->with('status.error', 'Something Went Wrong');
+			return redirect($request->header('Referer'))->with('status.error', 'Something Went Wrong');
 		}
 	}
 
@@ -567,11 +567,11 @@ class AdminController extends Controller
 		try
 		{
 			\App\Models\User::where('id', $id)->delete();
-			return redirect()->route('get_admin_users_index')->with('status.success', 'User Deleted.');
+			return redirect($request->header('Referer'))->with('status.success', 'User Deleted.');
 		}
 		catch(\Exception $ex)
 		{
-			return redirect()->route('get_admin_users_index')->with('status.error', 'Something Went Wrong');
+			return redirect($request->header('Referer'))->with('status.error', 'Something Went Wrong');
 		}
 	}
 
@@ -588,11 +588,34 @@ class AdminController extends Controller
 				\App\Models\User::where('id', $id)->delete();
 			}
 			
-			return redirect()->route('get_admin_users_index')->with('status.success', 'Users Deleted.');
+			return redirect($request->header('Referer'))->with('status.success', 'Users Deleted.');
 		}
 		catch(\Exception $ex)
 		{
-			return redirect()->route('get_admin_users_index')->with('status.error', 'Something Went Wrong');
+			return redirect($request->header('Referer'))->with('status.error', 'Something Went Wrong');
+		}
+	}
+
+	// disable multiple user (post)
+	public function postDisableMultipleUser(Request $request)
+	{
+		try
+		{
+			$user_ids = $request->input("users_id");
+			$user_ids = explode(",", $user_ids);
+
+			foreach($user_ids as $id)
+			{
+				\App\Models\User::where('id', $id)->update([
+					'enabled'	=>	false
+				]);
+			}
+			
+			return redirect($request->header('Referer'))->with('status.success', 'Users Disabled.');
+		}
+		catch(\Exception $ex)
+		{
+			return redirect($request->header('Referer'))->with('status.error', 'Something Went Wrong');
 		}
 	}
 
@@ -621,11 +644,11 @@ class AdminController extends Controller
 				}
 			}
 			
-			return redirect()->route('get_admin_users_index')->with('status.success', 'Users Plan Updated.');
+			return redirect($request->header('Referer'))->with('status.success', 'Users Plan Updated.');
 		}
 		catch(\Exception $ex)
 		{
-			return redirect()->route('get_admin_users_index')->with('status.error', 'Something Went Wrong');
+			return redirect($request->header('Referer'))->with('status.error', 'Something Went Wrong');
 		}
 	}
 
@@ -687,12 +710,12 @@ class AdminController extends Controller
 			}
 			else
 			{
-				return redirect()->route('get_admin_users_index')->with('status.error', 'User Not Found.');
+				return redirect($request->header('Referer'))->with('status.error', 'User Not Found.');
 			}
 		}
 		catch(\Exception $ex)
 		{
-			return redirect()->route('get_admin_users_index')->with('status.error', 'Something went wrong, try again later');
+			return redirect($request->header('Referer'))->with('status.error', 'Something went wrong, try again later');
 		}
 	}
 

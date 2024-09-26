@@ -5,12 +5,12 @@
 [Done] export table (xsl, pdf)
 [Done] tag on resources
 [Done] confirm box for assigning assignment / delete anything
+[Done] membership / student - mass deactivate
 
 [Working]
 
 [ToDo]
 
-> membership / student - mass deactivate
 > field trip acknowledgement (dynamic text)
 
 > school signup / enrolment email (message)
@@ -22,7 +22,7 @@
 [Done] show up the classes in students grid 
 [Done] export student list to xls and pdf 
 students all grid add column of class with date range
-membership build deactivate button 
+[Done] membership build deactivate button 
 student creation terms and condition editable and sent to 
 field trip enrollment accepted via event 
 field disclaimer to be signed online only remove download button

@@ -116,6 +116,9 @@ Route::group(
 		// delete users
 		Route::post('/users/delete-multiple', [AdminController::class, 'postDeleteMultipleUser'])->name('post_admin_users_delete_multiple');
 
+		// disable users
+		Route::post('/users/disable-multiple', [AdminController::class, 'postDisableMultipleUser'])->name('post_admin_users_disable_multiple');
+
 		Route::post('/users/plan-multiple', [AdminController::class, 'postPlanMultipleUser'])->name('post_admin_users_plan_multiple');
 
 		// admin settings
