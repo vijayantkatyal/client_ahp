@@ -3535,6 +3535,12 @@ class AdminController extends Controller
 		$term = Terms::where('type', 'signup')->first();
 		return view('admin.terms.signup')->with('term', $term);
 	}
+
+	public function getSignUpEmailTerms(Request $request)
+	{
+		$term = Terms::where('type', 'mail')->first();
+		return view('admin.terms.mail')->with('term', $term);
+	}
 	
 	public function postTerm(Request $request, $type)
 	{

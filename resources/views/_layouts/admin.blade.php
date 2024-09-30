@@ -176,10 +176,13 @@
 								<div class="dropdown-menu-columns">
 									<div class="dropdown-menu-column">
 										<a class="dropdown-item" href="{{ route('get_admin_field_terms') }}">
-											Field Trip
+											Field Trip Terms
 										</a>
 										<a class="dropdown-item" href="{{ route('get_admin_signup_terms') }}">
-											SignUp
+											SignUp Terms
+										</a>
+										<a class="dropdown-item" href="{{ route('get_admin_signup_email') }}">
+											SignUp Email
 										</a>
 									</div>
 								</div>

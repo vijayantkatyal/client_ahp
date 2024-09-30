@@ -1,5 +1,5 @@
 @extends('_layouts.admin')
-@section('title','Field Trip Terms')
+@section('title','SignUp Email Text')
 @section('header')
 
 @endsection
@@ -12,10 +12,10 @@
 		<div class="row align-items-center">
 			<div class="col">
 				<div class="page-pretitle">
-					Terms
+					Text
 				</div>
 				<h2 class="page-title">
-					SignUp
+					SignUp Email
 				</h2>
 			</div>
 		</div>
@@ -35,7 +35,7 @@
 						{{ csrf_field() }}
 						<div class="card-body">
 							<div class="form-group mb-3 row">
-								<label for="" class="form-label col-12 col-sm-12 col-form-label">Title</label>
+								<label for="" class="form-label col-12 col-sm-12 col-form-label">Subject</label>
 								<div class="col-12">
 									<input
 										type="text" name="title" required
@@ -52,7 +52,7 @@
 								</div>
 							</div>
 							<div class="form-group mb-3 row">
-								<label for="" class="form-label col-12 col-sm-12 col-form-label">Description</label>
+								<label for="" class="form-label col-12 col-sm-12 col-form-label">Body</label>
 								<div class="col-12">
 									<textarea name="description" class="form-control" rows="10" required>{{ old('terms', $term->terms) }}</textarea>
 									@if($errors->has('terms'))

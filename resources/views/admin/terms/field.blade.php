@@ -54,7 +54,7 @@
 							<div class="form-group mb-3 row">
 								<label for="" class="form-label col-12 col-sm-12 col-form-label">Description</label>
 								<div class="col-12">
-									<textarea name="description" class="form-control" rows="10">{{ old('terms', $term->terms) }}</textarea>
+									<textarea name="description" class="form-control" rows="10" required>{{ old('terms', $term->terms) }}</textarea>
 									@if($errors->has('terms'))
 										<div class="invalid-feedback">{{ $errors->first('terms') }}</div>
 									@endif

@@ -15,6 +15,10 @@
 [Done] field trip acknowledgement (dynamic text)
 [Done] school signup / enrolment email (message)
 
+> Field Trip Accept (student dashboard)
+> Signup email
+> communication email b/w users
+
 [Working]
 
 [ToDo]
@@ -26,10 +30,10 @@
 students all grid add column of class with date range
 [Done] membership build deactivate button 
 
-student creation terms and condition editable and sent to 
+[Done] student creation terms and condition editable and sent to 
 
 field trip enrollment accepted via event 
-field disclaimer to be signed online only remove download button
+[Done] field disclaimer to be signed online only remove download button
 
 [Done] export in pdf and exl both formats
 [Done] assignemnt confirmation box 

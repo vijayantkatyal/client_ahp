@@ -219,6 +219,7 @@ Route::group(
 		// terms
 		Route::get('/terms/field', [AdminController::class, 'getFieldTerms'])->name('get_admin_field_terms');
 		Route::get('/terms/signup', [AdminController::class, 'getSignUpTerms'])->name('get_admin_signup_terms');
+		Route::get('/terms/email', [AdminController::class, 'getSignUpEmailTerms'])->name('get_admin_signup_email');
 
 		Route::post('/terms/{type}', [AdminController::class, 'postTerm'])->name('post_admin_terms');
 
