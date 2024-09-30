@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\MailSend_SignUp;
 use App\Models\Attendance;
 use App\Models\CalendarDirector;
 use App\Models\CalendarSchool;
@@ -183,6 +184,9 @@ class GuestController extends Controller
 					'enabled'       =>  true
 				]);
 
+				// send signup email
+                MailSend_SignUp::dispatch($user->id);
+
 				// save role
 				$save_role = User_Role::create([
 					'user_id'	=>	$user->id,
@@ -259,6 +263,9 @@ class GuestController extends Controller
 					'email_token'   =>  $random_token,
 					'enabled'       =>  true
 				]);
+
+				// send signup email
+                MailSend_SignUp::dispatch($user->id);
 
 				// save role
 				$save_role = User_Role::create([

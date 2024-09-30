@@ -16,10 +16,16 @@
 [Done] school signup / enrolment email (message)
 
 [Done] Field Trip Accept (student dashboard)
-- student dashboard
-- admin dashboard
+✅ student dashboard
+✅ admin dashboard
 
-> Signup email
+[Done] verification email
+
+[Done] Signup email
+✅ on signup
+✅ form submission
+✅ admin created user
+
 > communication email b/w users
 
 [Working]

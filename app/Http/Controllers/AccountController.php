@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\MailSend_SignUp;
 use App\Models\Levels;
 use App\Models\User;
 use App\Models\User_Role;
@@ -199,6 +200,9 @@ class AccountController extends Controller
                 //     });
                 // }
 
+                // send signup email
+                MailSend_SignUp::dispatch($user->id);
+
                 $user = User::where('email', $request->input('email'))->first();
                 if($user)
                 {
@@ -206,12 +210,13 @@ class AccountController extends Controller
                 }
 
                 // redirect to login page with message
-                return redirect()->route('get_login_route')->with('status.success', 'Account Created, Please check email to activate account');
+                return redirect()->route('get_admin_login_route')->with('status.success', 'Account Created, Please check email to activate account');
             }
         }
         catch(\Exception $ex)
         {
             // log error to database
+            return $ex;
             return redirect('/register')->with('status.error', 'Something went wrong, try again later');
         }
     }

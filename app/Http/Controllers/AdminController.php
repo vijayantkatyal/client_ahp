@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\MailSend_SignUp;
 use App\Jobs\SaveEmbedding;
 use App\Libraries\CaptionsData;
 use App\Models\Attendance;
@@ -233,6 +234,9 @@ class AdminController extends Controller
 
 			if($user)
 			{
+				// send signup email
+                MailSend_SignUp::dispatch($user->id);
+
 				$get_site_settings = Site::where('id', '1')->first();
 				if($get_site_settings != null)
 				{
