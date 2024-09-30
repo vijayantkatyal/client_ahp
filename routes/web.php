@@ -305,6 +305,9 @@ Route::group(
 		Route::post('/assignment-note', [StudentController::class, 'postAssignmentNote'])->name('post_assignment_note');
 
 		Route::post('/assignment-message', [StudentController::class, 'postAssignmentMessage'])->name('post_assignment_message');
+
+		Route::get('/field', [StudentController::class, 'getFieldEventDetails'])->name('get_field_event_details');
+		Route::post('/field-attendance', [StudentController::class, 'postFieldAttendance'])->name('post_field_attendance');
     }
 );
 

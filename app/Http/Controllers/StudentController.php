@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\CalendarSchool;
 use App\Models\ClassAssignment;
 use App\Models\Classes;
 use App\Models\Courses;
+use App\Models\FieldAttendance;
 use App\Models\StudentAssignment;
 use App\Models\StudentAssignmentThread;
 use App\Models\StudentClass;
@@ -65,11 +67,48 @@ class StudentController extends Controller
 			}
 		}
 
+		// get field trips
+		$field_trips = CalendarSchool::where('school_activity', 'Field Trip')->get();
+
+		foreach($field_trips as $f_event)
+		{
+			$will_be_there = "null";
+
+			$attendance_info = FieldAttendance::where('event_id', $f_event->id)->first();
+			if($attendance_info)
+			{
+				if($attendance_info->will_be_there == true)
+				{
+					$will_be_there = true;
+				}
+				if($attendance_info->will_be_there == false)
+				{
+					$will_be_there = false;
+				}
+			}
+
+			$f_event->will_be_there = $will_be_there;
+		}
+
+		// return $field_trips;
+
 		return view('student.index')
 			->with('classes', $classes)
 			->with('attendance', $attendance)
 			->with('assignments', $assignments)
-			->with('class_id', $class_id);
+			->with('class_id', $class_id)
+			->with('field_trips', $field_trips);
+	}
+
+	public function getFieldEventDetails(Request $request)
+	{
+		if($request->filled('id'))
+		{
+			$event = CalendarSchool::where('id', $request->input('id'))->first();
+			return $event;
+		}
+
+		return "error";
 	}
 
 	public function postSettingsGeneral(Request $request)
@@ -213,5 +252,17 @@ class StudentController extends Controller
 		]);
 
 		return redirect($request->header('Referer'))->with('status.success', 'Message Sent');
+	}
+
+	public function postFieldAttendance(Request $request)
+	{
+		FieldAttendance::insert([
+			'student_id'	=>	Auth::id(),
+			'event_id'		=>	$request->input('event_id'),
+			'will_be_there'	=>	$request->input('will_be_there'),
+			'time_recorded'	=>	time()
+		]);
+
+		return redirect($request->header('Referer'))->with('status.success', 'Field Trip Attendance Updated.');
 	}
 }

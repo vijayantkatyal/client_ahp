@@ -12,6 +12,10 @@
     .nav-pills .nav-link:hover {
         color: #fff;
     }
+
+    .nav-pills .nav-link {
+        padding: 10px;
+    }
 </style>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css" />
@@ -39,6 +43,9 @@
                         </li>
                         <li class="nav-item">
                             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Classes</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" id="pills-fields-tab" data-bs-toggle="pill" data-bs-target="#pills-fields" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Field Trips</button>
                         </li>
                         <li class="nav-item">
                             <button class="nav-link" id="pills-attendance-tab" data-bs-toggle="pill" data-bs-target="#pills-attendance" type="button" role="tab" aria-controls="pills-attendance" aria-selected="false">Attendance</button>
@@ -200,6 +207,43 @@
                             @endif
 
                         </div>
+                        <div class="tab-pane fade" id="pills-fields" role="tabpanel" aria-labelledby="pills-fields-tab" tabindex="0">
+                            
+                            <div class="table-responsive">
+                                <table class="table card-table table-vcenter table-mobile-md datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Activity Note</th>
+                                            <th class="text-end">Will Be There ?</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($field_trips as $f_event)
+                                            <tr>
+                                                <td>{{ $f_event->date }}</td>
+                                                <td>{{ $f_event->activity }}</td>
+                                                <td class="text-end">
+
+                                                    @if($f_event->will_be_there === "null")
+                                                        <button type="button" class="btn btn-sm btn-primary f_make_decision" data-id="{{ $f_event->id }}">Accept / Reject</button>
+                                                    @endif
+
+                                                    @if($f_event->will_be_there === true)
+                                                        <span class="btn bg-success">Yes</span>
+                                                    @endif
+
+                                                    @if($f_event->will_be_there === false)
+                                                        <span class="btn bg-danger">No</span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
                         <div class="tab-pane fade" id="pills-attendance" role="tabpanel" aria-labelledby="pills-attendance-tab" tabindex="0">
                             <b>Attendance</b>
                             <br />
@@ -336,6 +380,39 @@
     </div>
 </div>
 <br /><br />
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Field Trip</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="{{ route('post_field_attendance') }}" method="post">
+        {{ csrf_field() }}
+        <input type="hidden" name="event_id" required id="f_event_id">
+        <div class="modal-body">
+            <b>Date</b>: <span id="f_event_date"></span>
+            <br/>
+            <b>Note</b>: <span id="f_event_activity"></span>
+            <br/><br/>
+            <b>Your Decision</b>: <select class="form-control" required name="will_be_there">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            <div class="form-check mt-1">
+                <input class="form-check-input" required type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label mt-0" for="flexCheckDefault">
+                I Accept <a href="{{ route('get_terms', ['type' => 'field']) }}" target="_blank">Terms & Conditions</a> for this Field Trip
+            </label>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('footer')
@@ -357,6 +434,25 @@
         ],
         "pageLength": "20",
         dom: '<"card-body"<"d-flex"<l><"ms-auto"f>>>rt<"card-body"<"d-flex"<i><"ms-auto"p>>><"clear">'
+    });
+</script>
+<script>
+    $(".f_make_decision").click(function(){
+        var _id = $(this).attr("data-id");
+
+        // get event info
+        $.getJSON("{{ route('get_field_event_details') }}?id=" + _id).done(function(data){
+            console.log(data);
+
+            // set modal data
+            $("#f_event_id").val(data.id);
+            $("#f_event_date").text(data.date);
+            $("#f_event_activity").text(data.activity);
+
+            // open modal
+            const myModalAlternative = new bootstrap.Modal('#exampleModal');
+            myModalAlternative.show();
+        });
     });
 </script>
 @endsection
