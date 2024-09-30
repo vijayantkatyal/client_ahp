@@ -15,7 +15,10 @@
 [Done] field trip acknowledgement (dynamic text)
 [Done] school signup / enrolment email (message)
 
-> Field Trip Accept (student dashboard)
+[Done] Field Trip Accept (student dashboard)
+- student dashboard
+- admin dashboard
+
 > Signup email
 > communication email b/w users
 

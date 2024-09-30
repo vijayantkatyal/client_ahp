@@ -229,6 +229,8 @@ Route::group(
 		Route::get('/calendar/edit/school-event/{id}', [AdminController::class, 'getEditSchoolCalendarEvent'])->name('get_admin_school_calendar_event_edit');
 		Route::post('/calendar/edit-school-event', [AdminController::class, 'postEditSchoolCalendarEvent'])->name('post_admin_school_calendar_event_edit');
 		Route::post('/calendar/delete-school-event/{id}', [AdminController::class, 'postDeleteSchoolCalendarEvent'])->name('post_admin_school_calendar_event_delete');
+
+		Route::get('/calendar/school-event-attendance/{id}', [AdminController::class, 'getSchoolCalendarEventAttendance'])->name('get_admin_school_calendar_event_attendance');
 		
 		Route::get('/calendar/director', [AdminController::class, 'getDirectorCalendar'])->name('get_admin_director_calendar');
 		Route::post('/calendar/director-event', [AdminController::class, 'postDirectorCalendarEvent'])->name('post_admin_director_calendar_event');

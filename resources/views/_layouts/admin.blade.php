@@ -322,6 +322,17 @@
 	<!-- <script src="{{ asset('admin_panel/dist/js/tabler.min.js') }}"></script> -->
 	<script src="{{ asset('admin_panel/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script>
+        $(".moment_time").each(function(){
+            var _e_time = $(this).text();
+            var _time = moment.unix(_e_time);
+            var _title = _time.format("DD-MMMM-YYYY h:mm:ss a");
+            $(this).attr("title", _title);
+            $(this).text(_time.fromNow());
+        });
+    </script>
+
 	<script>
 		// get query string
 		function getUrlVars()

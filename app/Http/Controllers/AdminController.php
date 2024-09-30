@@ -34,6 +34,7 @@ use App\Models\VideoPage;
 use App\Models\Video;
 use App\Models\VideoReactions;
 use App\Models\Domain;
+use App\Models\FieldAttendance;
 use App\Models\FormMembership;
 use App\Models\FormRegistration;
 use App\Models\Levels;
@@ -3551,5 +3552,30 @@ class AdminController extends Controller
 		
 		return redirect($request->header('Referer'))->with('status.success', 'Updated');
 
+	}
+
+	public function getSchoolCalendarEventAttendance(Request $request, $id)
+	{
+
+		// event
+		$event = CalendarSchool::where('id', $id)->first();
+		// return $event;
+
+		$data = FieldAttendance::where('event_id', $id)->get();
+
+		foreach($data as $item)
+		{
+			$dd = null;
+			$user = User::where('id', $item->student_id)->select('id', 'first_name', 'last_name', 'email')->first();
+			if($user)
+			{
+				$dd = $user;
+			}
+			
+			$item->user = $dd;
+		}
+
+		// return $data;
+		return view('admin.calendar.attendance')->with('event', $event)->with('data', $data);
 	}
 }
