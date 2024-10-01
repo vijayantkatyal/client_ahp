@@ -3602,4 +3602,31 @@ class AdminController extends Controller
 			return redirect($request->header('Referer'))->with('status.error', 'Something went wrong.');
 		}
 	}
+
+	public function postSendMailtoClass(Request $request)
+	{
+		try
+		{
+			// get class users
+			$class_users = StudentClass::where('class_id', $request->input('class_id'))->get();
+			
+			foreach ($class_users as $class_user)
+			{
+				// get user details
+				$user = User::where('id', $class_user->student_id)->select('id', 'first_name', 'last_name', 'email')->first();
+				if($user)
+				{
+					// schedule mail
+					MailSend_Direct::dispatch($user->first_name, $user->email, $request->input('subject'), $request->input('body'));
+				}
+			}
+			
+			return redirect($request->header('Referer'))->with('status.success', 'Message Scheduled.');
+		}
+		catch(\Exception $ex)
+		{
+			return redirect($request->header('Referer'))->with('status.error', 'Something went wrong.');
+		}
+	}
+	
 }

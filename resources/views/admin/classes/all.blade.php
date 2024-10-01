@@ -150,6 +150,11 @@
 														<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-dots-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
 													</button>
 													<ul class="dropdown-menu">
+														<li>
+															<button type="button" class="dropdown-item send_message" data-classid="{{ $user->id }}" data-classname="{{ $user->name }}">
+																<svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>&nbsp;Send Message
+															</button>
+														</li>
 														<li><a class="dropdown-item" href="{{ route('get_admin_class_resources', ['id' => $user->id]) }}">Resources</a></li>
 														<li><a class="dropdown-item" href="{{ route('get_admin_class_assignments', ['id' => $user->id]) }}">Assignments</a></li>
 														@if(Auth::user()->isAdmin() === true || Auth::user()->isPrincipal() == true)
@@ -301,6 +306,39 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="sendMessageModal" tabindex="-1" aria-labelledby="sendMessageModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="sendMessageModalLabel">Send Message</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<form action="{{ route('post_admin_send_mail_to_class') }}" method="post">
+					{{ csrf_field() }}
+					<input type="hidden" id="sm_modal_id" name="class_id" required/>
+					<div class="modal-body">
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">To</label>
+							<b class="text-muted"><span id="sm_modal_name"></span></b>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Subject</label>
+							<input type="subject" name="subject" required class="form-control"/>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Body</label>
+							<textarea name="body" required class="form-control" rows="6"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Send</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
 @endsection
 
 @section('footer')
@@ -375,6 +413,22 @@
 				event.preventDefault();
 				document.getElementById('delete-users').submit();
 			}
+		});
+	</script>
+
+	<script>
+		$(".send_message").click(function(){
+			var _class_id = $(this).attr("data-classid");
+			var _name = $(this).attr("data-classname");
+
+			// alert(_id + " " + _name + " " + _email);
+
+			$("#sm_modal_id").val(_class_id);
+			$("#sm_modal_name").text(_name);
+
+			const myModalAlternative = new bootstrap.Modal('#sendMessageModal');
+			myModalAlternative.show();
+
 		});
 	</script>
 
