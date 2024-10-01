@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\MailSend_Direct;
 use App\Jobs\MailSend_SignUp;
 use App\Jobs\SaveEmbedding;
 use App\Libraries\CaptionsData;
@@ -3581,5 +3582,24 @@ class AdminController extends Controller
 
 		// return $data;
 		return view('admin.calendar.attendance')->with('event', $event)->with('data', $data);
+	}
+
+	public function postSendMailtoUser(Request $request)
+	{
+		// return json_encode($request->all());
+
+		// get user details
+		$user = User::where('id', $request->input('user_id'))->select('id', 'first_name', 'last_name', 'email')->first();
+		if($user)
+		{
+			// schedule mail
+			MailSend_Direct::dispatch($user->first_name, $user->email, $request->input('subject'), $request->input('body'));
+
+			return redirect($request->header('Referer'))->with('status.success', 'Message Scheduled.');
+		}
+		else
+		{
+			return redirect($request->header('Referer'))->with('status.error', 'Something went wrong.');
+		}
 	}
 }

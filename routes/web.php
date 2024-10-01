@@ -247,6 +247,9 @@ Route::group(
 		Route::post('/add-school-event-photos', [AdminController::class, 'postEditSchoolEventPhotos'])->name('post_admin_school_event_photos');
 		Route::get('/delete-school-event-photo/{id}', [AdminController::class, 'getDeleteSchoolEventPhoto'])->name('get_admin_school_event_photo_delete');
 
+		// send mail
+		// to user
+		Route::post('/mail-to-user', [AdminController::class, 'postSendMailtoUser'])->name('post_admin_send_mail_to_user');
     }
 );
 

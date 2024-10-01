@@ -27,6 +27,10 @@
 ✅ admin created user
 
 > communication email b/w users
+✅ to specific user (board member, principal, teacher, student, member)
+- to specific class
+- to all for new event
+- from user to admin / teacher / board member
 
 [Working]
 
