@@ -251,6 +251,7 @@ Route::group(
 		// to user
 		Route::post('/mail-to-user', [AdminController::class, 'postSendMailtoUser'])->name('post_admin_send_mail_to_user');
 		Route::post('/mail-to-class', [AdminController::class, 'postSendMailtoClass'])->name('post_admin_send_mail_to_class');
+		Route::post('/mail-to-filter', [AdminController::class, 'postSendMailtoFilter'])->name('post_admin_send_mail_to_filter');
     }
 );
 

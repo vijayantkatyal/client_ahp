@@ -3628,5 +3628,64 @@ class AdminController extends Controller
 			return redirect($request->header('Referer'))->with('status.error', 'Something went wrong.');
 		}
 	}
-	
+
+	public function postSendMailtoFilter(Request $request)
+	{
+		try
+		{
+			// get filter users
+			$filter = $request->input('filter');
+
+			// all
+			if($filter == "All")
+			{
+				$users = \App\Models\User::select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at', 'users.profile_pic')->orderByDesc('id')->get();
+			}
+
+			// board_members
+			if($filter == "Board Member(s)")
+			{
+				$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '2')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at', 'users.profile_pic')->orderByDesc('id')->get();
+			}
+
+			// principals
+			if($filter == "Principal(s)")
+			{
+				$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '3')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at')->orderByDesc('id')->get();
+			}
+			
+			// teachers
+			if($filter == "Teacher(s)")
+			{
+				$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '4')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at')->orderByDesc('id')->get();
+			}
+
+			// students
+			if($filter == "Student(s)")
+			{
+				$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '5')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at')->orderByDesc('id')->get();
+			}
+
+			// members
+			if($filter == "Member(s)")
+			{
+				$users = \App\Models\User::join('user_role', 'users.id', '=', 'user_role.user_id')->whereJsonContains('user_role.levels', '6')->select('users.id','users.first_name', 'users.last_name', 'users.email', 'users.enabled', 'users.created_by', 'users.created_at')->orderByDesc('id')->get();
+			}
+			
+			// return $users;
+			
+			foreach ($users as $user)
+			{
+				// schedule mail
+				MailSend_Direct::dispatch($user->first_name, $user->email, $request->input('subject'), $request->input('body'));
+			}
+			
+			return redirect($request->header('Referer'))->with('status.success', 'Message Scheduled.');
+		}
+		catch(\Exception $ex)
+		{
+			return redirect($request->header('Referer'))->with('status.error', 'Something went wrong.');
+		}
+	}
+
 }

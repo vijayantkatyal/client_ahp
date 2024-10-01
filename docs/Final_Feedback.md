@@ -30,7 +30,7 @@
 ✅ to specific user (board member, principal, teacher, student, member)
 ✅ to specific class
 - from user to admin / teacher / board member
-- to specific user type (student, teacher, board member)
+✅ to specific user type (student, teacher, board member)
 [?] to all for new event
 
 [Working]
