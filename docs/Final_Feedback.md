@@ -36,7 +36,7 @@
 
 [Done] show up the classes in students grid 
 [Done] export student list to xls and pdf 
-students all grid add column of class with date range
+[Done] students all grid add column of class with date range
 [Done] membership build deactivate button 
 
 [Done] student creation terms and condition editable and sent to 

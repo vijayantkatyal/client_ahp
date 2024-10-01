@@ -250,17 +250,6 @@
 	<script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap5.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
-    <script>
-        $(".moment_time").each(function(){
-            var _e_time = $(this).text();
-            var _time = moment.unix(_e_time);
-            var _title = _time.format("DD-MMMM-YYYY h:mm:ss a");
-            $(this).attr("title", _title);
-            $(this).text(_time.fromNow());
-        });
-    </script>
-
 	<script>
 		$('.datatable').DataTable({
 			// dom: '<"top"i>rt<"bottom"flp><"clear">'
