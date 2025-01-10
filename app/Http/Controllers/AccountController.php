@@ -290,4 +290,37 @@ class AccountController extends Controller
                             ->with('status.error', 'Not Valid');
         }
     }
+
+    public function getTestMail(Request $request)
+    {
+        $get_site_settings = DB::table('site_settings')->where('id', '1')->first();
+        if($get_site_settings != null)
+        {
+            $site_settings = $get_site_settings;
+        }
+
+        Config::set('mail.encryption',$site_settings->encryption);
+        Config::set('mail.host', $site_settings->host);
+        Config::set('mail.port', $site_settings->port);
+        Config::set('mail.username', $site_settings->username);
+        Config::set('mail.password', $site_settings->password);
+        Config::set('mail.from',  ['address' => $site_settings->from_address , 'name' => $site_settings->from_name]);
+        
+        $data = [
+            'email' =>  "vijayantskatyal@gmail.com",
+            'name'  =>  "Vijayant"
+        ];
+
+        $emails_to = array(
+            'email' => "vijayantskatyal@gmail.com",
+            'name' => "Vijayant"
+        );
+
+        Mail::send('emails.test', $data, function($message) use ($emails_to)
+        {
+            $message->to($emails_to['email'], $emails_to['name'])->subject('Welcome To AHP');
+        });
+
+        return "sent";
+    }
 }

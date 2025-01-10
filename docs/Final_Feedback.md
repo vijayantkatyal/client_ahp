@@ -62,4 +62,23 @@ field trip enrollment accepted via event
 [Checked] map location
 - will be part of cms
 
-communication from pricipal to all teachers, classes,
+.............
+
+[Done] tag name not showing
+[Done] field trip export (pdf, excel) (for all grids)
+✅ courses
+✅ classes
+✅ forms - registration
+✅ forms - membership
+✅ calendar - school
+✅ calendar -  duty
+✅ calendar - events
+
+> CMS
+> feedback
+
+> communication from pricipal to all teachers, classes,
+- cc to email sender as well (show email as well in checkbox)
+- send mail to members (dropbox for all or annual or life)
+- don't send email to disabled users
+- send attachment in mail (5 mb) (multiple)

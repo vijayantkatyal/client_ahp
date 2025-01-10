@@ -49,6 +49,8 @@ Route::get('/gallery', [GuestController::class, 'getGallery'])->name('get_galler
 Route::post('/logout', [AdminController::class, 'postLogout'])->name('post_logout_route');
 Route::get('/dashboard', [AccountController::class, 'getIndex'])->name('get_dashboard_index');
 
+Route::get('/test-email', [AccountController::class, 'getTestMail'])->name('get_test_email');
+
 Route::group(
 	[
 		'prefix'		=>	'/',
