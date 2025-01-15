@@ -28,6 +28,7 @@
 					<h4>{{ $user->first_name }} {{ $user->last_name }}</h4>
 				</a>
 				<h6>{{ $user->title }}</h6>
+				<p>{{ $user->phone }}</p>
 				<p>
 					{{ $user->description }}
 				</p>

@@ -2,6 +2,21 @@
 @section('title', 'Home')
 
 @section('header')
+
+<style>
+	.ls-wrapper.ls-in-out {
+		left: 0px !important;
+	}
+
+	.parallax-slider .header-wrapper .header-text {
+		background: rgba(255, 255, 255, 0.73);
+        width: 50% !important;
+        padding: 20px;
+        border-radius: 20px;
+        margin-top: 10%;
+	}
+</style>
+
 @endsection
 
 @section('content')
@@ -12,15 +27,9 @@
 		<!-- Slide 1 -->
 		<div class="ls-slide" data-ls="duration:4000; transition2d:7;">
 			<!-- background image  -->
-			<img src="{{ asset('assets/img/slider/parallaxslider/slide1.jpg') }}" class="ls-bg" alt="" />
-			<!-- clouds  -->
-			<img src="{{ asset('assets/img/slider/parallaxslider/clouds.png') }}" class="ls-l" alt="" style="top:56px;left:-100px;" data-ls="parallax:true; parallaxlevel:-5;">
-			<!-- butterflies  -->
-			<img src="{{ asset('assets/img/slider/parallaxslider/butterflies.png') }}" class="ls-l" alt="" style="top:16px;left:0px;" data-ls=" parallax:true; parallaxlevel:4;">
-			<!-- sun  -->
-			<img src="{{ asset('assets/img/slider/parallaxslider/sun.png') }}" class="ls-l" alt="" style="top:-190px;left:650px;" data-ls="parallax:true; parallaxlevel:-3;">
+			
 			<!--child image  -->
-			<img src="{{ asset('assets/img/slider/parallaxslider1.png') }}" class="ls-l" alt="" style="top:166px;left:520px;" data-ls="offsetxin:10; offsetyin:120; durationin:1100; rotatein:5; transformoriginin:59.3% 80.3% 0; offsetxout:-80; durationout:400; parallax:true; parallaxlevel:10;">
+			<img src="{{ asset('assets/img/slider/parallaxslider1.png') }}" class="ls-l" alt="" style="top:0px !important;left:0px !important;" data-ls="offsetxin:10; offsetyin:120; durationin:1100; rotatein:5; transformoriginin:59.3% 80.3% 0; offsetxout:-80; durationout:400; parallax:true; parallaxlevel:10;">
 			<!-- text  -->
 			<div class="ls-l header-wrapper" data-ls="offsetyin:150; durationin:700; delayin:200; easingin:easeOutQuint; rotatexin:20; scalexin:1.4; offsetyout:600; durationout:400;">
 				<div class="header-text">
