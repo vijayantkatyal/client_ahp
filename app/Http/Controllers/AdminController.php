@@ -40,6 +40,9 @@ use App\Models\FieldAttendance;
 use App\Models\FormMembership;
 use App\Models\FormRegistration;
 use App\Models\Levels;
+use App\Models\Message;
+use App\Models\Page;
+use App\Models\Post;
 use App\Models\SchoolEventPhotos;
 use App\Models\SchoolEvents;
 use App\Models\Site;
@@ -1419,7 +1422,27 @@ class AdminController extends Controller
 				'support_email'		=>	$request->input('support_email'),
 				'support_url'		=>	$request->input('support_url'),
 				'show_training_url'	=>	$request->input('show_training_url'),
-				'training_url'		=>	$request->input('training_url')
+				'training_url'		=>	$request->input('training_url'),
+
+				'appointment_url'	=>	$request->input('appointment_url'),
+				'phone'				=>	$request->input('phone'),
+				'address'			=>	$request->input('address'),
+				'maps_link'			=>	$request->input('maps_link'),
+				
+				'hide_top_alert_bar'	=>	$request->input('hide_top_alert_bar'),
+				'custom_top_alert_bar_text'	=>	$request->input('custom_top_alert_bar_text'),
+				'working_hours_mon_thu'	=>	$request->input('working_hours_mon_thu'),
+				'working_hours_friday'	=>	$request->input('working_hours_friday'),
+				'working_hours_sat_sun'	=>	$request->input('working_hours_sat_sun'),
+				
+				'social_link_facebook'	=>	$request->input('social_link_facebook'),
+				'social_link_instagram'	=>	$request->input('social_link_instagram'),
+				'social_link_linkedin'	=>	$request->input('social_link_linkedin'),
+				'social_link_twitter'	=>	$request->input('social_link_twitter'),
+
+				'analytics_code'		=>	$request->input('analytics_code'),
+				'custom_style'			=>	$request->input('custom_style'),
+				'custom_script'			=>	$request->input('custom_script')
 			]);
 
 			return redirect()->route('get_admin_settings')->with('status.success', 'General Settings Updated.');
@@ -3685,6 +3708,523 @@ class AdminController extends Controller
 		catch(\Exception $ex)
 		{
 			return redirect($request->header('Referer'))->with('status.error', 'Something went wrong.');
+		}
+	}
+
+	// pages
+
+	public function getPages(Request $request)
+	{
+		$pages = Page::orderBy('id', 'asc')->get();
+		return view('admin.pages.all')->with('pages', $pages);
+	}
+
+	public function postPage(Request $request)
+	{
+		try
+		{
+			$isValid =  Validator::make($request->all(), [
+				'name'		=> 'required',
+				'type'		=> 'required',
+			]);
+
+			
+			if($isValid->fails()){
+				$messages = $isValid->messages();
+				return redirect()->route('get_admin_pages')->withErrors($isValid)->withInput();
+			}
+
+			Page::create([
+				'name'	=>	$request->input('name'),
+				'type'	=>	$request->input('type'),
+				'show_in_top_menu'	=>	$request->input('show_in_top_menu'),
+				'show_in_footer'	=>	$request->input('show_in_footer')
+			]);
+			
+			return redirect()->route('get_admin_pages')->with('status.success', 'Page Created');
+		}
+		catch(\Exception $ex)
+		{
+			return $ex;
+			return redirect()->route('get_admin_pages')->with('status.error', 'Something Went Wrong');
+		}
+	}
+
+	public function getEditPage(Request $request, $id)
+	{
+		$page = Page::where('id', $id)->first();
+		if($page)
+		{
+			return view('admin.pages.edit')->with('page', $page);
+		}
+		else
+		{
+			return redirect()->route('get_admin_pages')->with('status.error', 'Page Not Found');
+		}
+	}
+
+	public static function arraySearch($array, $index, $value)
+    {
+        foreach($array as $arrayInf) {
+            if($arrayInf[$index] == $value) {
+                return $arrayInf;
+            }
+        }
+        return null;
+	}
+
+	public function postEditPage(Request $request)
+	{
+		// return $request->all();
+		$page = Page::where('id', $request->input('id'))->first();
+
+		if($page)
+		{
+			if($page->type == "custom")
+			{
+				$page_schema = json_decode($page->page_schema, true);
+
+				$page_schema_values = $request->input('page_schema');
+
+				foreach($page_schema_values as $block_key => $block_value)
+				{
+					$old_block = $this->arraySearch($page_schema['blocks'], "name", $block_key);
+					
+					foreach ($block_value as $key => $value)
+					{
+						if($old_block["type"] == "single")
+						{
+							if(is_string($value))
+							{
+								$old_block["attributes"][$key]["value"] = $value;
+							}
+							else
+							{
+								$old_block["attributes"][$key]["values"] = $value;
+							}
+						}
+						
+
+						if($old_block["type"] == "collection")
+						{
+							// set all attributes as well
+							$old_block["values"] = $block_value;
+						}
+
+						// collection
+						$old_key = array_search($block_key, array_column($page_schema["blocks"], "name"));
+						
+						$page_schema["blocks"][$old_key] = $old_block;
+					}
+				}
+
+				// return $page_schema;
+
+				Page::where('id', $request->input('id'))->update([
+					'name'	=>	$request->input('name'),
+					'show_in_top_menu'	=>	$request->input('show_in_top_menu'),
+					'show_in_footer'	=>	$request->input('show_in_footer'),
+					'page_schema'		=>	$page_schema
+				]);
+
+				return redirect()->route('get_edit_page', ['id' => $request->input('id')])->with('status.success', 'Page Updated');
+			}
+			else
+			{
+				// cta bg file path
+				$cta_bg_to_upload = $request->file('image');
+				$cta_bg_path = null;
+
+				if($cta_bg_to_upload)
+				{
+					// check size
+					$size = $request->file('image')->getSize();
+					if($size > 2000000)
+					{
+						// return redirect()->route('get_user_video', $id)->with('status.error', 'Max File Size should be 2MB');
+						return json_encode("max cta background image file size should be 2mb");
+					}
+
+					$extension = $cta_bg_to_upload->getClientOriginalExtension();
+					if($extension == "png" || $extension == "jpg" || $extension == "jpeg")
+					{
+						$random_name = rand().".".$request->file('image')->clientExtension();
+
+						// Storage::disk('uploads')->putFileAs('documents', $request->file('document_path'), $random_name);
+						Storage::disk('uploads')->putFileAs('images', $request->file('image'), $random_name);
+						$cta_bg_path = "/uploads/images/".$random_name;
+					}
+					else
+					{
+						// return redirect()->route('get_user_video', $id)->with('status.error', 'Supported Formats: png, jpeg, jpg');
+						return json_encode("supported image formats: png, jpeg or jpg");
+					}
+				}
+				else
+				{
+					$cta_bg_path = $page->image;	
+				}
+
+				Page::where('id', $request->input('id'))->update([
+					'name'	=>	$request->input('name'),
+					'show_in_top_menu'	=>	$request->input('show_in_top_menu'),
+					'show_in_footer'	=>	$request->input('show_in_footer'),
+					'title'				=>	$request->input('title'),
+					'summary'			=>	$request->input('summary'),
+					'image'				=>	$cta_bg_path,
+					'content'			=>	$request->input('content')
+				]);
+
+				return "Changes Saved";
+			}
+		}
+		else
+		{
+			return "not found";
+		}
+	}
+
+	public function getRemoveItem(Request $request, $pid, $bid, $aid)
+	{
+		// get old schema
+		$page = Page::where('id', $pid)->first();
+		if($page)
+		{
+			$page_schema = json_decode($page->page_schema, true);
+
+			$block_key = array_search($bid, array_column($page_schema["blocks"], "name"));
+
+			// unset($page_schema['blocks'][$block_key]['attributes'][$aid]['values'][$key]);
+
+			// $page_schema['blocks'][$block_key]['attributes'][$aid]['values'] = array_merge($page_schema['blocks'][$block_key]['attributes'][$aid]['values']);
+
+			$page_schema['blocks'][$block_key]['attributes'][$aid]['value'] = "";
+
+			Page::where('id', $pid)->update([
+				'page_schema'		=>	$page_schema
+			]);
+
+			return redirect()->route('get_edit_page', ['id' => $pid])->with('status.success', 'Image Removed');
+		}
+		else
+		{
+			return redirect()->route('get_edit_page', ['id' => $pid])->with('status.error', 'Page Not Found');
+		}
+	}
+
+	public function getRemoveItemFromCustomPageCollection(Request $request, $pid, $bid, $aid, $key)
+	{
+		// get old schema
+		$page = Page::where('id', $pid)->first();
+		if($page)
+		{
+			$page_schema = json_decode($page->page_schema, true);
+
+			$block_key = array_search($bid, array_column($page_schema["blocks"], "name"));
+
+			if($page_schema['blocks'][$block_key]['type'] == "collection")
+			{
+				unset($page_schema['blocks'][$block_key]['values'][$key]);
+				$page_schema['blocks'][$block_key]['values'] = array_merge($page_schema['blocks'][$block_key]['values']);
+			}
+			else
+			{
+				unset($page_schema['blocks'][$block_key]['attributes'][$aid]['values'][$key]);
+				$page_schema['blocks'][$block_key]['attributes'][$aid]['values'] = array_merge($page_schema['blocks'][$block_key]['attributes'][$aid]['values']);
+			}
+
+			Page::where('id', $pid)->update([
+				'page_schema'		=>	$page_schema
+			]);
+
+			return redirect()->route('get_edit_page', ['id' => $pid])->with('status.success', 'Item Removed');
+		}
+		else
+		{
+			return redirect()->route('get_edit_page', ['id' => $pid])->with('status.error', 'Page Not Found');
+		}
+	}
+
+	public function postAddImage(Request $request)
+	{
+		$page = Page::where('id', $request->input('_page_id'))->first();
+		if($page)
+		{
+			$page_schema = json_decode($page->page_schema, true);
+
+			$block_key = array_search($request->input('_bid'), array_column($page_schema["blocks"], "name"));
+
+			// cta bg file path
+			$cta_bg_to_upload = $request->file('image_file');
+			$cta_bg_path = null;
+
+			if($cta_bg_to_upload)
+			{
+				// check size
+				$size = $request->file('image_file')->getSize();
+				if($size > 2000000)
+				{
+					return json_encode("max image file size should be 2mb");
+				}
+
+				$extension = $cta_bg_to_upload->getClientOriginalExtension();
+				if($extension == "png" || $extension == "jpg" || $extension == "jpeg")
+				{
+					$random_name = rand().".".$request->file('image_file')->clientExtension();
+					Storage::disk('uploads')->putFileAs('images', $request->file('image_file'), $random_name);
+					$cta_bg_path = "/uploads/images/".$random_name;
+				}
+				else
+				{
+					return json_encode("supported image formats: png, jpeg or jpg");
+				}
+			}
+			
+			$page_schema['blocks'][$block_key]['attributes'][$request->input('_key')]['value'] = $cta_bg_path;
+
+			// return $page_schema;
+
+			Page::where('id', $request->input('_page_id'))->update([
+				'page_schema'		=>	$page_schema
+			]);
+
+			return json_encode("done");
+		}
+	}
+
+	public function postAddImageToCollection(Request $request)
+	{
+		// return json_encode($request->all());
+		$page = Page::where('id', $request->input('_page_id'))->first();
+		if($page)
+		{
+			$page_schema = json_decode($page->page_schema, true);
+
+			$block_key = array_search($request->input('_bid'), array_column($page_schema["blocks"], "name"));
+
+			if($request->filled('_fid'))
+			{
+				$old_array = $page_schema['blocks'][$block_key]['attributes'][$request->input('_aid')]['values'];
+			}
+			else
+			{
+				$old_array = $page_schema['blocks'][$block_key]['values'];
+			}
+
+			// cta bg file path
+			$cta_bg_to_upload = $request->file('image_file');
+			$cta_bg_path = null;
+
+			if($cta_bg_to_upload)
+			{
+				// check size
+				$size = $request->file('image_file')->getSize();
+				if($size > 2000000)
+				{
+					return json_encode("max image file size should be 2mb");
+				}
+
+				$extension = $cta_bg_to_upload->getClientOriginalExtension();
+				if($extension == "png" || $extension == "jpg" || $extension == "jpeg")
+				{
+					$random_name = rand().".".$request->file('image_file')->clientExtension();
+					Storage::disk('uploads')->putFileAs('images', $request->file('image_file'), $random_name);
+					$cta_bg_path = "/uploads/images/".$random_name;
+				}
+				else
+				{
+					return json_encode("supported image formats: png, jpeg or jpg");
+				}
+			}
+
+			// check if index already exists
+			if(array_key_exists($request->input('_key'), $old_array))
+			{
+				// $new_item = [
+				// 	$request->input('_fid') => $cta_bg_path
+				// ];
+
+				$new_item = $old_array[$request->input('_key')];
+				$new_item['image'] = $cta_bg_path;
+
+				$old_array[$request->input('_key')] = $new_item;
+			}
+			else
+			{
+				if($request->filled('_fid'))
+				{
+					$new_item_attributes = $page_schema['blocks'][$block_key]['attributes'][$request->input('_aid')]['attributes'];
+				}
+				else
+				{
+					$new_item_attributes = $page_schema['blocks'][$block_key]['attributes'];
+				}
+
+				$new_item_array = [];
+
+				foreach($new_item_attributes as $new_item_att_key => $new_item_att_value)
+				{
+					$temp = [
+						$new_item_att_key => ""
+					];
+
+					array_push($new_item_array, $temp);
+				}
+
+				$flatNewItemArray = array_merge(...$new_item_array);
+				$flatNewItemArray['image'] = $cta_bg_path;
+				array_push($old_array, $flatNewItemArray);
+			}
+			
+			if($request->filled('_fid'))
+			{
+				$page_schema['blocks'][$block_key]['attributes'][$request->input('_aid')]['values'] = $old_array;
+			}
+			else
+			{
+				$page_schema['blocks'][$block_key]['values'] = $old_array;
+			}
+
+			Page::where('id', $request->input('_page_id'))->update([
+				'page_schema'		=>	$page_schema
+			]);
+
+			return json_encode("done");
+		}
+	}
+
+	public function getDeletePage(Request $request, $id)
+	{
+		Page::where('id', $id)->delete();
+		return redirect()->route('get_admin_pages')->with('status.success', 'Page Deleted');
+	}
+
+	// blog posts
+
+	public function getPosts(Request $request)
+	{
+		$pages = Post::orderBy('id', 'desc')->get();
+		return view('admin.posts.all')->with('pages', $pages);
+	}
+
+	public function postPost(Request $request)
+	{
+		try
+		{
+			$isValid =  Validator::make($request->all(), [
+				'name'		=> 'required',
+				'title'		=> 'required'
+			]);
+
+			
+			if($isValid->fails()){
+				$messages = $isValid->messages();
+				return redirect()->route('get_admin_posts')->withErrors($isValid)->withInput();
+			}
+
+			Post::create([
+				'name'	=>	$request->input('name'),
+				'title'	=>	$request->input('title')
+			]);
+			
+			return redirect()->route('get_admin_posts')->with('status.success', 'Post Created');
+		}
+		catch(\Exception $ex)
+		{
+			return $ex;
+			return redirect()->route('get_admin_posts')->with('status.error', 'Something Went Wrong');
+		}
+	}
+
+	public function getEditPost(Request $request, $id)
+	{
+		$page = Post::where('id', $id)->first();
+		if($page)
+		{
+			return view('admin.posts.edit')->with('page', $page);
+		}
+		else
+		{
+			return redirect()->route('get_admin_posts')->with('status.error', 'Post Not Found');
+		}
+	}
+
+	public function postEditPost(Request $request)
+	{
+		$page = Post::where('id', $request->input('id'))->first();
+
+		if($page)
+		{
+			// cta bg file path
+			$cta_bg_to_upload = $request->file('image');
+			$cta_bg_path = null;
+
+			if($cta_bg_to_upload)
+			{
+				// check size
+				$size = $request->file('image')->getSize();
+				if($size > 2000000)
+				{
+					// return redirect()->route('get_user_video', $id)->with('status.error', 'Max File Size should be 2MB');
+					return json_encode("max cta background image file size should be 2mb");
+				}
+
+				$extension = $cta_bg_to_upload->getClientOriginalExtension();
+				if($extension == "png" || $extension == "jpg" || $extension == "jpeg")
+				{
+					$random_name = rand().".".$request->file('image')->clientExtension();
+
+					// Storage::disk('uploads')->putFileAs('documents', $request->file('document_path'), $random_name);
+					Storage::disk('uploads')->putFileAs('images', $request->file('image'), $random_name);
+					$cta_bg_path = "/uploads/images/".$random_name;
+				}
+				else
+				{
+					// return redirect()->route('get_user_video', $id)->with('status.error', 'Supported Formats: png, jpeg, jpg');
+					return json_encode("supported image formats: png, jpeg or jpg");
+				}
+			}
+			else
+			{
+				$cta_bg_path = $page->image;	
+			}
+
+			Post::where('id', $request->input('id'))->update([
+				'name'				=>	$request->input('name'),
+				'title'				=>	$request->input('title'),
+				'summary'			=>	$request->input('summary'),
+				'image'				=>	$cta_bg_path,
+				'content'			=>	$request->input('content'),
+				'published'			=>	$request->input('published'),
+				'created_at'		=>	$request->input('created_at')
+			]);
+
+			return "Changes Saved";
+		}
+		else
+		{
+			return "not found";
+		}
+	}
+
+	// messages
+
+	public function getMessages(Request $request)
+	{
+		$pages = Message::orderBy('id', 'desc')->get();
+		return view('admin.messages.all')->with('pages', $pages);
+	}
+
+	public function getMessage(Request $request, $id)
+	{
+		$page = Message::where('id', $id)->first();
+		if($page)
+		{
+			return view('admin.messages.edit')->with('page', $page);
+		}
+		else
+		{
+			return redirect()->route('get_admin_messages')->with('status.error', 'Message Not Found');
 		}
 	}
 

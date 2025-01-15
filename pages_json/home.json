@@ -1,0 +1,181 @@
+{
+    "uniq_key": "home",
+    "name": "Home Page",
+    "blocks": [
+        {
+            "name": "slider",
+            "type": "single",
+            "attributes": {
+                "title": {
+                    "type": "text",
+                    "value": "Welcome to Alberta Hindi Parishad"
+                },
+                "sub_title": {
+                    "type": "text",
+                    "value": "We provide regular classes to teach Hindi systematically"
+                },
+                "link_title": {
+                    "type": "text",
+                    "value": "School Registration"
+                },
+                "link_url": {
+                    "type": "text",
+                    "value": "/register"
+                }
+            }
+        },
+        {
+            "name": "features",
+            "type": "collection",
+            "attributes": {
+                "title": {
+                    "type": "text"
+                },
+                "sub_title": {
+                    "type": "rich_text"
+                },
+                "summary_title": {
+                    "type": "text"
+                },
+                "summary_description": {
+                    "type": "rich_text"
+                },
+                "summary_link_title": {
+                    "type": "text"
+                },
+                "summary_link_url": {
+                    "type": "text"
+                }
+            },
+            "values": [
+                {
+                    "title": "Licensed Vidyalaya",
+                    "sub_title": "Hindi Vidyalaya was started in 1987 at the University of Alberta with the help of (late) Professor Emeritus Dr. Ambikeshwar Sharma",
+                    "summary_title": "Since 1987",
+                    "summary_description": "enas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat",
+                    "summary_link_title": "Contact Us",
+                    "summary_link_url": "/contact"
+                },
+                {
+                    "title": "High Quality learning",
+                    "sub_title": "In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat lorem",
+                    "summary_title": "Quality Education",
+                    "summary_description": "enas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat",
+                    "summary_link_title": "our services",
+                    "summary_link_url": "/services"
+                },
+                {
+                    "title": "Talented Staff",
+                    "sub_title": "In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat lorem",
+                    "summary_title": "Meet our Staff",
+                    "summary_description": "enas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat",
+                    "summary_link_title": "our team",
+                    "summary_link_url": "/team"
+                }
+            ]
+        },
+        {
+            "name": "about_us",
+            "type": "single",
+            "attributes": {
+                "title": {
+                    "type": "text",
+                    "value": "Our Mission"
+                },
+                "summary": {
+                    "type": "rich_text",
+                    "value": "Alberta Hindi Parishad was founded in 1985 with main objective to provide regular classes to teach Hindi systematically. Hindi Vidyalaya was started in 1987 at the University of Alberta with the help of (late) Professor Emeritus Dr. Ambikeshwar Sharma. Alberta Hindi Parishad chose the books prepared and published by National Council of Educational Research and Training (NCERT)-Baal Bharati is used in the central school system throughout India, as the curriculum to structure the classes. Experienced teachers provide basic training and guidance to the volunteer teachers. Hindi Vidyalaya conducts five classes (levels 1 to 5) for children from 5 to 15 years old."
+                },
+                "link_title": {
+                    "type": "text",
+                    "value": "contact us"
+                },
+                "link_url": {
+                    "type": "text",
+                    "value": "/contact"
+                }
+                
+            }
+        },
+        {
+            "name": "testimonials",
+            "type": "single",
+            "attributes": {
+                "title": {
+                    "type": "text",
+                    "value": "What Our Customers Say"
+                },
+                "reviews": {
+                    "type": "collection",
+                    "attributes": {
+                        "name": {
+                            "type": "text"
+                        },
+                        "title": {
+                            "type": "text"
+                        },
+                        "summary": {
+                            "type": "rich_text"
+                        }
+                    },
+                    "values": [
+                        {
+                            "name": "John Edison",
+                            "title": "UI Designer",
+                            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "stats",
+            "type": "collection",
+            "attributes": {
+                "title": {
+                    "type": "text"
+                },
+                "count": {
+                    "type": "text"
+                }
+            },
+            "values": [
+                {
+                    "title": "Professionals",
+                    "count": "30"
+                },
+                {
+                    "title": "Happy Parents",
+                    "count": "74"
+                },
+                {
+                    "title": "Students",
+                    "count": "104"
+                }
+            ]
+        },
+        {
+            "name": "enroll",
+            "type": "single",
+            "attributes": {
+                "title": {
+                    "type": "text",
+                    "value": "Enroll Today"
+                },
+                "summary": {
+                    "type": "rich_text",
+                    "value": "Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus vi tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."
+                },
+                "link_title": {
+                    "type": "text",
+                    "value": "contact us"
+                },
+                "link_url": {
+                    "type": "text",
+                    "value": "/contact"
+                }
+                
+            }
+        }
+    ]
+}

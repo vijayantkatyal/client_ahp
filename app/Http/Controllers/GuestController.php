@@ -10,6 +10,9 @@ use App\Models\Classes;
 use App\Models\Courses;
 use App\Models\FormMembership;
 use App\Models\FormRegistration;
+use App\Models\Message;
+use App\Models\Page;
+use App\Models\Post;
 use App\Models\SchoolEventPhotos;
 use App\Models\SchoolEvents;
 use App\Models\Terms;
@@ -32,7 +35,9 @@ class GuestController extends Controller
 {
 	public function getIndex()
 	{
-		return view('guest.index');
+		$page = Page::where('id', 1)->first();
+		$posts = Post::where('published', true)->get();
+		return view('guest.index')->with('page', $page)->with('posts', $posts);
 	}
 
 	public function getGallery()
@@ -52,12 +57,14 @@ class GuestController extends Controller
 
 	public function getAbout()
 	{
-		return view('guest.about');
+		$page = Page::where('id', 1)->first();
+		return view('guest.about')->with('page', $page);
 	}
 
 	public function getContact()
 	{
-		return view('guest.contact');
+		$page = Page::where('id', 4)->first();
+		return view('guest.contact')->with('page', $page);
 	}
 
 	public function getTeam()
@@ -73,7 +80,13 @@ class GuestController extends Controller
 
 	public function getMission()
 	{
-		return view('guest.mission');
+		$page = Page::where('id', 2)->first();
+		return view('guest.mission')->with('page', $page);
+	}
+
+	public function getDocuments()
+	{
+		return view('guest.documents');
 	}
 
 	public function getEvents(Request $request)
@@ -323,5 +336,48 @@ class GuestController extends Controller
 	{
 		$events = CalendarDirector::orderBy('date', 'asc')->get();
 		return view('guest.calendar.director')->with('events', $events);
+	}
+
+	public function getPage($name)
+	{
+		$page = Page::where('name', $name)->first();
+
+		if($page->type == "general")
+		{
+			return view('guest.page')->with('page', $page);
+		}
+
+		if($page->type == "service")
+		{
+			return view('guest.service')->with('page', $page);
+		}
+	}
+
+	public function getBlog()
+	{
+		$posts = Post::where('published', true)->get();
+		return view('guest.blog')->with('posts', $posts);
+	}
+
+	public function getPost($name)
+	{
+		$post = Post::where('published', true)->where('name', $name)->first();
+		return view('guest.post')->with('post', $post);
+	}
+
+	public function postContact(Request $request)
+	{
+		Message::create([
+			'message'	=>	$request->input('message'),
+			'name'		=>	$request->input('name'),
+			'email'		=>	$request->input('email'),
+			'phone'		=>	$request->input('phone'),
+			'created_at' => time()
+		]);
+
+		// send email
+		
+
+		return redirect()->route('get_contact')->with('status.success', 'Message Received, will get back to you soon.');
 	}
 }

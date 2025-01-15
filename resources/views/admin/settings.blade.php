@@ -171,32 +171,308 @@
 									@endif
 								</div>
 							</div>
+							
 							<div class="form-group mb-3 row">
-								<label class="form-label col-12 col-sm-3 col-form-label">Show Training URL</label>
-								<div class="col">
-									<select name="show_training_url" class="form-control">
-										<option  {{ old('show_training_url', $settings->show_training_url) == 1 ? "selected": "" }} value="1">Yes</option>
-										<option  {{ old('show_training_url', $settings->show_training_url) == 0 ? "selected": "" }} value="0">No</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group mb-3 row">
-								<label class="form-label col-12 col-sm-3 col-form-label">Training URL</label>
+								<label class="form-label col-12 col-sm-3 col-form-label">Appointment URL</label>
 								<div class="col">
 									<input
-										type="text" name="training_url"
-										@if($errors->has('training_url'))
+										type="text" name="appointment_url"
+										@if($errors->has('appointment_url'))
 											class="form-control is-invalid"
 										@else
 											class="form-control"
 										@endif
-										value="{{ old('training_url', $settings->training_url) }}"
+										value="{{ old('appointment_url', $settings->appointment_url) }}"
 									/>
-									@if($errors->has('training_url'))
-										<div class="invalid-feedback">{{ $errors->first('training_url') }}</div>
+									@if($errors->has('appointment_url'))
+										<div class="invalid-feedback">{{ $errors->first('appointment_url') }}</div>
 									@endif
 								</div>
 							</div>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Phone</label>
+								<div class="col">
+									<input
+										type="text" name="phone"
+										@if($errors->has('phone'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('phone', $settings->phone) }}"
+									/>
+									@if($errors->has('phone'))
+										<div class="invalid-feedback">{{ $errors->first('phone') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Maps URL</label>
+								<div class="col">
+									<input
+										type="text" name="maps_link"
+										@if($errors->has('maps_link'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('maps_link', $settings->maps_link) }}"
+									/>
+									@if($errors->has('maps_link'))
+										<div class="invalid-feedback">{{ $errors->first('maps_link') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Address</label>
+								<div class="col">
+									<textarea name="address"
+										@if($errors->has('address'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+									>{{ old('address', $settings->address) }}</textarea>
+									@if($errors->has('address'))
+										<div class="invalid-feedback">{{ $errors->first('address') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<br/>
+							<b>Working Hours:</b>
+							<br/>
+							<br/>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Monday to - Thursday</label>
+								<div class="col">
+									<input
+										type="text" name="working_hours_mon_thu"
+										@if($errors->has('working_hours_mon_thu'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('working_hours_mon_thu', $settings->working_hours_mon_thu) }}"
+									/>
+									@if($errors->has('working_hours_mon_thu'))
+										<div class="invalid-feedback">{{ $errors->first('working_hours_mon_thu') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Friday</label>
+								<div class="col">
+									<input
+										type="text" name="working_hours_friday"
+										@if($errors->has('working_hours_friday'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('working_hours_friday', $settings->working_hours_friday) }}"
+									/>
+									@if($errors->has('working_hours_friday'))
+										<div class="invalid-feedback">{{ $errors->first('working_hours_friday') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Saturday - Sunday</label>
+								<div class="col">
+									<input
+										type="text" name="working_hours_sat_sun"
+										@if($errors->has('working_hours_sat_sun'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('working_hours_sat_sun', $settings->working_hours_sat_sun) }}"
+									/>
+									@if($errors->has('working_hours_sat_sun'))
+										<div class="invalid-feedback">{{ $errors->first('working_hours_sat_sun') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<br/>
+							<b>Social Links:</b>
+							<br/>
+							<br/>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Facebook Link</label>
+								<div class="col">
+									<input
+										type="text" name="social_link_facebook"
+										@if($errors->has('social_link_facebook'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('social_link_facebook', $settings->social_link_facebook) }}"
+									/>
+									@if($errors->has('social_link_facebook'))
+										<div class="invalid-feedback">{{ $errors->first('social_link_facebook') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Instagram Link</label>
+								<div class="col">
+									<input
+										type="text" name="social_link_instagram"
+										@if($errors->has('social_link_instagram'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('social_link_instagram', $settings->social_link_instagram) }}"
+									/>
+									@if($errors->has('social_link_instagram'))
+										<div class="invalid-feedback">{{ $errors->first('social_link_instagram') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Linkedin Link</label>
+								<div class="col">
+									<input
+										type="text" name="social_link_linkedin"
+										@if($errors->has('social_link_linkedin'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('social_link_linkedin', $settings->social_link_linkedin) }}"
+									/>
+									@if($errors->has('social_link_linkedin'))
+										<div class="invalid-feedback">{{ $errors->first('social_link_linkedin') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Twitter Link</label>
+								<div class="col">
+									<input
+										type="text" name="social_link_twitter"
+										@if($errors->has('social_link_twitter'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+										value="{{ old('social_link_twitter', $settings->social_link_twitter) }}"
+									/>
+									@if($errors->has('social_link_twitter'))
+										<div class="invalid-feedback">{{ $errors->first('social_link_twitter') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<br/>
+							<b>Top Bar:</b>
+							<br/>
+							<br/>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Hide Top Bar</label>
+								<div class="col">
+									<select
+										name="hide_top_alert_bar"
+										@if($errors->has('hide_top_alert_bar'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+									>
+										<option value="0" @if($settings->hide_top_alert_bar == false) selected @endif>No</option>
+										<option value="1" @if($settings->hide_top_alert_bar == true) selected @endif>Yes</option>
+									</select>
+									@if($errors->has('hide_top_alert_bar'))
+										<div class="invalid-feedback">{{ $errors->first('hide_top_alert_bar') }}</div>
+									@endif
+								</div>
+							</div>
+
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Custom Text</label>
+								<div class="col">
+									<textarea name="custom_top_alert_bar_text"
+										@if($errors->has('custom_top_alert_bar_text'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+									>{{ old('custom_top_alert_bar_text', $settings->custom_top_alert_bar_text) }}</textarea>
+									@if($errors->has('custom_top_alert_bar_text'))
+										<div class="invalid-feedback">{{ $errors->first('custom_top_alert_bar_text') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<br/>
+							<b>Custom Code:</b>
+							<br/>
+							<br/>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Analytics Code</label>
+								<div class="col">
+									<textarea name="analytics_code"
+										@if($errors->has('analytics_code'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+									>{{ old('analytics_code', $settings->analytics_code) }}</textarea>
+									@if($errors->has('analytics_code'))
+										<div class="invalid-feedback">{{ $errors->first('analytics_code') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Custom Style</label>
+								<div class="col">
+									<textarea name="custom_style"
+										@if($errors->has('custom_style'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+									>{{ old('custom_style', $settings->custom_style) }}</textarea>
+									@if($errors->has('custom_style'))
+										<div class="invalid-feedback">{{ $errors->first('custom_style') }}</div>
+									@endif
+								</div>
+							</div>
+
+							<div class="form-group mb-3 row">
+								<label class="form-label col-12 col-sm-3 col-form-label">Custom Script</label>
+								<div class="col">
+									<textarea name="custom_script"
+										@if($errors->has('custom_script'))
+											class="form-control is-invalid"
+										@else
+											class="form-control"
+										@endif
+									>{{ old('custom_script', $settings->custom_script) }}</textarea>
+									@if($errors->has('custom_script'))
+										<div class="invalid-feedback">{{ $errors->first('custom_script') }}</div>
+									@endif
+								</div>
+							</div>
+
 						</div>
 						<div class="card-footer">
 							<div class="d-flex">

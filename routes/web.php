@@ -25,6 +25,7 @@ use App\Http\Controllers\StaffController;
 Route::get('/', [GuestController::class, 'getIndex'])->name('get_index');
 Route::get('/about', [GuestController::class, 'getAbout'])->name('get_about');
 Route::get('/contact', [GuestController::class, 'getContact'])->name('get_contact');
+Route::post('/contact', [GuestController::class, 'postContact'])->name('post_contact');
 Route::get('/events', [GuestController::class, 'getEvents'])->name('get_events');
 Route::get('/event/{id}', [GuestController::class, 'getEventDetails'])->name('get_event_details');
 
@@ -43,6 +44,8 @@ Route::post('/form/membership', [GuestController::class, 'postFormMembership'])-
 
 Route::get('/mission', [GuestController::class, 'getMission'])->name('get_mission');
 
+Route::get('/documents', [GuestController::class, 'getDocuments'])->name('get_documents');
+
 Route::get('/team', [GuestController::class, 'getTeam'])->name('get_team');
 Route::get('/gallery', [GuestController::class, 'getGallery'])->name('get_gallery');
 
@@ -50,6 +53,12 @@ Route::post('/logout', [AdminController::class, 'postLogout'])->name('post_logou
 Route::get('/dashboard', [AccountController::class, 'getIndex'])->name('get_dashboard_index');
 
 Route::get('/test-email', [AccountController::class, 'getTestMail'])->name('get_test_email');
+
+Route::get('/blog', [GuestController::class, 'getBlog'])->name('get_blog');
+
+Route::get('/post/{name}', [GuestController::class, 'getPost'])->name('get_post');
+Route::get('/page/{name}', [GuestController::class, 'getPage'])->name('get_page');
+
 
 Route::group(
 	[
@@ -254,6 +263,32 @@ Route::group(
 		Route::post('/mail-to-user', [AdminController::class, 'postSendMailtoUser'])->name('post_admin_send_mail_to_user');
 		Route::post('/mail-to-class', [AdminController::class, 'postSendMailtoClass'])->name('post_admin_send_mail_to_class');
 		Route::post('/mail-to-filter', [AdminController::class, 'postSendMailtoFilter'])->name('post_admin_send_mail_to_filter');
+
+		// pages
+		Route::get('/pages', [AdminController::class, 'getPages'])->name('get_admin_pages');
+		Route::post('/page', [AdminController::class, 'postPage'])->name('post_admin_page');
+
+		Route::get('/page-edit/{id}', [AdminController::class, 'getEditPage'])->name('get_edit_page');
+		Route::post('/page-edit', [AdminController::class, 'postEditPage'])->name('post_edit_page');
+
+		Route::get('/page-delete/{id}', [AdminController::class, 'getDeletePage'])->name('get_delete_page');
+
+		Route::post('/add-image', [AdminController::class, 'postAddImage'])->name('post_add_image');
+		Route::get('/remove-item/{pid}/{bid}/{aid}', [AdminController::class, 'getRemoveItem'])->name('remove_item');
+
+		Route::post('/add-image-to-collection', [AdminController::class, 'postAddImageToCollection'])->name('post_add_image_to_collection');
+		Route::get('/remove-item-collection/{pid}/{bid}/{aid}/{key}', [AdminController::class, 'getRemoveItemFromCustomPageCollection'])->name('remove_item_from_collection');
+
+		// blog
+		Route::get('/posts', [AdminController::class, 'getPosts'])->name('get_admin_posts');
+		Route::post('/post', [AdminController::class, 'postPost'])->name('post_admin_post');
+
+		Route::get('/post-edit/{id}', [AdminController::class, 'getEditPost'])->name('get_edit_post');
+		Route::post('/post-edit', [AdminController::class, 'postEditPost'])->name('post_edit_post');
+
+		// messages
+		Route::get('/messages', [AdminController::class, 'getMessages'])->name('get_admin_messages');
+		Route::get('/message/{id}', [AdminController::class, 'getMessage'])->name('get_admin_message');
     }
 );
 

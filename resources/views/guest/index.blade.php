@@ -24,12 +24,11 @@
 			<!-- text  -->
 			<div class="ls-l header-wrapper" data-ls="offsetyin:150; durationin:700; delayin:200; easingin:easeOutQuint; rotatexin:20; scalexin:1.4; offsetyout:600; durationout:400;">
 				<div class="header-text">
-					<span>Welcome to</span>
-					<h1>Alberta Hindi Parishad</h1>
+					<h1>{{ App\Models\Site::getItem($page->page_schema, 'slider', 'title') }}</h1>
 					<!--the div below is hidden on small screens  -->
 					<div class="hidden-small">
-						<p class="header-p">We provide regular classes to teach Hindi systematically</p>
-						<a class="btn btn-secondary" href="{{ route('get_admin_register_route') }}">School Registration</a>
+						<p class="header-p">{{ App\Models\Site::getItem($page->page_schema, 'slider', 'sub_title') }}</p>
+						<a class="btn btn-secondary" href="{{ App\Models\Site::getItem($page->page_schema, 'slider', 'link_url') }}">{{ App\Models\Site::getItem($page->page_schema, 'slider', 'link_title') }}</a>
 					</div>
 					<!--/hidden-small -->
 				</div>
@@ -55,12 +54,12 @@
 				<!-- front of card  -->
 				<div class="card bg-secondary text-light ">
 					<div class="p-5">
-						<h5 class="card-title text-light">Licensed Vidyalaya</h5>
+						<h5 class="card-title text-light">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[0]->title }}</h5>
 						<p class="card-text">
-							Hindi Vidyalaya was started in 1987 at the University of Alberta with the help of (late) Professor Emeritus Dr. Ambikeshwar Sharma
+							{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[0]->sub_title }}
 						</p>
 						<!-- button show on mobile only,where flip is disabled -->
-						<a href="contact.php" class="btn d-lg-none">Contact us</a>
+						<a href="{{ App\Models\Site::getItemCollectionParent($page->page_schema, 'features')[0]->summary_link_url }}" class="btn d-lg-none">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[0]->summary_link_title }}</a>
 					</div>
 					<!-- /p-5 -->
 					<!-- image -->
@@ -71,12 +70,10 @@
 				<div class="card bg-secondary text-light card-back">
 					<div class="card-body d-flex justify-content-center align-items-center">
 						<div class="p-4">
-							<h5 class="card-title text-light">Since 1987</h5>
-							<p class="card-text">enas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id.
-								In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat
-							</p>
+							<h5 class="card-title text-light">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[0]->summary_title }}</h5>
+							<p class="card-text">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[0]->summary_description }}</p>
 							<!-- button -->
-							<a href="contact.php" class="btn">contact us</a>
+							<a href="{{ App\Models\Site::getItemCollectionParent($page->page_schema, 'features')[0]->summary_link_url }}" class="btn">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[0]->summary_link_title }}</a>
 						</div>
 						<!-- /p-4 -->
 					</div>
@@ -93,12 +90,12 @@
 				<!-- front of card  -->
 				<div class="card bg-primary text-light">
 					<div class="p-5">
-						<h5 class="card-title text-light">High Quality learning</h5>
+						<h5 class="card-title text-light">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[1]->title }}</h5>
 						<p class="card-text">
-							In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat lorem
+							{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[1]->sub_title }}
 						</p>
 						<!-- button show on mobile only,where flip is disabled -->
-						<a href="services.php" class="btn d-lg-none">Our Services</a>
+						<a href="{{ App\Models\Site::getItemCollectionParent($page->page_schema, 'features')[1]->summary_link_url }}" class="btn d-lg-none">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[0]->summary_link_title }}</a>
 					</div>
 					<!-- /p-5 -->
 					<!-- image -->
@@ -109,12 +106,10 @@
 				<div class="card bg-primary text-light card-back">
 					<div class="card-body d-flex justify-content-center align-items-center">
 						<div class="p-4">
-							<h5 class="card-title text-light">Quality Education</h5>
-							<p class="card-text">enas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id.
-								In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat
-							</p>
+							<h5 class="card-title text-light">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[1]->summary_title }}</h5>
+							<p class="card-text">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[1]->summary_description }}</p>
 							<!-- button -->
-							<a href="services.php" class="btn">Our Services</a>
+							<a href="{{ App\Models\Site::getItemCollectionParent($page->page_schema, 'features')[1]->summary_link_url }}" class="btn">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[1]->summary_link_title }}</a>
 						</div>
 						<!-- /p-4 -->
 					</div>
@@ -131,12 +126,12 @@
 				<!-- front of card  -->
 				<div class="card bg-tertiary text-light">
 					<div class="p-5">
-						<h5 class="card-title text-light">Talented Staff</h5>
+						<h5 class="card-title text-light">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[2]->title }}</h5>
 						<p class="card-text">
-							In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat lorem
+							{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[2]->sub_title }}
 						</p>
 						<!-- button show on mobile only,where flip is disabled -->
-						<a href="team.php" class="btn d-lg-none">Our Team</a>
+						<a href="{{ App\Models\Site::getItemCollectionParent($page->page_schema, 'features')[2]->summary_link_url }}" class="btn d-lg-none">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[2]->summary_link_title }}</a>
 					</div>
 					<!-- /p-5 -->
 					<!-- image -->
@@ -147,12 +142,10 @@
 				<div class="card bg-tertiary text-light card-back">
 					<div class="card-body d-flex justify-content-center align-items-center">
 						<div class="p-4">
-							<h5 class="card-title text-light">Meet our Staff</h5>
-							<p class="card-text">enas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id.
-								In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat
-							</p>
+							<h5 class="card-title text-light">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[2]->summary_title }}</h5>
+							<p class="card-text">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[2]->summary_description }}</p>
 							<!-- button -->
-							<a href="team.php" class="btn">Our Team</a>
+							<a href="{{ App\Models\Site::getItemCollectionParent($page->page_schema, 'features')[2]->summary_link_url }}" class="btn">{{ App\Models\Site::getItemCollectionParent($page->page_schema, "features")[2]->summary_link_title }}</a>
 						</div>
 						<!-- /p-4 -->
 					</div>
@@ -178,14 +171,11 @@
 		<!-- /section-heading -->
 		<div class="row">
 			<div class="col-lg-7 ">
-				<h3>Our Mission</h3>
+				<h3>{{ App\Models\Site::getItem($page->page_schema, 'about_us', 'title') }}</h3>
 				<p class="mt-4 res-margin">
-                    Alberta Hindi Parishad was founded in 1985 with main objective to provide regular classes to teach Hindi systematically. Hindi Vidyalaya was started in 1987 at the University of Alberta with the help of (late) Professor Emeritus Dr. Ambikeshwar Sharma. Alberta Hindi Parishad chose the books prepared and published by National Council of Educational Research and Training (NCERT)-Baal Bharati is used in the central school system throughout India, as the curriculum to structure the classes. Experienced teachers provide basic training and guidance to the volunteer teachers. Hindi Vidyalaya conducts five classes (levels 1 to 5) for children from 5 to 15 years old.
+					{!! App\Models\Site::getItem($page->page_schema, 'about_us', 'summary') !!}
                 </p>
-                <p>
-                    There are separate classes for adults where basic reading, writing and speaking is taught, followed by conversation class, where emphasis is on Hindi speaking and a class of grammar. Students participate in many programs like Holi, Independence Day, Kavi Sammelan, Hindi Divas, Antakshari, field trips and annual picnic. These programs are organized by Hindi Parishad. Students and members are encouraged to submit articles, poems and short stories our annual publication MEDHAVANI and newsletter KRITI.
-                </p>
-				<a href="contact.php" class="btn btn-secondary ">Contact us</a>
+				<a href="{{ App\Models\Site::getItem($page->page_schema, 'about_us', 'link_url') }}" class="btn btn-secondary ">{{ App\Models\Site::getItem($page->page_schema, 'about_us', 'link_title') }}</a>
 			</div>
 			<!-- /col-lg -->
 			<div class="col-lg-5 res-margin">
@@ -197,68 +187,27 @@
 			<!-- /col-lg -->
 		</div>
 		<!-- /row -->
-		<h3 class="mt-5 text-center">What Parents say:</h3>
+		<h3 class="mt-5 text-center">{{ App\Models\Site::getItem($page->page_schema, 'testimonials', 'title') }}</h3>
 		<div class="row">
 			<!-- testimonials -->
 			<!-- testimonial carousel -->
 			<div class="carousel-2items owl-carousel owl-theme col-md-12">
-				<!-- testimonial -->
+				@foreach(App\Models\Site::getItemCollection($page->page_schema, "testimonials", "reviews") as $reviewItemKey => $reviewItemValue)
 				<div class="testimonial">
 					<div class="content">
 						<p class="description">
-							Scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.
+							{{ $reviewItemValue->summary }}
 						</p>
 					</div>
 					<!-- /content -->
-					<div class="testimonial-pic">
-						<img src="{{ asset('assets/img/team/team1.jpg') }}" class="img-fluid" alt="">
-					</div>
 					<!-- /testimonial-pic -->
 					<div class="testimonial-review">
-						<h5 class="testimonial-title">Lucianna Smith</h5>
-						<span class="post">Teacher</span>
+						<h5 class="testimonial-title">{{ $reviewItemValue->name }}</h5>
+						<span class="post">{{ $reviewItemValue->title }}</span>
 					</div>
 					<!-- /testimonial-review -->
 				</div>
-				<!-- /testimonial -->
-				<!-- testimonial -->
-				<div class="testimonial">
-					<div class="content">
-						<p class="description">
-							Aliquam erat volutpat In id fermentum augue, ut pellentesque leo. Maecenas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.
-						</p>
-					</div>
-					<!-- /content -->
-					<div class="testimonial-pic">
-						<img src="{{ asset('assets/img/team/team2.jpg') }}" class="img-fluid" alt="">
-					</div>
-					<!-- /testimonial-pic -->
-					<div class="testimonial-review">
-						<h5 class="testimonial-title">John Sadana</h5>
-						<span class="post">Doctor</span>
-					</div>
-					<!-- /testimonial-review -->
-				</div>
-				<!-- /testimonial -->
-				<!-- testimonial -->
-				<div class="testimonial">
-					<div class="content">
-						<p class="description">
-							Aliquam erat volutpat In id fermentum augue, ut pellentesque leo. Maecenas at arcu risus. Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis maximus. Etiam rhoncus leo a dolor placerat, nec elementum ipsum convall.
-						</p>
-					</div>
-					<!-- /content -->
-					<div class="testimonial-pic">
-						<img src="{{ asset('assets/img/team/team3.jpg') }}" class="img-fluid" alt="">
-					</div>
-					<!-- /testimonial-pic -->
-					<div class="testimonial-review">
-						<h5 class="testimonial-title">Jane Janeth</h5>
-						<span class="post">Librarian</span>
-					</div>
-					<!-- /testimonial-review -->
-				</div>
-				<!-- /testimonial -->
+				@endforeach
 			</div>
 			<!-- /owl-testimonial -->
 		</div>
@@ -279,79 +228,6 @@
 	<!--/ whale in water scene ends -->
 </section>
 <!-- /section ends -->
-<!-- section -->
-<section id="features" class="bg-secondary text-light">
-	<div class="container">
-		<!-- section heading -->
-		<div class="section-heading text-center">
-			<h2>Our Features</h2>
-			<p class="subtitle">Benefits for you</p>
-		</div>
-		<!-- /section-heading -->
-		<!-- features -->
-		<div class="row ">
-			<div class="col-lg-6">
-				<div class="row ">
-					<div class="col-md-6 col-lg-6">
-						<!-- feature -->
-						<div class="feature-with-icon">
-							<div class="icon-features">
-								<!-- icon -->
-								<i class="flaticon-maternity text-primary"></i>
-							</div>
-							<h5>Safe Enviroment</h5>
-							<p>Etiam rhoncus leo a dolor placerat, nec elem entum ipsum convall.</p>
-						</div>
-						<!-- /feature-with-icon-->
-						<!-- feature -->
-						<div class="feature-with-icon mt-5">
-							<div class="icon-features">
-								<!-- icon -->
-								<i class="flaticon-open-book-1 text-primary"></i>
-							</div>
-							<h5>Educational activities</h5>
-							<p>Etiam rhoncus leo a dolor placerat, nec elem entum ipsum convall.</p>
-						</div>
-						<!-- /feature-with-icon-->
-					</div>
-					<div class="col-md-6 col-lg-6">
-						<!-- feature -->
-						<div class="feature-with-icon">
-							<div class="icon-features">
-								<!-- icon -->
-								<i class="flaticon-classroom-1 text-primary"></i>
-							</div>
-							<h5>Qualified teachers</h5>
-							<p>Etiam rhoncus leo a dolor placerat, nec elem entum ipsum convall.</p>
-						</div>
-						<!-- /feature-with-icon-->
-						<!-- feature -->
-						<div class="feature-with-icon mt-5">
-							<div class="icon-features">
-								<!-- icon -->
-								<i class="flaticon-baby-boy text-primary"></i>
-							</div>
-							<h5>care</h5>
-							<p>Etiam rhoncus leo a dolor placerat, nec elem entum ipsum convall.</p>
-						</div>
-						<!-- /feature-with-icon-->
-					</div>
-					<!-- /col-l -->
-				</div>
-				<!-- /row-->
-			</div>
-			<!-- /col-l -->
-			<div class="col-lg-6 features-bg">
-				<!-- image -->
-				<img src="{{ asset('assets/img/features.png') }}" alt="" class="img-fluid" data-aos="zoom-out" data-aos-delay="300">
-			</div>
-			<!-- /col-l -->
-		</div>
-		<!-- /row -->
-	</div>
-	<!-- /container -->
-</section>
-<!-- /section ends -->
 
 <!-- Section  -->
 <section id="counter-section" class="container-fluid counter-calltoaction bg-fixed overlay" data-100-bottom="background-position: 50% 100px;" data-top-bottom="background-position: 50% -100px;">
@@ -363,8 +239,8 @@
 					<div class="counter-wrapper bg-primary">
 						<i class="counter-icon flaticon-teacher"></i>
 						<!-- insert your final value on data-count= -->
-						<div class="counter-value" data-count="30">0</div>
-						<h3 class="title">Professionals</h3>
+						<div class="counter-value" data-count="{{ App\Models\Site::getItemCollectionParent($page->page_schema, 'stats')[0]->count }}">0</div>
+						<h3 class="title">{{ App\Models\Site::getItemCollectionParent($page->page_schema, 'stats')[0]->title }}</h3>
 					</div>
 				</div>
 				<!-- /counter -->
@@ -376,8 +252,8 @@
 					<div class="counter-wrapper bg-secondary">
 						<i class="counter-icon  flaticon-family"></i>
 						<!-- insert your final value on data-count= -->
-						<div class="counter-value" data-count="74">0</div>
-						<h3 class="title">Happy parents</h3>
+						<div class="counter-value" data-count="{{ App\Models\Site::getItemCollectionParent($page->page_schema, 'stats')[1]->count }}">0</div>
+						<h3 class="title">{{ App\Models\Site::getItemCollectionParent($page->page_schema, 'stats')[1]->title }}</h3>
 					</div>
 				</div>
 				<!-- /counter -->
@@ -389,8 +265,8 @@
 					<div class="counter-wrapper bg-tertiary">
 						<i class="counter-icon flaticon-children"></i>
 						<!-- insert your final value on data-count= -->
-						<div class="counter-value" data-count="104">0</div>
-						<h3 class="title">Students</h3>
+						<div class="counter-value" data-count="{{ App\Models\Site::getItemCollectionParent($page->page_schema, 'stats')[2]->count }}">0</div>
+						<h3 class="title">{{ App\Models\Site::getItemCollectionParent($page->page_schema, 'stats')[2]->title }}</h3>
 					</div>
 				</div>
 				<!-- /counter -->
@@ -401,37 +277,8 @@
 	</div>
 	<!-- /container -->
 </section>
-<!-- /section ends--><!-- section-->
-<section id="team-home" class="container">
-	<!-- section heading -->
-	<div class="section-heading text-center">
-		<h2>Our Team</h2>
-		<p class="subtitle">Qualified Professionals</p>
-	</div>
-	<!-- /section-heading -->
-	<div class="row">
-		<div class="col-lg-7">
-			<h3>Meet our Talented Team</h3>
-			<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			<ul class="checkmark ps-0 font-weight-bold">
-				<li>Over 30 Qualified professionals</li>
-				<li>We offer you our quality services since 2002</li>
-				<li>Fun and educational activities in our daily plan</li>
-			</ul>
-			<!-- /ul-->
-		</div>
-		<!-- /col-lg-->
-		<div class="col-lg-5 res-margin">
-			<img src="{{ asset('assets/img/team/team-home.jpg') }}" alt="" class="img-fluid blob2">
-			<!-- ornament starts-->
-			<div class="ornament-stars" data-aos="fade-down"></div>
-		</div>
-		<!-- /col-lg-->
-		
-	</div>
-	<!-- /row-->
-</section>
 <!-- /section ends-->
+@if(count($posts) > 0)
 <!-- section -->
 <section id="blogprev-home" data-100-bottom="background-position: 0% 120%;" data-top-bottom="background-position: 0% 100%;">
 	<div class="container">
@@ -443,126 +290,45 @@
 		<!-- /section-heading -->
 		<!-- blog carousel -->
 		<div class="carousel-3items owl-carousel owl-theme mt-0">
-			<!-- blog-box -->
+			@foreach($posts as $post)
 			<div class="blog-box">
 				<!-- image -->
-				<a href="blog-single.php">
-					<div class="image"><img src="http://ahpschool.ca/Ref/Events/2020/RepublicDay/9M%20.jpeg" alt=""></div>
+				<a href="{{ route('get_post', ['name' => $post->name]) }}">
+					@if($post->image != null)
+						<div class="image"><img src="{{ asset($post->image) }}" alt=""></div>
+					@else
+						<div class="image"><img src="https://placehold.co/600x400?text=AHP" alt=""></div>
+					@endif
 				</a>
 				<!-- blog-box-caption -->
 				<div class="blog-box-caption">
 					<!-- date -->
-					<div class="date"><span class="day">12</span><span class="month">May</span></div>
-					<a href="blog-single.php">
-						<h4>Republic Day</h4>
+					<div class="date" style="padding: 8px;">{{ $post->created_at }}</div>
+					<a href="{{ route('get_post', ['name' => $post->name]) }}">
+						<h4>{{ $post->title }}</h4>
 					</a>
 					<!-- /link -->
 					<p>
-						Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis...
+						{{ $post->summary }}
 					</p>
 				</div>
 				<!-- blog-box-footer -->
 				<div class="blog-box-footer">
 					<!-- Button -->
 					<div class="text-center col-md-12">
-						<a href="#" class="btn btn-primary ">Read more</a>
+						<a href="{{ route('get_post', ['name' => $post->name]) }}" class="btn btn-primary ">Read more</a>
 					</div>
 				</div>
 				<!-- /blog-box-footer -->
 			</div>
-			<!-- /blog-box -->
-			<!-- blog-box -->
-			<div class="blog-box">
-				<!-- image -->
-				<a href="blog-single.php">
-					<div class="image"><img src="http://ahpschool.ca/Ref/Events/2020/Ilha/9M%20.jpeg" alt=""></div>
-				</a>
-				<!-- blog-box-caption -->
-				<div class="blog-box-caption">
-					<!-- date -->
-					<div class="date"><span class="day">28</span><span class="month">June</span></div>
-					<a href="blog-single.php">
-						<h4>llha</h4>
-					</a>
-					<!-- /link -->
-					<p>
-						Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis...
-					</p>
-				</div>
-				<!-- blog-box-footer -->
-				<div class="blog-box-footer">
-					<!-- Button -->
-					<div class="text-center col-md-12">
-						<a href="blog-single.php" class="btn btn-primary ">Read more</a>
-					</div>
-				</div>
-				<!-- /blog-box-footer -->
-			</div>
-			<!-- /blog-box -->
-			<!-- blog-box -->
-			<div class="blog-box">
-				<!-- image -->
-				<a href="blog-single.php">
-					<div class="image"><img src="{{ asset('assets/img/blog/blogstyle2-3.jpg') }}" alt=""></div>
-				</a>
-				<!-- blog-box-caption -->
-				<div class="blog-box-caption">
-					<!-- date -->
-					<div class="date"><span class="day">02</span><span class="month">July</span></div>
-					<a href="blog-single.php">
-						<h4>20 Fun Activities to Do With Your Kids</h4>
-					</a>
-					<!-- /link -->
-					<p>
-						Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis...
-					</p>
-				</div>
-				<!-- blog-box-footer -->
-				<div class="blog-box-footer">
-					<!-- Button -->
-					<div class="text-center col-md-12">
-						<a href="blog-single.php" class="btn btn-primary ">Read more</a>
-					</div>
-				</div>
-				<!-- /blog-box-footer -->
-			</div>
-			<!-- /blog-box -->
-			<!-- blog-box -->
-			<div class="blog-box">
-				<!-- image -->
-				<a href="blog-single.php">
-					<div class="image"><img src="{{ asset('assets/img/blog/blogstyle2-4.jpg') }}" alt=""></div>
-				</a>
-				<!-- blog-box-caption -->
-				<div class="blog-box-caption">
-					<!-- date -->
-					<div class="date"><span class="day">18</span><span class="month">June</span></div>
-					<a href="blog-single.php">
-						<h4>Brain-Boosting Activities for Children</h4>
-					</a>
-					<!-- /link -->
-					<p>
-						Donec commodo sodales ex, scelerisque laoreet nibh hendrerit id. In aliquet magna nec lobortis...
-					</p>
-				</div>
-				<!-- blog-box-footer -->
-				<div class="blog-box-footer">
-					<div class="author">Posted by<a href="#"><i class="fas fa-user"></i>Jonas Doe</a></div>
-					<div class="comments"><a href="blog-single.php"><i class="fas fa-comment"></i>11</a></div>
-					<!-- Button -->
-					<div class="text-center col-md-12">
-						<a href="blog-single.php" class="btn btn-primary ">Read more</a>
-					</div>
-				</div>
-				<!-- /blog-box-footer -->
-			</div>
-			<!-- /blog-box -->
+			@endforeach
 		</div>
 		<!-- /owl-carousel -->
 	</div>
 	<!-- /container -->
 </section>
 <!-- /section ends-->
+ @endif
 <!-- section -->
 <section id="callout" class=" container-fluid bg-fixed">
 	<div class="container">
@@ -575,9 +341,9 @@
 			<!-- text box  -->
 			<div class="col-lg-6 bg-secondary p-5 justify-content-center align-self-center" data-start="left: 50%;" data-center="left:-5%;">
 				<div class="text-light justify-content-center align-self-center">
-					<h3>Enroll Today</h3>
-					<p>Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus vi tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-					<a href="contact.php" class="btn btn-tertiary">Contact us</a>
+					<h3>{{ App\Models\Site::getItem($page->page_schema, 'enroll', 'title') }}</h3>
+					<p>{{ App\Models\Site::getItem($page->page_schema, 'enroll', 'summary') }}</p>
+					<a href="{{ App\Models\Site::getItem($page->page_schema, 'enroll', 'link_url') }}" class="btn btn-tertiary">{{ App\Models\Site::getItem($page->page_schema, 'enroll', 'link_title') }}</a>
 				</div>
 				<!-- /text-light  -->
 			</div>
@@ -601,6 +367,7 @@
 			<!-- contact info boxes start-->
 			<div class="contact-info res-margin">
 				<div class="row res-margin">
+					@if(App\Models\Site::settings()['support_email'] != null)
 					<div class="col-lg-4 contact-box">
 						<div class="contact-icon bg-secondary text-light">
 							<!---icon-->
@@ -608,12 +375,14 @@
 							<!-- contact-icon info-->
 							<div class="contact-icon-info">
 								<h5>Write us</h5>
-								<p><a href="mailto:albertahindischool@gmail.com">albertahindischool@gmail.com</a></p>
+								<p><a href="mailto:{{ App\Models\Site::settings()['support_email'] }}">{{ App\Models\Site::settings()['support_email'] }}</a></p>
 							</div>
 						</div>
 						<!-- /contact-icon-->
 					</div>
+					@endif
 					<!-- /col-lg-->
+					@if(App\Models\Site::settings()['address'] != null)
 					<div class="col-lg-4 contact-box res-margin">
 						<div class="contact-icon bg-secondary text-light">
 							<!---icon-->
@@ -621,12 +390,14 @@
 							<!-- contact-icon info-->
 							<div class="contact-icon-info">
 								<h5>Visit us</h5>
-								<p>#104, 3907-98 Street, Edmonton, Alberta, T6E 6M3</p>
+								<p>{{ App\Models\Site::settings()['address'] }}</p>
 							</div>
 						</div>
 						<!-- /contact-icon-->
 					</div>
+					@endif
 					<!-- /col-lg -->
+					@if(App\Models\Site::settings()['phone'] != null)
 					<div class="col-lg-4 contact-box res-margin">
 						<div class="contact-icon bg-secondary text-light">
 							<!---icon-->
@@ -634,11 +405,12 @@
 							<!-- contact-icon info-->
 							<div class="contact-icon-info">
 								<h5>Call us</h5>
-								<p>(780) 432-3674</p>
+								<p>{{ App\Models\Site::settings()['phone'] }}</p>
 							</div>
 						</div>
 						<!-- /contact-icon-->
 					</div>
+					@endif
 					<!-- /col-lg-->
 				</div>
 				<!-- /row -->
@@ -654,29 +426,30 @@
 					<h4>Send us a message</h4>
 					<!-- Form Starts -->
 					<div id="contact_form">
-						<div class="form-group">
+						<form class="form-group" action="{{ route('post_contact') }}" method="post">
+							{{ csrf_field() }}
 							<div class="row">
 								<div class="col-md-6">
 									<label>Name<span class="required">*</span></label>
-									<input type="text" name="name" class="form-control input-field" required="">
+									<input type="text" name="name" required class="form-control input-field" required="">
 								</div>
 								<div class="col-md-6">
 									<label>Email Address <span class="required">*</span></label>
-									<input type="email" name="email" class="form-control input-field" required="">
+									<input type="email" name="email" required class="form-control input-field" required="">
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<label>Subject</label>
-									<input type="text" name="subject" class="form-control input-field">
+									<label>Phone</label>
+									<input type="text" name="phone" class="form-control input-field">
 								</div>
 								<div class="col-md-12">
 									<label>Message<span class="required">*</span></label>
-									<textarea name="message" id="message" class="textarea-field form-control" rows="3" required=""></textarea>
+									<textarea name="message" required maxlength="500" id="message" class="textarea-field form-control" rows="3" required=""></textarea>
 								</div>
 							</div>
 							<button type="submit" id="submit_btn" value="Submit" class="btn btn-tertiary">Send message</button>
-						</div>
+						</form>
 						<!-- /form-group-->
 						<!-- Contact results -->
 						<div id="contact_results"></div>
@@ -684,12 +457,22 @@
 					<!-- /contact-form-->
 				</div>
 				<!-- /contact-info-->
+				@if(App\Models\Site::settings()['maps_link'] != null)
 				<div class="col-lg-5">
 					<!-- map-->
-					<div id="map-canvas" class="mt-5 rounded"></div>
+					<!-- <div id="map-canvas" class="mt-5 rounded"></div> -->
+					<iframe
+						width="100%"
+  						height="400"
+  						frameborder="0" style="border:0"
+  						referrerpolicy="no-referrer-when-downgrade"
+						src="{{ App\Models\Site::settings()['maps_link'] }}"
+						allowfullscreen
+					></iframe>
 				</div>
+				@endif
 				<!-- ornament starts-->
-				<div class="ornament-stars mt-8 d-none d-md-block" data-aos="zoom-out"></div>
+				<!-- <div class="ornament-stars mt-8 d-none d-md-block" data-aos="zoom-out"></div> -->
 			</div>
 			<!-- /row-->
 		</div>
@@ -702,4 +485,14 @@
 @endsection
 
 @section('footer')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js" integrity="sha512-hUhvpC5f8cgc04OZb55j0KNGh4eh7dLxd/dPSJ5VyzqDWxsayYbojWyl5Tkcgrmb/RVKCRJI1jNlRbVP4WWC4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+	$(".date").each(function(){
+		var _e_time = $(this).text();
+		var _time = moment(_e_time);
+		var _title = _time.format("DD MMM, YYYY");
+		$(this).attr("title", _title);
+		$(this).text(_title);
+	});
+</script>
 @endsection

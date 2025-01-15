@@ -74,7 +74,7 @@ field trip enrollment accepted via event
 ✅ calendar -  duty
 ✅ calendar - events
 
-> CMS
+✅ CMS
 > feedback
 
 > communication from pricipal to all teachers, classes,

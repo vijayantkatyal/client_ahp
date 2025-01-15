@@ -10,7 +10,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<!-- page title -->
-	<title>Alberta Hindi Parishad : @yield('title')</title>
+	<title>{{ App\Models\Site::settings()['name'] }} : @yield('title')</title>
 	<!--[if lt IE 9]>
       <script src="js/respond.js"></script>
       <![endif]-->
@@ -54,6 +54,10 @@
 		}
 	</style>
 
+	@if(App\Models\Site::settings()['custom_style'] != null)
+		{!! App\Models\Site::settings()['custom_style'] !!}
+	@endif
+
 	@yield('header')
 </head>
 <!-- ==== body starts ==== -->
@@ -78,16 +82,24 @@
 	<!--/Preloader ends -->
 	<nav id="main-nav" class="navbar-expand-xl">
 		<div class="row">
+			@if(App\Models\Site::settings()['hide_top_alert_bar'] == false)
 			<!-- Start Top Bar -->
 			<div class="container-fluid top-bar">
 				<div class="container">
+					@if(App\Models\Site::settings()['custom_top_alert_bar_text'] == null)
 					<div class="row">
 						<div class="col-md-9">
 							<!-- Start Contact Info -->
 							<ul class="contact-details float-left">
-								<li><i class="fa fa-map-marker"></i>#104, 3907-98 Street, Edmonton, Alberta, T6E 6M3</li>
-								<li><i class="fa fa-envelope"></i><a href="mailto:albertahindischool@gmail.com">albertahindischool@gmail.com</a></li>
-								<li><i class="fa fa-phone"></i>(780) 432-3674</li>
+								@if(App\Models\Site::settings()['address'] != null)
+								<li><i class="fa fa-map-marker"></i>{!! App\Models\Site::settings()['address'] !!}</li>
+								@endif
+								@if(App\Models\Site::settings()['support_email'] != null)
+								<li><i class="fa fa-envelope"></i><a href="mailto:{{ App\Models\Site::settings()['address'] }}">{{ App\Models\Site::settings()['support_email'] }}</a></li>
+								@endif
+								@if(App\Models\Site::settings()['phone'] != null)
+								<li><i class="fa fa-phone"></i>{{ App\Models\Site::settings()['phone'] }}</li>
+								@endif
 							</ul>
 							<!-- End Contact Info -->
 						</div>
@@ -95,19 +107,33 @@
 						<div class="col-md-3">
 							<!-- Start Social Links -->
 							<ul class="social-list float-end list-inline">
-								<li class="list-inline-item"><a title="Facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
-								<li class="list-inline-item"><a title="Twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-								<li class="list-inline-item"><a title="Instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+								@if(App\Models\Site::settings()['social_link_facebook'])
+								<li class="list-inline-item"><a title="Facebook" href="{{ App\Models\Site::settings()['social_link_facebook'] }}"><i class="fab fa-facebook-f"></i></a></li>
+								@endif
+								@if(App\Models\Site::settings()['social_link_twitter'])
+								<li class="list-inline-item"><a title="Twitter" href="{{ App\Models\Site::settings()['social_link_twitter'] }}"><i class="fab fa-twitter"></i></a></li>
+								@endif
+								@if(App\Models\Site::settings()['social_link_instagram'])
+								<li class="list-inline-item"><a title="Instagram" href="{{ App\Models\Site::settings()['social_link_instagram'] }}"><i class="fab fa-instagram"></i></a></li>
+								@endif
 							</ul>
 							<!-- /End Social Links -->
 						</div>
 						<!-- col -->
 					</div>
+					@else
+					<div class="row" style="color: #fff;">
+						<div class="col-12">
+						{{ App\Models\Site::settings()['custom_top_alert_bar_text'] }}
+						</div>
+					</div>
+					@endif
 					<!-- /row -->
 				</div>
 				<!-- /container -->
 			</div>
 			<!-- End Top bar -->
+			 @endif
 
 			<!-- Navbar Starts -->
 			<div class="navbar container-fluid">
@@ -144,10 +170,9 @@
 									Resources
 								</a>
 								<div class="dropdown-menu" aria-labelledby="about-dropdown">
-									<a class="dropdown-item" href="about.php">Documents</a>
+									<a class="dropdown-item" href="{{ route('get_documents') }}">Documents</a>
 									<a class="dropdown-item" href="{{ route('get_calendar') }}">Calendar</a>
 									<a class="dropdown-item" href="{{ route('get_forms') }}">Forms</a>
-									<a class="dropdown-item" href="team-single.php">Newsletter</a>
 								</div>
 							</li>
 							<!-- menu item -->
@@ -221,28 +246,46 @@
 					<div class="col-lg-4 text-center res-margin">
 						<h5>Contact Us</h5>
 						<ul class="list-unstyled mt-3">
-							<li class="mb-1"><i class="fas fa-phone margin-icon "></i>(780) 432-3674</li>
-							<li class="mb-1"><i class="fas fa-envelope margin-icon"></i><a href="mailto:albertahindischool@gmail.com">albertahindischool@gmail.com</a></li>
-							<li><i class="fas fa-map-marker margin-icon"></i>#104, 3907-98 Street, Edmonton, Alberta, T6E 6M3</li>
+							@if(App\Models\Site::settings()['phone'] != null)
+							<li class="mb-1"><i class="fas fa-phone margin-icon "></i>{{ App\Models\Site::settings()['phone'] }}</li>
+							@endif
+							@if(App\Models\Site::settings()['support_email'] != null)
+							<li class="mb-1"><i class="fas fa-envelope margin-icon"></i><a href="mailto:{{ App\Models\Site::settings()['support_email'] }}">{{ App\Models\Site::settings()['support_email'] }}</a></li>
+							@endif
+							@if(App\Models\Site::settings()['address'] != null)
+							<li><i class="fas fa-map-marker margin-icon"></i>{!! App\Models\Site::settings()['address'] !!}</li>
+							@endif
 						</ul>
 						<!--/ul -->
 						<!-- Start Social Links -->
 						<ul class="social-list text-center list-inline mt-2">
-							<li class="list-inline-item"><a title="Facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
-							<li class="list-inline-item"><a title="Twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-							<li class="list-inline-item"><a title="Instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+							@if(App\Models\Site::settings()['social_link_facebook'])
+							<li class="list-inline-item"><a title="Facebook" href="{{ App\Models\Site::settings()['social_link_facebook'] }}"><i class="fab fa-facebook-f"></i></a></li>
+							@endif
+							@if(App\Models\Site::settings()['social_link_twitter'])
+							<li class="list-inline-item"><a title="Twitter" href="{{ App\Models\Site::settings()['social_link_twitter'] }}"><i class="fab fa-twitter"></i></a></li>
+							@endif
+							@if(App\Models\Site::settings()['social_link_instagram'])
+							<li class="list-inline-item"><a title="Instagram" href="{{ App\Models\Site::settings()['social_link_instagram'] }}"><i class="fab fa-instagram"></i></a></li>
+							@endif
 						</ul>
 						<!-- /End Social Links -->
 					</div>
 					<!--/ col-lg -->
+					@if(App\Models\Site::settings()['working_hours_mon_thu'] != null || App\Models\Site::settings()['working_hours_friday'] != null)
 					<div class="col-lg-4 text-center">
 						<h5>Working Hours</h5>
 						<ul class="list-unstyled mt-3">
-							<li class="mb-1">Every Sunday</li>
-							<li class="mb-1">Open from 11:00 am - 1:00 pm</li>
+							@if(App\Models\Site::settings()['working_hours_mon_thu'] != null)
+							<li class="mb-1">Mon–Fri {{ App\Models\Site::settings()['working_hours_mon_thu'] }}</li>
+							@endif
+							@if(App\Models\Site::settings()['working_hours_friday'] != null)
+							<li class="mb-1"> Sat–Sun {{ App\Models\Site::settings()['working_hours_friday'] }}</li>
+							@endif
 						</ul>
 						<!--/ul -->
 					</div>
+					@endif
 					<!--/ col-lg -->
 				</div>
 				<!--/ row-->
@@ -308,15 +351,20 @@
 						<!--/ul -->
 					</div>
 					<!--/ col-lg -->
+					@if(App\Models\Site::settings()['working_hours_mon_thu'] != null || App\Models\Site::settings()['working_hours_friday'] != null)
 					<div class="col-lg-4 text-center">
 						<h5>Working Hours</h5>
 						<ul class="list-unstyled mt-3">
-							<li class="mb-1">Monday to Friday</li>
-							<li class="mb-1">Open from 9am - 6pm</li>
-							<li class="mb-1">Holidays / Weekends - Closed</li>
+							@if(App\Models\Site::settings()['working_hours_mon_thu'] != null)
+							<li class="mb-1">Mon–Fri {{ App\Models\Site::settings()['working_hours_mon_thu'] }}</li>
+							@endif
+							@if(App\Models\Site::settings()['working_hours_friday'] != null)
+							<li class="mb-1"> Sat–Sun {{ App\Models\Site::settings()['working_hours_friday'] }}</li>
+							@endif
 						</ul>
 						<!--/ul -->
 					</div>
+					@endif
 					<!--/ col-lg -->
 				</div>
 				<!--/ row-->
@@ -360,15 +408,21 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row mt-3">
+					@if(App\Models\Site::settings()['working_hours_mon_thu'] != null || App\Models\Site::settings()['working_hours_friday'] != null)
 					<div class="col-lg-4 text-center">
 						<h5>Working Hours</h5>
 						<ul class="list-unstyled mt-3">
+							@if(App\Models\Site::settings()['working_hours_mon_thu'] != null)
 							<li class="mb-1">Monday to Friday</li>
-							<li class="mb-1">Open from 9am - 6pm</li>
-							<li class="mb-1">Holidays/Weekends - Closed</li>
+							<li class="mb-1">Open from {{ App\Models\Site::settings()['working_hours_mon_thu'] }}</li>
+							@endif
+							@if(App\Models\Site::settings()['working_hours_friday'] != null)
+							<li class="mb-1">Holidays/Weekends - {{ App\Models\Site::settings()['working_hours_friday'] }}</li>
+							@endif
 						</ul>
 						<!--/ul -->
 					</div>
+					@endif
 					<!--/ col-lg -->
 					<div class="col-lg-4 text-center">
 						<!-- logo -->
@@ -470,6 +524,14 @@
 			jqKeyboard.init();
 		});
 	</script>
+
+	@if(App\Models\Site::settings()['analytics_code'] != null)
+	{!! App\Models\Site::settings()['analytics_code'] !!}
+	@endif
+
+	@if(App\Models\Site::settings()['custom_script'] != null)
+	{!! App\Models\Site::settings()['custom_script'] !!}
+	@endif
 	
 	@yield('footer')
 </body>
