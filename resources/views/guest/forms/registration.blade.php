@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="page container">
-    <h2 class="element-heading col-lg-12">Registration Form</h2>
+    <h2 class="element-heading col-lg-12">School Registration Form</h2>
     
     @if(session('status.success'))
         <div class="alert alert-important alert-success">

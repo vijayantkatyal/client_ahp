@@ -119,6 +119,9 @@
 			</form>
 			<div class="text-center mt-3">
 				<a href="{{ route('get_admin_login_route') }}" class="btn btn-link">Already have account ? Sign In</a>
+				<br/><br/>
+				<a href="{{ route('get_form_membership') }}" class="btn btn-primary">Member Registration Form</a>
+				<a href="{{ route('get_form_registration') }}" class="btn btn-primary">Student Registration Form</a>
 			</div>
 		</div>
 	</div>
