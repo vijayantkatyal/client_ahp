@@ -33,12 +33,6 @@
 [?] from user to admin / teacher / board member (show what level)
 [?] to all for new event
 
-[Working]
-
-[ToDo]
-
---------
-
 [Done] show up the classes in students grid 
 [Done] export student list to xls and pdf 
 [Done] students all grid add column of class with date range
@@ -62,8 +56,6 @@ field trip enrollment accepted via event
 [Checked] map location
 - will be part of cms
 
-.............
-
 [Done] tag name not showing
 [Done] field trip export (pdf, excel) (for all grids)
 ✅ courses
@@ -75,7 +67,11 @@ field trip enrollment accepted via event
 ✅ calendar - events
 
 ✅ CMS
-> feedback
+✅ feedback
+
+[Working]
+
+[ToDo]
 
 > communication from pricipal to all teachers, classes,
 - cc to email sender as well (show email as well in checkbox)

@@ -183,7 +183,17 @@
 							@if(Auth::check())
 								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_dashboard_index') }}">Dashboard ({{ Auth::user()->levelInfo() != null ? Auth::user()->levelInfo()->name : (Auth::user()->isUser() ? "User" : "Admin" )  }})</a></li>
 							@else
-								<li class="nav-item home-menu"><a class="nav-link" href="{{ route('get_admin_register_route') }}">Registration / Login</a></li>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="about-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Register
+									</a>
+									<div class="dropdown-menu" aria-labelledby="about-dropdown">
+										<a class="dropdown-item" href="{{ route('get_admin_register_route') }}">Registration</a>
+										<a class="dropdown-item" href="{{ route('get_form_membership') }}">Membership Registration</a>
+										<a class="dropdown-item" href="{{ route('get_form_registration') }}">Student Registration</a>
+										<a class="dropdown-item" href="{{ route('get_admin_login_route') }}">Have an Account ? Login</a>
+									</div>
+								</li>
 							@endif
 						</ul>
 						<!--/ul -->

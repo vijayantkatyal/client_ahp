@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+use Mail;
+use Config;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use DateTime;
@@ -399,6 +401,35 @@ class GuestController extends Controller
 		]);
 
 		// send email
+		$get_site_settings = DB::table('site_settings')->where('id', '1')->first();
+        if($get_site_settings != null)
+        {
+            $site_settings = $get_site_settings;
+        }
+
+        Config::set('mail.encryption', $site_settings->encryption);
+        Config::set('mail.host', $site_settings->host);
+        Config::set('mail.port', $site_settings->port);
+        Config::set('mail.username', $site_settings->username);
+        Config::set('mail.password', $site_settings->password);
+        Config::set('mail.from',  ['address' => $site_settings->from_address , 'name' => $site_settings->from_name]);
+        
+        $data = [
+            'email' =>  $request->input('email'),
+            'name'  =>  $request->input('name'),
+			'msg'	=>	$request->input('message'),
+			'phone'		=>	$request->input('phone')
+        ];
+
+        $emails_to = array(
+            'email' => "vijayantskatyal@gmail.com",
+            'name' => "Vijayant"
+        );
+
+        Mail::send('emails.new_message', $data, function($message) use ($emails_to)
+        {
+            $message->to($emails_to['email'], $emails_to['name'])->subject('New Message from AHP Site');
+        });
 		
 
 		return redirect()->route('get_contact')->with('status.success', 'Message Received, will get back to you soon.');

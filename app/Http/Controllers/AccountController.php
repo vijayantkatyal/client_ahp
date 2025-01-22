@@ -299,7 +299,7 @@ class AccountController extends Controller
             $site_settings = $get_site_settings;
         }
 
-        Config::set('mail.encryption',$site_settings->encryption);
+        Config::set('mail.encryption', $site_settings->encryption);
         Config::set('mail.host', $site_settings->host);
         Config::set('mail.port', $site_settings->port);
         Config::set('mail.username', $site_settings->username);

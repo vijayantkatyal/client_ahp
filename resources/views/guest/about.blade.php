@@ -43,10 +43,6 @@
 								{{ $reviewItemValue->summary }}
 							</p>
 						</div>
-						<!-- /content -->
-						<div class="testimonial-pic">
-							<img src="{{ asset('/assets/img/team/team1.jpg') }}" class="img-fluid" alt="">
-						</div>
 						<!-- /testimonial-pic -->
 						<div class="testimonial-review">
 							<h5 class="testimonial-title">{{ $reviewItemValue->name }}</h5>
